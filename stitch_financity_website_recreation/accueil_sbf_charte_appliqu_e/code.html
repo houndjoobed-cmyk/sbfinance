@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Financity - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#00036b",
+                        "surface": "#ffffff",
+                        "surface-muted": "#f5f5f5",
+                        "on-primary": "#ffffff",
+                        "text-charcoal": "#333333",
+                        "surface-variant": "#e2e2e2",
+                        "outline": "#757680",
+                        "trust-navy": "#01438F",
+                        "on-primary-container": "#8090c0",
+                        "surface-bright": "#ffffff",
+                        "primary": "#01438F",
+                        "surface-container-high": "#e8e8e8",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#2f38a8",
+                        "accent-royal": "#01438F",
+                        "primary-fixed": "#e6f0fa",
+                        "on-primary-fixed-variant": "#354571",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#e27139",
+                        "secondary-fixed": "#e0e0ff",
+                        "tertiary": "#2c0b00",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "on-tertiary-fixed": "#351000",
+                        "secondary-container": "#828bfe",
+                        "surface-tint": "#4d5d8a",
+                        "inverse-on-surface": "#f0f1f1",
+                        "primary-container": "#01438F",
+                        "tertiary-fixed": "#ffdbcc",
+                        "secondary-fixed-dim": "#bec2ff",
+                        "surface-container-low": "#f3f3f4",
+                        "tertiary-container": "#4d1a00",
+                        "outline-variant": "#c5c6d0",
+                        "surface-container": "#eeeeee",
+                        "on-tertiary-fixed-variant": "#7c2e00",
+                        "primary-fixed-dim": "#b5c5f9",
+                        "on-error": "#ffffff",
+                        "action-orange": "#EB001B",
+                        "secondary": "#4852c1",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "on-background": "#1a1c1c",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#ffb595",
+                        "background": "#ffffff",
+                        "on-surface-variant": "#45464f",
+                        "on-primary-fixed": "#051943",
+                        "inverse-surface": "#2f3131",
+                        "inverse-primary": "#b5c5f9",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-secondary-container": "#0f1791"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "unit-base": "8px",
+                        "gutter": "30px",
+                        "section-padding-vertical": "80px"
+                    },
+                    "fontFamily": {
+                        "display-hero-mobile": ["Helvetica", "Arial", "sans-serif"],
+                        "display-hero": ["Helvetica", "Arial", "sans-serif"],
+                        "headline-lg": ["Helvetica", "Arial", "sans-serif"],
+                        "button-text": ["Helvetica", "Arial", "sans-serif"],
+                        "headline-md": ["Helvetica", "Arial", "sans-serif"],
+                        "body-lg": ["Helvetica", "Arial", "sans-serif"],
+                        "label-caps": ["Helvetica", "Arial", "sans-serif"],
+                        "body-md": ["Helvetica", "Arial", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "display-hero-mobile": ["36px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "display-hero": ["56px", { "lineHeight": "1.1", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "button-text": ["14px", { "lineHeight": "1.0", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["13px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        :root {
+            --anim-duration: 0.6s;
+            --anim-easing: cubic-bezier(0.16, 1, 0.3, 1);
+            --stagger-delay: 0.1s;
+        }
+
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+          font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Smooth hover transitions */
+        a, button, .group {
+            transition: all 0.3s ease;
+        }
+
+        /* Subtle hover lift for cards */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Entrance Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp var(--anim-duration) var(--anim-easing) forwards;
+            opacity: 0;
+        }
+
+        /* Scroll Reveal Utility Classes */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--anim-duration) var(--anim-easing), transform var(--anim-duration) var(--anim-easing);
+        }
+
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .delay-100 { transition-delay: calc(1 * var(--stagger-delay)); animation-delay: calc(1 * var(--stagger-delay)); }
+        .delay-200 { transition-delay: calc(2 * var(--stagger-delay)); animation-delay: calc(2 * var(--stagger-delay)); }
+        .delay-300 { transition-delay: calc(3 * var(--stagger-delay)); animation-delay: calc(3 * var(--stagger-delay)); }
+    </style>
+</head>
+<body class="bg-background text-text-charcoal font-body-md antialiased">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-primary docked full-width top-0 z-50 border-b border-outline-variant dark:border-primary-container">
+<div class="max-w-container mx-auto flex flex-col w-full">
+<div class="flex items-center justify-between py-4 px-4 md:px-0">
+<!-- Brand -->
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-trust-navy text-3xl filled">account_balance</span>
+<span class="text-headline-md font-headline-lg font-bold text-trust-navy dark:text-on-primary">Financity</span>
+</div>
+<!-- Navigation (Desktop) -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-action-orange border-b-2 border-action-orange pb-1 font-label-caps text-label-caps uppercase" href="#">Home</a>
+<a class="text-trust-navy dark:text-on-primary-container hover:text-action-orange transition-colors font-label-caps text-label-caps uppercase" href="#">Pages</a>
+<a class="text-trust-navy dark:text-on-primary-container hover:text-action-orange transition-colors font-label-caps text-label-caps uppercase" href="#">Our Services</a>
+<a class="text-trust-navy dark:text-on-primary-container hover:text-action-orange transition-colors font-label-caps text-label-caps uppercase" href="#">Our Cases</a>
+<a class="text-trust-navy dark:text-on-primary-container hover:text-action-orange transition-colors font-label-caps text-label-caps uppercase" href="#">Features</a>
+<a class="text-trust-navy dark:text-on-primary-container hover:text-action-orange transition-colors font-label-caps text-label-caps uppercase" href="#">Blog</a>
+<a class="text-trust-navy dark:text-on-primary-container hover:text-action-orange transition-colors font-label-caps text-label-caps uppercase" href="#">Shop</a>
+</nav>
+<!-- Actions -->
+<div class="hidden md:flex items-center gap-4">
+<button class="text-trust-navy dark:text-on-primary hover:text-action-orange transition-all duration-300">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<a class="bg-action-orange text-on-primary font-button-text text-button-text py-3 px-6 rounded hover:bg-opacity-90 transition-all" href="#">GET A QUOTE</a>
+</div>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-trust-navy hover:text-action-orange transition-colors">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative bg-primary py-24 md:py-32 overflow-hidden flex items-center min-h-[80vh]">
+<div class="absolute inset-0 z-0">
+<img alt="Hero Background" class="w-full h-full object-cover opacity-30" data-alt="A modern corporate office setting with diverse professionals in suits discussing business strategy over documents. High-key lighting, corporate modern aesthetic with trust-navy and action-orange accents. Sharp focus, professional mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4dsoigphSyOHIOoM7UX8JevVUu8y8KdRDFe2i011piKH6PUV3DW0m4Vxp69rK9bBzSgTVVVZZGnfA6SSh8C9FaGoMz3N0gZKcnyas9OTClunEQdUQ8nSzcJF7Yi1X_Zc0pjqvBjOo5PNHckcS7hoUHsu51cGU_VLIfjL5zfByCvKVh-bPx1lA0JZ4scmNHZEdXaqOJNPsY8_jO3snyc3fxzb6ysb5RMcRsyHOhcdcsB8Ng-umbztgPA"/>
+<div class="absolute inset-0 bg-primary opacity-80"></div>
+</div>
+<div class="max-w-container mx-auto px-4 md:px-0 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="text-on-primary">
+<h1 class="font-display-hero-mobile text-display-hero-mobile md:font-display-hero md:text-display-hero mb-6 text-on-primary animate-fade-in-up">Financity</h1>
+<p class="font-body-lg text-body-lg mb-8 text-surface-variant max-w-lg animate-fade-in-up delay-100">We help you managing asset, provide financial advise. Leave money issue with us and focus on your core business.</p>
+<div class="flex flex-wrap gap-4 animate-fade-in-up delay-200">
+<a class="bg-transparent border-2 border-on-primary text-on-primary font-button-text text-button-text py-3 px-8 rounded hover:bg-on-primary hover:text-trust-navy transition-all uppercase" href="#">Learn More</a>
+<a class="bg-action-orange text-on-primary font-button-text text-button-text py-3 px-8 rounded hover:bg-opacity-90 transition-all uppercase" href="#">Contact Us</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Row -->
+<section class="bg-surface py-section-padding-vertical border-b border-surface-muted">
+<div class="max-w-container mx-auto px-4 md:px-0 grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="flex gap-4 items-start reveal-up">
+<div class="bg-primary-fixed p-4 rounded-full text-primary shrink-0">
+<span class="material-symbols-outlined text-3xl">schedule</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-trust-navy mb-2">On Time Service.</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Transforming distribution and marketing with key capabilities in customer insight and analytics.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start reveal-up delay-100">
+<div class="bg-primary-fixed p-4 rounded-full text-primary shrink-0">
+<span class="material-symbols-outlined text-3xl">groups</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-trust-navy mb-2">A Team Of Professionals.</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Transforming distribution and marketing with key capabilities in customer insight and analytics.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start reveal-up delay-200">
+<div class="bg-primary-fixed p-4 rounded-full text-primary shrink-0">
+<span class="material-symbols-outlined text-3xl">trending_up</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-trust-navy mb-2">Analyze Your Business.</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Transforming distribution and marketing with key capabilities in customer insight and analytics.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Bento Grid -->
+<section class="bg-white py-section-padding-vertical relative overflow-hidden">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 text-[150px] font-bold text-surface-muted opacity-30 whitespace-nowrap pointer-events-none z-0">
+            SERVICES
+        </div>
+<div class="max-w-container mx-auto px-4 md:px-0 relative z-10">
+<div class="text-center mb-16 reveal-up">
+<h2 class="font-headline-lg text-headline-lg text-trust-navy mb-2">Services We Provide</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Covered in these areas</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Service Card 1 -->
+<div class="bg-surface p-8 rounded border border-surface-muted hover-lift group text-center flex flex-col items-center reveal-up">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">monetization_on</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-trust-navy mb-4 group-hover:text-action-orange transition-colors">Capital Markets</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Providing insight-driven transformation to investment banks, wealth and asset managers, exchanges, clearing houses.</p>
+</div>
+<!-- Service Card 2 -->
+<div class="bg-surface p-8 rounded border border-surface-muted hover-lift group text-center flex flex-col items-center reveal-up delay-100">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">shield</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-trust-navy mb-4 group-hover:text-action-orange transition-colors">Insurance</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Providing insight-driven transformation to investment banks, wealth and asset managers, exchanges, clearing houses.</p>
+</div>
+<!-- Service Card 3 -->
+<div class="bg-surface p-8 rounded border border-surface-muted hover-lift group text-center flex flex-col items-center reveal-up delay-200">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">link</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-trust-navy mb-4 group-hover:text-action-orange transition-colors">Blockchain</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Providing insight-driven transformation to investment banks, wealth and asset managers, exchanges, clearing houses.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-primary full-width">
+<div class="max-w-container mx-auto grid grid-cols-1 md:grid-cols-4 gap-gutter py-section-padding-vertical px-4">
+<div class="col-span-1 md:col-span-1 reveal-up">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-on-primary text-3xl filled">account_balance</span>
+<span class="font-headline-md text-headline-md text-on-primary">Financity</span>
+</div>
+<p class="font-body-md text-body-md text-on-primary-container dark:text-on-primary-fixed-variant mb-4">
+                    34 Hamston, Times Avnue NY<br/>
+                    +1-3454-5678-77<br/>
+                    sales@goodlayers.com
+                </p>
+</div>
+<div class="col-span-1 md:col-span-1 reveal-up delay-100">
+<h4 class="font-headline-md text-headline-md text-on-primary mb-6">Recent News</h4>
+<div class="space-y-4">
+<a class="block hover:text-action-orange transition-all group" href="#">
+<p class="font-body-md text-body-md text-on-primary-container group-hover:text-action-orange transition-colors">I sink under the weight</p>
+<span class="font-label-caps text-label-caps text-action-orange">JUNE 6, 2016</span>
+</a>
+</div>
+</div>
+<div class="col-span-1 md:col-span-1 reveal-up delay-200">
+<h4 class="font-headline-md text-headline-md text-on-primary mb-6">Useful Links</h4>
+<ul class="space-y-3">
+<li><a class="font-label-caps text-label-caps text-on-primary-container dark:text-on-primary-fixed-variant hover:text-action-orange underline transition-all uppercase" href="#">About Us</a></li>
+<li><a class="font-label-caps text-label-caps text-on-primary-container dark:text-on-primary-fixed-variant hover:text-action-orange underline transition-all uppercase" href="#">Our Team</a></li>
+<li><a class="font-label-caps text-label-caps text-on-primary-container dark:text-on-primary-fixed-variant hover:text-action-orange underline transition-all uppercase" href="#">Our Services</a></li>
+<li><a class="font-label-caps text-label-caps text-on-primary-container dark:text-on-primary-fixed-variant hover:text-action-orange underline transition-all uppercase" href="#">News</a></li>
+<li><a class="font-label-caps text-label-caps text-on-primary-container dark:text-on-primary-fixed-variant hover:text-action-orange underline transition-all uppercase" href="#">Career</a></li>
+</ul>
+</div>
+<div class="col-span-1 md:col-span-1 reveal-up delay-300">
+<h4 class="font-headline-md text-headline-md text-on-primary mb-6">Contact Form</h4>
+<form class="space-y-4">
+<input class="w-full bg-trust-navy border border-on-primary-container rounded text-on-primary p-3 focus:ring-1 focus:ring-action-orange font-body-md transition-all" placeholder="Full Name*" type="text"/>
+<input class="w-full bg-trust-navy border border-on-primary-container rounded text-on-primary p-3 focus:ring-1 focus:ring-action-orange font-body-md transition-all" placeholder="Email*" type="email"/>
+<button class="bg-action-orange text-on-primary font-button-text text-button-text py-3 px-6 rounded hover:bg-opacity-90 transition-all uppercase hover:-translate-y-1" type="submit">Submit Now</button>
+</form>
+</div>
+</div>
+<div class="border-t border-on-primary-container py-6 text-center">
+<p class="font-body-md text-body-md text-on-primary-container">Copyright 2024, All Rights Reserved, Financity.</p>
+</div>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const revealElements = document.querySelectorAll('.reveal-up');
+        revealElements.forEach(el => observer.observe(el));
+    });
+</script>
+</body></html>

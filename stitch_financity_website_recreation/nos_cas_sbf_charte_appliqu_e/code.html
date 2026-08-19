@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Financity - Our Cases</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#00036b",
+                        "surface": "#ffffff",
+                        "surface-muted": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "text-charcoal": "#1A1A1A",
+                        "surface-variant": "#e2e2e2",
+                        "outline": "#757680",
+                        "trust-navy": "#01438F",
+                        "on-primary-container": "#8090c0",
+                        "surface-bright": "#ffffff",
+                        "primary": "#01438F",
+                        "surface-container-high": "#e8e8e8",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#2f38a8",
+                        "accent-royal": "#01326b",
+                        "primary-fixed": "#dae1ff",
+                        "on-primary-fixed-variant": "#354571",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#e27139",
+                        "secondary-fixed": "#e0e0ff",
+                        "tertiary": "#2c0b00",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "on-tertiary-fixed": "#351000",
+                        "secondary-container": "#828bfe",
+                        "surface-tint": "#4d5d8a",
+                        "inverse-on-surface": "#f0f1f1",
+                        "primary-container": "#01438F",
+                        "tertiary-fixed": "#ffdbcc",
+                        "secondary-fixed-dim": "#bec2ff",
+                        "surface-container-low": "#eff4ff",
+                        "tertiary-container": "#4d1a00",
+                        "outline-variant": "#c5c6d0",
+                        "surface-container": "#eeeeee",
+                        "on-tertiary-fixed-variant": "#7c2e00",
+                        "primary-fixed-dim": "#b5c5f9",
+                        "on-error": "#ffffff",
+                        "action-orange": "#01438F",
+                        "secondary": "#4852c1",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d0dbed",
+                        "on-background": "#1a1c1c",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#ffb595",
+                        "background": "#f8f9ff",
+                        "on-surface-variant": "#45464f",
+                        "on-primary-fixed": "#051943",
+                        "inverse-surface": "#2f3131",
+                        "inverse-primary": "#b5c5f9",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-secondary-container": "#0f1791"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "unit-base": "8px",
+                        "gutter": "30px",
+                        "section-padding-vertical": "100px"
+                    },
+                    "fontFamily": {
+                        "display-hero-mobile": ["Helvetica", "Arial", "sans-serif"],
+                        "display-hero": ["Helvetica", "Arial", "sans-serif"],
+                        "headline-lg": ["Helvetica", "Arial", "sans-serif"],
+                        "button-text": ["Helvetica", "Arial", "sans-serif"],
+                        "headline-md": ["Helvetica", "Arial", "sans-serif"],
+                        "body-lg": ["Helvetica", "Arial", "sans-serif"],
+                        "label-caps": ["Helvetica", "Arial", "sans-serif"],
+                        "body-md": ["Helvetica", "Arial", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "display-hero-mobile": ["36px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "display-hero": ["56px", { "lineHeight": "1.1", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "button-text": ["14px", { "lineHeight": "1.0", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["13px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Helvetica', Arial, sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-montserrat { font-family: 'Helvetica', Arial, sans-serif; }
+        
+        /* Reveal Animations */
+        .reveal-fade {
+            opacity: 0;
+            transition: opacity 0.8s ease-out;
+        }
+        .reveal-fade.active {
+            opacity: 1;
+        }
+
+        .reveal-slide-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal-slide-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-surface text-text-charcoal antialiased">
+<!-- TopNavBar -->
+<header class="bg-surface border-b border-outline-variant w-full sticky top-0 z-50">
+<div class="max-w-container-max mx-auto px-4 md:px-8 py-6 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-trust-navy text-3xl" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+<span class="text-headline-md font-headline-md text-trust-navy font-bold">Financity</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-label-caps font-label-caps text-trust-navy hover:text-accent-royal transition-colors" href="#">Home</a>
+<a class="text-label-caps font-label-caps text-trust-navy hover:text-accent-royal transition-colors" href="#">Pages</a>
+<a class="text-label-caps font-label-caps text-trust-navy hover:text-accent-royal transition-colors" href="#">Our Services</a>
+<a class="text-label-caps font-label-caps text-trust-navy border-b-2 border-trust-navy pb-1" href="#">Our Cases</a>
+<a class="text-label-caps font-label-caps text-trust-navy hover:text-accent-royal transition-colors" href="#">Features</a>
+<a class="text-label-caps font-label-caps text-trust-navy hover:text-accent-royal transition-colors" href="#">Blog</a>
+<a class="text-label-caps font-label-caps text-trust-navy hover:text-accent-royal transition-colors" href="#">Shop</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-trust-navy hover:text-accent-royal transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="hidden md:block bg-trust-navy text-on-primary text-button-text font-button-text py-3 px-6 rounded hover:bg-accent-royal transition-colors">
+                    GET A QUOTE
+                </button>
+</div>
+</div>
+</header>
+<!-- Page Header -->
+<section class="bg-trust-navy text-on-primary py-section-padding-vertical relative overflow-hidden">
+<div class="absolute inset-0 bg-trust-navy opacity-90"></div>
+<div class="max-w-container-max mx-auto px-4 md:px-8 relative z-10 text-center">
+<h1 class="text-display-hero-mobile md:text-display-hero font-display-hero-mobile md:font-display-hero mb-6">Our Cases</h1>
+<p class="text-body-lg font-body-lg text-on-primary-container max-w-2xl mx-auto">
+                Explore our portfolio of successful projects and see how we've helped businesses achieve their financial goals through strategic insight and execution.
+            </p>
+</div>
+</section>
+<!-- Filter & Grid Section -->
+<section class="py-section-padding-vertical bg-surface">
+<div class="max-w-container-max mx-auto px-4 md:px-8">
+<!-- Filters -->
+<div class="flex flex-wrap justify-center gap-4 mb-16">
+<button class="px-8 py-3 rounded-full bg-trust-navy text-on-primary text-label-caps font-label-caps transition-colors reveal-fade" style="transition-delay: 100ms;">All</button>
+<button class="px-8 py-3 rounded-full bg-surface-muted text-text-charcoal hover:bg-surface-variant text-label-caps font-label-caps transition-colors reveal-fade" style="transition-delay: 200ms;">Finance</button>
+<button class="px-8 py-3 rounded-full bg-surface-muted text-text-charcoal hover:bg-surface-variant text-label-caps font-label-caps transition-colors reveal-fade" style="transition-delay: 300ms;">Investment</button>
+<button class="px-8 py-3 rounded-full bg-surface-muted text-text-charcoal hover:bg-surface-variant text-label-caps font-label-caps transition-colors reveal-fade" style="transition-delay: 400ms;">Advisory</button>
+</div>
+<!-- Bento Grid Portfolio -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+<!-- Case 1 -->
+<div class="group bg-surface-container-lowest rounded-lg overflow-hidden border border-surface-muted transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-slide-up" style="transition-delay: 100ms;">
+<div class="aspect-w-16 aspect-h-10 relative overflow-hidden">
+<img class="object-cover w-full h-64 transition-transform duration-500 group-hover:scale-105" data-alt="Corporate professionals analyzing financial charts in a modern, well-lit boardroom. The environment is sleek with a light-mode aesthetic, emphasizing deep blues and vibrant orange accents to convey professional trust and energetic progress." src="https://lh3.googleusercontent.com/aida/AP1WRLvuPIFAE0wrU0NxZS2INaZF3FnYcdfTfwr7Us3BbNGwMUW3woEQrCZGUc9h7Jd2KsM5zTE2uF7YSy237mRlfg6mQCoZJz9LGIG4XzTn-LdXmWLJ-dvLtxQ8Cj0hp0k5jsO_Q-J6MfnkRHeDu32B0jjSKT-4TSDFRssFCejwbBgvSiLAT-NYA_RP332sr7wWueW9yvsVctAMJzR7WzR8oXBPDtROBlc055jztX8Ku2WRikaoQcQD83ZnglE"/>
+<div class="absolute inset-0 bg-trust-navy bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+</div>
+<div class="p-8">
+<span class="inline-block px-3 py-1 bg-surface-muted text-outline text-xs font-label-caps tracking-wider rounded mb-4">Investment</span>
+<h3 class="text-headline-md font-headline-md text-trust-navy mb-4">Startup Funding</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-8">
+                            Providing insight-driven transformation to investment banks, wealth and asset managers, exchanges, clearing houses.
+                        </p>
+<a class="inline-flex items-center text-trust-navy text-button-text font-button-text hover:text-accent-royal transition-colors" href="#">
+                            Read More <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Case 2 -->
+<div class="group bg-surface-container-lowest rounded-lg overflow-hidden border border-surface-muted transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-slide-up" style="transition-delay: 200ms;">
+<div class="aspect-w-16 aspect-h-10 relative overflow-hidden">
+<img class="object-cover w-full h-64 transition-transform duration-500 group-hover:scale-105" data-alt="A close-up of a diverse team reviewing architectural plans and financial documents on a large table. The scene is brightly lit, modern corporate style, using a professional color palette of navy, gray, and subtle warm orange highlights." src="https://lh3.googleusercontent.com/aida/AP1WRLt4P8z45nqQgbmnPGv9x-nVrvZjgXC-gDEDii6_HeKmWX4Fjhm431XQJDlEvVBPv5yxLkypI8CjXYRulQG3KfDWGbe_nzmDHy4fcgAg6dk_v32fvINt33bRG7ClK_FPknEkyVucQ_ykS0Za5nJf0JDEKBJlKDpnbYMnXp4ix4bjKX0mx8j3xFWSK8Dps321_39NG2RRbL7ERAu36O2NReNpSMcbS-mtO9QoWwzieo5gUbVI9OXb6kk6OyZl"/>
+<div class="absolute inset-0 bg-trust-navy bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+</div>
+<div class="p-8">
+<span class="inline-block px-3 py-1 bg-surface-muted text-outline text-xs font-label-caps tracking-wider rounded mb-4">Wealth Management</span>
+<h3 class="text-headline-md font-headline-md text-trust-navy mb-4">Family Asset Management</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-8">
+                            Delivering comprehensive asset structuring and intergenerational wealth transfer strategies for high-net-worth families.
+                        </p>
+<a class="inline-flex items-center text-trust-navy text-button-text font-button-text hover:text-accent-royal transition-colors" href="#">
+                            Read More <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Case 3 -->
+<div class="group bg-surface-container-lowest rounded-lg overflow-hidden border border-surface-muted transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-slide-up" style="transition-delay: 300ms;">
+<div class="aspect-w-16 aspect-h-10 relative overflow-hidden">
+<img class="object-cover w-full h-64 transition-transform duration-500 group-hover:scale-105" data-alt="A focused professional examining a digital tablet displaying complex financial data. The setting is a minimalist, high-end office. Lighting is crisp and clean, reflecting a modern, trustworthy corporate identity with deep blue undertones." src="https://lh3.googleusercontent.com/aida/AP1WRLsZtN1rwnsQYZtRRiwsJIC1xk2sbuog3YR3Aom4x3OdjlvXORqQOgjp8vvTSabg6uOckLVmKFK5wMR-LizLiz7Jdnwc2oWwYTDv648PZPnIIy3Gqe7QViPmIX4jyS0k2PCeM2WsqOHHkyfxXPVjPWtG80zNoVnzkSsnji-4SxGWBaJVMxJI04EaLR6NsRFJHegzmVO7I2fGmaZZghSCQ_rXLZVK3bIn12P-glq_liENylAvzVKdwTtppxkw"/>
+<div class="absolute inset-0 bg-trust-navy bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+</div>
+<div class="p-8">
+<span class="inline-block px-3 py-1 bg-surface-muted text-outline text-xs font-label-caps tracking-wider rounded mb-4">Advisory</span>
+<h3 class="text-headline-md font-headline-md text-trust-navy mb-4">Accounting Advisory</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-8">
+                            Streamlining corporate accounting processes and ensuring compliance through rigorous audit and advisory services.
+                        </p>
+<a class="inline-flex items-center text-trust-navy text-button-text font-button-text hover:text-accent-royal transition-colors" href="#">
+                            Read More <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Case 4 -->
+<div class="group bg-surface-container-lowest rounded-lg overflow-hidden border border-surface-muted transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-slide-up" style="transition-delay: 100ms;">
+<div class="aspect-w-16 aspect-h-10 relative overflow-hidden">
+<img class="object-cover w-full h-64 transition-transform duration-500 group-hover:scale-105" data-alt="Two executives shaking hands over a sleek glass desk in a bright, modern office with city views. The atmosphere communicates successful negotiation and partnership, styled with crisp whites, deep navys, and subtle warm lighting." src="https://lh3.googleusercontent.com/aida/AP1WRLucehmUz96hChHR2z8uKtqWeioGpbRagkhit7kG1AfCUAImYgfh0V8bxq9BDEMIpQn8oGBaWzUstlglNHDeCqrE4v5nsmMVG9wjmwXdTAQoZNk0W6Vpe1kRknkW8tbbnj9OpeEu5YlDZTZcHP_MZh35mKGdNulMe3sTp8djXP7AVvcG263pkY4Z2Sh4GEhM-Srlly77ZV4mSsYoFSLNJ9x9UkwWISegqHBZyajtezEg6FbypiRRPLE4-i4"/>
+<div class="absolute inset-0 bg-trust-navy bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+</div>
+<div class="p-8">
+<span class="inline-block px-3 py-1 bg-surface-muted text-outline text-xs font-label-caps tracking-wider rounded mb-4">Corporate Finance</span>
+<h3 class="text-headline-md font-headline-md text-trust-navy mb-4">Merger &amp; Acquisition</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-8">
+                            Facilitating complex M&amp;A transactions with strategic insight, ensuring seamless integration and value maximization.
+                        </p>
+<a class="inline-flex items-center text-trust-navy text-button-text font-button-text hover:text-accent-royal transition-colors" href="#">
+                            Read More <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Case 5 -->
+<div class="group bg-surface-container-lowest rounded-lg overflow-hidden border border-surface-muted transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-slide-up" style="transition-delay: 200ms;">
+<div class="aspect-w-16 aspect-h-10 relative overflow-hidden bg-surface-variant flex items-center justify-center">
+<img class="object-cover w-full h-64 transition-transform duration-500 group-hover:scale-105" data-alt="An abstract visualization of global financial markets featuring glowing interconnected nodes and subtle chart lines against a bright, pristine white background. Accents of vibrant orange and deep royal blue emphasize a high-tech, modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLGXxwsykgnvAgIHdaQ3bW7Y1kBTCLHQxMz4bdwY6grGOQeyd_CRL5KwFFDULEOaH5UFWjtmShW9udrfAJQLOjqEpPvFRHqw6b7xXFSWPGOsmfVDREtfrsF2Zxm7cqRakDP68htl2if7u-fWwHmYhGYubYI-5MsAMGefSPT-9evS4lrliKwq2eVvNe7IyCSC0Cvi6gOSk0Vcp5NDAzOawe0OrhW0hTlDL109ZMTVweiXugGfbcImFRKg"/>
+<div class="absolute inset-0 bg-trust-navy bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+</div>
+<div class="p-8">
+<span class="inline-block px-3 py-1 bg-surface-muted text-outline text-xs font-label-caps tracking-wider rounded mb-4">Strategy</span>
+<h3 class="text-headline-md font-headline-md text-trust-navy mb-4">Business Matching</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-8">
+                            Connecting synergistic enterprises globally to foster strategic partnerships and joint venture opportunities.
+                        </p>
+<a class="inline-flex items-center text-trust-navy text-button-text font-button-text hover:text-accent-royal transition-colors" href="#">
+                            Read More <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Case 6 -->
+<div class="group bg-surface-container-lowest rounded-lg overflow-hidden border border-surface-muted transition-all duration-300 hover:shadow-xl hover:-translate-y-1 reveal-slide-up" style="transition-delay: 300ms;">
+<div class="aspect-w-16 aspect-h-10 relative overflow-hidden bg-surface-variant flex items-center justify-center">
+<img class="object-cover w-full h-64 transition-transform duration-500 group-hover:scale-105" data-alt="A modern data center aisle with sleek servers emitting soft blue light, transitioning into abstract digital currency symbols. The scene is brightly lit in a high-key style, using pristine whites and deep navys to convey institutional trust in new technologies." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEcV9XYo7xL9f7BPOblYoapH1AeWDMscreL_t_ErZtULDexTCLZmJijOzU-z0s1dsAol1Njy04ujJYtvT6XOTjPTKhldIMRac9UacXRO-DNvs08qoMX4jPbk536BQWgYQczMZ1ub9A7PF5LtQmJIYqMpWkGsL5PrtgM5GHARbdMovBtGfbA33dO0LhChkJMXwPKnLP0bLLsEtDQ72oGEvsKp1isqIBhYTCU_-ntAOjm02IgE-wym_hig"/>
+<div class="absolute inset-0 bg-trust-navy bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+</div>
+<div class="p-8">
+<span class="inline-block px-3 py-1 bg-surface-muted text-outline text-xs font-label-caps tracking-wider rounded mb-4">Tech Advisory</span>
+<h3 class="text-headline-md font-headline-md text-trust-navy mb-4">Blockchain Farming</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-8">
+                            Navigating the complexities of decentralized finance and optimizing digital asset infrastructure.
+                        </p>
+<a class="inline-flex items-center text-trust-navy text-button-text font-button-text hover:text-accent-royal transition-colors" href="#">
+                            Read More <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<div class="text-center mt-16 reveal-slide-up" style="transition-delay: 100ms;">
+<button class="bg-trust-navy text-on-primary text-button-text font-button-text py-4 px-10 rounded hover:bg-accent-royal transition-colors shadow-sm">
+                    View All Cases
+                </button>
+</div>
+</div>
+</section>
+<!-- Call to Action -->
+<section class="bg-trust-navy py-20 reveal-fade">
+<div class="max-w-container-max mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between">
+<div class="text-center md:text-left mb-8 md:mb-0">
+<h2 class="text-headline-lg font-headline-lg text-on-primary mb-4">Wanna Talk To Us?</h2>
+<p class="text-body-lg font-body-lg text-primary-fixed-dim">Please feel free to contact us. We're super happy to talk to you.</p>
+</div>
+<button class="bg-on-primary text-trust-navy text-button-text font-button-text py-4 px-10 rounded hover:bg-surface-muted transition-colors shadow-md">
+                CONTACT US
+            </button>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-trust-navy text-on-primary py-section-padding-vertical border-t border-accent-royal">
+<div class="max-w-container-max mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
+<!-- Brand -->
+<div>
+<div class="flex items-center gap-2 mb-8">
+<span class="material-symbols-outlined text-on-primary text-3xl" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+<span class="text-headline-md font-headline-md text-on-primary font-bold">Financity</span>
+</div>
+<p class="text-body-md font-body-md text-on-primary-container mb-8">
+                    We help you managing asset, provide financial advise. Leave money issue with us and focus on your core business.
+                </p>
+<div class="space-y-3 text-sm text-on-primary-container">
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">location_on</span> 34 Hamston, Times Avnue NY</p>
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">call</span> +1-3454-5678-77</p>
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">mail</span> sales@goodlayers.com</p>
+</div>
+</div>
+<!-- Links -->
+<div>
+<h4 class="text-headline-md font-headline-md text-on-primary mb-8 text-lg">Useful Links</h4>
+<ul class="space-y-4">
+<li><a class="text-on-primary-container hover:text-on-primary transition-colors" href="#">About Us</a></li>
+<li><a class="text-on-primary-container hover:text-on-primary transition-colors" href="#">Our Team</a></li>
+<li><a class="text-on-primary-container hover:text-on-primary transition-colors" href="#">Our Services</a></li>
+<li><a class="text-on-primary-container hover:text-on-primary transition-colors" href="#">News</a></li>
+<li><a class="text-on-primary-container hover:text-on-primary transition-colors" href="#">Career</a></li>
+</ul>
+</div>
+<!-- Recent News -->
+<div>
+<h4 class="text-headline-md font-headline-md text-on-primary mb-8 text-lg">Recent News</h4>
+<div class="space-y-6">
+<a class="block group" href="#">
+<h5 class="text-on-primary group-hover:text-surface-muted transition-colors text-sm font-semibold mb-2">I sink under the weight</h5>
+<p class="text-xs text-on-primary-container uppercase tracking-wider">June 6, 2016</p>
+</a>
+<a class="block group" href="#">
+<h5 class="text-on-primary group-hover:text-surface-muted transition-colors text-sm font-semibold mb-2">Possession of my entire soul</h5>
+<p class="text-xs text-on-primary-container uppercase tracking-wider">June 6, 2016</p>
+</a>
+</div>
+</div>
+<!-- Form -->
+<div>
+<h4 class="text-headline-md font-headline-md text-on-primary mb-8 text-lg">Contact Form</h4>
+<form class="space-y-4">
+<input class="w-full bg-accent-royal border-none rounded px-4 py-3 text-on-primary placeholder-on-primary-container focus:ring-2 focus:ring-on-primary text-sm" placeholder="Full Name*" type="text"/>
+<input class="w-full bg-accent-royal border-none rounded px-4 py-3 text-on-primary placeholder-on-primary-container focus:ring-2 focus:ring-on-primary text-sm" placeholder="Email*" type="email"/>
+<textarea class="w-full bg-accent-royal border-none rounded px-4 py-3 text-on-primary placeholder-on-primary-container focus:ring-2 focus:ring-on-primary text-sm" placeholder="Message*" rows="3"></textarea>
+<button class="bg-on-primary text-trust-navy text-button-text font-button-text py-3 px-6 rounded hover:bg-surface-muted transition-colors w-full" type="submit">
+                        Submit Now
+                    </button>
+</form>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-4 md:px-8 mt-16 pt-8 border-t border-accent-royal flex flex-col md:flex-row items-center justify-between">
+<p class="text-sm text-on-primary-container text-center md:text-left">
+                Copyright 2024, All Rights Reserved, Financity.
+            </p>
+</div>
+</footer>
+<!-- Intersection Observer for Scroll Reveal -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-fade, .reveal-slide-up').forEach((el) => {
+            observer.observe(el);
+        });
+    });
+</script>
+</body></html>
