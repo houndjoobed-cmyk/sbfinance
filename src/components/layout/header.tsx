@@ -48,7 +48,7 @@ export function Header() {
       {/* Top Bar (Logo and Contact Info) - Hidden on Mobile since StaggeredMenu takes over */}
       <div className={cn("hidden md:block w-full transition-colors duration-300", isScrolled ? "bg-[#111e36]/80 backdrop-blur-md shadow-sm" : "bg-transparent")}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between py-3">
+          <div className="flex items-center justify-between py-2">
             {/* Logo */}
             <Link href="/" className="shrink-0">
               <Image
@@ -56,7 +56,7 @@ export function Header() {
                 alt="Salem Braha Finance Logo"
                 width={240}
                 height={80}
-                className="h-16 md:h-20 w-auto object-contain brightness-0 invert"
+                className="h-12 md:h-14 w-auto object-contain brightness-0 invert"
                 priority
               />
             </Link>
@@ -77,7 +77,7 @@ export function Header() {
 
       {/* Bottom Bar (Navigation Links) */}
       <div className="hidden md:block mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-2">
-        <div className="bg-[#243048]/70 backdrop-blur-md rounded-md shadow-lg w-full flex items-center justify-center px-6 py-4">
+        <div className="bg-[#243048]/70 backdrop-blur-md rounded-md shadow-lg w-full flex items-center justify-center px-6 py-2.5">
           <nav className="flex space-x-8">
             {navLinks.map((link) => (
               <Link

@@ -68,7 +68,7 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="relative w-full h-150 md:h-175 lg:h-[80vh] min-h-125">
+    <div className="relative w-full h-[85vh] md:h-[90vh] lg:h-[95vh] min-h-150">
       <div className="embla h-full" ref={emblaRef}>
         <div className="embla__container h-full">
           {displaySlides.map((slide, index) => (
@@ -88,7 +88,7 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
               </div>
 
               {/* Content */}
-              <div className="relative z-10 h-full flex items-center pt-37.5">
+              <div className="relative z-10 h-full flex items-center pt-28 md:pt-32">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
                   <div className="max-w-2xl reveal-up">
                     <h1

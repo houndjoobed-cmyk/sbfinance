@@ -1,12 +1,10 @@
 "use client";
 
 import React, { useEffect, useCallback, useState } from 'react';
-import { TypingAnimation } from '@/components/ui/typing-animation';
 import { Section } from '@/components/layout/section';
-import { Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Quote } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import { Card, CardContent } from '@/components/ui/card';
 
 interface TestimonialsProps {
   testimonials: Array<{
@@ -18,18 +16,19 @@ interface TestimonialsProps {
 }
 
 export function Testimonials({ testimonials }: TestimonialsProps) {
-
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'center' }, [
-    Autoplay({ delay: 5000, stopOnInteraction: true })
+    Autoplay({ delay: 6000, stopOnInteraction: false })
   ]);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
+  const scrollTo = useCallback((index: number) => {
+    if (emblaApi) emblaApi.scrollTo(index);
   }, [emblaApi]);
 
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
+  const onInit = useCallback(() => {
+    if (!emblaApi) return;
+    setScrollSnaps(emblaApi.scrollSnapList());
   }, [emblaApi]);
 
   const onSelect = useCallback(() => {
@@ -39,84 +38,83 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
 
   useEffect(() => {
     if (!emblaApi) return;
+    onInit();
     onSelect();
+    emblaApi.on('reInit', onInit);
+    emblaApi.on('reInit', onSelect);
     emblaApi.on('select', onSelect);
-  }, [emblaApi, onSelect]);
+  }, [emblaApi, onInit, onSelect]);
 
   return (
-    <Section variant="default" className="overflow-hidden">
-      <div className="relative text-center max-w-5xl mx-auto mb-16 mt-10 reveal-up">
-        {/* Background Large Text with Marquee Animation */}
-        <div 
-          className="absolute top-1/2 left-0 -translate-y-1/2 w-full pointer-events-none -z-10 select-none overflow-hidden"
-          aria-hidden="true"
-        >
-          <div className="animate-marquee">
-            {[...Array(4)].map((_, i) => (
-              <span key={i} className="text-[80px] md:text-[130px] lg:text-[180px] font-black text-slate-200/40 dark:text-slate-800/10 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
-                Témoignages
-              </span>
-            ))}
-          </div>
+    <section className="bg-primary/95 py-24 relative overflow-hidden">
+      {/* Background Large Text with Marquee Animation */}
+      <div 
+        className="absolute top-1/2 left-0 -translate-y-1/2 w-full pointer-events-none z-0 select-none overflow-hidden"
+        aria-hidden="true"
+      >
+        <div className="animate-marquee">
+          {[...Array(4)].map((_, i) => (
+            <span key={i} className="text-[100px] md:text-[180px] lg:text-[250px] font-black text-white/5 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
+              Témoignages
+            </span>
+          ))}
         </div>
-        
-        <h2 className="text-3xl md:text-5xl font-bold text-primary-dark mb-4 relative z-10">
-          <TypingAnimation text="Ce que disent nos clients" typeSpeed={50} />
-        </h2>
-        <p className="text-on-surface-variant text-sm tracking-[0.2em] uppercase font-semibold relative z-10">
-          Notre plus grande fierté
-        </p>
       </div>
 
-      <div className="relative max-w-4xl mx-auto reveal-up delay-100">
-        <div className="embla" ref={emblaRef}>
-          <div className="embla__container py-4">
-            {testimonials.map((testimonial, index) => (
-              <div className="embla__slide flex-[0_0_100%] md:flex-[0_0_80%] px-4" key={index}>
-                <Card className={`h-full border-0 ${index === selectedIndex ? 'shadow-xl scale-100 bg-primary text-white' : 'shadow-md scale-95 opacity-50 bg-white'} transition-all duration-500`}>
-                  <CardContent className="p-8 md:p-12 text-center relative">
-                    <Quote className={`h-12 w-12 mx-auto mb-6 ${index === selectedIndex ? 'text-white/20' : 'text-primary/10'}`} />
-                    <p className={`text-xl md:text-2xl font-medium leading-relaxed mb-8 ${index === selectedIndex ? 'text-white' : 'text-on-surface'}`}>
-                      "{testimonial.text}"
-                    </p>
-                    <div className="flex flex-col items-center justify-center">
-                      <div className={`w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold mb-3 ${index === selectedIndex ? 'bg-white text-primary' : 'bg-surface-muted text-primary'}`}>
-                        {testimonial.initial}
-                      </div>
-                      <h4 className={`font-bold ${index === selectedIndex ? 'text-white' : 'text-primary-dark'}`}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10 text-center text-white">
+        
+        <h2 className="text-3xl md:text-5xl font-bold mb-12">
+          Témoignages
+        </h2>
+
+        <div className="relative mx-auto reveal-up">
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex touch-pan-y" style={{ backfaceVisibility: 'hidden' }}>
+              {testimonials.map((testimonial, index) => (
+                <div className="flex-[0_0_100%] min-w-0 px-4" key={index}>
+                  
+                  <p className="text-lg md:text-2xl font-light italic leading-relaxed mb-10 text-white/90 max-w-4xl mx-auto">
+                    {testimonial.text}
+                  </p>
+                  
+                  <div className="flex items-center justify-center gap-4">
+                    <Quote className="h-10 w-10 text-white fill-white rotate-180" />
+                    <div className="text-left">
+                      <h4 className="font-bold text-lg text-white">
                         {testimonial.author}
                       </h4>
-                      <p className={`text-sm ${index === selectedIndex ? 'text-primary-light' : 'text-on-surface-variant'}`}>
-                        {testimonial.role}
-                      </p>
+                      {testimonial.role && (
+                        <p className="text-xs tracking-wider text-white/70 uppercase mt-1">
+                          {testimonial.role}
+                        </p>
+                      )}
                     </div>
-                  </CardContent>
-                </Card>
-              </div>
+                  </div>
+
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation Lines */}
+          <div className="flex justify-center items-center gap-2 mt-12">
+            {scrollSnaps.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollTo(index)}
+                className={`h-1 transition-all duration-300 ${
+                  index === selectedIndex 
+                    ? 'w-8 bg-white' 
+                    : 'w-8 bg-transparent border border-white/50 hover:bg-white/30'
+                }`}
+                aria-label={`Aller au témoignage ${index + 1}`}
+              />
             ))}
           </div>
-        </div>
 
-        {/* Navigation Arrows */}
-        <div className="absolute top-1/2 -left-4 md:-left-12 transform -translate-y-1/2">
-          <button
-            className="h-10 w-10 rounded-full bg-white shadow-md flex items-center justify-center text-primary hover:bg-surface-muted transition-colors"
-            onClick={scrollPrev}
-            aria-label="Témoignage précédent"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-        </div>
-        <div className="absolute top-1/2 -right-4 md:-right-12 transform -translate-y-1/2">
-          <button
-            className="h-10 w-10 rounded-full bg-white shadow-md flex items-center justify-center text-primary hover:bg-surface-muted transition-colors"
-            onClick={scrollNext}
-            aria-label="Témoignage suivant"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }
+

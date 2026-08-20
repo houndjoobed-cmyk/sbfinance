@@ -12,7 +12,7 @@ interface MissionVisionProps {
 
 export function MissionVision({ mission, vision }: MissionVisionProps) {
   return (
-    <Section variant="light" className="relative">
+    <Section variant="default" className="relative bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="space-y-8 reveal-left relative">
           {/* Background Large Text */}
@@ -73,7 +73,7 @@ export function MissionVision({ mission, vision }: MissionVisionProps) {
           </Button>
         </div>
 
-        <div className="relative h-100 rounded-2xl overflow-hidden shadow-lg reveal-left">
+        <div className="relative h-100 rounded-none overflow-hidden shadow-lg reveal-left">
           {/* Using a placeholder div instead of Image to avoid missing assets during build */}
           <div className="absolute inset-0 bg-primary-dark opacity-10"></div>
           <div className="absolute inset-0 flex items-center justify-center text-primary/30 p-8 text-center">

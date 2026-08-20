@@ -47,12 +47,12 @@ export function Footer() {
 
       {/* Background Scrolling Text */}
       <div
-        className="absolute top-1/2 left-0 -translate-y-1/2 w-full pointer-events-none z-[1] select-none overflow-hidden"
+        className="absolute top-1/2 left-0 -translate-y-1/2 w-full pointer-events-none z-1 select-none overflow-hidden"
         aria-hidden="true"
       >
         <div className="animate-marquee">
           {[...Array(4)].map((_, i) => (
-            <span key={i} className="text-[100px] md:text-[160px] lg:text-[220px] font-black text-white/[0.03] uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
+            <span key={i} className="text-[100px] md:text-[160px] lg:text-[220px] font-black text-white/3 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
               SBF Finance
             </span>
           ))}
@@ -61,14 +61,14 @@ export function Footer() {
 
       <div className="relative z-10 mx-auto max-w-max px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-          
+
           {/* Column 1: Brand & About */}
           <div className="space-y-6">
             <div className="bg-white p-2 rounded inline-block">
-              <Image 
-                src="/images/logos/logo-sbf.png" 
-                alt="SBF Logo" 
-                width={140} 
+              <Image
+                src="/images/logos/logo-sbf.png"
+                alt="SBF Logo"
+                width={140}
                 height={45}
                 className="h-8 w-auto"
               />
@@ -169,7 +169,7 @@ export function Footer() {
               <li className="flex items-start">
                 <Phone className="h-5 w-5 text-accent mr-3 mt-0.5 shrink-0" />
                 <span className="text-sm text-primary-light">
-                  +229 01 21 38 05 87 <br/> +229 01 61 09 20 32
+                  +229 01 21 38 05 87 <br /> +229 01 61 09 20 32
                 </span>
               </li>
               <li className="flex items-start">

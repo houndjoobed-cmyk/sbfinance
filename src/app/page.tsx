@@ -5,7 +5,7 @@ import { MissionVision } from "@/components/home/mission-vision";
 import { ProductsPreview } from "@/components/home/products-preview";
 import { NewsPreview } from "@/components/home/news-preview";
 import { Testimonials } from "@/components/home/testimonials";
-import { NetworkPreview } from "@/components/home/network-preview";
+import { JoinUs } from "@/components/home/join-us";
 import prisma from "@/lib/prisma";
 
 export const dynamic = 'force-dynamic';
@@ -105,7 +105,7 @@ export default async function Home() {
       <ProductsPreview />
       <NewsPreview news={recentNews} />
       <Testimonials testimonials={displayTestimonials} />
-      <NetworkPreview />
+      <JoinUs />
     </>
   );
 }
