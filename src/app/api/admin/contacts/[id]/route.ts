@@ -31,7 +31,7 @@ export async function PUT(request: Request, props: { params: Promise<{ id: strin
 
     const contact = await prisma.demandeContact.update({
       where: { id: params.id },
-      data: { traite: data.traite }
+      data: { estTraite: data.estTraite }
     });
 
     return NextResponse.json(contact);

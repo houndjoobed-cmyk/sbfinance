@@ -7,9 +7,9 @@ import { Button } from '@/components/ui/button';
 
 type Temoignage = {
   id: string;
-  nomClient: string;
-  profession: string | null;
-  message: string;
+  nom: string;
+  role: string | null;
+  texte: string;
   estAffiche: boolean;
   createdAt: string;
 };
@@ -84,11 +84,11 @@ export default function TemoignagesPage() {
               temoignages.map((t) => (
                 <tr key={t.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="font-medium text-gray-900">{t.nomClient}</div>
-                    <div className="text-sm text-gray-500">{t.profession || 'Non spécifié'}</div>
+                    <div className="font-medium text-gray-900">{t.nom}</div>
+                    <div className="text-sm text-gray-500">{t.role || 'Non spécifié'}</div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-sm text-gray-900 line-clamp-2 italic">"{t.message}"</div>
+                    <p className="text-sm text-gray-900 line-clamp-3">{t.texte}</p>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {t.estAffiche ? (

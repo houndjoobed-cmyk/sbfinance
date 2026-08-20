@@ -20,8 +20,8 @@ export async function submitContactForm(formData: FormData) {
         telephone,
         email: email || null,
         message,
-        agenceId: agenceId || null,
-        traite: false
+        agencePreference: agenceId || null,
+        estTraite: false
       }
     });
 

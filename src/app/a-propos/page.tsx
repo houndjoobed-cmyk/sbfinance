@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  let parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } });
+  let parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } }) as any;
   
   if (!parametres) {
     parametres = {

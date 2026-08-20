@@ -42,9 +42,9 @@ export async function POST(request: Request) {
 
     const nouveauTemoignage = await prisma.temoignage.create({
       data: {
-        nomClient: data.nomClient,
-        profession: data.profession || null,
-        message: data.message,
+        nom: data.nom,
+        role: data.role || null,
+        texte: data.texte,
         photo: data.photo || null,
         estAffiche: data.estAffiche ?? true,
       }

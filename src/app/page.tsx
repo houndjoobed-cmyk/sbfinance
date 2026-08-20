@@ -11,7 +11,7 @@ import prisma from "@/lib/prisma";
 // This runs on the server during SSG/SSR
 export default async function Home() {
   // Fetch site parameters
-  let parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } });
+  let parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } }) as any;
   
   if (!parametres) {
     parametres = {
@@ -27,7 +27,7 @@ export default async function Home() {
       adresseSiege: '',
       createdAt: new Date(),
       updatedAt: new Date()
-    };
+    } as any;
   }
 
   // Calculate experience dynamically based on creation year
@@ -57,10 +57,10 @@ export default async function Home() {
 
   // Format testimonials for the component
   const formattedTestimonials = publishedTestimonials.map((t: any) => ({
-    text: t.message,
-    author: t.nomClient,
-    role: t.profession,
-    initial: t.nomClient.charAt(0).toUpperCase()
+    text: t.texte,
+    author: t.nom,
+    role: t.role,
+    initial: t.nom.charAt(0).toUpperCase()
   }));
 
   // Fallback testimonials if none are found in the DB

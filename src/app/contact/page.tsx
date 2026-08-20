@@ -13,11 +13,10 @@ export const metadata: Metadata = {
 };
 
 export default async function ContactPage() {
-  const parametres = await prisma.parametresSite.findFirst() || {
+  const parametres = await prisma.parametresSite.findFirst() as any || {
     telephonePrincipal: "+229 01 21 38 05 87",
-    emailContact: "contact@sbfinance.bj",
+    emailPrincipal: "contact@sbfinance.bj",
     adresseSiege: "ZOGBO Carré 553 Lot 1907 M 072, Arconville / Abomey-Calavi, Bénin",
-    boitePostale: "BP 317"
   };
 
   const agencies = await prisma.agence.findMany({
@@ -62,9 +61,7 @@ export default async function ContactPage() {
                   <div>
                     <h3 className="font-bold text-primary-dark text-lg mb-1">Siège social</h3>
                     <p className="text-on-surface-variant whitespace-pre-line">{parametres.adresseSiege}</p>
-                    {parametres.boitePostale && (
-                      <p className="text-on-surface-variant mt-2 text-sm">{parametres.boitePostale}</p>
-                    )}
+                    <p className="text-on-surface-variant mt-2 text-sm">BP 317</p>
                   </div>
                 </CardContent>
               </Card>
@@ -84,8 +81,8 @@ export default async function ContactPage() {
                   <Mail className="h-6 w-6 text-accent mr-4 shrink-0 mt-1" />
                   <div>
                     <h3 className="font-bold text-primary-dark text-lg mb-1">Email</h3>
-                    <a href={`mailto:${parametres.emailContact || 'contact@sbfinance.bj'}`} className="text-primary hover:underline">
-                      {parametres.emailContact || 'contact@sbfinance.bj'}
+                    <a href={`mailto:${parametres.emailPrincipal || 'contact@sbfinance.bj'}`} className="text-primary hover:underline">
+                      {parametres.emailPrincipal || 'contact@sbfinance.bj'}
                     </a>
                   </div>
                 </CardContent>

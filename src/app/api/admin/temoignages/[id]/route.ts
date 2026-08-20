@@ -45,9 +45,9 @@ export async function PUT(request: Request, props: { params: Promise<{ id: strin
     const temoignage = await prisma.temoignage.update({
       where: { id: params.id },
       data: {
-        nomClient: data.nomClient,
-        profession: data.profession,
-        message: data.message,
+        nom: data.nom,
+        role: data.role,
+        texte: data.texte,
         photo: data.photo,
         estAffiche: data.estAffiche,
       }

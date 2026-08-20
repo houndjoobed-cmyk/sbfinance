@@ -11,7 +11,7 @@ type Contact = {
   email: string | null;
   message: string;
   agenceRef: string | null;
-  traite: boolean;
+  estTraite: boolean;
   createdAt: string;
 };
 
@@ -40,10 +40,10 @@ export default function ContactsPage() {
       const res = await fetch(`/api/admin/contacts/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ traite: !currentState })
+        body: JSON.stringify({ estTraite: !currentState })
       });
       if (res.ok) {
-        setContacts(prev => prev.map(c => c.id === id ? { ...c, traite: !currentState } : c));
+        setContacts(prev => prev.map(c => c.id === id ? { ...c, estTraite: !currentState } : c));
       }
     } catch (error) {
       console.error('Erreur', error);
@@ -86,11 +86,11 @@ export default function ContactsPage() {
               <tr><td colSpan={4} className="px-6 py-8 text-center text-gray-500">Aucune demande reçue pour l'instant.</td></tr>
             ) : (
               contacts.map((c) => (
-                <tr key={c.id} className={`hover:bg-gray-50 ${c.traite ? 'opacity-60' : 'bg-blue-50/30'}`}>
+                <tr key={c.id} className={`hover:bg-gray-50 ${c.estTraite ? 'opacity-60' : 'bg-blue-50/30'}`}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-gray-900">{new Date(c.createdAt).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>
                     <div className="mt-1">
-                      {c.traite ? (
+                      {c.estTraite ? (
                         <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
                           <CheckCircle2 className="w-3 h-3 mr-1" /> Traitée
                         </span>
@@ -115,10 +115,10 @@ export default function ContactsPage() {
                       <Button 
                         variant="outline" 
                         size="sm"
-                        onClick={() => toggleTraite(c.id, c.traite)}
-                        className={c.traite ? "text-gray-600" : "text-green-600 border-green-200 hover:bg-green-50"}
+                        onClick={() => toggleTraite(c.id, c.estTraite)}
+                        className={c.estTraite ? "text-gray-600" : "text-green-600 border-green-200 hover:bg-green-50"}
                       >
-                        {c.traite ? <><XCircle className="w-4 h-4 mr-1" /> Marquer non lue</> : <><CheckCircle2 className="w-4 h-4 mr-1" /> Marquer traitée</>}
+                        {c.estTraite ? <><XCircle className="w-4 h-4 mr-1" /> Marquer non lue</> : <><CheckCircle2 className="w-4 h-4 mr-1" /> Marquer traitée</>}
                       </Button>
                       <button onClick={() => handleDelete(c.id)} className="text-red-600 hover:bg-red-50 p-2 rounded-md">
                         <Trash2 className="w-4 h-4" />

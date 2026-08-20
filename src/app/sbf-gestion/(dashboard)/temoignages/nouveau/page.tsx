@@ -16,9 +16,9 @@ export default function TemoignageFormPage({ params }: { params?: { id: string }
   const [error, setError] = useState('');
   
   const [formData, setFormData] = useState({
-    nomClient: '',
-    profession: '',
-    message: '',
+    nom: '',
+    role: '',
+    texte: '',
     photo: '',
     estAffiche: true
   });
@@ -33,9 +33,9 @@ export default function TemoignageFormPage({ params }: { params?: { id: string }
       if (res.ok) {
         const data = await res.json();
         setFormData({
-          nomClient: data.nomClient || '',
-          profession: data.profession || '',
-          message: data.message || '',
+          nom: data.nom || '',
+          role: data.role || '',
+          texte: data.texte || '',
           photo: data.photo || '',
           estAffiche: data.estAffiche
         });
@@ -103,15 +103,15 @@ export default function TemoignageFormPage({ params }: { params?: { id: string }
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Nom du client *</label>
-            <input required name="nomClient" value={formData.nomClient} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5]" placeholder="Ex: Jean DUPONT" />
+            <input required name="nom" value={formData.nom} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5]" placeholder="Ex: Jean DUPONT" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Profession / Activité</label>
-            <input name="profession" value={formData.profession} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5]" placeholder="Ex: Commerçant au marché Dantokpa" />
+            <input name="role" value={formData.role} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5]" placeholder="Ex: Commerçant au marché Dantokpa" />
           </div>
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">Le témoignage *</label>
-            <textarea required name="message" rows={4} value={formData.message} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5]" placeholder="Le message du client..." />
+            <textarea required name="texte" rows={4} value={formData.texte} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5]" placeholder="Le message du client..." />
           </div>
           <div className="md:col-span-2">
             <ImageUpload 
