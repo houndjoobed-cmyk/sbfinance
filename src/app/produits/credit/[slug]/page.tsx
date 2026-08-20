@@ -9,12 +9,17 @@ import Link from 'next/link';
 import prisma from "@/lib/prisma";
 
 export async function generateStaticParams() {
-  const products = await prisma.produitCredit.findMany({
-    select: { slug: true }
-  });
-  return products.map((p: any) => ({
-    slug: p.slug,
-  }));
+  try {
+    const products = await prisma.produitCredit.findMany({
+      select: { slug: true }
+    });
+    return products.map((p: any) => ({
+      slug: p.slug,
+    }));
+  } catch (error) {
+    console.error("Error in generateStaticParams:", error);
+    return [];
+  }
 }
 
 type Props = {
