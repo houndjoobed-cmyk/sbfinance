@@ -8,6 +8,8 @@ import { Testimonials } from "@/components/home/testimonials";
 import { NetworkPreview } from "@/components/home/network-preview";
 import prisma from "@/lib/prisma";
 
+export const dynamic = 'force-dynamic';
+
 // This runs on the server during SSG/SSR
 export default async function Home() {
   // Fetch site parameters

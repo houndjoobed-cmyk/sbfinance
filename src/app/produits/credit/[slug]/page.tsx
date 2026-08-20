@@ -8,19 +8,7 @@ import { ArrowLeft, CheckCircle2, AlertCircle, Target, FileText } from 'lucide-r
 import Link from 'next/link';
 import prisma from "@/lib/prisma";
 
-export async function generateStaticParams() {
-  try {
-    const products = await prisma.produitCredit.findMany({
-      select: { slug: true }
-    });
-    return products.map((p: any) => ({
-      slug: p.slug,
-    }));
-  } catch (error) {
-    console.error("Error in generateStaticParams:", error);
-    return [];
-  }
-}
+export const dynamic = 'force-dynamic';
 
 type Props = {
   params: { slug: string }

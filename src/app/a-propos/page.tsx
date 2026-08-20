@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   description: "Découvrez l'histoire, la mission, la vision et les valeurs de Salem Braha Finance, votre partenaire financier au Bénin.",
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function AboutPage() {
   let parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } }) as any;
   

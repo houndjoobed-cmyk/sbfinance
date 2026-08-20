@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Contactez Salem Braha Finance pour toute question sur nos offres de crédit ou d'épargne. Trouvez notre siège à Arconville.",
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function ContactPage() {
   const parametres = await prisma.parametresSite.findFirst() as any || {
     telephonePrincipal: "+229 01 21 38 05 87",

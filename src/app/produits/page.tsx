@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   description: "Découvrez nos offres de crédit, d'épargne et d'accompagnement pour concrétiser vos projets.",
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function ProductsPage() {
   const allCredits = await prisma.produitCredit.findMany({
     orderBy: { nom: 'asc' }

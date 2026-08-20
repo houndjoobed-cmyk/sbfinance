@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   description: "Trouvez l'agence Salem Braha Finance la plus proche de chez vous au Bénin. Consultez nos horaires et coordonnées.",
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function NetworkPage() {
   const dbAgencies = await prisma.agence.findMany({
     orderBy: { nom: 'asc' }
