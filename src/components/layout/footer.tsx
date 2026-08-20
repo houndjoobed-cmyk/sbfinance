@@ -32,8 +32,34 @@ export function Footer() {
   if (pathname.startsWith('/sbf-gestion')) return null;
 
   return (
-    <footer className="bg-primary-dark text-white border-t-4 border-accent">
-      <div className="mx-auto max-w-max px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <footer className="relative overflow-hidden text-white border-t-4 border-accent">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/hero/hero-finance.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-primary-dark/95"></div>
+      </div>
+
+      {/* Background Scrolling Text */}
+      <div
+        className="absolute top-1/2 left-0 -translate-y-1/2 w-full pointer-events-none z-[1] select-none overflow-hidden"
+        aria-hidden="true"
+      >
+        <div className="animate-marquee">
+          {[...Array(4)].map((_, i) => (
+            <span key={i} className="text-[100px] md:text-[160px] lg:text-[220px] font-black text-white/[0.03] uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
+              SBF Finance
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-max px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           
           {/* Column 1: Brand & About */}
