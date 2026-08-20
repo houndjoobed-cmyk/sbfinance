@@ -37,7 +37,7 @@ export function ContactForm({ agencies }: ContactFormProps) {
 
   if (status === 'success') {
     return (
-      <div className="bg-green-50 text-green-800 p-8 rounded-xl border border-green-200 text-center">
+      <div className="bg-green-50 text-green-800 p-8 border border-green-200 text-center">
         <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
         <h3 className="text-xl font-bold mb-2">Message envoyé avec succès !</h3>
         <p>Nous avons bien reçu votre demande et nous vous contacterons dans les plus brefs délais.</p>
@@ -53,7 +53,7 @@ export function ContactForm({ agencies }: ContactFormProps) {
       <h2 className="text-2xl font-bold text-primary-dark mb-6"><TypingAnimation text="Envoyez-nous un message" typeSpeed={50} /></h2>
       
       {status === 'error' && (
-        <div className="bg-red-50 text-red-800 p-4 rounded-md flex items-center mb-6">
+        <div className="bg-red-50 text-red-800 p-4 flex items-center mb-6">
             <AlertCircle className="w-5 h-5 text-red-600 mt-0.5 shrink-0" />
             <p className="ml-3 text-sm text-red-600">{errorMessage}</p>
         </div>
@@ -66,7 +66,7 @@ export function ContactForm({ agencies }: ContactFormProps) {
             type="text" 
             id="name" 
             name="name"
-            className="w-full h-12 px-4 rounded-md border border-outline-variant bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow" 
+            className="w-full h-12 px-4 rounded-none border border-outline-variant bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow" 
             placeholder="Votre nom"
             required
             disabled={isPending}
@@ -80,7 +80,7 @@ export function ContactForm({ agencies }: ContactFormProps) {
               type="tel" 
               id="phone" 
               name="phone"
-              className="w-full h-12 px-4 rounded-md border border-outline-variant bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow" 
+              className="w-full h-12 px-4 rounded-none border border-outline-variant bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow" 
               placeholder="+229..."
               required
               disabled={isPending}
@@ -92,7 +92,7 @@ export function ContactForm({ agencies }: ContactFormProps) {
               type="email" 
               id="email" 
               name="email"
-              className="w-full h-12 px-4 rounded-md border border-outline-variant bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow" 
+              className="w-full h-12 px-4 rounded-none border border-outline-variant bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow" 
               placeholder="votre@email.com"
               disabled={isPending}
             />
@@ -104,7 +104,7 @@ export function ContactForm({ agencies }: ContactFormProps) {
           <select 
             id="agency" 
             name="agency"
-            className="w-full h-12 px-4 rounded-md border border-outline-variant bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow appearance-none"
+            className="w-full h-12 px-4 rounded-none border border-outline-variant bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow appearance-none"
             disabled={isPending}
           >
             <option value="">Sélectionnez une agence...</option>
@@ -122,7 +122,7 @@ export function ContactForm({ agencies }: ContactFormProps) {
             id="message" 
             name="message"
             rows={5}
-            className="w-full p-4 rounded-md border border-outline-variant bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow resize-none" 
+            className="w-full p-4 rounded-none border border-outline-variant bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow resize-none" 
             placeholder="Comment pouvons-nous vous aider ?"
             required
             disabled={isPending}

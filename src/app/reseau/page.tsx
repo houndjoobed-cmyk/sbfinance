@@ -119,7 +119,7 @@ export default async function NetworkPage() {
 
         {/* Interactive Map */}
         <div className="mb-16 reveal-up delay-100">
-          <div className="lg:col-span-8 bg-surface-muted rounded-2xl overflow-hidden shadow-sm h-125 relative reveal-left">
+          <div className="lg:col-span-8 bg-surface-muted overflow-hidden shadow-sm h-125 relative reveal-left">
             <MapWrapper agencies={agencies} />
           </div>
         </div>

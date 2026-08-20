@@ -126,16 +126,16 @@ export default function NewsPage() {
         {/* Pagination */}
         <div className="mt-16 flex justify-center reveal-up">
           <nav className="flex items-center gap-2">
-            <button className="w-10 h-10 rounded-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-muted disabled:opacity-50" disabled>
+            <button className="w-10 h-10 rounded-none border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-muted disabled:opacity-50" disabled>
               &laquo;
             </button>
-            <button className="w-10 h-10 rounded-md bg-primary text-white flex items-center justify-center font-medium">
+            <button className="w-10 h-10 rounded-none bg-primary text-white flex items-center justify-center font-medium">
               1
             </button>
-            <button className="w-10 h-10 rounded-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-muted">
+            <button className="w-10 h-10 rounded-none border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-muted">
               2
             </button>
-            <button className="w-10 h-10 rounded-md border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-muted">
+            <button className="w-10 h-10 rounded-none border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-surface-muted">
               &raquo;
             </button>
           </nav>

@@ -82,9 +82,8 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
                   priority={index === 0}
                   className={`object-cover transition-transform duration-10000 ${index === selectedIndex ? 'scale-110' : 'scale-100'}`}
                 />
-                {/* Gradient Overlay for text readability */}
-                <div className="absolute inset-0 bg-linear-to-r from-primary-dark/80 via-primary-dark/60 to-transparent"></div>
-                <div className="absolute inset-0 bg-black/20"></div>
+                {/* Dark Overlay for text readability — no gradient */}
+                <div className="absolute inset-0 bg-black/30"></div>
               </div>
 
               {/* Content */}

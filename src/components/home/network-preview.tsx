@@ -39,7 +39,7 @@ export function NetworkPreview() {
           </div>
 
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-white text-primary text-sm font-bold tracking-wide uppercase shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 bg-white text-primary text-sm font-bold tracking-wide uppercase shadow-sm">
               <MapPin className="h-4 w-4" />
               Notre Réseau
             </div>
@@ -53,7 +53,7 @@ export function NetworkPreview() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-outline-variant/50">
+          <div className="bg-white shadow-sm p-6 border border-outline-variant/50">
             <h3 className="font-bold text-primary-dark mb-4 flex items-center">
               <Map className="h-5 w-5 mr-2 text-accent" />
               Nos agences
@@ -79,8 +79,8 @@ export function NetworkPreview() {
         </div>
 
         {/* Placeholder map illustration */}
-        <div className="relative h-100 bg-white rounded-2xl shadow-xl overflow-hidden reveal-right border border-outline-variant p-2">
-          <div className="w-full h-full bg-surface-muted rounded-xl flex flex-col items-center justify-center border border-dashed border-outline/30 relative">
+        <div className="relative h-100 bg-white shadow-xl overflow-hidden reveal-right border border-outline-variant p-2">
+          <div className="w-full h-full bg-surface-muted flex flex-col items-center justify-center border border-dashed border-outline/30 relative">
             {/* Mock map elements */}
             <div className="absolute top-1/4 left-1/3">
               <div className="relative flex items-center justify-center">
@@ -104,7 +104,7 @@ export function NetworkPreview() {
               </div>
             </div>
 
-            <div className="text-center mt-auto mb-8 relative z-10 bg-white/80 px-4 py-2 rounded-lg backdrop-blur-sm">
+            <div className="text-center mt-auto mb-8 relative z-10 bg-white/80 px-4 py-2 backdrop-blur-sm">
               <p className="text-sm font-medium text-on-surface">Carte interactive Leaflet complète sur la page Réseau</p>
             </div>
           </div>

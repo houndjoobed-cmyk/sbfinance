@@ -25,6 +25,12 @@ const InstagramIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const WhatsappIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path fillRule="evenodd" d="M12.031 0C5.395 0 0 5.394 0 12.031c0 2.128.552 4.195 1.6 6.012L.15 24l6.103-1.602a11.967 11.967 0 005.778 1.488h.005c6.634 0 12.029-5.394 12.029-12.031 0-3.216-1.252-6.241-3.526-8.514A11.977 11.977 0 0012.031 0zm0 21.849h-.003c-1.802 0-3.567-.484-5.114-1.402l-.367-.217-3.805.998.997-3.722-.238-.378a10.027 10.027 0 01-1.53-5.275c0-5.525 44.97-10.016 10.023-10.016 2.677 0 5.193 1.042 7.085 2.935 1.892 1.893 2.934 4.409 2.934 7.086 0 5.525-44.969 10.018-10.023 10.018zM17.534 14.5c-.302-.152-1.785-.882-2.062-.982-.276-.1-.478-.152-.678.151-.2.302-.78 1-.955 1.203-.175.201-.35.226-.652.075-1.523-.76-2.529-1.393-3.483-2.915-.246-.395.242-.363.682-1.233.15-.302.075-.578-.075-.879-.15-.302-.678-1.637-.93-2.242-.244-.59-.493-.51-.678-.52-.175-.008-.377-.008-.578-.008-.2 0-.528.075-.804.377-.276.302-1.054 1.031-1.054 2.515 0 1.485 1.08 2.923 1.23 3.125.151.201 2.13 3.252 5.158 4.561.721.311 1.283.498 1.725.637.724.23 1.383.197 1.9.119.58-.088 1.785-.728 2.036-1.433.25-.704.25-1.307.175-1.433-.075-.126-.276-.201-.578-.352z" clipRule="evenodd" />
+  </svg>
+);
+
 export function Footer() {
   const pathname = usePathname();
   const currentYear = new Date().getFullYear();
@@ -88,6 +94,10 @@ export function Footer() {
               <a href="#" className="text-primary-light hover:text-white transition-colors">
                 <span className="sr-only">Instagram</span>
                 <InstagramIcon className="h-5 w-5" />
+              </a>
+              <a href="https://wa.me/2290128305976" target="_blank" rel="noopener noreferrer" className="text-primary-light hover:text-white transition-colors">
+                <span className="sr-only">WhatsApp</span>
+                <WhatsappIcon className="h-5 w-5" />
               </a>
             </div>
           </div>

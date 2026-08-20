@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { WhatsAppButton } from "@/components/whatsapp-button";
+
 import { ScrollReveal } from "@/components/layout/scroll-reveal";
 import "./globals.css";
 
@@ -35,7 +35,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <WhatsAppButton />
+
         <ScrollReveal />
       </body>
     </html>

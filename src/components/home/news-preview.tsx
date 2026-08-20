@@ -54,9 +54,9 @@ export function NewsPreview({ news }: NewsPreviewProps) {
         {news.map((item, index) => (
           <Card key={item.id} className={`flex flex-col h-full reveal-up delay-${(index + 1) * 100} group`}>
             {/* Image Placeholder */}
-            <div className="h-48 bg-surface-container relative overflow-hidden rounded-t-xl" style={item.image ? { backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}>
+            <div className="h-48 bg-surface-container relative overflow-hidden" style={item.image ? { backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}>
               {!item.image && <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>}
-              <div className="absolute top-4 left-4 bg-primary text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full">
+              <div className="absolute top-4 left-4 bg-primary text-white text-xs font-bold uppercase tracking-wider py-1 px-3">
                 {item.categorie}
               </div>
             </div>

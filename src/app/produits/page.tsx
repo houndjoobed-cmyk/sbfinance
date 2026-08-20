@@ -144,8 +144,8 @@ export default async function ProductsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-          <div className="bg-white rounded-2xl p-8 shadow-sm border border-outline-variant/30 reveal-up delay-100">
-            <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+          <div className="bg-white p-8 shadow-sm border border-outline-variant/30 reveal-up delay-100">
+            <div className="w-14 h-14 bg-primary/10 flex items-center justify-center mb-6">
               <Shield className="h-7 w-7 text-primary" />
             </div>
             <h3 className="text-2xl font-bold text-primary-dark mb-4">Épargne Sécurisée</h3>
@@ -163,7 +163,7 @@ export default async function ProductsPage() {
           </div>
 
           <div className="space-y-8 reveal-up delay-200">
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-outline-variant/30 flex items-start">
+            <div className="bg-white p-6 shadow-sm border border-outline-variant/30 flex items-start">
               <BookOpen className="h-8 w-8 text-accent mr-4 shrink-0" />
               <div>
                 <h3 className="text-xl font-bold text-primary-dark mb-2">Formation</h3>
@@ -173,7 +173,7 @@ export default async function ProductsPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-outline-variant/30 flex items-start">
+            <div className="bg-white p-6 shadow-sm border border-outline-variant/30 flex items-start">
               <Lightbulb className="h-8 w-8 text-accent mr-4 shrink-0" />
               <div>
                 <h3 className="text-xl font-bold text-primary-dark mb-2">Conseil & Éducation Financière</h3>
@@ -183,7 +183,7 @@ export default async function ProductsPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-outline-variant/30 flex items-start">
+            <div className="bg-white p-6 shadow-sm border border-outline-variant/30 flex items-start">
               <Handshake className="h-8 w-8 text-accent mr-4 shrink-0" />
               <div>
                 <h3 className="text-xl font-bold text-primary-dark mb-2">Appui / Assurance Conseil</h3>

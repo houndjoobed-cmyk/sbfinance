@@ -91,7 +91,7 @@ export default async function ProductDetailPage({ params }: Props) {
                 <CheckCircle2 className="h-6 w-6 text-accent mr-3 shrink-0" />
                 Conditions d'éligibilité
               </h2>
-              <div className="bg-surface-muted p-6 rounded-xl border border-outline-variant/50">
+              <div className="bg-surface-muted p-6 border border-outline-variant/50">
                 <p className="font-medium text-on-surface mb-4">Ce produit s'adresse à :</p>
                 <p className="text-on-surface-variant mb-6">{product.cible}</p>
 
@@ -114,7 +114,7 @@ export default async function ProductDetailPage({ params }: Props) {
               </h2>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {documents.map((doc, idx) => (
-                  <li key={idx} className="bg-white p-4 rounded-lg shadow-sm border border-outline-variant/30 text-sm text-on-surface-variant flex items-center">
+                  <li key={idx} className="bg-white p-4 shadow-sm border border-outline-variant/30 text-sm text-on-surface-variant flex items-center">
                     <div className="w-2 h-2 bg-primary rounded-full mr-3 shrink-0"></div>
                     {doc}
                   </li>
@@ -128,7 +128,7 @@ export default async function ProductDetailPage({ params }: Props) {
                   <CheckCircle2 className="h-6 w-6 text-primary mr-3" />
                   <TypingAnimation text="Garanties exigées" typeSpeed={50} />
                 </h2>
-                <div className="bg-white p-6 rounded-xl border border-outline-variant/50">
+                <div className="bg-white p-6 border border-outline-variant/50">
                   <p className="text-on-surface-variant">{product.garantieExigee}</p>
                 </div>
               </div>
@@ -137,7 +137,7 @@ export default async function ProductDetailPage({ params }: Props) {
 
           {/* Sidebar / Parameters */}
           <div>
-            <div className="bg-primary-dark text-white rounded-2xl p-6 shadow-lg sticky top-24">
+            <div className="bg-primary-dark text-white p-6 shadow-lg sticky top-24">
               <h3 className="text-xl font-bold mb-6 border-b border-white/20 pb-4">Caractéristiques</h3>
 
               <div className="space-y-6">
@@ -166,7 +166,7 @@ export default async function ProductDetailPage({ params }: Props) {
                 </Button>
               </div>
 
-              <div className="mt-6 flex items-start text-xs text-primary-light bg-black/20 p-3 rounded-lg">
+              <div className="mt-6 flex items-start text-xs text-primary-light bg-black/20 p-3">
                 <AlertCircle className="h-4 w-4 mr-2 shrink-0 mt-0.5" />
                 <p>Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</p>
               </div>

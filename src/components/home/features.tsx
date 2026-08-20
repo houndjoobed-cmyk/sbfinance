@@ -27,7 +27,7 @@ export function Features() {
   ];
 
   return (
-    <Section variant="muted" className="-mt-8 relative z-30 pt-16">
+    <Section variant="default" className="bg-white -mt-8 relative z-30 pt-16">
       <div className="relative text-center max-w-5xl mx-auto mb-16 reveal-up">
         {/* Background Large Text */}
         <div 

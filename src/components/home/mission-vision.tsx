@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Target, Eye } from 'lucide-react';
 import { TypingAnimation } from '@/components/ui/typing-animation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface MissionVisionProps {
   mission: string;
@@ -73,12 +74,14 @@ export function MissionVision({ mission, vision }: MissionVisionProps) {
           </Button>
         </div>
 
-        <div className="relative h-100 rounded-none overflow-hidden shadow-lg reveal-left">
-          {/* Using a placeholder div instead of Image to avoid missing assets during build */}
+        <div className="relative h-100 rounded-none overflow-hidden shadow-lg reveal-left bg-surface-muted">
+          <Image
+            src="/images/home/mission-vision.jpg"
+            alt="Équipe Salem Braha Finance au travail"
+            fill
+            className="object-cover"
+          />
           <div className="absolute inset-0 bg-primary-dark opacity-10"></div>
-          <div className="absolute inset-0 flex items-center justify-center text-primary/30 p-8 text-center">
-            [Image: Photo des membres / locaux de Salem Braha Finance]
-          </div>
 
           {/* Decorative elements */}
           <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-accent rounded-full opacity-20"></div>

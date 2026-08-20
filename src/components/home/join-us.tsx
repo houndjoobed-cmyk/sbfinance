@@ -40,7 +40,7 @@ export function JoinUs() {
             asChild
             variant="default"
             size="lg"
-            className="bg-primary hover:bg-primary-dark text-white border-none min-w-55 rounded-sm py-6 font-semibold uppercase tracking-wide group"
+            className="bg-primary hover:bg-primary-dark text-white border-none min-w-55 py-6 font-semibold uppercase tracking-wide group"
           >
             <Link href="/produits/credit">
               Demande de crédit
@@ -51,7 +51,7 @@ export function JoinUs() {
             asChild
             variant="default"
             size="lg"
-            className="bg-primary hover:bg-primary-dark text-white border-none min-w-55 rounded-sm py-6 font-semibold uppercase tracking-wide group"
+            className="bg-primary hover:bg-primary-dark text-white border-none min-w-55 py-6 font-semibold uppercase tracking-wide group"
           >
             <Link href="/produits/epargne">
               Compte d'épargne
@@ -62,7 +62,7 @@ export function JoinUs() {
             asChild
             variant="default"
             size="lg"
-            className="bg-primary hover:bg-primary-dark text-white border-none min-w-55 rounded-sm py-6 font-semibold uppercase tracking-wide group"
+            className="bg-primary hover:bg-primary-dark text-white border-none min-w-55 py-6 font-semibold uppercase tracking-wide group"
           >
             <Link href="/contact">
               Nos offres d'emploi

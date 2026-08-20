@@ -71,7 +71,7 @@ export default async function AboutPage() {
               )}
             </div>
           </div>
-          <div className="bg-surface-muted rounded-2xl p-8 shadow-sm reveal-right">
+          <div className="bg-surface-muted p-8 shadow-sm reveal-right">
             <h3 className="text-2xl font-bold text-primary-dark mb-6">SBF, c'est aussi :</h3>
             <ul className="space-y-4">
               <li className="flex items-start">
@@ -104,7 +104,7 @@ export default async function AboutPage() {
       <Section variant="light">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 reveal-up">
           
-          <div className="md:col-span-7 bg-primary text-white rounded-2xl p-8 md:p-12 shadow-(--shadow-card)">
+          <div className="md:col-span-7 bg-primary text-white p-8 md:p-12 shadow-(--shadow-card)">
             <Users className="h-10 w-10 text-primary-light mb-6" />
             <h2 className="text-3xl font-bold mb-4"><TypingAnimation text="Notre Mission" typeSpeed={50} /></h2>
             <p className="text-lg text-primary-light leading-relaxed">
@@ -112,7 +112,7 @@ export default async function AboutPage() {
             </p>
           </div>
 
-          <div className="md:col-span-5 bg-white rounded-2xl p-8 shadow-(--shadow-card)">
+          <div className="md:col-span-5 bg-white p-8 shadow-(--shadow-card)">
             <TrendingUp className="h-10 w-10 text-accent mb-6" />
             <h2 className="text-2xl font-bold text-primary-dark mb-4"><TypingAnimation text="Notre Vision" typeSpeed={50} /></h2>
             <p className="text-on-surface-variant leading-relaxed">
@@ -185,7 +185,7 @@ export default async function AboutPage() {
         <Section variant="default">
           <div className="max-w-4xl mx-auto text-center reveal-up">
             <h2 className="text-3xl font-bold text-primary-dark mb-8"><TypingAnimation text="Notre Gouvernance" typeSpeed={50} /></h2>
-            <div className="prose text-on-surface-variant whitespace-pre-line text-left bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+            <div className="prose text-on-surface-variant whitespace-pre-line text-left bg-white p-8 shadow-sm border border-gray-100">
               {parametres.gouvernanceTexte}
             </div>
           </div>
