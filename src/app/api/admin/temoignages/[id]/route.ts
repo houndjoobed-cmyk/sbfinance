@@ -21,7 +21,8 @@ async function checkAuth() {
   return user;
 }
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(request: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   try {
     const temoignage = await prisma.temoignage.findUnique({
       where: { id: params.id }
@@ -33,7 +34,8 @@ export async function GET(request: Request, { params }: { params: { id: string }
   }
 }
 
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+export async function PUT(request: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   try {
     const user = await checkAuth();
     if (!user) return NextResponse.json({ error: 'Non autorisé' }, { status: 401 });
@@ -58,7 +60,8 @@ export async function PUT(request: Request, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   try {
     const user = await checkAuth();
     if (!user) return NextResponse.json({ error: 'Non autorisé' }, { status: 401 });
