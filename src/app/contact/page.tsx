@@ -20,7 +20,7 @@ export default async function ContactPage() {
     emailPrincipal: "contact@sbfinance.bj",
     adresseSiege: "ZOGBO Carré 553 Lot 1907 M 072, Arconville / Abomey-Calavi, Bénin",
   };
-  let agencies = [];
+  let agencies: any[] = [];
 
   try {
     const fetchedParametres = await prisma.parametresSite.findFirst() as any;

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function ProductsPage() {
-  let allCredits = [];
+  let allCredits: any[] = [];
   try {
     allCredits = await prisma.produitCredit.findMany({
       orderBy: { nom: 'asc' }

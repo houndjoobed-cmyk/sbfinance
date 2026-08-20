@@ -13,8 +13,8 @@ export const dynamic = 'force-dynamic';
 // This runs on the server during SSG/SSR
 export default async function Home() {
   let parametres = null;
-  let recentNews = [];
-  let publishedTestimonials = [];
+  let recentNews: any[] = [];
+  let publishedTestimonials: any[] = [];
 
   try {
     parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } }) as any;

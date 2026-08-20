@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function NetworkPage() {
-  let dbAgencies = [];
+  let dbAgencies: any[] = [];
   let parametres = {
     telephonePrincipal: "+229 01 21 38 05 87"
   };
