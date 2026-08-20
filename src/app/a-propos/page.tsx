@@ -14,8 +14,12 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function AboutPage() {
-  let parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } }) as any;
-  
+  let parametres = null;
+  try {
+    parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } }) as any;
+  } catch (error) {
+    console.error("Database fetch error:", error);
+  }
   if (!parametres) {
     parametres = {
       id: 1,

@@ -16,11 +16,17 @@ type Props = {
 
 export default async function ProductDetailPage({ params }: Props) {
   const slug = params.slug;
-  const product = await prisma.produitCredit.findUnique({
-    where: { slug }
-  });
+  let product = null;
+  try {
+    product = await prisma.produitCredit.findUnique({
+      where: { slug }
+    });
+  } catch (error) {
+    console.error("Database fetch error:", error);
+  }
 
   if (!product) {
+    // Return a graceful 404 or fallback if the DB is unreachable
     notFound();
   }
 

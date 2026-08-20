@@ -12,8 +12,27 @@ export const dynamic = 'force-dynamic';
 
 // This runs on the server during SSG/SSR
 export default async function Home() {
-  // Fetch site parameters
-  let parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } }) as any;
+  let parametres = null;
+  let recentNews = [];
+  let publishedTestimonials = [];
+
+  try {
+    parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } }) as any;
+    
+    recentNews = await prisma.actualite.findMany({
+      where: { estPublie: true },
+      orderBy: { createdAt: 'desc' },
+      take: 3
+    });
+
+    publishedTestimonials = await prisma.temoignage.findMany({
+      where: { estAffiche: true },
+      orderBy: { createdAt: 'desc' },
+      take: 5
+    });
+  } catch (error) {
+    console.error("Database fetch error:", error);
+  }
   
   if (!parametres) {
     parametres = {
@@ -43,19 +62,7 @@ export default async function Home() {
     { value: 138, label: "Millions FCFA Capital", suffix: "" },
   ];
 
-  // Fetch published news
-  const recentNews = await prisma.actualite.findMany({
-    where: { estPublie: true },
-    orderBy: { createdAt: 'desc' },
-    take: 3
-  });
 
-  // Fetch published testimonials
-  const publishedTestimonials = await prisma.temoignage.findMany({
-    where: { estAffiche: true },
-    orderBy: { createdAt: 'desc' },
-    take: 5
-  });
 
   // Format testimonials for the component
   const formattedTestimonials = publishedTestimonials.map((t: any) => ({

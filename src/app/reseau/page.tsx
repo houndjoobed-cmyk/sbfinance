@@ -16,13 +16,23 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function NetworkPage() {
-  const dbAgencies = await prisma.agence.findMany({
-    orderBy: { nom: 'asc' }
-  });
-
-  const parametres = await prisma.parametresSite.findFirst() || {
+  let dbAgencies = [];
+  let parametres = {
     telephonePrincipal: "+229 01 21 38 05 87"
   };
+
+  try {
+    dbAgencies = await prisma.agence.findMany({
+      orderBy: { nom: 'asc' }
+    });
+
+    const fetchedParametres = await prisma.parametresSite.findFirst();
+    if (fetchedParametres) {
+      parametres = fetchedParametres as any;
+    }
+  } catch (error) {
+    console.error("Database fetch error:", error);
+  }
 
   const defaultAgencies = [
     {

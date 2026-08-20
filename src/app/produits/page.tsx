@@ -16,9 +16,14 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function ProductsPage() {
-  const allCredits = await prisma.produitCredit.findMany({
-    orderBy: { nom: 'asc' }
-  });
+  let allCredits = [];
+  try {
+    allCredits = await prisma.produitCredit.findMany({
+      orderBy: { nom: 'asc' }
+    });
+  } catch (error) {
+    console.error("Database fetch error:", error);
+  }
 
   // Default hardcoded fallback in case DB is empty
   let creditCategories = [

@@ -15,21 +15,31 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function ContactPage() {
-  const parametres = await prisma.parametresSite.findFirst() as any || {
+  let parametres = {
     telephonePrincipal: "+229 01 21 38 05 87",
     emailPrincipal: "contact@sbfinance.bj",
     adresseSiege: "ZOGBO Carré 553 Lot 1907 M 072, Arconville / Abomey-Calavi, Bénin",
   };
+  let agencies = [];
 
-  const agencies = await prisma.agence.findMany({
-    select: {
-      id: true,
-      nom: true,
-    },
-    orderBy: {
-      nom: 'asc'
+  try {
+    const fetchedParametres = await prisma.parametresSite.findFirst() as any;
+    if (fetchedParametres) {
+      parametres = fetchedParametres;
     }
-  });
+
+    agencies = await prisma.agence.findMany({
+      select: {
+        id: true,
+        nom: true,
+      },
+      orderBy: {
+        nom: 'asc'
+      }
+    });
+  } catch (error) {
+    console.error("Database fetch error:", error);
+  }
 
   return (
     <>
