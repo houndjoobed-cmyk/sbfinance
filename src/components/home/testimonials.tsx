@@ -1,34 +1,23 @@
 "use client";
 
 import React, { useEffect, useCallback, useState } from 'react';
+import { TypingAnimation } from '@/components/ui/typing-animation';
 import { Section } from '@/components/layout/section';
 import { Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { Card, CardContent } from '@/components/ui/card';
 
-export function Testimonials() {
-  // Placeholder testimonials
-  const testimonials = [
-    {
-      text: "Grâce au crédit de SBF, j'ai pu agrandir ma boutique et diversifier mes produits. Leur accompagnement a été précieux.",
-      author: "Mme. Amoussou",
-      role: "Commerçante au marché Dantokpa",
-      initial: "A"
-    },
-    {
-      text: "Les conditions d'épargne 'Ahossou' m'ont permis de sécuriser l'avenir de mes enfants avec un taux très avantageux.",
-      author: "M. Kossi",
-      role: "Artisan menuisier",
-      initial: "K"
-    },
-    {
-      text: "Au-delà du financement, les conseils de SBF m'ont aidé à mieux structurer mon entreprise agricole.",
-      author: "Mme. Dossou",
-      role: "Agricultrice",
-      initial: "D"
-    }
-  ];
+interface TestimonialsProps {
+  testimonials: Array<{
+    text: string;
+    author: string;
+    role: string | null;
+    initial: string;
+  }>;
+}
+
+export function Testimonials({ testimonials }: TestimonialsProps) {
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'center' }, [
     Autoplay({ delay: 5000, stopOnInteraction: true })
@@ -56,10 +45,26 @@ export function Testimonials() {
 
   return (
     <Section variant="default" className="overflow-hidden">
-      <div className="text-center max-w-3xl mx-auto mb-16 reveal-up">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-4">Ce que disent nos clients</h2>
-        <p className="text-on-surface-variant text-lg">
-          La réussite de nos clients est notre plus grande fierté. Découvrez leurs témoignages.
+      <div className="relative text-center max-w-5xl mx-auto mb-16 mt-10 reveal-up">
+        {/* Background Large Text with Marquee Animation */}
+        <div 
+          className="absolute top-1/2 left-0 -translate-y-1/2 w-full pointer-events-none -z-10 select-none overflow-hidden"
+          aria-hidden="true"
+        >
+          <div className="animate-marquee">
+            {[...Array(4)].map((_, i) => (
+              <span key={i} className="text-[80px] md:text-[130px] lg:text-[180px] font-black text-slate-200/40 dark:text-slate-800/10 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
+                Témoignages
+              </span>
+            ))}
+          </div>
+        </div>
+        
+        <h2 className="text-3xl md:text-5xl font-bold text-primary-dark mb-4 relative z-10">
+          <TypingAnimation text="Ce que disent nos clients" typeSpeed={50} />
+        </h2>
+        <p className="text-on-surface-variant text-sm tracking-[0.2em] uppercase font-semibold relative z-10">
+          Notre plus grande fierté
         </p>
       </div>
 

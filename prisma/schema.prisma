@@ -1,0 +1,140 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------------------------------------------
+// Produits et Crédits
+// ---------------------------------------------
+
+model ProduitCredit {
+  id               String   @id @default(cuid())
+  nom              String
+  slug             String   @unique
+  categorie        String   // ex: "Besoin de fonds de roulement", "Crédit à la consommation", "Crédit Cause"
+  description      String
+  cible            String
+  conditions       Json     // Array de strings (liste à puces)
+  garantieExigee   String
+  piecesAFournir   Json     // Array de strings
+  montantMin       Int?
+  montantMax       Int?
+  dureeMinMois     Int?
+  dureeMaxMois     Int?
+  tauxInteretAnnuel String?
+  periodicite      String?  // ex: "Mensuelle"
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Produit {
+  id               String   @id @default(cuid())
+  type             String   // "Epargne", "Appui", "Conseil", "Formation"
+  nom              String
+  slug             String   @unique
+  description      String
+  contenuDetaille  String   @db.Text
+  image            String?
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+// ---------------------------------------------
+// Réseau d'Agences
+// ---------------------------------------------
+
+model Agence {
+  id               String   @id @default(cuid())
+  nom              String
+  adresse          String
+  coordonneesGps   String?  // "lat,lng"
+  telephones       Json     // Array de strings
+  horaires         String
+  estSiege         Boolean  @default(false)
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+// ---------------------------------------------
+// Actualités / Blog
+// ---------------------------------------------
+
+model Actualite {
+  id               String   @id @default(cuid())
+  titre            String
+  slug             String   @unique
+  extrait          String
+  contenu          String   @db.Text
+  image            String?
+  categorie        String
+  estPublie        Boolean  @default(true)
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+// ---------------------------------------------
+// Témoignages Clients
+// ---------------------------------------------
+
+model Temoignage {
+  id               String   @id @default(cuid())
+  nom              String
+  role             String?  // ex: "Commerçante à Dantokpa"
+  texte            String   @db.Text
+  photo            String?
+  estAffiche       Boolean  @default(true)
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+// ---------------------------------------------
+// Contacts et Demandes
+// ---------------------------------------------
+
+model DemandeContact {
+  id               String   @id @default(cuid())
+  nom              String
+  telephone        String
+  email            String?
+  message          String   @db.Text
+  agencePreference String?
+  estTraite        Boolean  @default(false)
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+// ---------------------------------------------
+// Paramètres Globaux du Site
+// ---------------------------------------------
+
+model ParametresSite {
+  id               Int      @id @default(1) // Singleton
+  mission          String   @db.Text
+  vision           String   @db.Text
+  valeurs          Json     // Array de strings
+  anneeCreation    Int      @default(2009) // 15 ans = ~2009
+  nombreAgences    Int      @default(5)
+  nombreClients    Int      @default(0)
+  telephonePrincipal String @default("+229 01 21 38 05 87")
+  emailPrincipal   String   @default("contact@sbfinance.bj")
+  adresseSiege     String   @default("ZOGBO Carré 553 Lot 1907 M 072, Arconville")
+  
+  heroCarousel     Json?    // Array of objects for home page slider
+  histoireTexte    String?  @db.Text
+  gouvernanceTexte String?  @db.Text
+  banniereAPropos  String?
+  motDuDg          String?  @db.Text
+  motDuDgImage     String?
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}

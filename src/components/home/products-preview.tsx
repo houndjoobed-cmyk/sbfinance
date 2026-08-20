@@ -1,92 +1,166 @@
-import React from 'react';
+"use client";
+
+import React, { useCallback } from 'react';
 import { Section } from '@/components/layout/section';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Wallet, Landmark, Handshake, Lightbulb, GraduationCap } from 'lucide-react';
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Wallet,
+  Landmark,
+  Handshake,
+  Lightbulb,
+  GraduationCap
+} from 'lucide-react';
+import { TypingAnimation } from '@/components/ui/typing-animation';
 import Link from 'next/link';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 
 export function ProductsPreview() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: 'start',
+    loop: true,
+    dragFree: true,
+  }, [Autoplay({ delay: 5000, stopOnInteraction: true })]);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
   const products = [
     {
       title: "Crédit",
       description: "Solutions de financement pour vos besoins de roulement, de consommation ou d'investissement.",
-      icon: <Wallet className="h-10 w-10 text-primary" />,
+      icon: <Wallet className="h-8 w-8 text-primary" />,
       link: "/produits/credit"
     },
     {
       title: "Épargne",
       description: "Sécurisez votre avenir avec nos produits d'épargne: Houenoussou, Allodo, Ahossou, Zédaga et Kondokpo.",
-      icon: <Landmark className="h-10 w-10 text-primary" />,
+      icon: <Landmark className="h-8 w-8 text-primary" />,
       link: "/produits/epargne"
     },
     {
       title: "Appui",
       description: "Un soutien sur-mesure pour développer vos activités et pérenniser votre croissance.",
-      icon: <Handshake className="h-10 w-10 text-primary" />,
+      icon: <Handshake className="h-8 w-8 text-primary" />,
       link: "/produits/appui"
     },
     {
       title: "Conseil",
       description: "Expertise et accompagnement stratégique pour la gestion de votre entreprise.",
-      icon: <Lightbulb className="h-10 w-10 text-primary" />,
+      icon: <Lightbulb className="h-8 w-8 text-primary" />,
       link: "/produits/conseil"
     },
     {
       title: "Formation",
       description: "Renforcez vos compétences avec nos programmes d'éducation financière et entrepreneuriale.",
-      icon: <GraduationCap className="h-10 w-10 text-primary" />,
+      icon: <GraduationCap className="h-8 w-8 text-primary" />,
       link: "/produits/formation"
     }
   ];
 
   return (
-    <Section variant="default">
-      <div className="text-center max-w-3xl mx-auto mb-16 reveal-up">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-4">Nos Produits & Services</h2>
-        <p className="text-on-surface-variant text-lg">
-          Découvrez notre gamme complète de solutions financières et d'accompagnement conçues pour répondre à vos besoins spécifiques.
-        </p>
-      </div>
+    <section className="py-20 md:py-28 bg-surface-white relative overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {products.map((product, index) => (
-          <Card key={index} className={`flex flex-col h-full reveal-up delay-${(index % 3 + 1) * 100}`}>
-            <CardHeader className="pb-4">
-              <div className="bg-surface-muted w-20 h-20 rounded-full flex items-center justify-center mb-4">
-                {product.icon}
+        {/* Header Section */}
+        <div className="relative mb-16 pt-8 pb-4">
+          {/* Background large text with marquee animation */}
+          <div
+            className="absolute inset-0 flex items-center overflow-hidden pointer-events-none select-none z-0"
+            aria-hidden="true"
+          >
+            <div className="animate-marquee">
+              {[...Array(4)].map((_, i) => (
+                <span key={i} className="text-[120px] md:text-[180px] font-black text-slate-200/40 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
+                  PRODUITS
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Foreground content */}
+          <div className="relative z-10 flex flex-col items-center justify-center text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-3">
+              Découvrez nos produits
+            </h2>
+            <div className="text-slate-500 text-sm md:text-base font-bold tracking-[0.2em] uppercase">
+              Nos services
+            </div>
+          </div>
+        </div>
+
+        <div className="hidden md:flex justify-end mb-6 gap-3 shrink-0 relative z-10">
+          <button
+            onClick={scrollPrev}
+            className="w-12 h-12 rounded-full border border-slate-200 bg-white text-primary flex items-center justify-center hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary shadow-sm"
+            aria-label="Précédent"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            onClick={scrollNext}
+            className="w-12 h-12 rounded-full border border-slate-200 bg-white text-primary flex items-center justify-center hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary shadow-sm"
+            aria-label="Suivant"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
+        </div>
+
+        {/* Embla Carousel */}
+        <div className="overflow-hidden -mx-4 px-4 sm:mx-0 sm:px-0 py-4" ref={emblaRef}>
+          <div className="flex touch-pan-y" style={{ backfaceVisibility: 'hidden' }}>
+            {products.map((product, index) => (
+              <div
+                key={index}
+                className="flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_33.33%] min-w-0 pr-4 sm:pr-6"
+              >
+                <div className="bg-white rounded-2xl p-8 border border-slate-200 hover:shadow-lg transition-all h-full flex flex-col group">
+                  <div className="w-16 h-16 rounded-full bg-primary/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    {product.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-primary mb-3">
+                    {product.title}
+                  </h3>
+                  <p className="text-slate-600 mb-8 grow">
+                    {product.description}
+                  </p>
+                  <Button asChild variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white group-hover:bg-primary group-hover:text-white transition-colors">
+                    <Link href={product.link}>
+                      Découvrir
+                    </Link>
+                  </Button>
+                </div>
               </div>
-              <CardTitle className="text-primary-dark">{product.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="flex-grow">
-              <CardDescription className="text-base text-on-surface-variant">
-                {product.description}
-              </CardDescription>
-            </CardContent>
-            <CardFooter>
-              <Button asChild variant="outline" className="w-full">
-                <Link href={product.link}>Découvrir</Link>
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
-        
-        {/* Call to action card to complete the grid */}
-        <Card className="flex flex-col h-full bg-primary text-white hover-lift reveal-up delay-100 border-none">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-white text-2xl">Besoin d'aide pour choisir ?</CardTitle>
-          </CardHeader>
-          <CardContent className="flex-grow">
-            <CardDescription className="text-primary-light text-base">
-              Nos conseillers sont à votre disposition dans toutes nos agences pour vous orienter vers la solution la plus adaptée.
-            </CardDescription>
-          </CardContent>
-          <CardFooter>
-            <Button asChild variant="accent" className="w-full">
-              <Link href="/contact">Nous contacter</Link>
-            </Button>
-          </CardFooter>
-        </Card>
+            ))}
+
+            {/* Special Contact Card in the Carousel */}
+            <div className="flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_33.33%] min-w-0 pr-4 sm:pr-6">
+              <div className="bg-primary rounded-2xl p-8 shadow-lg h-full flex flex-col text-white">
+                <h3 className="text-xl font-bold mb-4">
+                  Besoin d'aide pour choisir ?
+                </h3>
+                <p className="text-primary-light mb-8 grow">
+                  Nos conseillers sont à votre disposition dans toutes nos agences pour vous orienter vers la solution la plus adaptée.
+                </p>
+                <Button asChild variant="accent" className="w-full text-white">
+                  <Link href="/contact">
+                    Nous contacter
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </Section>
+    </section>
   );
 }

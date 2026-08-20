@@ -1,6 +1,9 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { MapPin, Phone, Mail } from 'lucide-react';
 
 // Custom SVG components for Social Brands since they were removed from lucide-react
@@ -23,12 +26,15 @@ const InstagramIcon = ({ className }: { className?: string }) => (
 );
 
 export function Footer() {
+  const pathname = usePathname();
   const currentYear = new Date().getFullYear();
 
+  if (pathname.startsWith('/sbf-gestion')) return null;
+
   return (
-    <footer className="bg-primary-dark text-white pt-16 pb-8">
-      <div className="mx-auto max-w-[var(--container-max)] px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+    <footer className="bg-primary-dark text-white border-t-4 border-accent">
+      <div className="mx-auto max-w-max px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           
           {/* Column 1: Brand & About */}
           <div className="space-y-6">
@@ -129,20 +135,20 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-6">Contact & Siège</h3>
             <ul className="space-y-4">
               <li className="flex items-start">
-                <MapPin className="h-5 w-5 text-accent mr-3 mt-0.5 flex-shrink-0" />
-                <span className="text-primary-light text-sm">
-                  Siège social : ZOGBO Carré 553 Lot 1907 M 072, Arconville / Abomey-Calavi
+                <MapPin className="h-5 w-5 text-accent mr-3 mt-0.5 shrink-0" />
+                <span className="text-sm text-primary-light">
+                  ZOGBO Carré 553 Lot 1907 M 072, Arconville / Abomey-Calavi
                 </span>
               </li>
-              <li className="flex items-center">
-                <Phone className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                <span className="text-primary-light text-sm">
+              <li className="flex items-start">
+                <Phone className="h-5 w-5 text-accent mr-3 mt-0.5 shrink-0" />
+                <span className="text-sm text-primary-light">
                   +229 01 21 38 05 87 <br/> +229 01 61 09 20 32
                 </span>
               </li>
-              <li className="flex items-center">
-                <Mail className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                <a href="mailto:contact@sbfinance.bj" className="text-primary-light hover:text-white transition-colors text-sm">
+              <li className="flex items-start">
+                <Mail className="h-5 w-5 text-accent mr-3 mt-0.5 shrink-0" />
+                <a href="mailto:contact@sbfinance.bj" className="text-sm text-primary-light hover:text-white transition-colors">
                   contact@sbfinance.bj
                 </a>
               </li>

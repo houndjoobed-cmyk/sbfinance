@@ -16,51 +16,20 @@ const customIcon = new L.Icon({
   shadowSize: [41, 41]
 });
 
-// Coordinates approximate based on Cotonou / Abomey-Calavi area
-const agencies = [
-  {
-    id: 1,
-    name: "Arconville (Siège)",
-    position: [6.435, 2.348] as [number, number],
-    address: "ZOGBO Carré 553 Lot 1907 M 072, Arconville / Abomey-Calavi",
-    phone: "+229 01 21 38 05 87",
-    hours: "Lun-Ven: 08:00 - 17:00 | Sam: 09:00 - 13:00"
-  },
-  {
-    id: 2,
-    name: "Agence de Zogbo",
-    position: [6.386, 2.383] as [number, number],
-    address: "Zogbo central",
-    phone: "+229 01 61 09 20 32",
-    hours: "Lun-Ven: 08:00 - 17:00 | Sam: 09:00 - 13:00"
-  },
-  {
-    id: 3,
-    name: "Agence de Tankpè",
-    position: [6.468, 2.327] as [number, number],
-    address: "Carrefour Tankpè, Abomey-Calavi",
-    phone: "+229 01 28 30 59 76",
-    hours: "Lun-Ven: 08:00 - 17:00 | Sam: Fermé"
-  },
-  {
-    id: 4,
-    name: "Agence de Togba",
-    position: [6.480, 2.290] as [number, number],
-    address: "Togba Centre",
-    phone: "+229 01 21 38 05 87",
-    hours: "Lun-Ven: 08:00 - 17:00 | Sam: 09:00 - 13:00"
-  },
-  {
-    id: 5,
-    name: "Division Crédit aux Fonctionnaires",
-    position: [6.360, 2.410] as [number, number],
-    address: "Cotonou Centre",
-    phone: "+229 01 61 09 20 32",
-    hours: "Lun-Ven: 08:00 - 17:00 | Sam: Fermé"
-  }
-];
+export interface MapAgency {
+  id: string;
+  name: string;
+  position: [number, number];
+  address: string;
+  phone: string;
+  hours: string;
+}
 
-export default function Map() {
+interface MapProps {
+  agencies: MapAgency[];
+}
+
+export default function Map({ agencies }: MapProps) {
   useEffect(() => {
     // Leaflet config happens only on the client
     L.Marker.prototype.options.icon = customIcon;
@@ -70,13 +39,8 @@ export default function Map() {
   const center: [number, number] = [6.42, 2.36];
 
   return (
-    <div className="w-full h-full min-h-[500px] z-0 relative rounded-xl overflow-hidden shadow-md border border-outline-variant">
-      <MapContainer 
-        center={center} 
-        zoom={12} 
-        scrollWheelZoom={false} 
-        className="w-full h-full absolute inset-0"
-      >
+    <div className="h-full w-full">
+      <MapContainer center={center} zoom={12} className="h-full w-full">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

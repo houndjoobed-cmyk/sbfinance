@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import { TypingAnimation } from '@/components/ui/typing-animation';
 import { Section } from '@/components/layout/section';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -59,11 +60,11 @@ export default function NewsPage() {
 
   return (
     <>
-      <Section variant="primary" className="pt-[160px] pb-16 md:pt-[200px] md:pb-24 relative overflow-hidden">
+      <Section variant="primary" className="pt-40 pb-12 md:pt-50 md:pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-primary-dark/80 z-0"></div>
         <div className="absolute inset-0 bg-[url('/images/hero/hero-women.jpg')] bg-cover bg-center opacity-40 mix-blend-overlay z-0"></div>
         <div className="text-center max-w-3xl mx-auto relative z-10 reveal-up">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Actualités</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6"><TypingAnimation text="Actualités" typeSpeed={50} /></h1>
           <p className="text-xl text-primary-light">
             Découvrez la vie de notre institution, nos nouveautés et nos conseils.
           </p>
@@ -93,30 +94,31 @@ export default function NewsPage() {
                 </div>
               </div>
               
-              <CardHeader className="pt-6 pb-2">
-                <div className="flex items-center text-on-surface-variant text-sm mb-3">
-                  <Calendar className="h-4 w-4 mr-2" />
-                  {item.date}
-                </div>
-                <CardTitle className="text-xl text-primary-dark group-hover:text-primary transition-colors">
-                  {item.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="text-on-surface-variant">
-                  {item.excerpt}
-                </p>
-              </CardContent>
-              <CardFooter>
-                {/* Links to a generic post page or # for demo */}
-                <Link 
-                  href="#"
-                  className="inline-flex items-center text-accent font-medium hover:text-accent-hover transition-colors"
-                >
-                  Lire la suite
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </CardFooter>
+              <div className="p-6 flex flex-col grow">
+                <CardHeader className="p-0 pb-2">
+                  <div className="flex items-center text-on-surface-variant text-sm mb-3">
+                    <Calendar className="h-4 w-4 mr-2" />
+                    {item.date}
+                  </div>
+                  <CardTitle className="text-xl text-primary-dark group-hover:text-primary transition-colors">
+                    {item.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-0 py-2 grow">
+                  <p className="text-on-surface-variant">
+                    {item.excerpt}
+                  </p>
+                </CardContent>
+                <CardFooter className="p-0 pt-4">
+                  <Link 
+                    href="#"
+                    className="inline-flex items-center text-accent font-medium hover:text-accent-hover transition-colors"
+                  >
+                    Lire la suite
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </CardFooter>
+              </div>
             </Card>
           ))}
         </div>

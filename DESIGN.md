@@ -60,13 +60,13 @@ Priorité visuelle : **neutres → bleu SBF → rouge SBF**.
 
 ## 4. Typographie
 
-La charte indique **Helvetica**.
+La charte utilise désormais **Open Sans**.
 
-### Helvetica Bold
+### Open Sans Bold
 
 Pour : titres, sous-titres importants, boutons, informations mises en avant et navigation nécessitant une emphase.
 
-### Helvetica Regular
+### Open Sans Regular
 
 Pour : paragraphes, descriptions, informations secondaires, formulaires et contenus longs.
 
@@ -373,7 +373,7 @@ components/
 - [ ] Logo conforme à la charte.
 - [ ] Bleu `#01438F` correctement utilisé.
 - [ ] Rouge `#EB001B` réservé aux accents.
-- [ ] Helvetica Bold / Regular respectées.
+- [ ] Open Sans Bold / Regular respectées.
 - [ ] Hiérarchie des titres claire.
 - [ ] CTA identifiables.
 - [ ] Espaces suffisants.
@@ -390,8 +390,8 @@ Le site Salem Braha Finance doit être **bleu, rouge, blanc, professionnel, inst
 ```text
 PRIMARY  = #01438F
 ACCENT   = #EB001B
-HEADINGS = Helvetica Bold
-BODY     = Helvetica Regular
+HEADINGS = Open Sans Bold
+BODY     = Open Sans Regular
 ```
 
 **Règle fondamentale :** ne pas créer une nouvelle identité visuelle. Construire une expérience web moderne à partir de l'identité SBF existante.

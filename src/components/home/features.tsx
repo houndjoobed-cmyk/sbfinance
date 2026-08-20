@@ -2,6 +2,7 @@ import React from 'react';
 import { Section } from '@/components/layout/section';
 import { ArrowRight, ShieldCheck, TrendingUp, Users } from 'lucide-react';
 import Link from 'next/link';
+import { TypingAnimation } from '@/components/ui/typing-animation';
 
 export function Features() {
   const features = [
@@ -26,14 +27,34 @@ export function Features() {
   ];
 
   return (
-    <Section variant="muted" className="-mt-8 relative z-30">
+    <Section variant="muted" className="-mt-8 relative z-30 pt-16">
+      <div className="relative text-center max-w-5xl mx-auto mb-16 reveal-up">
+        {/* Background Large Text */}
+        <div 
+          className="absolute top-1/2 left-0 -translate-y-1/2 w-full pointer-events-none -z-10 select-none overflow-hidden"
+          aria-hidden="true"
+        >
+          <div className="animate-marquee">
+            {[...Array(4)].map((_, i) => (
+              <span key={i} className="text-[100px] md:text-[160px] lg:text-[220px] font-black text-slate-200/40 dark:text-slate-800/10 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
+                Atouts
+              </span>
+            ))}
+          </div>
+        </div>
+        
+        <h2 className="text-3xl md:text-5xl font-bold text-primary-dark mb-4 relative z-10">
+          <TypingAnimation text="Pourquoi SBF ?" typeSpeed={50} />
+        </h2>
+        <p className="text-on-surface-variant text-sm tracking-[0.2em] uppercase font-semibold relative z-10">
+          Nos piliers fondateurs
+        </p>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {features.map((feature, index) => (
-          <div 
-            key={index} 
-            className={`bg-white rounded-xl p-8 shadow-[var(--shadow-card)] hover-lift reveal-up delay-${(index + 1) * 100}`}
-          >
-            <div className="bg-primary/5 w-16 h-16 rounded-lg flex items-center justify-center mb-6">
+          <div key={index} className="bg-white rounded-2xl p-8 shadow-(--shadow-card) border border-outline-variant hover:shadow-lg transition-shadow">
+            <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
               {feature.icon}
             </div>
             <h3 className="text-xl font-bold text-primary-dark mb-4">{feature.title}</h3>

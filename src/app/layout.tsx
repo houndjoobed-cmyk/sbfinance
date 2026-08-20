@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
+import { Open_Sans } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { ScrollReveal } from "@/components/layout/scroll-reveal";
 import "./globals.css";
+
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  variable: "--font-open-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -21,10 +28,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className="h-full antialiased">
-      <body className="min-h-full flex flex-col font-body bg-surface text-on-surface">
+    <html lang="fr" className={`h-full antialiased ${openSans.variable}`}>
+      <body className="min-h-full flex flex-col font-sans bg-surface text-on-surface" suppressHydrationWarning>
         <Header />
-        <main className="flex-grow">
+        <main className="grow">
           {children}
         </main>
         <Footer />
