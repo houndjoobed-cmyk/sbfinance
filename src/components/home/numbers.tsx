@@ -5,15 +5,15 @@ import Image from 'next/image';
 import { Section } from '@/components/layout/section';
 
 interface CounterProps {
-  end: number;
+  end: number | string;
   duration?: number;
   suffix?: string;
   prefix?: string;
 }
 
 function AnimatedCounter({ end, duration = 2000, suffix = '', prefix = '' }: CounterProps) {
-  const [count, setCount] = useState(0);
-  const countRef = useRef(0);
+  const [count, setCount] = useState<number | string>(0);
+  const countRef = useRef<number | string>(0);
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef<HTMLSpanElement>(null);
 
@@ -37,6 +37,11 @@ function AnimatedCounter({ end, duration = 2000, suffix = '', prefix = '' }: Cou
 
   useEffect(() => {
     if (!isVisible) return;
+
+    if (typeof end === 'string') {
+      setCount(end);
+      return;
+    }
 
     let startTime: number | null = null;
     const animate = (timestamp: number) => {
@@ -69,7 +74,7 @@ function AnimatedCounter({ end, duration = 2000, suffix = '', prefix = '' }: Cou
 
 interface NumbersProps {
   stats: Array<{
-    value: number;
+    value: number | string;
     label: string;
     suffix: string;
   }>;

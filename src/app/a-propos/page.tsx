@@ -66,7 +66,7 @@ export default async function AboutPage() {
             <h2 className="text-3xl font-bold text-primary-dark mb-6"><TypingAnimation text="Notre Histoire" typeSpeed={50} /></h2>
             <div className="prose text-on-surface-variant whitespace-pre-line">
               {parametres.histoireTexte || (
-                `Salem Braha Finance (SBF) est une institution de microfinance créée avec la volonté de proposer des solutions de financement adaptées aux réalités locales. Forte de ${experienceYears} années d'expérience, SBF a su développer une expertise pointue dans l'accompagnement des populations béninoises.\n\nAgréée sous le N° A.20.0126.L et dotée d'un capital social de 138 000 000 FCFA, notre institution se positionne aujourd'hui comme un acteur incontournable de l'inclusion financière au Bénin, avec un accent particulier mis sur l'accompagnement des femmes en milieu urbain et rural.`
+                `Salem Braha Finance (SBF) est une institution de microfinance créée avec la volonté de proposer des solutions de financement adaptées aux réalités locales. Forte de plus de 15 années d'expérience, SBF a su développer une expertise pointue dans l'accompagnement des populations béninoises.\n\nAgréée sous le N° A.20.0126.L et dotée d'un capital social de 1,5 Milliard FCFA, notre institution se positionne aujourd'hui comme un acteur incontournable de l'inclusion financière au Bénin, avec un accent particulier mis sur l'accompagnement des femmes en milieu urbain et rural.`
               )}
             </div>
           </div>

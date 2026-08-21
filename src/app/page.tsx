@@ -53,15 +53,15 @@ export default async function Home() {
     } as any;
   }
 
-  // Calculate experience dynamically based on creation year
+  // Calculate experience dynamically based on creation year (Disabled to use fixed 15+)
   const currentYear = new Date().getFullYear();
   const experienceYears = currentYear - parametres.anneeCreation;
 
   const stats = [
-    { value: experienceYears, label: "Années d'expérience", suffix: "+" },
+    { value: 15, label: "Années d'expérience", suffix: "+" },
     { value: parametres.nombreAgences, label: "Points de service", suffix: "" },
     { value: parametres.nombreClients, label: "Clients satisfaits", suffix: "+" },
-    { value: 138, label: "Millions FCFA Capital", suffix: "" },
+    { value: "1,5", label: "Milliard FCFA Capital", suffix: "" },
   ];
 
 
