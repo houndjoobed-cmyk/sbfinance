@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 
 import { ScrollReveal } from "@/components/layout/scroll-reveal";
 import "./globals.css";
 
-const openSans = Open_Sans({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-open-sans",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -28,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`h-full antialiased ${openSans.variable}`}>
-      <body className="min-h-full flex flex-col font-sans bg-surface text-on-surface" suppressHydrationWarning>
+    <html lang="fr" className={`h-full antialiased ${poppins.variable}`}>
+      <body className={`min-h-full flex flex-col bg-surface text-on-surface ${poppins.className}`} suppressHydrationWarning>
         <Header />
         <main className="grow">
           {children}

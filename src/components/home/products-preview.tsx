@@ -67,7 +67,7 @@ export function ProductsPreview() {
       title: "Formation",
       description: "Renforcez vos compétences avec nos programmes d'éducation financière et entrepreneuriale.",
       icon: <GraduationCap className="h-5 w-5" />,
-      image: "/images/products/formation.jpg",
+      image: "/images/products/formation.jpeg",
       link: "/produits/formation"
     }
   ];

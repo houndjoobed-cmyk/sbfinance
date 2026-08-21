@@ -12,7 +12,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 const defaultSlides = [
   {
     id: "1",
-    image: "/images/hero/hero-women.jpg",
+    image: "/images/hero/Osez entreprendre.png",
     title: "Osez entreprendre, nous finançons la suite",
     subtitle: "Des solutions de financement adaptées pour accompagner la croissance de vos activités.",
     cta: "Découvrir nos crédits",
@@ -20,7 +20,7 @@ const defaultSlides = [
   },
   {
     id: "2",
-    image: "/images/hero/hero-finance.jpg",
+    image: "/images/hero/Cultivons la prospérité.png",
     title: "Cultivons la prospérité ensemble",
     subtitle: "Votre partenaire financier de confiance pour bâtir un avenir solide et sécurisé.",
     cta: "Notre mission",
@@ -28,7 +28,7 @@ const defaultSlides = [
   },
   {
     id: "3",
-    image: "/images/hero/hero-market.jpg",
+    image: "/images/hero/Soutenir l'économie local.png",
     title: "Soutenir l'économie locale",
     subtitle: "Nous accompagnons les commerçants et artisans béninois dans leur développement.",
     cta: "Voir nos produits",
@@ -36,11 +36,12 @@ const defaultSlides = [
   },
   {
     id: "4",
-    image: "/images/hero/hero-community.jpg",
+    image: "/images/hero/Pour le financement inclusif.png",
     title: "Pour une finance inclusive et responsable",
     subtitle: "Nous favorisons l'inclusion financière des populations à travers tout le Bénin.",
     cta: "Notre réseau",
-    href: "/reseau"
+    href: "/reseau",
+    objectPosition: "top"
   }
 ];
 
@@ -79,7 +80,10 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
                   src={slide.image || '/images/hero/hero-finance.jpg'}
                   alt={slide.title || 'SBF'}
                   fill
+                  sizes="100vw"
+                  quality={100}
                   priority={index === 0}
+                  style={{ objectPosition: slide.objectPosition || 'center' }}
                   className={`object-cover transition-transform duration-10000 ${index === selectedIndex ? 'scale-110' : 'scale-100'}`}
                 />
                 {/* Dark Overlay for text readability — no gradient */}

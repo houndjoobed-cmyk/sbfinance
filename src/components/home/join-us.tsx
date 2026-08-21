@@ -11,7 +11,7 @@ export function JoinUs() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/home/join-us.jpg"
+          src="/images/home/REJOIGNEZ-NOUS.png"
           alt="Rejoignez-nous"
           fill
           sizes="100vw"

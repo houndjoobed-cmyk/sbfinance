@@ -60,30 +60,105 @@ Priorité visuelle : **neutres → bleu SBF → rouge SBF**.
 
 ## 4. Typographie
 
-La charte utilise désormais **Open Sans**.
+La typographie du site web utilise désormais **Poppins** comme police unique de l’interface afin de garantir une identité visuelle moderne, cohérente et parfaitement adaptée au web.
 
-### Open Sans Bold
+### Police officielle web
 
-Pour : titres, sous-titres importants, boutons, informations mises en avant et navigation nécessitant une emphase.
+**Famille :** Poppins
 
-### Open Sans Regular
+Utiliser **Poppins** pour l’ensemble du site : titres, sous-titres, paragraphes, navigation, boutons, formulaires, tableaux et composants UI.
 
-Pour : paragraphes, descriptions, informations secondaires, formulaires et contenus longs.
+### Graisses à utiliser
+
+| Graisse | Usage |
+|---|---|
+| Poppins 400 — Regular | Paragraphes, descriptions, contenus longs, formulaires |
+| Poppins 500 — Medium | Navigation, listes, labels, texte mis en avant |
+| Poppins 600 — SemiBold | Boutons, CTA, sous-titres importants |
+| Poppins 700 — Bold | Titres H2 à H4, éléments fortement mis en avant |
+| Poppins 800 — ExtraBold | Hero H1 et grands titres marketing |
+
+> Éviter l’utilisation de graisses 100, 200, 300 ou 900 afin de conserver une hiérarchie visuelle homogène.
 
 ### Échelle web recommandée
 
-| Élément | Desktop | Mobile | Graisse |
-|---|---:|---:|---|
-| Hero H1 | 48–64 px | 36–42 px | Bold |
-| H2 | 36–44 px | 28–32 px | Bold |
-| H3 | 24–30 px | 22–24 px | Bold |
-| H4 | 20–22 px | 18–20 px | Bold |
-| Body large | 18 px | 17 px | Regular |
-| Body | 16 px | 16 px | Regular |
-| Small | 14 px | 14 px | Regular |
-| Caption | 12 px | 12 px | Regular |
+| Élément | Desktop | Mobile | Graisse | Line-height |
+|---|---:|---:|---|---:|
+| Hero H1 | 48–64 px | 36–42 px | 800 | 1.1–1.2 |
+| H2 | 36–44 px | 28–32 px | 700 | 1.2 |
+| H3 | 24–30 px | 22–24 px | 700 | 1.3 |
+| H4 | 20–22 px | 18–20 px | 700 | 1.35 |
+| Body large | 18 px | 17 px | 400 | 1.6 |
+| Body | 16 px | 16 px | 400 | 1.6 |
+| Small | 14 px | 14 px | 400 | 1.5 |
+| Caption | 12 px | 12 px | 400 | 1.4 |
+| Button | 16 px | 16 px | 600 | 1.2 |
+| Navigation | 15–16 px | 15–16 px | 500 | 1.2 |
 
-Cette échelle est une adaptation web ; la charte ne définit pas ces tailles en pixels.
+Cette échelle est une adaptation web destinée à l’implémentation du site avec Poppins.
+
+### Spécifications d’implémentation web
+
+#### Import Google Fonts
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+```
+
+#### Déclaration CSS globale
+
+```css
+html {
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+```
+
+#### Variables de typographie recommandées
+
+```css
+:root {
+  --font-sans: 'Poppins', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+}
+```
+
+#### Utilisation avec Next.js
+
+```ts
+import { Poppins } from 'next/font/google';
+
+export const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-poppins',
+  display: 'swap',
+});
+```
+
+Puis appliquer `poppins.variable` sur le `<body>` ou le layout racine et utiliser `font-family: var(--font-poppins), sans-serif;` comme police globale.
+
+### Règles d’utilisation
+
+- Utiliser **Poppins 800** uniquement pour les Hero H1 et les très grands titres.
+- Utiliser **Poppins 700** pour les titres standards H2, H3 et H4.
+- Utiliser **Poppins 600** pour les boutons et appels à l’action.
+- Utiliser **Poppins 500** pour la navigation, les menus et les labels importants.
+- Utiliser **Poppins 400** pour tous les contenus de lecture afin de préserver la lisibilité.
+- Conserver un `letter-spacing: 0` par défaut ; n’ajouter un espacement léger qu’aux textes en majuscules si nécessaire.
+- Charger uniquement les graisses 400, 500, 600, 700 et 800 afin d’optimiser les performances du site.
 
 ## 5. Logo
 
@@ -316,6 +391,13 @@ Un même composant conserve le même comportement partout.
   --color-text-secondary: #667085;
   --color-border: #E2E6EA;
 
+  --font-sans: 'Poppins', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
@@ -373,7 +455,7 @@ components/
 - [ ] Logo conforme à la charte.
 - [ ] Bleu `#01438F` correctement utilisé.
 - [ ] Rouge `#EB001B` réservé aux accents.
-- [ ] Open Sans Bold / Regular respectées.
+- [ ] Poppins 400 / 500 / 600 / 700 / 800 correctement utilisées selon la hiérarchie.
 - [ ] Hiérarchie des titres claire.
 - [ ] CTA identifiables.
 - [ ] Espaces suffisants.
@@ -390,8 +472,8 @@ Le site Salem Braha Finance doit être **bleu, rouge, blanc, professionnel, inst
 ```text
 PRIMARY  = #01438F
 ACCENT   = #EB001B
-HEADINGS = Open Sans Bold
-BODY     = Open Sans Regular
+HEADINGS = Poppins Bold / ExtraBold
+BODY     = Poppins Regular
 ```
 
 **Règle fondamentale :** ne pas créer une nouvelle identité visuelle. Construire une expérience web moderne à partir de l'identité SBF existante.

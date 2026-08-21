@@ -54,9 +54,9 @@
   --container-max: 1200px;
 
   /* Fonts */
-  --font-sans: var(--font-open-sans), sans-serif;
-  --font-display: var(--font-open-sans), sans-serif;
-  --font-body: var(--font-open-sans), sans-serif;
+  --font-sans: var(--font-poppins), sans-serif;
+  --font-display: var(--font-poppins), sans-serif;
+  --font-body: var(--font-poppins), sans-serif;
   --font-weight-base: 400;
 
   /* Font sizes (Typography Scale) */
