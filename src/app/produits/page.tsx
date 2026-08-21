@@ -75,12 +75,11 @@ export default async function ProductsPage() {
 
   return (
     <>
-      <Section variant="primary" className="pt-40 pb-16 md:pt-50 md:pb-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-primary-dark/80 z-0"></div>
-        <div className="absolute inset-0 bg-[url('/images/hero/hero-market.jpg')] bg-cover bg-center opacity-40 mix-blend-overlay z-0"></div>
+      <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
+        <div className="absolute inset-0 bg-[url('/images/banniere-interne.png')] bg-cover bg-center bg-no-repeat z-0"></div>
         <div className="text-center max-w-3xl mx-auto relative z-10 reveal-up">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6"><TypingAnimation text="Nos Produits & Services" typeSpeed={50} /></h1>
-          <p className="text-xl text-primary-light">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg"><TypingAnimation text="Nos Produits & Services" typeSpeed={50} /></h1>
+          <p className="text-xl text-white drop-shadow-md">
             Des solutions financières conçues pour répondre à vos besoins spécifiques et accompagner votre croissance.
           </p>
         </div>
@@ -158,7 +157,7 @@ export default async function ProductsPage() {
               <li className="flex items-center"><span className="w-1.5 h-1.5 rounded-full bg-accent mr-2"></span> Tontine institutionnelle</li>
             </ul>
             <Button asChild variant="outline">
-              <Link href="/contact">Se renseigner en agence</Link>
+              <Link href="/contacts">Se renseigner en agence</Link>
             </Button>
           </div>
 

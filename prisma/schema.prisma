@@ -26,6 +26,8 @@ model ProduitCredit {
   dureeMaxMois     Int?
   tauxInteretAnnuel String?
   periodicite      String?  // ex: "Mensuelle"
+  fraisEtEpargne   String?  @db.Text
+  differeMois      Int?
   
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt

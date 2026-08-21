@@ -11,7 +11,8 @@ import {
   Landmark,
   Handshake,
   Lightbulb,
-  GraduationCap
+  GraduationCap,
+  Phone
 } from 'lucide-react';
 import { TypingAnimation } from '@/components/ui/typing-animation';
 import Link from 'next/link';
@@ -166,7 +167,7 @@ export function ProductsPreview() {
                 {/* Decorative top image area */}
                 <div className="relative h-48 sm:h-52 overflow-hidden">
                   <Image
-                    src="/images/hero/hero-community.jpg"
+                    src="/images/products/besoin d'aide.jpeg"
                     alt="Nos agences"
                     fill
                     className="object-cover opacity-40"
@@ -183,9 +184,9 @@ export function ProductsPreview() {
                   <p className="text-primary-light text-sm leading-relaxed mb-6 grow">
                     Nos conseillers sont à votre disposition dans toutes nos agences pour vous orienter vers la solution la plus adaptée.
                   </p>
-                  <Button asChild variant="accent" className="w-full text-white">
-                    <Link href="/contact">
-                      Nous contacter
+                  <Button asChild className="w-full bg-white text-primary hover:bg-slate-100 border-0">
+                    <Link href="/contacts">
+                      <Phone className="mr-2 h-4 w-4" /> Nous contacter
                     </Link>
                   </Button>
                 </div>

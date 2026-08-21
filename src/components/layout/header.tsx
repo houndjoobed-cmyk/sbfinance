@@ -26,7 +26,7 @@ export function Header() {
     { name: 'Nos produits', href: '/produits' },
     { name: 'Notre réseau', href: '/reseau' },
     { name: 'Actualités', href: '/actualites' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Contacts', href: '/contacts' },
   ];
 
   const mobileMenuLinks = navLinks.map(link => ({
@@ -42,12 +42,17 @@ export function Header() {
 
   if (pathname.startsWith('/sbf-gestion')) return null;
 
+  const isHomePage = pathname === '/';
+
   return (
-    <header className="absolute top-0 z-40 w-full">
+    <header className={cn(
+      "top-0 z-40 w-full",
+      isHomePage ? "absolute" : "sticky bg-white shadow-sm"
+    )}>
       {/* Top Bar — White with color logo + CTA */}
       <div className={cn(
         "hidden md:block w-full transition-colors duration-300",
-        isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-white"
+        (isScrolled && isHomePage) ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-white"
       )}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-3">
@@ -73,8 +78,11 @@ export function Header() {
         </div>
       </div>
 
-      {/* Navigation Bar — Solid SBF blue */}
-      <div className="hidden md:block w-full bg-primary">
+      {/* Navigation Bar */}
+      <div
+        className={cn("hidden md:block w-full", isHomePage && "backdrop-blur-md")}
+        style={{ backgroundColor: isHomePage ? 'rgba(1, 67, 143, 0.40)' : '#01438F' }}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center py-3">
             <nav className="flex space-x-8">

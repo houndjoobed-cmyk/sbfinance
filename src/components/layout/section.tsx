@@ -8,7 +8,7 @@ interface SectionProps extends React.HTMLAttributes<HTMLElement> {
 
 const Section = React.forwardRef<HTMLElement, SectionProps>(
   ({ className, variant = "default", container = true, children, ...props }, ref) => {
-    
+
     const variants = {
       default: "bg-surface-white",
       muted: "bg-surface-muted",
@@ -20,14 +20,14 @@ const Section = React.forwardRef<HTMLElement, SectionProps>(
       <section
         ref={ref}
         className={cn(
-          "py-[var(--spacing-section)]", 
+          "py-(--spacing-section)",
           variants[variant],
           className
         )}
         {...props}
       >
         {container ? (
-          <div className="mx-auto max-w-[var(--container-max)] px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-max px-4 sm:px-6 lg:px-8">
             {children}
           </div>
         ) : (

@@ -18,10 +18,6 @@ export default function TemoignagesPage() {
   const [temoignages, setTemoignages] = useState<Temoignage[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchTemoignages();
-  }, []);
-
   const fetchTemoignages = async () => {
     try {
       setLoading(true);
@@ -35,6 +31,10 @@ export default function TemoignagesPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchTemoignages();
+  }, []);
 
   const handleDelete = async (id: string) => {
     if (!window.confirm('Voulez-vous vraiment supprimer ce témoignage ?')) return;

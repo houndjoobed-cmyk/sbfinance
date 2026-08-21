@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { TypingAnimation } from '@/components/ui/typing-animation';
-import { submitContactForm } from '@/app/contact/actions';
+import { submitContactForm } from '@/app/contacts/actions';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
 
 interface ContactFormProps {

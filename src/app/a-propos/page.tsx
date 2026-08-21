@@ -43,11 +43,10 @@ export default async function AboutPage() {
   return (
     <>
       {/* Page Header */}
-      <Section variant="primary" className="pt-40 pb-16 md:pt-50 md:pb-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-primary-dark/80 z-0"></div>
+      <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay z-0"
-          style={{ backgroundImage: `url('${parametres.banniereAPropos || '/images/hero/hero-agency.jpg'}')` }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+          style={{ backgroundImage: `url('${parametres.banniereAPropos || '/images/banniere-interne.png'}')` }}
         ></div>
         
         <div className="text-center max-w-3xl mx-auto relative z-10 reveal-up">

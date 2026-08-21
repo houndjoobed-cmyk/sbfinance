@@ -64,7 +64,7 @@ export function JoinUs() {
             size="lg"
             className="bg-primary hover:bg-primary-dark text-white border-none min-w-55 py-6 font-semibold uppercase tracking-wide group"
           >
-            <Link href="/contact">
+            <Link href="/contacts">
               Nos offres d'emploi
             </Link>
           </Button>

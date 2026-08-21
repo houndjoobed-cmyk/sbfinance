@@ -13,9 +13,9 @@ const FacebookIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const LinkedinIcon = ({ className }: { className?: string }) => (
+const TiktokIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" />
+    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.2c0 1.61-.43 3.2-1.25 4.54-1.29 2.09-3.5 3.42-5.95 3.65-2.03.2-4.14-.14-5.87-1.26-1.87-1.2-3.07-3.23-3.29-5.46-.22-2.18.27-4.42 1.48-6.19 1.13-1.65 2.87-2.8 4.84-3.26 1.43-.33 2.94-.28 4.31.22V11.2c-.82-.26-1.72-.34-2.58-.2-1.46.22-2.82 1.13-3.57 2.4-.73 1.25-.87 2.83-.34 4.18.51 1.28 1.6 2.3 2.91 2.66 1.39.37 2.91.22 4.18-.46 1.14-.62 2-1.7 2.3-2.96.16-.68.22-1.4.22-2.1V0h-3.92z" />
   </svg>
 );
 
@@ -83,15 +83,15 @@ export function Footer() {
               Institution de microfinance au Bénin dédiée à l&apos;amélioration des conditions de vie via des services financiers inclusifs et responsables.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-primary-light hover:text-white transition-colors">
+              <a href="https://www.facebook.com/profile.php?id=61587817931449" className="text-primary-light hover:text-white transition-colors">
                 <span className="sr-only">Facebook</span>
                 <FacebookIcon className="h-5 w-5" />
               </a>
               <a href="#" className="text-primary-light hover:text-white transition-colors">
-                <span className="sr-only">LinkedIn</span>
-                <LinkedinIcon className="h-5 w-5" />
+                <span className="sr-only">Tiktok</span>
+                <TiktokIcon className="h-5 w-5" />
               </a>
-              <a href="#" className="text-primary-light hover:text-white transition-colors">
+              <a href="https://www.instagram.com/salembraha?igsi=MXRqMjJ2bWNkbHk1bQ==" className="text-primary-light hover:text-white transition-colors">
                 <span className="sr-only">Instagram</span>
                 <InstagramIcon className="h-5 w-5" />
               </a>
@@ -127,8 +127,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-primary-light hover:text-white transition-colors text-sm">
-                  Contact
+                <Link href="/contacts" className="text-primary-light hover:text-white transition-colors text-sm">
+                  Contacts
                 </Link>
               </li>
             </ul>

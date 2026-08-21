@@ -74,12 +74,13 @@ export function MissionVision({ mission, vision }: MissionVisionProps) {
           </Button>
         </div>
 
-        <div className="relative h-100 rounded-none overflow-hidden shadow-lg reveal-left bg-surface-muted">
+        <div className="relative rounded-none overflow-hidden shadow-lg reveal-left bg-surface-muted">
           <Image
-            src="/images/home/mission-vision.jpg"
+            src="/images/home/engagement.png"
             alt="Équipe Salem Braha Finance au travail"
-            fill
-            className="object-cover"
+            width={1200}
+            height={800}
+            className="w-full h-auto object-cover"
           />
           <div className="absolute inset-0 bg-primary-dark opacity-10"></div>
 

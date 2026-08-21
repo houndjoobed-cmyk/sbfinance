@@ -1,21 +1,20 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { TypingAnimation } from '@/components/ui/typing-animation';
 import { Section } from '@/components/layout/section';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, CheckCircle2, AlertCircle, Target, FileText } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, AlertCircle, Shield, FileText, Banknote, Calendar, Percent, Receipt } from 'lucide-react';
 import Link from 'next/link';
 import prisma from "@/lib/prisma";
 
 export const dynamic = 'force-dynamic';
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 };
 
 export default async function ProductDetailPage({ params }: Props) {
-  const slug = params.slug;
+  const { slug } = await params;
   let product = null;
   try {
     product = await prisma.produitCredit.findUnique({
@@ -26,11 +25,9 @@ export default async function ProductDetailPage({ params }: Props) {
   }
 
   if (!product) {
-    // Return a graceful 404 or fallback if the DB is unreachable
     notFound();
   }
 
-  // Parse JSON fields safely
   let conditions: string[] = [];
   let documents: string[] = [];
   try {
@@ -40,139 +37,206 @@ export default async function ProductDetailPage({ params }: Props) {
     console.error("Error parsing JSON fields", e);
   }
 
-  // Format min/max amount and duration
   const formatAmount = (min: number | null, max: number | null) => {
     if (min && max) return `De ${min.toLocaleString('fr-FR')} à ${max.toLocaleString('fr-FR')} FCFA`;
     if (min) return `À partir de ${min.toLocaleString('fr-FR')} FCFA`;
     if (max) return `Jusqu'à ${max.toLocaleString('fr-FR')} FCFA`;
-    return "À consulter en agence";
+    return "À consulter";
   };
 
-  const formatDuration = (min: number | null, max: number | null) => {
-    if (min && max) return `De ${min} à ${max} mois`;
-    if (min) return `À partir de ${min} mois`;
-    if (max) return `Maximum ${max} mois`;
-    return "À consulter en agence";
+  const formatDuration = (min: number | null, max: number | null, differe: number | null) => {
+    let dur = "";
+    if (min && max) dur = `De ${min} à ${max} mois`;
+    else if (min) dur = `À partir de ${min} mois`;
+    else if (max) dur = `Jusqu'à ${max} mois`;
+    else dur = "À consulter";
+
+    if (differe && differe > 0) {
+      dur += ` (Différé : ${differe} mois)`;
+    }
+    return dur;
   };
 
   const formattedAmount = formatAmount(product.montantMin, product.montantMax);
-  const formattedDuration = formatDuration(product.dureeMinMois, product.dureeMaxMois);
+  const formattedDuration = formatDuration(product.dureeMinMois, product.dureeMaxMois, product.differeMois);
 
   return (
     <>
-      <Section variant="primary" className="pt-40 pb-16 md:pt-50 md:pb-24 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto">
-          <Link href="/produits#credit" className="inline-flex items-center text-on-surface-variant hover:text-primary transition-colors mb-6 font-medium text-sm">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Retour à la liste des crédits
-          </Link>
+      {/* Hero Section */}
+      <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
+        <div className="absolute inset-0 bg-[url('/images/banniere-interne.png')] bg-cover bg-center bg-no-repeat z-0"></div>
 
-          <div className="flex items-center mb-4">
-            <span className="bg-accent/10 text-accent font-bold px-3 py-1 rounded-full text-xs uppercase tracking-wider">
+        {/* Decorative elements */}
+        <div className="absolute top-[20%] right-[10%] w-[50%] h-[80%] rounded-full bg-accent/20 blur-[120px] pointer-events-none"></div>
+        <div className="absolute bottom-[10%] left-[10%] w-[40%] h-[60%] rounded-full bg-primary-light/20 blur-[100px] pointer-events-none"></div>
+
+        <div className="max-w-5xl mx-auto relative z-10 reveal-up">
+          <div className="flex items-center mb-6">
+            <span className="bg-accent text-primary-dark font-bold px-4 py-1.5 text-xs uppercase tracking-widest shadow-lg">
               {product.categorie}
             </span>
           </div>
-          <h1 className="text-3xl md:text-5xl font-bold text-primary-dark mb-6">
-            <TypingAnimation text={product.nom} typeSpeed={50} />
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-md">
+            {product.nom}
           </h1>
-          <p className="text-xl text-on-surface-variant leading-relaxed">
+          <p className="text-xl md:text-2xl text-primary-light leading-relaxed max-w-3xl border-l-4 border-accent pl-6">
             {product.description}
           </p>
         </div>
       </Section>
 
-      <Section variant="default">
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+      {/* Main Content */}
+      <Section variant="default" className="py-16 bg-surface-muted/30">
+        <div className="max-w-5xl mx-auto">
 
-          {/* Main Details */}
-          <div className="md:col-span-2 space-y-12">
-            <div>
-              <h2 className="text-2xl font-bold text-primary-dark mb-6 flex items-center">
-                <CheckCircle2 className="h-6 w-6 text-accent mr-3 shrink-0" />
-                Conditions d'éligibilité
-              </h2>
-              <div className="bg-surface-muted p-6 border border-outline-variant/50">
-                <p className="font-medium text-on-surface mb-4">Ce produit s'adresse à :</p>
-                <p className="text-on-surface-variant mb-6">{product.cible}</p>
+          {/* Back Button positioned outside the dark hero, clean and visible */}
+          <div className="mb-10 reveal-up">
+            <Link href="/produits#credit" className="inline-flex items-center text-primary-dark hover:text-primary transition-colors font-semibold group">
+              <span className="bg-white p-2 border border-outline-variant/50 mr-3 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all shadow-sm">
+                <ArrowLeft className="h-4 w-4" />
+              </span>
+              Retourner à la liste des offres
+            </Link>
+          </div>
 
-                <p className="font-medium text-on-surface mb-3">Conditions préalables :</p>
-                <ul className="space-y-3">
-                  {conditions.map((cond, idx) => (
-                    <li key={idx} className="flex items-start">
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2 mr-3 shrink-0"></span>
-                      <span className="text-on-surface-variant">{cond}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
 
-            <div>
-              <h2 className="text-2xl font-bold text-primary-dark mb-6 flex items-center">
-                <CheckCircle2 className="h-6 w-6 text-primary mr-3" />
-                <TypingAnimation text="Pièces à fournir" typeSpeed={50} />
-              </h2>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {documents.map((doc, idx) => (
-                  <li key={idx} className="bg-white p-4 shadow-sm border border-outline-variant/30 text-sm text-on-surface-variant flex items-center">
-                    <div className="w-2 h-2 bg-primary rounded-full mr-3 shrink-0"></div>
-                    {doc}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <div className="lg:col-span-2 space-y-16">
 
-            {product.garantieExigee && (
-              <div>
-                <h2 className="text-2xl font-bold text-primary-dark mb-6 flex items-center">
-                  <CheckCircle2 className="h-6 w-6 text-primary mr-3" />
-                  <TypingAnimation text="Garanties exigées" typeSpeed={50} />
+              <div className="reveal-up">
+                <h2 className="text-3xl font-bold text-primary-dark mb-8 flex items-center">
+                  <CheckCircle2 className="h-8 w-8 text-accent mr-4 shrink-0" />
+                  Cible & Éligibilité
                 </h2>
-                <div className="bg-white p-6 border border-outline-variant/50">
-                  <p className="text-on-surface-variant">{product.garantieExigee}</p>
-                </div>
-              </div>
-            )}
-          </div>
+                <div className="bg-white p-8 shadow-sm border border-outline-variant/30 relative overflow-hidden group hover:shadow-md transition-shadow">
+                  <div className="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+                  <h3 className="font-semibold text-lg text-primary mb-3">À qui s'adresse ce produit ?</h3>
+                  <p className="text-on-surface-variant text-lg leading-relaxed mb-8">{product.cible}</p>
 
-          {/* Sidebar / Parameters */}
-          <div>
-            <div className="bg-primary-dark text-white p-6 shadow-lg sticky top-24">
-              <h3 className="text-xl font-bold mb-6 border-b border-white/20 pb-4">Caractéristiques</h3>
-
-              <div className="space-y-6">
-                <div>
-                  <p className="text-primary-light text-sm mb-1">Montant</p>
-                  <p className="font-medium">{formattedAmount}</p>
-                </div>
-
-                <div>
-                  <p className="text-primary-light text-sm mb-1">Durée</p>
-                  <p className="font-medium">{formattedDuration}</p>
-                </div>
-
-                <div>
-                  <p className="text-primary-light text-sm mb-1">Taux & Remboursement</p>
-                  <p className="font-medium">{product.tauxInteretAnnuel || "Consulter en agence"} ({product.periodicite || "Mensuelle"})</p>
+                  {conditions.length > 0 && (
+                    <>
+                      <h3 className="font-semibold text-lg text-primary mb-4">Conditions d'accès :</h3>
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {conditions.map((cond, idx) => (
+                          <li key={idx} className="flex items-start bg-surface-muted/50 p-4 border border-outline-variant/20">
+                            <span className="w-2 h-2 rounded-none bg-accent mt-2 mr-3 shrink-0"></span>
+                            <span className="text-on-surface-variant leading-relaxed">{cond}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/20">
-                <Button asChild variant="accent" className="w-full mb-3">
-                  <Link href="/contact">Demander ce crédit</Link>
-                </Button>
-                <Button asChild variant="outline" className="w-full border-white text-white hover:bg-white hover:text-primary-dark">
-                  <Link href="/reseau">Trouver une agence</Link>
-                </Button>
+              {product.garantieExigee && (
+                <div className="reveal-up">
+                  <h2 className="text-3xl font-bold text-primary-dark mb-8 flex items-center">
+                    <Shield className="h-8 w-8 text-primary mr-4" />
+                    Garanties Exigées
+                  </h2>
+                  <div className="bg-primary/5 p-8 border border-primary/20 relative">
+                    <p className="text-primary-dark font-medium leading-relaxed text-lg">{product.garantieExigee}</p>
+                  </div>
+                </div>
+              )}
+
+              <div className="reveal-up">
+                <h2 className="text-3xl font-bold text-primary-dark mb-8 flex items-center">
+                  <FileText className="h-8 w-8 text-accent mr-4" />
+                  Pièces à fournir
+                </h2>
+                {documents.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {documents.map((doc, idx) => (
+                      <div key={idx} className="bg-white p-5 shadow-sm border border-outline-variant/30 flex items-center hover:border-primary/30 transition-colors">
+                        <div className="w-8 h-8 bg-surface-muted flex items-center justify-center mr-4 shrink-0">
+                          <span className="text-primary font-bold text-sm">{idx + 1}</span>
+                        </div>
+                        <span className="text-on-surface-variant font-medium">{doc}</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-on-surface-variant italic bg-surface-muted p-6 border border-outline-variant/30">Aucune pièce spécifique n'est listée. Rapprochez-vous d'une agence pour plus de détails.</p>
+                )}
               </div>
 
-              <div className="mt-6 flex items-start text-xs text-primary-light bg-black/20 p-3">
-                <AlertCircle className="h-4 w-4 mr-2 shrink-0 mt-0.5" />
-                <p>Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</p>
+            </div>
+
+            <div className="">
+              <div className="bg-white shadow-xl border border-outline-variant/50 overflow-hidden">
+                <div className="bg-primary-dark p-6 text-white text-center">
+                  <h3 className="text-2xl font-bold mb-2">Conditions Financières</h3>
+                  <p className="text-primary-light text-sm">Transparence et souplesse</p>
+                </div>
+
+                <div className="p-6 space-y-6">
+
+                  <div className="flex items-start pb-6 border-b border-outline-variant/30">
+                    <div className="bg-primary/10 p-3 shrink-0 mr-4 border border-primary/20">
+                      <Banknote className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-on-surface-variant text-sm font-medium mb-1 uppercase tracking-wide">Montant</p>
+                      <p className="font-bold text-primary-dark text-lg">{formattedAmount}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start pb-6 border-b border-outline-variant/30">
+                    <div className="bg-accent/10 p-3 shrink-0 mr-4 border border-accent/20">
+                      <Calendar className="h-6 w-6 text-accent" />
+                    </div>
+                    <div>
+                      <p className="text-on-surface-variant text-sm font-medium mb-1 uppercase tracking-wide">Durée</p>
+                      <p className="font-bold text-primary-dark text-lg">{formattedDuration}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start pb-6 border-b border-outline-variant/30">
+                    <div className="bg-primary/10 p-3 shrink-0 mr-4 border border-primary/20">
+                      <Percent className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-on-surface-variant text-sm font-medium mb-1 uppercase tracking-wide">Taux</p>
+                      <p className="font-bold text-primary-dark text-lg">{product.tauxInteretAnnuel || "Consulter en agence"}</p>
+                      <p className="text-sm text-on-surface-variant mt-1">Périodicité : {product.periodicite || "Mensuelle"}</p>
+                    </div>
+                  </div>
+
+                  {product.fraisEtEpargne && (
+                    <div className="flex items-start">
+                      <div className="bg-accent/10 p-3 shrink-0 mr-4 border border-accent/20">
+                        <Receipt className="h-6 w-6 text-accent" />
+                      </div>
+                      <div>
+                        <p className="text-on-surface-variant text-sm font-medium mb-1 uppercase tracking-wide">Frais & Épargne</p>
+                        <p className="text-primary-dark font-medium leading-snug">{product.fraisEtEpargne}</p>
+                      </div>
+                    </div>
+                  )}
+
+                </div>
+
+                <div className="p-6 bg-surface-muted/50 space-y-4 border-t border-outline-variant/30">
+                  <Button asChild variant="primary" size="lg" className="w-full rounded-none text-base font-semibold shadow-md">
+                    <Link href="/contacts">Demander ce financement</Link>
+                  </Button>
+                  <Button asChild variant="outline" size="lg" className="w-full rounded-none text-base font-semibold">
+                    <Link href="/reseau">Trouver une agence</Link>
+                  </Button>
+                </div>
+              </div>
+
+              <div className="mt-6 flex items-start text-xs text-on-surface-variant bg-white border border-outline-variant/50 p-4 shadow-sm">
+                <AlertCircle className="h-5 w-5 text-accent mr-3 shrink-0" />
+                <p className="leading-relaxed">
+                  Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.
+                </p>
               </div>
             </div>
-          </div>
 
+          </div>
         </div>
       </Section>
     </>

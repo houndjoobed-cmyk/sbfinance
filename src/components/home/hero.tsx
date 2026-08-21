@@ -36,12 +36,12 @@ const defaultSlides = [
   },
   {
     id: "4",
-    image: "/images/hero/Pour le financement inclusif.png",
+    image: "/images/hero/BANNIERE 04 SITE.png",
     title: "Pour une finance inclusive et responsable",
     subtitle: "Nous favorisons l'inclusion financière des populations à travers tout le Bénin.",
     cta: "Notre réseau",
     href: "/reseau",
-    objectPosition: "top"
+    objectPosition: "center 10%"
   }
 ];
 
@@ -110,7 +110,7 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
                         </Button>
                       )}
                       <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10 hover:text-white">
-                        <Link href="/contact">Nous contacter</Link>
+                        <Link href="/contacts">Nous contacter</Link>
                       </Button>
                     </div>
                   </div>

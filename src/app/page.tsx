@@ -6,6 +6,7 @@ import { ProductsPreview } from "@/components/home/products-preview";
 import { NewsPreview } from "@/components/home/news-preview";
 import { Testimonials } from "@/components/home/testimonials";
 import { DgQuote } from "@/components/home/dg-quote";
+import { Partners } from "@/components/home/partners";
 import { JoinUs } from "@/components/home/join-us";
 import prisma from "@/lib/prisma";
 
@@ -103,6 +104,7 @@ export default async function Home() {
       <Features />
       <Numbers stats={stats} />
       <MissionVision mission={parametres.mission} vision={parametres.vision} />
+      <Partners />
       <DgQuote />
       <ProductsPreview />
       <NewsPreview news={recentNews} />

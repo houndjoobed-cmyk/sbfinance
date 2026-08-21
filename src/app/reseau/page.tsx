@@ -98,13 +98,12 @@ export default async function NetworkPage() {
 
   return (
     <>
-      <Section variant="primary" className="pt-40 pb-16 md:pt-50 md:pb-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-primary-dark/80 z-0"></div>
-        <div className="absolute inset-0 bg-[url('/images/hero/hero-community.jpg')] bg-cover bg-center opacity-40 mix-blend-overlay z-0"></div>
+      <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
+        <div className="absolute inset-0 bg-[url('/images/banniere-interne.png')] bg-cover bg-center bg-no-repeat z-0"></div>
         <div className="text-center max-w-3xl mx-auto relative z-10 reveal-up">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6"><TypingAnimation text="Notre Réseau" typeSpeed={50} /></h1>
-          <p className="text-xl text-primary-light">
-            Une présence stratégique pour vous offrir un service de proximité et une assistance rapide.
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg"><TypingAnimation text="Notre Réseau" typeSpeed={50} /></h1>
+          <p className="text-xl text-white drop-shadow-md">
+            Trouvez l'agence Salem Braha Finance la plus proche de chez vous.
           </p>
         </div>
       </Section>
