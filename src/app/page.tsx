@@ -53,17 +53,6 @@ export default async function Home() {
     } as any;
   }
 
-  // Calculate experience dynamically based on creation year (Disabled to use fixed 15+)
-  const currentYear = new Date().getFullYear();
-  const experienceYears = currentYear - parametres.anneeCreation;
-
-  const stats = [
-    { value: 15, label: "Années d'expérience", suffix: "+" },
-    { value: parametres.nombreAgences, label: "Points de service", suffix: "" },
-    { value: parametres.nombreClients, label: "Clients satisfaits", suffix: "+" },
-    { value: "1,5", label: "Milliard FCFA Capital", suffix: "" },
-  ];
-
 
 
   // Format testimonials for the component
@@ -179,7 +168,13 @@ export default async function Home() {
         { id: "2", text: "Compte d'épargne", link: "/produits" },
         { id: "3", text: "Nos offres d'emploi", link: "/carrieres" }
       ]
-    }
+    },
+    stats: [
+      { id: "1", value: "15", label: "Années d'expérience", suffix: "+" },
+      { id: "2", value: parametres?.nombreAgences?.toString() || "5", label: "Points de service", suffix: "" },
+      { id: "3", value: parametres?.nombreClients?.toString() || "10000", label: "Clients satisfaits", suffix: "+" },
+      { id: "4", value: "1,5", label: "Milliard FCFA Capital", suffix: "" }
+    ]
   };
 
   const content = parametres?.accueilContenu ? { ...defaultContent, ...(parametres.accueilContenu as any) } : defaultContent;
@@ -196,7 +191,7 @@ export default async function Home() {
     <>
       <Hero carouselSlides={heroSlides} />
       <Features content={content.features} />
-      <Numbers stats={stats} />
+      <Numbers stats={content.stats} />
       <MissionVision mission={parametres.mission} vision={parametres.vision} content={content.missionVision} />
       <Partners content={content.partners} />
       <DgQuote content={content.dgQuote} />

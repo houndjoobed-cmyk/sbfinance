@@ -91,7 +91,13 @@ const DEFAULT_CONTENT = {
       { id: "2", text: "Compte d'épargne", link: "/produits" },
       { id: "3", text: "Nos offres d'emploi", link: "/carrieres" }
     ]
-  }
+  },
+  stats: [
+    { id: "1", value: "15", label: "Années d'expérience", suffix: "+" },
+    { id: "2", value: "5", label: "Points de service", suffix: "" },
+    { id: "3", value: "10000", label: "Clients satisfaits", suffix: "+" },
+    { id: "4", value: "1,5", label: "Milliard FCFA Capital", suffix: "" }
+  ]
 };
 
 export default function ContenuAccueilPage() {
@@ -243,6 +249,13 @@ export default function ContenuAccueilPage() {
     }));
   };
 
+  const updateStat = (id: string, field: string, value: string) => {
+    setContent(prev => ({
+      ...prev,
+      stats: (prev.stats || DEFAULT_CONTENT.stats).map((s: any) => s.id === id ? { ...s, [field]: value } : s)
+    }));
+  };
+
   if (loading) {
     return <div className="flex justify-center py-20"><Loader2 className="w-8 h-8 animate-spin text-[#0991b5]" /></div>;
   }
@@ -275,6 +288,9 @@ export default function ContenuAccueilPage() {
         </button>
         <button type="button" onClick={() => setActiveTab('join')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'join' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
           Rejoignez-nous
+        </button>
+        <button type="button" onClick={() => setActiveTab('stats')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'stats' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
+          Chiffres Clés
         </button>
       </div>
 
@@ -621,6 +637,46 @@ export default function ContenuAccueilPage() {
                 ))}
               </div>
             )}
+          </div>
+        )}
+
+        {activeTab === 'stats' && (
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold text-[#111e36] border-b pb-2">Chiffres Clés (Statistiques)</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {(content.stats || DEFAULT_CONTENT.stats).map((stat: any, index: number) => (
+                <div key={stat.id} className="p-4 border border-gray-200 rounded-lg bg-gray-50 relative space-y-4">
+                  <h3 className="font-medium text-gray-900">Statistique #{index + 1}</h3>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-500">Valeur (Chiffre)</label>
+                    <input 
+                      type="text" 
+                      className="w-full mt-1 border-gray-300 rounded-md text-sm"
+                      value={stat.value}
+                      onChange={(e) => updateStat(stat.id, 'value', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-500">Suffixe (ex: +, %)</label>
+                    <input 
+                      type="text" 
+                      className="w-full mt-1 border-gray-300 rounded-md text-sm"
+                      value={stat.suffix}
+                      onChange={(e) => updateStat(stat.id, 'suffix', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-500">Libellé (Texte)</label>
+                    <input 
+                      type="text" 
+                      className="w-full mt-1 border-gray-300 rounded-md text-sm"
+                      value={stat.label}
+                      onChange={(e) => updateStat(stat.id, 'label', e.target.value)}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
