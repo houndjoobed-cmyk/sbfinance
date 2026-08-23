@@ -149,7 +149,7 @@ export default function ContenuMobilisPage() {
         <label className="block text-sm font-medium text-gray-700">Titre de la section</label>
         <input 
           type="text" 
-          className="w-full mt-1 border-gray-300 rounded-md" 
+          className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" 
           value={(content as any)[section].title} 
           onChange={e => updateSection(section, 'title', e.target.value)} 
         />
@@ -166,14 +166,14 @@ export default function ContenuMobilisPage() {
                 {field.key === 'description' ? (
                   <textarea 
                     rows={3}
-                    className="w-full mt-1 border-gray-300 rounded-md text-sm"
+                    className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
                     value={item[field.key]}
                     onChange={(e) => updateItem(section, item.id, field.key, e.target.value)}
                   />
                 ) : (
                   <input 
                     type="text" 
-                    className="w-full mt-1 border-gray-300 rounded-md text-sm"
+                    className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
                     value={item[field.key]}
                     onChange={(e) => updateItem(section, item.id, field.key, e.target.value)}
                   />
@@ -240,15 +240,15 @@ export default function ContenuMobilisPage() {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Titre principal</label>
-                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md" value={content.hero.title} onChange={e => updateSection('hero', 'title', e.target.value)} />
+                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.hero.title} onChange={e => updateSection('hero', 'title', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Sous-titre (Slogan)</label>
-                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md" value={content.hero.subtitle} onChange={e => updateSection('hero', 'subtitle', e.target.value)} />
+                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.hero.subtitle} onChange={e => updateSection('hero', 'subtitle', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Description</label>
-                  <textarea rows={4} className="w-full mt-1 border-gray-300 rounded-md" value={content.hero.description} onChange={e => updateSection('hero', 'description', e.target.value)} />
+                  <textarea rows={4} className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.hero.description} onChange={e => updateSection('hero', 'description', e.target.value)} />
                 </div>
               </div>
             </div>
@@ -281,23 +281,23 @@ export default function ContenuMobilisPage() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">Titre de la section</label>
-                <input type="text" className="w-full mt-1 border-gray-300 rounded-md" value={content.ecologie.title} onChange={e => updateSection('ecologie', 'title', e.target.value)} />
+                <input type="text" className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.ecologie.title} onChange={e => updateSection('ecologie', 'title', e.target.value)} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Paragraphe 1</label>
-                <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md" value={content.ecologie.text1} onChange={e => updateSection('ecologie', 'text1', e.target.value)} />
+                <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.ecologie.text1} onChange={e => updateSection('ecologie', 'text1', e.target.value)} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Paragraphe 2</label>
-                <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md" value={content.ecologie.text2} onChange={e => updateSection('ecologie', 'text2', e.target.value)} />
+                <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.ecologie.text2} onChange={e => updateSection('ecologie', 'text2', e.target.value)} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Paragraphe 3</label>
-                <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md" value={content.ecologie.text3} onChange={e => updateSection('ecologie', 'text3', e.target.value)} />
+                <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.ecologie.text3} onChange={e => updateSection('ecologie', 'text3', e.target.value)} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Citation / Slogan (Gras italique)</label>
-                <input type="text" className="w-full mt-1 border-gray-300 rounded-md" value={content.ecologie.quote} onChange={e => updateSection('ecologie', 'quote', e.target.value)} />
+                <input type="text" className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.ecologie.quote} onChange={e => updateSection('ecologie', 'quote', e.target.value)} />
               </div>
             </div>
           </div>
@@ -309,24 +309,24 @@ export default function ContenuMobilisPage() {
             <div className="space-y-4 max-w-3xl">
               <div>
                 <label className="block text-sm font-medium text-gray-700">Titre de la section</label>
-                <input type="text" className="w-full mt-1 border-gray-300 rounded-md" value={content.fleet.title} onChange={e => updateSection('fleet', 'title', e.target.value)} />
+                <input type="text" className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.fleet.title} onChange={e => updateSection('fleet', 'title', e.target.value)} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Description principale</label>
-                <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md" value={content.fleet.description} onChange={e => updateSection('fleet', 'description', e.target.value)} />
+                <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.fleet.description} onChange={e => updateSection('fleet', 'description', e.target.value)} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Note de bas de page (Italique)</label>
-                <textarea rows={2} className="w-full mt-1 border-gray-300 rounded-md text-sm" value={content.fleet.note} onChange={e => updateSection('fleet', 'note', e.target.value)} />
+                <textarea rows={2} className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={content.fleet.note} onChange={e => updateSection('fleet', 'note', e.target.value)} />
               </div>
               <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-100">
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Texte du bouton CTA</label>
-                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md" value={content.fleet.buttonText} onChange={e => updateSection('fleet', 'buttonText', e.target.value)} />
+                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.fleet.buttonText} onChange={e => updateSection('fleet', 'buttonText', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Lien du bouton (tel: ou mailto: ou /url)</label>
-                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md" value={content.fleet.buttonLink} onChange={e => updateSection('fleet', 'buttonLink', e.target.value)} />
+                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.fleet.buttonLink} onChange={e => updateSection('fleet', 'buttonLink', e.target.value)} />
                 </div>
               </div>
             </div>

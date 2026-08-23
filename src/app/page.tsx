@@ -148,7 +148,21 @@ export default async function Home() {
     productsPreview: {
       backgroundText: "Produits",
       title: "Nos Offres de Crédit",
-      subtitle: "Nos piliers fondateurs"
+      subtitle: "Nos piliers fondateurs",
+      items: [
+        { id: "1", title: "Crédit", description: "Solutions de financement pour vos besoins de roulement, de consommation ou d'investissement.", image: "/images/products/credit-v2.jpg", link: "/produits/credit" },
+        { id: "2", title: "Épargne", description: "Sécurisez votre avenir avec nos produits d'épargne: Houenoussou, Allodo, Ahossou, Zédaga et Kondokpo.", image: "/images/products/epargne-v2.jpg", link: "/produits/epargne" },
+        { id: "3", title: "Appui", description: "Un soutien sur-mesure pour développer vos activités et pérenniser votre croissance.", image: "/images/products/appui.png", link: "/produits/appui" },
+        { id: "4", title: "Conseil", description: "Expertise et accompagnement stratégique pour la gestion de votre entreprise.", image: "/images/products/conseil.jpeg", link: "/produits/conseil" },
+        { id: "5", title: "Formation", description: "Renforcez vos compétences avec nos programmes d'éducation financière et entrepreneuriale.", image: "/images/products/formation.jpeg", link: "/produits/formation" }
+      ],
+      helpCard: {
+        title: "Besoin d'aide pour choisir ?",
+        description: "Nos conseillers sont à votre disposition dans toutes nos agences pour vous orienter vers la solution la plus adaptée.",
+        image: "/images/products/besoin d'aide.jpeg",
+        buttonText: "Nous contacter",
+        buttonLink: "/contacts"
+      }
     },
     newsPreview: {
       backgroundText: "ACTUALITÉS",

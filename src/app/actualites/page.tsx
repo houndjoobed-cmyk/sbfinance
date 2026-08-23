@@ -93,9 +93,9 @@ export default async function NewsPage() {
                   </CardContent>
                   <CardFooter className="p-0 pt-4 mt-auto">
                     <Link 
-                      href={item.lienExterne ? item.lienExterne : `/actualites/${item.slug}`}
-                      target={item.lienExterne ? "_blank" : undefined}
-                      rel={item.lienExterne ? "noopener noreferrer" : undefined}
+                      href={(item as any).lienExterne ? (item as any).lienExterne : `/actualites/${item.slug}`}
+                      target={(item as any).lienExterne ? "_blank" : undefined}
+                      rel={(item as any).lienExterne ? "noopener noreferrer" : undefined}
                       className="inline-flex items-center text-accent font-medium hover:text-accent-hover transition-colors"
                     >
                       Lire la suite

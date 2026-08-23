@@ -118,7 +118,7 @@ export default function AgenceFormPage({ params }: { params?: { id: string } }) 
               name="nom"
               value={formData.nom}
               onChange={handleChange}
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
               placeholder="Ex: Agence Principale Arconville"
             />
           </div>
@@ -130,7 +130,7 @@ export default function AgenceFormPage({ params }: { params?: { id: string } }) 
               type="checkbox"
               checked={formData.estSiege}
               onChange={handleChange}
-              className="h-4 w-4 text-[#0991b5] focus:ring-[#0991b5] border-gray-300 rounded"
+              className="h-4 w-4 text-[#0991b5] focus:ring-[#0991b5] border-gray-300 rounded border bg-white px-3 py-2"
             />
             <label htmlFor="estSiege" className="ml-2 block text-sm text-gray-900 font-medium">
               Cette agence est le siège social principal
@@ -145,7 +145,7 @@ export default function AgenceFormPage({ params }: { params?: { id: string } }) 
               rows={2}
               value={formData.adresse}
               onChange={handleChange}
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
             />
           </div>
 
@@ -155,7 +155,7 @@ export default function AgenceFormPage({ params }: { params?: { id: string } }) 
               name="coordonneesGps"
               value={formData.coordonneesGps}
               onChange={handleChange}
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
               placeholder="lat, lng (Ex: 6.366667, 2.433333)"
             />
             <p className="text-xs text-gray-500 mt-1">Nécessaire pour l'affichage sur la carte</p>
@@ -169,7 +169,7 @@ export default function AgenceFormPage({ params }: { params?: { id: string } }) 
               rows={3}
               value={formData.telephones}
               onChange={handleChange}
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
               placeholder="+229 01 21 38 05 87"
             />
           </div>
@@ -182,7 +182,7 @@ export default function AgenceFormPage({ params }: { params?: { id: string } }) 
               rows={2}
               value={formData.horaires}
               onChange={handleChange}
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
             />
           </div>
         </div>

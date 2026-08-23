@@ -121,7 +121,7 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
               name="titre"
               value={formData.titre}
               onChange={handleChange}
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
               placeholder="Titre de l'actualité"
             />
           </div>
@@ -132,7 +132,7 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
               name="categorie"
               value={formData.categorie}
               onChange={handleChange}
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
             >
               <option value="Informations">Informations</option>
               <option value="Événements">Événements</option>
@@ -155,7 +155,7 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
               type="url"
               value={formData.lienExterne}
               onChange={handleChange}
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
               placeholder="Ex: https://lien-vers-article-externe.com"
             />
             <p className="text-xs text-gray-500 mt-1">Si renseigné, l'article redirigera vers ce lien au lieu de la page détaillée.</p>
@@ -169,7 +169,7 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
               rows={2}
               value={formData.extrait}
               onChange={handleChange}
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
               placeholder="Résumé de l'article pour la page d'accueil"
             />
           </div>
@@ -182,7 +182,7 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
               rows={10}
               value={formData.contenu}
               onChange={handleChange}
-              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
               placeholder="Contenu détaillé (supporte le HTML basique ou Markdown plus tard)"
             />
           </div>
@@ -194,7 +194,7 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
               type="checkbox"
               checked={formData.estPublie}
               onChange={handleChange}
-              className="h-4 w-4 text-[#0991b5] focus:ring-[#0991b5] border-gray-300 rounded"
+              className="h-4 w-4 text-[#0991b5] focus:ring-[#0991b5] border-gray-300 rounded border bg-white px-3 py-2"
             />
             <label htmlFor="estPublie" className="ml-2 block text-sm text-gray-900">
               Publier cet article immédiatement (décocher pour garder en brouillon)

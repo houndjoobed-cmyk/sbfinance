@@ -35,43 +35,71 @@ export function ProductsPreview({ content }: { content?: any }) {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
-  const products = [
+  const defaultProducts = [
     {
+      id: "1",
       title: "Crédit",
       description: "Solutions de financement pour vos besoins de roulement, de consommation ou d'investissement.",
-      icon: <Wallet className="h-5 w-5" />,
+      icon: "Wallet",
       image: "/images/products/credit-v2.jpg",
       link: "/produits/credit"
     },
     {
+      id: "2",
       title: "Épargne",
       description: "Sécurisez votre avenir avec nos produits d'épargne: Houenoussou, Allodo, Ahossou, Zédaga et Kondokpo.",
-      icon: <Landmark className="h-5 w-5" />,
+      icon: "Landmark",
       image: "/images/products/epargne-v2.jpg",
       link: "/produits/epargne"
     },
     {
+      id: "3",
       title: "Appui",
       description: "Un soutien sur-mesure pour développer vos activités et pérenniser votre croissance.",
-      icon: <Handshake className="h-5 w-5" />,
+      icon: "Handshake",
       image: "/images/products/appui.png",
       link: "/produits/appui"
     },
     {
+      id: "4",
       title: "Conseil",
       description: "Expertise et accompagnement stratégique pour la gestion de votre entreprise.",
-      icon: <Lightbulb className="h-5 w-5" />,
+      icon: "Lightbulb",
       image: "/images/products/conseil.jpeg",
       link: "/produits/conseil"
     },
     {
+      id: "5",
       title: "Formation",
       description: "Renforcez vos compétences avec nos programmes d'éducation financière et entrepreneuriale.",
-      icon: <GraduationCap className="h-5 w-5" />,
+      icon: "GraduationCap",
       image: "/images/products/formation.jpeg",
       link: "/produits/formation"
     }
   ];
+
+  const products = content?.items?.length > 0 ? content.items : defaultProducts;
+
+  const defaultHelpCard = {
+    title: "Besoin d'aide pour choisir ?",
+    description: "Nos conseillers sont à votre disposition dans toutes nos agences pour vous orienter vers la solution la plus adaptée.",
+    image: "/images/products/besoin d'aide.jpeg",
+    buttonText: "Nous contacter",
+    buttonLink: "/contacts"
+  };
+
+  const helpCard = content?.helpCard || defaultHelpCard;
+
+  const renderIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'Wallet': return <Wallet className="h-5 w-5" />;
+      case 'Landmark': return <Landmark className="h-5 w-5" />;
+      case 'Handshake': return <Handshake className="h-5 w-5" />;
+      case 'Lightbulb': return <Lightbulb className="h-5 w-5" />;
+      case 'GraduationCap': return <GraduationCap className="h-5 w-5" />;
+      default: return <Wallet className="h-5 w-5" />;
+    }
+  };
 
   return (
     <section className="py-20 md:py-28 bg-surface-white relative overflow-hidden">
@@ -124,7 +152,7 @@ export function ProductsPreview({ content }: { content?: any }) {
         {/* Embla Carousel */}
         <div className="overflow-hidden -mx-4 px-4 sm:mx-0 sm:px-0 py-4" ref={emblaRef}>
           <div className="flex touch-pan-y" style={{ backfaceVisibility: 'hidden' }}>
-            {products.map((product, index) => (
+            {products.map((product: any, index: number) => (
               <div
                 key={index}
                 className="flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_33.33%] min-w-0 pr-4 sm:pr-6"
@@ -140,7 +168,7 @@ export function ProductsPreview({ content }: { content?: any }) {
                     />
                     {/* Icon badge */}
                     <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-primary shadow-md">
-                      {product.icon}
+                      {renderIcon(product.icon || 'Wallet')}
                     </div>
                   </div>
                   {/* Content */}
@@ -167,7 +195,7 @@ export function ProductsPreview({ content }: { content?: any }) {
                 {/* Decorative top image area */}
                 <div className="relative h-48 sm:h-52 overflow-hidden">
                   <Image
-                    src="/images/products/besoin d'aide.jpeg"
+                    src={helpCard.image}
                     alt="Nos agences"
                     fill
                     className="object-cover opacity-40"
@@ -179,14 +207,14 @@ export function ProductsPreview({ content }: { content?: any }) {
                 </div>
                 <div className="p-6 flex flex-col grow">
                   <h3 className="text-xl font-bold mb-3">
-                    Besoin d&apos;aide pour choisir ?
+                    {helpCard.title}
                   </h3>
                   <p className="text-primary-light text-sm leading-relaxed mb-6 grow">
-                    Nos conseillers sont à votre disposition dans toutes nos agences pour vous orienter vers la solution la plus adaptée.
+                    {helpCard.description}
                   </p>
                   <Button asChild className="w-full bg-white text-primary hover:bg-slate-100 border-0">
-                    <Link href="/contacts">
-                      <Phone className="mr-2 h-4 w-4" /> Nous contacter
+                    <Link href={helpCard.buttonLink}>
+                      <Phone className="mr-2 h-4 w-4" /> {helpCard.buttonText}
                     </Link>
                   </Button>
                 </div>

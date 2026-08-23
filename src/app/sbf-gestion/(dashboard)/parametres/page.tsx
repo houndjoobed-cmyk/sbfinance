@@ -147,7 +147,7 @@ export default function ParametresPage() {
                 <textarea 
                   name="mission" 
                   rows={4} 
-                  className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+                  className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
                   value={formData.mission}
                   onChange={handleChange}
                 />
@@ -158,7 +158,7 @@ export default function ParametresPage() {
                 <textarea 
                   name="vision" 
                   rows={4} 
-                  className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+                  className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
                   value={formData.vision}
                   onChange={handleChange}
                 />
@@ -169,7 +169,7 @@ export default function ParametresPage() {
                 <textarea 
                   name="valeurs" 
                   rows={4} 
-                  className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+                  className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
                   value={formData.valeurs}
                   onChange={handleChange}
                   placeholder="Respect&#10;Intégrité&#10;Efficacité"
@@ -185,7 +185,7 @@ export default function ParametresPage() {
                 <input 
                   type="text" 
                   name="telephonePrincipal" 
-                  className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+                  className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
                   value={formData.telephonePrincipal}
                   onChange={handleChange}
                 />
@@ -196,7 +196,7 @@ export default function ParametresPage() {
                 <input 
                   type="email" 
                   name="emailPrincipal" 
-                  className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+                  className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
                   value={formData.emailPrincipal}
                   onChange={handleChange}
                 />
@@ -207,7 +207,7 @@ export default function ParametresPage() {
                 <input 
                   type="text" 
                   name="adresseSiege" 
-                  className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+                  className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
                   value={formData.adresseSiege}
                   onChange={handleChange}
                 />
@@ -219,7 +219,7 @@ export default function ParametresPage() {
                   <input 
                     type="number" 
                     name="anneeCreation" 
-                    className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+                    className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
                     value={formData.anneeCreation}
                     onChange={handleChange}
                   />
@@ -229,7 +229,7 @@ export default function ParametresPage() {
                   <input 
                     type="number" 
                     name="nombreAgences" 
-                    className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+                    className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
                     value={formData.nombreAgences}
                     onChange={handleChange}
                   />
@@ -239,7 +239,7 @@ export default function ParametresPage() {
                   <input 
                     type="number" 
                     name="nombreClients" 
-                    className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+                    className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
                     value={formData.nombreClients}
                     onChange={handleChange}
                   />
@@ -259,7 +259,7 @@ export default function ParametresPage() {
               <textarea 
                 name="histoireTexte" 
                 rows={8} 
-                className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+                className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
                 value={formData.histoireTexte}
                 onChange={handleChange}
                 placeholder="Rédigez l'histoire de la création de SBF ici..."
@@ -271,7 +271,7 @@ export default function ParametresPage() {
               <textarea 
                 name="gouvernanceTexte" 
                 rows={8} 
-                className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+                className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
                 value={formData.gouvernanceTexte}
                 onChange={handleChange}
                 placeholder="Décrivez l'équipe dirigeante ou la structure de gouvernance..."

@@ -145,11 +145,11 @@ export default function ProduitCreditFormPage({ params }: { params?: { id: strin
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Nom du crédit *</label>
-              <input required name="nom" value={formData.nom} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] focus:border-[#0991b5]" placeholder="Ex: Crédit Groupe Solidaire (CGS)" />
+              <input required name="nom" value={formData.nom} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2" placeholder="Ex: Crédit Groupe Solidaire (CGS)" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Catégorie *</label>
-              <select name="categorie" value={formData.categorie} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] focus:border-[#0991b5]">
+              <select name="categorie" value={formData.categorie} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2">
                 <option value="Besoin de fonds de roulement">Besoin de fonds de roulement</option>
                 <option value="Crédit à la consommation">Crédit à la consommation</option>
                 <option value="Crédit Cause">Crédit Cause</option>
@@ -157,11 +157,11 @@ export default function ProduitCreditFormPage({ params }: { params?: { id: strin
             </div>
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">Cible *</label>
-              <input required name="cible" value={formData.cible} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] focus:border-[#0991b5]" placeholder="Ex: Femmes en groupe, Commerçants..." />
+              <input required name="cible" value={formData.cible} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2" placeholder="Ex: Femmes en groupe, Commerçants..." />
             </div>
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">Description courte *</label>
-              <textarea required name="description" rows={2} value={formData.description} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] focus:border-[#0991b5]" />
+              <textarea required name="description" rows={2} value={formData.description} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2" />
             </div>
           </div>
         </div>
@@ -172,27 +172,27 @@ export default function ProduitCreditFormPage({ params }: { params?: { id: strin
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Montant Min (FCFA)</label>
-              <input type="number" name="montantMin" value={formData.montantMin} onChange={handleChange} className="w-full border-gray-300 rounded-md" />
+              <input type="number" name="montantMin" value={formData.montantMin} onChange={handleChange} className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Montant Max (FCFA)</label>
-              <input type="number" name="montantMax" value={formData.montantMax} onChange={handleChange} className="w-full border-gray-300 rounded-md" />
+              <input type="number" name="montantMax" value={formData.montantMax} onChange={handleChange} className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Durée Min (Mois)</label>
-              <input type="number" name="dureeMinMois" value={formData.dureeMinMois} onChange={handleChange} className="w-full border-gray-300 rounded-md" />
+              <input type="number" name="dureeMinMois" value={formData.dureeMinMois} onChange={handleChange} className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Durée Max (Mois)</label>
-              <input type="number" name="dureeMaxMois" value={formData.dureeMaxMois} onChange={handleChange} className="w-full border-gray-300 rounded-md" />
+              <input type="number" name="dureeMaxMois" value={formData.dureeMaxMois} onChange={handleChange} className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" />
             </div>
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">Taux d'intérêt (Optionnel, ex: 1.5% par mois)</label>
-              <input name="tauxInteretAnnuel" value={formData.tauxInteretAnnuel} onChange={handleChange} className="w-full border-gray-300 rounded-md" />
+              <input name="tauxInteretAnnuel" value={formData.tauxInteretAnnuel} onChange={handleChange} className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" />
             </div>
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">Périodicité de remboursement</label>
-              <input name="periodicite" value={formData.periodicite} onChange={handleChange} className="w-full border-gray-300 rounded-md" placeholder="Mensuelle, Hebdomadaire..." />
+              <input name="periodicite" value={formData.periodicite} onChange={handleChange} className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" placeholder="Mensuelle, Hebdomadaire..." />
             </div>
           </div>
         </div>
@@ -203,7 +203,7 @@ export default function ProduitCreditFormPage({ params }: { params?: { id: strin
           
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-700 mb-1">Garantie exigée *</label>
-            <input required name="garantieExigee" value={formData.garantieExigee} onChange={handleChange} className="w-full border-gray-300 rounded-md" placeholder="Ex: Caution solidaire, Épargne préalable de 10%..." />
+            <input required name="garantieExigee" value={formData.garantieExigee} onChange={handleChange} className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" placeholder="Ex: Caution solidaire, Épargne préalable de 10%..." />
             <p className="text-xs text-gray-500 mt-1">Évitez le jargon interne de recouvrement ou co-signature, restez grand public.</p>
           </div>
 
@@ -214,7 +214,7 @@ export default function ProduitCreditFormPage({ params }: { params?: { id: strin
               <div className="space-y-2">
                 {conditions.map((cond, index) => (
                   <div key={index} className="flex gap-2">
-                    <input value={cond} onChange={(e) => handleArrayChange(setConditions, index, e.target.value)} className="flex-1 border-gray-300 rounded-md text-sm" placeholder="Ex: Être majeur..." />
+                    <input value={cond} onChange={(e) => handleArrayChange(setConditions, index, e.target.value)} className="flex-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" placeholder="Ex: Être majeur..." />
                     <button type="button" onClick={() => removeArrayItem(setConditions, index)} className="p-2 text-red-500 hover:bg-red-50 rounded-md"><Trash2 className="w-4 h-4" /></button>
                   </div>
                 ))}
@@ -230,7 +230,7 @@ export default function ProduitCreditFormPage({ params }: { params?: { id: strin
               <div className="space-y-2">
                 {pieces.map((piece, index) => (
                   <div key={index} className="flex gap-2">
-                    <input value={piece} onChange={(e) => handleArrayChange(setPieces, index, e.target.value)} className="flex-1 border-gray-300 rounded-md text-sm" placeholder="Ex: Copie de la pièce d'identité..." />
+                    <input value={piece} onChange={(e) => handleArrayChange(setPieces, index, e.target.value)} className="flex-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" placeholder="Ex: Copie de la pièce d'identité..." />
                     <button type="button" onClick={() => removeArrayItem(setPieces, index)} className="p-2 text-red-500 hover:bg-red-50 rounded-md"><Trash2 className="w-4 h-4" /></button>
                   </div>
                 ))}

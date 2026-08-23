@@ -71,7 +71,9 @@ const DEFAULT_CONTENT = {
   productsPreview: {
     backgroundText: "Produits",
     title: "Nos Offres de Crédit",
-    subtitle: "Découvrez nos solutions de financement"
+    subtitle: "Découvrez nos solutions de financement",
+    items: [] as any[],
+    helpCard: null as any
   },
   newsPreview: {
     backgroundText: "ACTUALITÉS",
@@ -106,7 +108,7 @@ export default function ContenuAccueilPage() {
   const [activeTab, setActiveTab] = useState('hero');
   const [message, setMessage] = useState({ text: '', type: '' });
   
-  const [content, setContent] = useState(DEFAULT_CONTENT);
+  const [content, setContent] = useState<any>(DEFAULT_CONTENT);
   const [globalParams, setGlobalParams] = useState<any>({});
 
   useEffect(() => {
@@ -159,7 +161,7 @@ export default function ContenuAccueilPage() {
   };
 
   const updateSection = (section: string, field: string, value: string) => {
-    setContent(prev => ({
+    setContent((prev: any) => ({
       ...prev,
       [section]: {
         ...(prev as any)[section],
@@ -169,7 +171,7 @@ export default function ContenuAccueilPage() {
   };
 
   const addPartner = () => {
-    setContent(prev => ({
+    setContent((prev: any) => ({
       ...prev,
       partners: {
         ...prev.partners,
@@ -179,7 +181,7 @@ export default function ContenuAccueilPage() {
   };
 
   const removePartner = (id: string) => {
-    setContent(prev => ({
+    setContent((prev: any) => ({
       ...prev,
       partners: {
         ...prev.partners,
@@ -189,7 +191,7 @@ export default function ContenuAccueilPage() {
   };
 
   const updatePartner = (id: string, field: string, value: string) => {
-    setContent(prev => ({
+    setContent((prev: any) => ({
       ...prev,
       partners: {
         ...prev.partners,
@@ -199,28 +201,28 @@ export default function ContenuAccueilPage() {
   };
 
   const addSlide = () => {
-    setContent(prev => ({
+    setContent((prev: any) => ({
       ...prev,
       hero: [...prev.hero, { id: Date.now().toString(), image: '', title: '', subtitle: '', cta: '', href: '' }]
     }));
   };
 
   const removeSlide = (id: string) => {
-    setContent(prev => ({
+    setContent((prev: any) => ({
       ...prev,
       hero: prev.hero.filter((s: any) => s.id !== id)
     }));
   };
 
   const updateSlide = (id: string, field: string, value: string) => {
-    setContent(prev => ({
+    setContent((prev: any) => ({
       ...prev,
       hero: prev.hero.map((s: any) => s.id === id ? { ...s, [field]: value } : s)
     }));
   };
 
   const addJoinButton = () => {
-    setContent(prev => ({
+    setContent((prev: any) => ({
       ...prev,
       joinUs: {
         ...prev.joinUs,
@@ -230,7 +232,7 @@ export default function ContenuAccueilPage() {
   };
 
   const removeJoinButton = (id: string) => {
-    setContent(prev => ({
+    setContent((prev: any) => ({
       ...prev,
       joinUs: {
         ...prev.joinUs,
@@ -240,7 +242,7 @@ export default function ContenuAccueilPage() {
   };
 
   const updateJoinButton = (id: string, field: string, value: string) => {
-    setContent(prev => ({
+    setContent((prev: any) => ({
       ...prev,
       joinUs: {
         ...prev.joinUs,
@@ -250,7 +252,7 @@ export default function ContenuAccueilPage() {
   };
 
   const updateStat = (id: string, field: string, value: string) => {
-    setContent(prev => ({
+    setContent((prev: any) => ({
       ...prev,
       stats: (prev.stats || DEFAULT_CONTENT.stats).map((s: any) => s.id === id ? { ...s, [field]: value } : s)
     }));
@@ -285,6 +287,9 @@ export default function ContenuAccueilPage() {
         </button>
         <button type="button" onClick={() => setActiveTab('partners')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'partners' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
           Partenaires
+        </button>
+        <button type="button" onClick={() => setActiveTab('products')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'products' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
+          Produits (Cartes)
         </button>
         <button type="button" onClick={() => setActiveTab('join')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'join' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
           Rejoignez-nous
@@ -338,7 +343,7 @@ export default function ContenuAccueilPage() {
                           <label className="block text-sm font-medium text-gray-700 mb-1">Titre principal</label>
                           <input 
                             type="text" 
-                            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+                            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
                             value={slide.title}
                             onChange={(e) => updateSlide(slide.id, 'title', e.target.value)}
                             placeholder="Ex: Cultivons la prospérité"
@@ -349,7 +354,7 @@ export default function ContenuAccueilPage() {
                           <label className="block text-sm font-medium text-gray-700 mb-1">Sous-titre (Optionnel)</label>
                           <textarea 
                             rows={2}
-                            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+                            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
                             value={slide.subtitle}
                             onChange={(e) => updateSlide(slide.id, 'subtitle', e.target.value)}
                             placeholder="Texte descriptif affiché sous le titre..."
@@ -361,7 +366,7 @@ export default function ContenuAccueilPage() {
                             <label className="block text-sm font-medium text-gray-700 mb-1">Texte du bouton CTA</label>
                             <input 
                               type="text" 
-                              className="w-full border-gray-300 rounded-md shadow-sm text-sm"
+                              className="w-full border-gray-300 rounded-md shadow-sm text-sm border bg-white px-3 py-2"
                               value={slide.cta}
                               onChange={(e) => updateSlide(slide.id, 'cta', e.target.value)}
                             />
@@ -370,7 +375,7 @@ export default function ContenuAccueilPage() {
                             <label className="block text-sm font-medium text-gray-700 mb-1">Lien du bouton</label>
                             <input 
                               type="text" 
-                              className="w-full border-gray-300 rounded-md shadow-sm text-sm"
+                              className="w-full border-gray-300 rounded-md shadow-sm text-sm border bg-white px-3 py-2"
                               value={slide.href}
                               onChange={(e) => updateSlide(slide.id, 'href', e.target.value)}
                             />
@@ -394,15 +399,15 @@ export default function ContenuAccueilPage() {
                 <h3 className="font-bold text-gray-800">Section Atouts (Pourquoi SBF ?)</h3>
                 <div>
                   <label className="block text-xs font-medium text-gray-500">Texte de fond animé</label>
-                  <input type="text" className="w-full border-gray-300 rounded-md" value={content.features.backgroundText} onChange={e => updateSection('features', 'backgroundText', e.target.value)} />
+                  <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.features.backgroundText} onChange={e => updateSection('features', 'backgroundText', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-gray-500">Titre</label>
-                  <input type="text" className="w-full border-gray-300 rounded-md" value={content.features.title} onChange={e => updateSection('features', 'title', e.target.value)} />
+                  <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.features.title} onChange={e => updateSection('features', 'title', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-gray-500">Sous-titre</label>
-                  <input type="text" className="w-full border-gray-300 rounded-md" value={content.features.subtitle} onChange={e => updateSection('features', 'subtitle', e.target.value)} />
+                  <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.features.subtitle} onChange={e => updateSection('features', 'subtitle', e.target.value)} />
                 </div>
               </div>
 
@@ -410,15 +415,15 @@ export default function ContenuAccueilPage() {
                 <h3 className="font-bold text-gray-800">Section Nos Produits</h3>
                 <div>
                   <label className="block text-xs font-medium text-gray-500">Texte de fond animé</label>
-                  <input type="text" className="w-full border-gray-300 rounded-md" value={content.productsPreview.backgroundText} onChange={e => updateSection('productsPreview', 'backgroundText', e.target.value)} />
+                  <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.productsPreview.backgroundText} onChange={e => updateSection('productsPreview', 'backgroundText', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-gray-500">Titre</label>
-                  <input type="text" className="w-full border-gray-300 rounded-md" value={content.productsPreview.title} onChange={e => updateSection('productsPreview', 'title', e.target.value)} />
+                  <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.productsPreview.title} onChange={e => updateSection('productsPreview', 'title', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-gray-500">Sous-titre</label>
-                  <input type="text" className="w-full border-gray-300 rounded-md" value={content.productsPreview.subtitle} onChange={e => updateSection('productsPreview', 'subtitle', e.target.value)} />
+                  <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.productsPreview.subtitle} onChange={e => updateSection('productsPreview', 'subtitle', e.target.value)} />
                 </div>
               </div>
 
@@ -426,15 +431,15 @@ export default function ContenuAccueilPage() {
                 <h3 className="font-bold text-gray-800">Section Actualités</h3>
                 <div>
                   <label className="block text-xs font-medium text-gray-500">Texte de fond animé</label>
-                  <input type="text" className="w-full border-gray-300 rounded-md" value={content.newsPreview.backgroundText} onChange={e => updateSection('newsPreview', 'backgroundText', e.target.value)} />
+                  <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.newsPreview.backgroundText} onChange={e => updateSection('newsPreview', 'backgroundText', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-gray-500">Titre</label>
-                  <input type="text" className="w-full border-gray-300 rounded-md" value={content.newsPreview.title} onChange={e => updateSection('newsPreview', 'title', e.target.value)} />
+                  <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.newsPreview.title} onChange={e => updateSection('newsPreview', 'title', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-gray-500">Sous-titre</label>
-                  <input type="text" className="w-full border-gray-300 rounded-md" value={content.newsPreview.subtitle} onChange={e => updateSection('newsPreview', 'subtitle', e.target.value)} />
+                  <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.newsPreview.subtitle} onChange={e => updateSection('newsPreview', 'subtitle', e.target.value)} />
                 </div>
               </div>
 
@@ -442,11 +447,11 @@ export default function ContenuAccueilPage() {
                 <h3 className="font-bold text-gray-800">Section Témoignages</h3>
                 <div>
                   <label className="block text-xs font-medium text-gray-500">Titre</label>
-                  <input type="text" className="w-full border-gray-300 rounded-md" value={content.testimonials.title} onChange={e => updateSection('testimonials', 'title', e.target.value)} />
+                  <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.testimonials.title} onChange={e => updateSection('testimonials', 'title', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-gray-500">Sous-titre</label>
-                  <input type="text" className="w-full border-gray-300 rounded-md" value={content.testimonials.subtitle} onChange={e => updateSection('testimonials', 'subtitle', e.target.value)} />
+                  <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.testimonials.subtitle} onChange={e => updateSection('testimonials', 'subtitle', e.target.value)} />
                 </div>
               </div>
             </div>
@@ -467,15 +472,15 @@ export default function ContenuAccueilPage() {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Texte de fond (filigrane)</label>
-                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md" value={content.missionVision.backgroundText} onChange={e => updateSection('missionVision', 'backgroundText', e.target.value)} />
+                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.missionVision.backgroundText} onChange={e => updateSection('missionVision', 'backgroundText', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Titre principal</label>
-                  <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md" value={content.missionVision.title} onChange={e => updateSection('missionVision', 'title', e.target.value)} />
+                  <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.missionVision.title} onChange={e => updateSection('missionVision', 'title', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Texte du bouton</label>
-                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md" value={content.missionVision.buttonText} onChange={e => updateSection('missionVision', 'buttonText', e.target.value)} />
+                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.missionVision.buttonText} onChange={e => updateSection('missionVision', 'buttonText', e.target.value)} />
                 </div>
               </div>
             </div>
@@ -496,15 +501,15 @@ export default function ContenuAccueilPage() {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Message (Citation)</label>
-                  <textarea rows={6} className="w-full mt-1 border-gray-300 rounded-md" value={content.dgQuote.quote} onChange={e => updateSection('dgQuote', 'quote', e.target.value)} />
+                  <textarea rows={6} className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.dgQuote.quote} onChange={e => updateSection('dgQuote', 'quote', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Nom et Prénom(s)</label>
-                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md" value={content.dgQuote.author} onChange={e => updateSection('dgQuote', 'author', e.target.value)} />
+                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.dgQuote.author} onChange={e => updateSection('dgQuote', 'author', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Titre du poste</label>
-                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md" value={content.dgQuote.role} onChange={e => updateSection('dgQuote', 'role', e.target.value)} />
+                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.dgQuote.role} onChange={e => updateSection('dgQuote', 'role', e.target.value)} />
                 </div>
               </div>
             </div>
@@ -525,11 +530,11 @@ export default function ContenuAccueilPage() {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Titre</label>
-                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md" value={content.joinUs.title} onChange={e => updateSection('joinUs', 'title', e.target.value)} />
+                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.joinUs.title} onChange={e => updateSection('joinUs', 'title', e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Sous-titre / Texte</label>
-                  <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md" value={content.joinUs.text} onChange={e => updateSection('joinUs', 'text', e.target.value)} />
+                  <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2" value={content.joinUs.text} onChange={e => updateSection('joinUs', 'text', e.target.value)} />
                 </div>
               </div>
             </div>
@@ -563,7 +568,7 @@ export default function ContenuAccueilPage() {
                           <label className="block text-xs font-medium text-gray-500">Texte du bouton</label>
                           <input 
                             type="text" 
-                            className="w-full mt-1 border-gray-300 rounded-md text-sm"
+                            className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
                             value={btn.text}
                             onChange={(e) => updateJoinButton(btn.id, 'text', e.target.value)}
                           />
@@ -572,7 +577,7 @@ export default function ContenuAccueilPage() {
                           <label className="block text-xs font-medium text-gray-500">Lien</label>
                           <input 
                             type="text" 
-                            className="w-full mt-1 border-gray-300 rounded-md text-sm"
+                            className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
                             value={btn.link}
                             onChange={(e) => updateJoinButton(btn.id, 'link', e.target.value)}
                           />
@@ -598,7 +603,7 @@ export default function ContenuAccueilPage() {
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Titre de la section</label>
-              <input type="text" className="w-full border-gray-300 rounded-md max-w-md" value={content.partners.title} onChange={e => updateSection('partners', 'title', e.target.value)} />
+              <input type="text" className="w-full border-gray-300 rounded-md max-w-md border bg-white px-3 py-2" value={content.partners.title} onChange={e => updateSection('partners', 'title', e.target.value)} />
             </div>
 
             {content.partners.items.length === 0 ? (
@@ -628,7 +633,7 @@ export default function ContenuAccueilPage() {
                       <label className="block text-xs font-medium text-gray-500">Nom du partenaire</label>
                       <input 
                         type="text" 
-                        className="w-full mt-1 border-gray-300 rounded-md text-sm"
+                        className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
                         value={partner.name}
                         onChange={(e) => updatePartner(partner.id, 'name', e.target.value)}
                       />
@@ -637,6 +642,86 @@ export default function ContenuAccueilPage() {
                 ))}
               </div>
             )}
+          </div>
+        )}
+
+        {activeTab === 'products' && (
+          <div className="space-y-8">
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold text-[#111e36] border-b pb-2">Carte d'aide (Contact)</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 p-4 rounded-lg border">
+                <div>
+                  <ImageUpload 
+                    label="Image de fond (Carte bleue)"
+                    value={content.productsPreview.helpCard?.image || ''} 
+                    onChange={(url) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, helpCard: { ...prev.productsPreview.helpCard, image: url } } }))} 
+                  />
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-500">Titre</label>
+                    <input type="text" className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={content.productsPreview.helpCard?.title || ''} onChange={(e) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, helpCard: { ...prev.productsPreview.helpCard, title: e.target.value } } }))} />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-500">Description</label>
+                    <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={content.productsPreview.helpCard?.description || ''} onChange={(e) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, helpCard: { ...prev.productsPreview.helpCard, description: e.target.value } } }))} />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-medium text-gray-500">Texte Bouton</label>
+                      <input type="text" className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={content.productsPreview.helpCard?.buttonText || ''} onChange={(e) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, helpCard: { ...prev.productsPreview.helpCard, buttonText: e.target.value } } }))} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-500">Lien Bouton</label>
+                      <input type="text" className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={content.productsPreview.helpCard?.buttonLink || ''} onChange={(e) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, helpCard: { ...prev.productsPreview.helpCard, buttonLink: e.target.value } } }))} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold text-[#111e36] border-b pb-2">Les 5 Cartes Produits</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {(content.productsPreview.items || DEFAULT_CONTENT.productsPreview.items).map((item: any, index: number) => (
+                  <div key={item.id} className="p-4 border border-gray-200 rounded-lg bg-gray-50 relative">
+                    <div className="mb-4">
+                      <ImageUpload 
+                        label={`Image (${item.title})`}
+                        value={item.image} 
+                        onChange={(url) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, items: prev.productsPreview.items.map((i: any) => i.id === item.id ? { ...i, image: url } : i) } }))} 
+                      />
+                    </div>
+                    <div className="space-y-3">
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500">Titre</label>
+                        <input type="text" className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={item.title} onChange={(e) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, items: prev.productsPreview.items.map((i: any) => i.id === item.id ? { ...i, title: e.target.value } : i) } }))} />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500">Description</label>
+                        <textarea rows={2} className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={item.description} onChange={(e) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, items: prev.productsPreview.items.map((i: any) => i.id === item.id ? { ...i, description: e.target.value } : i) } }))} />
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-500">Lien</label>
+                          <input type="text" className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={item.link} onChange={(e) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, items: prev.productsPreview.items.map((i: any) => i.id === item.id ? { ...i, link: e.target.value } : i) } }))} />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-500">Icône</label>
+                          <select className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={item.icon || 'Wallet'} onChange={(e) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, items: prev.productsPreview.items.map((i: any) => i.id === item.id ? { ...i, icon: e.target.value } : i) } }))}>
+                            <option value="Wallet">Portefeuille (Crédit)</option>
+                            <option value="Landmark">Banque (Épargne)</option>
+                            <option value="Handshake">Poignée (Appui)</option>
+                            <option value="Lightbulb">Ampoule (Conseil)</option>
+                            <option value="GraduationCap">Diplôme (Formation)</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
@@ -651,7 +736,7 @@ export default function ContenuAccueilPage() {
                     <label className="block text-xs font-medium text-gray-500">Valeur (Chiffre)</label>
                     <input 
                       type="text" 
-                      className="w-full mt-1 border-gray-300 rounded-md text-sm"
+                      className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
                       value={stat.value}
                       onChange={(e) => updateStat(stat.id, 'value', e.target.value)}
                     />
@@ -660,7 +745,7 @@ export default function ContenuAccueilPage() {
                     <label className="block text-xs font-medium text-gray-500">Suffixe (ex: +, %)</label>
                     <input 
                       type="text" 
-                      className="w-full mt-1 border-gray-300 rounded-md text-sm"
+                      className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
                       value={stat.suffix}
                       onChange={(e) => updateStat(stat.id, 'suffix', e.target.value)}
                     />
@@ -669,7 +754,7 @@ export default function ContenuAccueilPage() {
                     <label className="block text-xs font-medium text-gray-500">Libellé (Texte)</label>
                     <input 
                       type="text" 
-                      className="w-full mt-1 border-gray-300 rounded-md text-sm"
+                      className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
                       value={stat.label}
                       onChange={(e) => updateStat(stat.id, 'label', e.target.value)}
                     />

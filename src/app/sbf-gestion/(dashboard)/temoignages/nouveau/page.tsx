@@ -103,15 +103,15 @@ export default function TemoignageFormPage({ params }: { params?: { id: string }
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Nom du client *</label>
-            <input required name="nom" value={formData.nom} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5]" placeholder="Ex: Jean DUPONT" />
+            <input required name="nom" value={formData.nom} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] border bg-white px-3 py-2" placeholder="Ex: Jean DUPONT" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Profession / Activité</label>
-            <input name="role" value={formData.role} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5]" placeholder="Ex: Commerçant au marché Dantokpa" />
+            <input name="role" value={formData.role} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] border bg-white px-3 py-2" placeholder="Ex: Commerçant au marché Dantokpa" />
           </div>
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">Le témoignage *</label>
-            <textarea required name="texte" rows={4} value={formData.texte} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5]" placeholder="Le message du client..." />
+            <textarea required name="texte" rows={4} value={formData.texte} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] border bg-white px-3 py-2" placeholder="Le message du client..." />
           </div>
           <div className="md:col-span-2">
             <ImageUpload 
@@ -127,7 +127,7 @@ export default function TemoignageFormPage({ params }: { params?: { id: string }
               type="checkbox"
               checked={formData.estAffiche}
               onChange={handleChange}
-              className="h-4 w-4 text-[#0991b5] focus:ring-[#0991b5] border-gray-300 rounded"
+              className="h-4 w-4 text-[#0991b5] focus:ring-[#0991b5] border-gray-300 rounded border bg-white px-3 py-2"
             />
             <label htmlFor="estAffiche" className="ml-2 block text-sm text-gray-900 font-medium">
               Afficher ce témoignage publiquement sur le site

@@ -102,11 +102,11 @@ export default function ProduitAutreFormPage({ params }: { params?: { id: string
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Nom du produit *</label>
-            <input required name="nom" value={formData.nom} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5]" placeholder="Ex: Dépôt à Terme (DAT)" />
+            <input required name="nom" value={formData.nom} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] border bg-white px-3 py-2" placeholder="Ex: Dépôt à Terme (DAT)" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Type de produit *</label>
-            <select name="type" value={formData.type} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5]">
+            <select name="type" value={formData.type} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] border bg-white px-3 py-2">
               <option value="Epargne">Épargne</option>
               <option value="Appui">Appui</option>
               <option value="Conseil">Conseil</option>
@@ -115,11 +115,11 @@ export default function ProduitAutreFormPage({ params }: { params?: { id: string
           </div>
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">Description courte *</label>
-            <textarea required name="description" rows={2} value={formData.description} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5]" placeholder="Résumé de l'offre" />
+            <textarea required name="description" rows={2} value={formData.description} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] border bg-white px-3 py-2" placeholder="Résumé de l'offre" />
           </div>
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">Contenu détaillé *</label>
-            <textarea required name="contenuDetaille" rows={6} value={formData.contenuDetaille} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5]" placeholder="Explication détaillée des avantages, fonctionnement..." />
+            <textarea required name="contenuDetaille" rows={6} value={formData.contenuDetaille} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] border bg-white px-3 py-2" placeholder="Explication détaillée des avantages, fonctionnement..." />
           </div>
           <div className="md:col-span-2">
             <ImageUpload 
