@@ -70,9 +70,11 @@ export function MissionVision({ mission, vision, content }: MissionVisionProps) 
             </div>
           </div>
 
-          <Button asChild variant="primary" size="lg">
-            <Link href={content?.buttonLink || "/a-propos"}>{content?.buttonText || "En savoir plus sur nous"}</Link>
-          </Button>
+          <Link href={content?.buttonLink || "/a-propos"}>
+            <Button variant="primary" size="lg">
+              {content?.buttonText || "En savoir plus sur nous"}
+            </Button>
+          </Link>
         </div>
 
         <div className="relative rounded-none overflow-hidden shadow-lg reveal-left bg-surface-muted">

@@ -69,8 +69,11 @@ const DEFAULT_CONTENT = {
     image: "/images/home/join-us.jpg",
     title: "Rejoignez Salem Braha Finance",
     text: "Découvrez nos offres d'emploi",
-    buttonText: "Voir les offres",
-    buttonLink: "/carrieres"
+    buttons: [
+      { id: "1", text: "Demande de crédit", link: "/contacts" },
+      { id: "2", text: "Compte d'épargne", link: "/produits" },
+      { id: "3", text: "Nos offres d'emploi", link: "/carrieres" }
+    ]
   }
 };
 
@@ -190,6 +193,36 @@ export default function ContenuAccueilPage() {
     setContent(prev => ({
       ...prev,
       hero: prev.hero.map((s: any) => s.id === id ? { ...s, [field]: value } : s)
+    }));
+  };
+
+  const addJoinButton = () => {
+    setContent(prev => ({
+      ...prev,
+      joinUs: {
+        ...prev.joinUs,
+        buttons: [...(prev.joinUs.buttons || []), { id: Date.now().toString(), text: 'Nouveau Bouton', link: '#' }]
+      }
+    }));
+  };
+
+  const removeJoinButton = (id: string) => {
+    setContent(prev => ({
+      ...prev,
+      joinUs: {
+        ...prev.joinUs,
+        buttons: (prev.joinUs.buttons || []).filter((b: any) => b.id !== id)
+      }
+    }));
+  };
+
+  const updateJoinButton = (id: string, field: string, value: string) => {
+    setContent(prev => ({
+      ...prev,
+      joinUs: {
+        ...prev.joinUs,
+        buttons: (prev.joinUs.buttons || []).map((b: any) => b.id === id ? { ...b, [field]: value } : b)
+      }
     }));
   };
 
@@ -465,11 +498,57 @@ export default function ContenuAccueilPage() {
                   <label className="block text-sm font-medium text-gray-700">Sous-titre / Texte</label>
                   <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md" value={content.joinUs.text} onChange={e => updateSection('joinUs', 'text', e.target.value)} />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Texte du bouton</label>
-                  <input type="text" className="w-full mt-1 border-gray-300 rounded-md" value={content.joinUs.buttonText} onChange={e => updateSection('joinUs', 'buttonText', e.target.value)} />
-                </div>
               </div>
+            </div>
+
+            <div className="space-y-4 pt-6 border-t">
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-medium text-gray-800">Boutons d'action</h3>
+                <Button type="button" onClick={addJoinButton} variant="outline" size="sm">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Ajouter un bouton
+                </Button>
+              </div>
+
+              {(!content.joinUs.buttons || content.joinUs.buttons.length === 0) ? (
+                <div className="text-center py-6 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                  <p className="text-gray-500">Aucun bouton. Ajoutez-en un pour l'afficher dans la section.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {content.joinUs.buttons.map((btn: any, index: number) => (
+                    <div key={btn.id} className="p-4 border border-gray-200 rounded-lg bg-gray-50 relative">
+                      <button 
+                        type="button"
+                        onClick={() => removeJoinButton(btn.id)}
+                        className="absolute top-2 right-2 text-red-500 hover:text-red-700 bg-white p-1 rounded-md shadow-sm"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                      <div className="space-y-3 mt-4">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-500">Texte du bouton</label>
+                          <input 
+                            type="text" 
+                            className="w-full mt-1 border-gray-300 rounded-md text-sm"
+                            value={btn.text}
+                            onChange={(e) => updateJoinButton(btn.id, 'text', e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-500">Lien</label>
+                          <input 
+                            type="text" 
+                            className="w-full mt-1 border-gray-300 rounded-md text-sm"
+                            value={btn.link}
+                            onChange={(e) => updateJoinButton(btn.id, 'link', e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}

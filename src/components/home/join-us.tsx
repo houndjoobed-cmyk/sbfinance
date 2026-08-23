@@ -35,18 +35,21 @@ export function JoinUs({ content }: { content?: any }) {
         </h2>
 
         {/* Buttons Row */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center w-full max-w-4xl reveal-up delay-200">
-          {content?.buttonText && content?.buttonLink ? (
-            <Button
-              asChild
-              variant="default"
-              size="lg"
-              className="bg-primary hover:bg-primary-dark text-white border-none min-w-55 py-6 font-semibold uppercase tracking-wide group"
-            >
-              <Link href={content.buttonLink}>
-                {content.buttonText}
-              </Link>
-            </Button>
+        <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 justify-center w-full max-w-4xl reveal-up delay-200">
+          {content?.buttons && content.buttons.length > 0 ? (
+            content.buttons.map((btn: any, index: number) => (
+              <Button
+                key={index}
+                asChild
+                variant="default"
+                size="lg"
+                className="bg-primary hover:bg-primary-dark text-white border-none min-w-55 py-6 font-semibold uppercase tracking-wide group"
+              >
+                <Link href={btn.link || "#"}>
+                  {btn.text}
+                </Link>
+              </Button>
+            ))
           ) : (
             <>
               <Button
@@ -55,7 +58,7 @@ export function JoinUs({ content }: { content?: any }) {
                 size="lg"
                 className="bg-primary hover:bg-primary-dark text-white border-none min-w-55 py-6 font-semibold uppercase tracking-wide group"
               >
-                <Link href="/produits/credit">
+                <Link href="/contacts">
                   Demande de crédit
                 </Link>
               </Button>
@@ -66,7 +69,7 @@ export function JoinUs({ content }: { content?: any }) {
                 size="lg"
                 className="bg-primary hover:bg-primary-dark text-white border-none min-w-55 py-6 font-semibold uppercase tracking-wide group"
               >
-                <Link href="/produits/epargne">
+                <Link href="/produits">
                   Compte d'épargne
                 </Link>
               </Button>
