@@ -1,15 +1,20 @@
 import React from 'react';
 import Image from 'next/image';
 
-export function DgQuote() {
+export function DgQuote({ content }: { content?: any }) {
+  const image = content?.image || "/images/home/dg-new.png";
+  const quote = content?.quote || "Notre mission dépasse la simple gestion de l'argent ; nous protégeons vos efforts. Chez SBF, nous croyons que chaque trajectoire, qu'elle soit dans le secteur formel ou informel, mérite d'être sécurisée et valorisée. Bienvenue dans notre communauté de progrès.";
+  const author = content?.author || "Dr. Ahonon Houekin Augustine";
+  const role = content?.role || "Directrice Générale, Salem Braha Finance";
+
   return (
     <section className="w-full bg-white">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-stretch">
         {/* Photo DG — left side */}
         <div className="relative min-h-100 md:min-h-125 bg-gray-100">
           <Image
-            src="/images/home/dg.png"
-            alt="Dr. Ahonon Houekin Augustine — Directrice Générale de SBF"
+            src={image}
+            alt={author}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover object-top"
@@ -30,19 +35,15 @@ export function DgQuote() {
           </svg>
 
           <blockquote className="text-lg md:text-xl lg:text-2xl font-semibold text-on-surface leading-relaxed mb-8">
-            Notre mission dépasse la simple gestion de l&apos;argent&nbsp;; nous
-            protégeons vos efforts. Chez SBF, nous croyons que chaque
-            trajectoire, qu&apos;elle soit dans le secteur formel ou informel,
-            mérite d&apos;être sécurisée et valorisée. Bienvenue dans notre
-            communauté de progrès.
+            {quote}
           </blockquote>
 
           <div>
             <p className="text-primary font-bold text-lg">
-              Dr. Ahonon Houekin Augustine
+              {author}
             </p>
             <p className="text-on-surface-variant text-sm">
-              Directrice Générale, Salem Braha Finance
+              {role}
             </p>
           </div>
         </div>

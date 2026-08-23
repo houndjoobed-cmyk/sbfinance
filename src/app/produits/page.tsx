@@ -17,13 +17,17 @@ export const dynamic = 'force-dynamic';
 
 export default async function ProductsPage() {
   let allCredits: any[] = [];
+  let parametres = null;
   try {
+    parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } });
     allCredits = await prisma.produitCredit.findMany({
       orderBy: { nom: 'asc' }
     });
   } catch (error) {
     console.error("Database fetch error:", error);
   }
+  
+  const bgUrl = parametres?.banniereAPropos || '/images/BANNIERE.png';
 
   // Default hardcoded fallback in case DB is empty
   let creditCategories = [
@@ -76,10 +80,13 @@ export default async function ProductsPage() {
   return (
     <>
       <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
-        <div className="absolute inset-0 bg-[url('/images/banniere-interne.png')] bg-cover bg-center bg-no-repeat z-0"></div>
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url('${bgUrl}')` }}></div>
+        <div className="absolute inset-0 bg-primary-dark/70 z-0"></div>
         <div className="text-center max-w-3xl mx-auto relative z-10 reveal-up">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg"><TypingAnimation text="Nos Produits & Services" typeSpeed={50} /></h1>
-          <p className="text-xl text-white drop-shadow-md">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+            <TypingAnimation text="Nos Produits & Services" typeSpeed={50} />
+          </h1>
+          <p className="text-xl text-white drop-shadow-md font-medium">
             Des solutions financières conçues pour répondre à vos besoins spécifiques et accompagner votre croissance.
           </p>
         </div>

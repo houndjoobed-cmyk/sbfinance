@@ -44,16 +44,19 @@ export default async function AboutPage() {
     <>
       {/* Page Header */}
       <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-          style={{ backgroundImage: `url('${parametres.banniereAPropos || '/images/banniere-interne.png'}')` }}
+          style={{ backgroundImage: `url('${parametres.banniereAPropos || '/images/BANNIERE.png'}')` }}
         ></div>
-        
+
+        {/* Overlay bleu pour faire ressortir le texte tout en gardant l'identité visuelle */}
+        <div className="absolute inset-0 bg-primary-dark/70 z-0"></div>
+
         <div className="text-center max-w-3xl mx-auto relative z-10 reveal-up">
-          <h1 className="text-4xl md:text-5xl lg:text-(--font-size-hero) font-bold text-white mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-(--font-size-hero) font-bold text-white mb-6 drop-shadow-lg">
             <TypingAnimation text="Qui sommes-nous" typeSpeed={50} />
           </h1>
-          <p className="text-xl text-primary-light">
+          <p className="text-xl text-white drop-shadow-md font-medium">
             Une institution financière engagée pour le développement socio-économique du Bénin.
           </p>
         </div>
@@ -66,7 +69,7 @@ export default async function AboutPage() {
             <h2 className="text-3xl font-bold text-primary-dark mb-6"><TypingAnimation text="Notre Histoire" typeSpeed={50} /></h2>
             <div className="prose text-on-surface-variant whitespace-pre-line">
               {parametres.histoireTexte || (
-                `Salem Braha Finance (SBF) est une institution de microfinance créée avec la volonté de proposer des solutions de financement adaptées aux réalités locales. Forte de plus de 15 années d'expérience, SBF a su développer une expertise pointue dans l'accompagnement des populations béninoises.\n\nAgréée sous le N° A.20.0126.L et dotée d'un capital social de 1,5 Milliard FCFA, notre institution se positionne aujourd'hui comme un acteur incontournable de l'inclusion financière au Bénin, avec un accent particulier mis sur l'accompagnement des femmes en milieu urbain et rural.`
+                `Salem Braha Finance (SBF) est une institution de microfinance créée avec la volonté de proposer des solutions de financement adaptées aux réalités locales. Forte de plus de 15 années d'expérience, SBF a su développer une expertise pointue dans l'accompagnement des populations béninoises.\n\nAgréée sous le N° A.20.0126.L et dotée d'un capital social de 138 Millions FCFA, notre institution se positionne aujourd'hui comme un acteur incontournable de l'inclusion financière au Bénin, avec un accent particulier mis sur l'accompagnement des femmes en milieu urbain et rural.`
               )}
             </div>
           </div>
@@ -102,12 +105,12 @@ export default async function AboutPage() {
       {/* Mission / Vision Bento Grid */}
       <Section variant="light">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 reveal-up">
-          
+
           <div className="md:col-span-7 bg-primary text-white p-8 md:p-12 shadow-(--shadow-card)">
             <Users className="h-10 w-10 text-primary-light mb-6" />
             <h2 className="text-3xl font-bold mb-4"><TypingAnimation text="Notre Mission" typeSpeed={50} /></h2>
             <p className="text-lg text-primary-light leading-relaxed">
-              {parametres.mission}
+              {parametres.mission || "Contribuer à l'amélioration des conditions de vie des personnes à faible revenu, notamment les femmes des zones urbaines et rurales, via des services financiers et non financiers adaptés et durables."}
             </p>
           </div>
 
@@ -115,7 +118,7 @@ export default async function AboutPage() {
             <TrendingUp className="h-10 w-10 text-accent mb-6" />
             <h2 className="text-2xl font-bold text-primary-dark mb-4"><TypingAnimation text="Notre Vision" typeSpeed={50} /></h2>
             <p className="text-on-surface-variant leading-relaxed">
-              {parametres.vision}
+              {parametres.vision || "Être une institution de microfinance leader dans la finance inclusive, responsable et environnementale au Bénin à l'horizon 2035."}
             </p>
           </div>
 
@@ -130,8 +133,8 @@ export default async function AboutPage() {
             <div className="w-20 h-20 mx-auto bg-surface-muted rounded-full flex items-center justify-center mb-6">
               <Users className="h-8 w-8 text-primary" />
             </div>
-            <h3 className="text-xl font-bold text-primary-dark mb-3">Respect</h3>
-            <p className="text-on-surface-variant">Considération et écoute mutuelle dans toutes nos interactions avec nos clients et partenaires.</p>
+            <h3 className="text-xl font-bold text-primary-dark mb-3">Discipline</h3>
+            <p className="text-on-surface-variant">Rigueur et constance dans l'application de nos règles et procédures pour garantir un service d'excellence.</p>
           </div>
           <div className="reveal-up delay-200">
             <div className="w-20 h-20 mx-auto bg-surface-muted rounded-full flex items-center justify-center mb-6">
@@ -158,10 +161,10 @@ export default async function AboutPage() {
             {parametres.motDuDgImage && (
               <div className="lg:col-span-4 reveal-left">
                 <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto rounded-full overflow-hidden shadow-xl border-4 border-white">
-                  <Image 
-                    src={parametres.motDuDgImage} 
-                    alt="Mot du Directeur Général" 
-                    fill 
+                  <Image
+                    src={parametres.motDuDgImage}
+                    alt="Mot du Directeur Général"
+                    fill
                     className="object-cover"
                   />
                 </div>

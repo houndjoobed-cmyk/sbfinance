@@ -131,6 +131,16 @@ export function Footer() {
                   Contacts
                 </Link>
               </li>
+              <li>
+                <Link href="/carrieres" className="text-primary-light hover:text-white transition-colors text-sm">
+                  Carrières
+                </Link>
+              </li>
+              <li>
+                <Link href="/mobilis" className="text-primary-light hover:text-white transition-colors text-sm">
+                  mobilis
+                </Link>
+              </li>
             </ul>
           </div>
 

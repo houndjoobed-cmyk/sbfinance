@@ -65,6 +65,7 @@ export async function POST(request: Request) {
         contenu: data.contenu,
         image: data.image || null,
         categorie: data.categorie,
+        lienExterne: data.lienExterne || null,
         estPublie: data.estPublie ?? true,
       }
     });

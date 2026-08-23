@@ -57,6 +57,7 @@ export async function PUT(request: Request, props: { params: Promise<{ id: strin
         contenu: data.contenu,
         image: data.image,
         categorie: data.categorie,
+        lienExterne: data.lienExterne,
         estPublie: data.estPublie,
       }
     });

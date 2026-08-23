@@ -24,10 +24,7 @@ export default function ParametresPage() {
     adresseSiege: '',
     histoireTexte: '',
     gouvernanceTexte: '',
-    banniereAPropos: '',
-    motDuDg: '',
-    motDuDgImage: '',
-    heroCarousel: [] as any[]
+    banniereAPropos: ''
   });
 
   useEffect(() => {
@@ -48,10 +45,7 @@ export default function ParametresPage() {
             valeurs: Array.isArray(data.valeurs) ? data.valeurs.join('\n') : '',
             histoireTexte: data.histoireTexte || '',
             gouvernanceTexte: data.gouvernanceTexte || '',
-            banniereAPropos: data.banniereAPropos || '',
-            motDuDg: data.motDuDg || '',
-            motDuDgImage: data.motDuDgImage || '',
-            heroCarousel: Array.isArray(data.heroCarousel) ? data.heroCarousel : []
+            banniereAPropos: data.banniereAPropos || ''
           });
         }
       }
@@ -101,26 +95,7 @@ export default function ParametresPage() {
     setFormData(prev => ({ ...prev, [name]: url }));
   };
 
-  const addSlide = () => {
-    setFormData(prev => ({
-      ...prev,
-      heroCarousel: [...prev.heroCarousel, { id: Date.now().toString(), image: '', title: '', subtitle: '', link: '' }]
-    }));
-  };
 
-  const removeSlide = (id: string) => {
-    setFormData(prev => ({
-      ...prev,
-      heroCarousel: prev.heroCarousel.filter(s => s.id !== id)
-    }));
-  };
-
-  const updateSlide = (id: string, field: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      heroCarousel: prev.heroCarousel.map(s => s.id === id ? { ...s, [field]: value } : s)
-    }));
-  };
 
   if (loading) {
     return <div className="flex justify-center py-20"><Loader2 className="w-8 h-8 animate-spin text-[#0991b5]" /></div>;
@@ -156,12 +131,7 @@ export default function ParametresPage() {
         >
           Images & Bannières
         </button>
-        <button 
-          onClick={() => setActiveTab('carousel')}
-          className={`pb-4 font-medium text-sm transition-colors ${activeTab === 'carousel' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}
-        >
-          Carrousel Accueil
-        </button>
+
       </div>
 
       <form onSubmit={handleSave} className="space-y-8 bg-white p-6 rounded-lg shadow-sm border border-gray-100">
@@ -308,17 +278,7 @@ export default function ParametresPage() {
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Mot du Directeur Général (Optionnel)</label>
-              <textarea 
-                name="motDuDg" 
-                rows={6} 
-                className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
-                value={formData.motDuDg}
-                onChange={handleChange}
-                placeholder="Le message du directeur..."
-              />
-            </div>
+
           </div>
         )}
 
@@ -337,86 +297,12 @@ export default function ParametresPage() {
                 <p className="mt-2 text-sm text-gray-500">Image recommandée : 1920x600px. S'affiche en haut de la page "Qui sommes-nous".</p>
               </div>
               
-              <div>
-                <ImageUpload 
-                  label="Photo du Directeur Général (Optionnel)"
-                  value={formData.motDuDgImage} 
-                  onChange={(url) => handleImageChange('motDuDgImage', url)} 
-                />
-                <p className="mt-2 text-sm text-gray-500">Image recommandée : Format carré ou portrait.</p>
-              </div>
+
             </div>
           </div>
         )}
 
-        {/* ONGLET: CAROUSEL */}
-        {activeTab === 'carousel' && (
-          <div className="space-y-8">
-            <div className="flex justify-between items-center border-b pb-2">
-              <h2 className="text-xl font-semibold text-[#111e36]">Images de la Page d'Accueil</h2>
-              <Button type="button" onClick={addSlide} variant="outline" size="sm">
-                <Plus className="w-4 h-4 mr-2" />
-                Ajouter une diapositive
-              </Button>
-            </div>
 
-            {formData.heroCarousel.length === 0 ? (
-              <div className="text-center py-10 bg-gray-50 rounded-lg border border-dashed border-gray-300">
-                <p className="text-gray-500">Aucune image dans le carrousel. Ajoutez-en une pour commencer.</p>
-              </div>
-            ) : (
-              <div className="space-y-6">
-                {formData.heroCarousel.map((slide, index) => (
-                  <div key={slide.id} className="p-4 border border-gray-200 rounded-lg bg-gray-50 relative">
-                    <button 
-                      type="button"
-                      onClick={() => removeSlide(slide.id)}
-                      className="absolute top-4 right-4 text-red-500 hover:text-red-700 bg-white p-2 rounded-md shadow-sm"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                    
-                    <h3 className="font-medium text-gray-900 mb-4">Diapositive #{index + 1}</h3>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <ImageUpload 
-                          label="Image de fond"
-                          value={slide.image} 
-                          onChange={(url) => updateSlide(slide.id, 'image', url)} 
-                        />
-                      </div>
-                      
-                      <div className="space-y-4">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Titre principal</label>
-                          <input 
-                            type="text" 
-                            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
-                            value={slide.title}
-                            onChange={(e) => updateSlide(slide.id, 'title', e.target.value)}
-                            placeholder="Ex: Cultivons la prospérité"
-                          />
-                        </div>
-                        
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Sous-titre (Optionnel)</label>
-                          <textarea 
-                            rows={3}
-                            className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
-                            value={slide.subtitle}
-                            onChange={(e) => updateSlide(slide.id, 'subtitle', e.target.value)}
-                            placeholder="Texte descriptif affiché sous le titre..."
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
 
         <div className="flex justify-end pt-4">
           <Button type="submit" variant="accent" disabled={saving}>

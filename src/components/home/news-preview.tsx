@@ -7,50 +7,37 @@ import Link from 'next/link';
 import { TypingAnimation } from '@/components/ui/typing-animation';
 
 interface NewsPreviewProps {
-  news: Array<{
-    id: string;
-    titre: string;
-    slug: string;
-    extrait: string;
-    categorie: string;
-    createdAt: Date;
-    image: string | null;
-  }>;
+  news: any[];
+  content?: any;
 }
 
-export function NewsPreview({ news }: NewsPreviewProps) {
-
+export function NewsPreview({ news, content }: NewsPreviewProps) {
   return (
-    <Section variant="muted">
-      <div className="relative flex flex-col md:flex-row justify-between items-end mb-16 mt-10 reveal-up">
-        {/* Background Large Text */}
-        <div 
-          className="absolute top-1/2 left-0 -translate-y-1/2 w-full pointer-events-none -z-10 select-none overflow-hidden"
-          aria-hidden="true"
-        >
-          <div className="animate-marquee">
-            {[...Array(4)].map((_, i) => (
-              <span key={i} className="text-[100px] md:text-[160px] lg:text-[220px] font-black text-slate-200/40 dark:text-slate-800/10 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
-                Actualités
-              </span>
-            ))}
-          </div>
+    <Section variant="light" className="relative bg-surface-muted py-24">
+      {/* Background Large Text */}
+      <div
+        className="absolute top-1/2 left-0 -translate-y-1/2 w-full pointer-events-none z-0 select-none overflow-hidden"
+        aria-hidden="true"
+      >
+        <div className="animate-marquee">
+          {[...Array(4)].map((_, i) => (
+            <span key={i} className="text-[120px] md:text-[180px] font-black text-slate-200/50 dark:text-slate-800/20 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
+              {content?.backgroundText || 'BLOG'}
+            </span>
+          ))}
         </div>
-        
-        <div className="max-w-2xl relative z-10">
-          <h2 className="text-3xl md:text-5xl font-bold text-primary-dark mb-4">
-            <TypingAnimation text="Actualités Récentes" typeSpeed={50} />
-          </h2>
-          <p className="text-on-surface-variant text-sm tracking-[0.2em] uppercase font-semibold">
-            Restez informés de nos nouveautés
-          </p>
-        </div>
-        <Button asChild variant="outline" className="mt-6 md:mt-0 hidden sm:flex">
-          <Link href="/actualites">Toutes les actualités</Link>
-        </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="relative z-10 text-center max-w-3xl mx-auto mb-16 reveal-up">
+        <h2 className="text-3xl md:text-5xl font-bold text-primary-dark mb-4">
+          <TypingAnimation text={content?.title || "Restez informés"} typeSpeed={50} />
+        </h2>
+        <p className="text-on-surface-variant text-sm tracking-[0.2em] uppercase font-semibold mb-6">
+          {content?.subtitle || "Les dernières nouveautés SBF"}
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
         {news.map((item, index) => (
           <Card key={item.id} className={`flex flex-col h-full reveal-up delay-${(index + 1) * 100} group`}>
             {/* Image Placeholder */}
@@ -77,7 +64,9 @@ export function NewsPreview({ news }: NewsPreviewProps) {
             </CardContent>
             <CardFooter>
               <Link 
-                href={`/actualites/${item.slug}`}
+                href={item.lienExterne ? item.lienExterne : `/actualites/${item.slug}`}
+                target={item.lienExterne ? "_blank" : undefined}
+                rel={item.lienExterne ? "noopener noreferrer" : undefined}
                 className="inline-flex items-center text-accent font-medium hover:text-accent-hover transition-colors"
               >
                 Lire la suite
@@ -88,7 +77,7 @@ export function NewsPreview({ news }: NewsPreviewProps) {
         ))}
       </div>
       
-      <div className="mt-8 text-center sm:hidden">
+      <div className="mt-8 text-center sm:hidden relative z-10">
         <Button asChild variant="outline" className="w-full">
           <Link href="/actualites">Toutes les actualités</Link>
         </Button>

@@ -7,64 +7,43 @@ import { Button } from '@/components/ui/button';
 import { Calendar, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
+import prisma from "@/lib/prisma";
+
 export const metadata: Metadata = {
   title: "Actualités",
   description: "Suivez les dernières nouvelles, événements et conseils financiers de Salem Braha Finance.",
 };
 
-export default function NewsPage() {
-  const news = [
-    {
-      id: 1,
-      title: "Nouvelle agence à Tankpè pour mieux vous servir",
-      date: "15 Août 2026",
-      excerpt: "SBF continue son expansion avec l'ouverture d'une nouvelle agence à Tankpè, rapprochant nos services des populations.",
-      category: "Événement"
-    },
-    {
-      id: 2,
-      title: "Lancement du produit d'épargne 'Allodo'",
-      date: "02 Août 2026",
-      excerpt: "Découvrez 'Allodo', notre nouvelle solution d'épargne conçue spécifiquement pour sécuriser les revenus des commerçants.",
-      category: "Produit"
-    },
-    {
-      id: 3,
-      title: "Campagne d'éducation financière dans la zone rurale",
-      date: "20 Juillet 2026",
-      excerpt: "Nos équipes ont animé une série de formations sur la gestion budgétaire auprès de plus de 500 femmes entrepreneurs.",
-      category: "Social"
-    },
-    {
-      id: 4,
-      title: "SBF célèbre ses 15 ans d'existence",
-      date: "05 Juin 2026",
-      excerpt: "Un parcours riche en accompagnements et en réussites partagées avec nos clients. Retour sur notre évolution.",
-      category: "Événement"
-    },
-    {
-      id: 5,
-      title: "5 conseils pour bien gérer son fonds de roulement",
-      date: "12 Mai 2026",
-      excerpt: "La séparation des caisses est essentielle pour la survie d'une micro-entreprise. Voici comment faire.",
-      category: "Conseil"
-    },
-    {
-      id: 6,
-      title: "Remise d'équipements aux groupements de femmes",
-      date: "28 Mars 2026",
-      excerpt: "Dans le cadre de notre produit CAF, plusieurs coopératives agricoles ont reçu de nouveaux équipements.",
-      category: "Social"
-    }
-  ];
+export const dynamic = 'force-dynamic';
+
+export default async function NewsPage() {
+  let parametres = null;
+  try {
+    parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } });
+  } catch (error) {
+    console.error("Database fetch error:", error);
+  }
+
+  const actualites = await prisma.actualite.findMany({
+    where: { estPublie: true },
+    orderBy: { createdAt: 'desc' }
+  });
+
+  const bgUrl = parametres?.banniereAPropos || '/images/BANNIERE.png';
+
+  // Get unique categories for filter
+  const categories = ["Tous", ...Array.from(new Set(actualites.map(a => a.categorie)))];
 
   return (
     <>
       <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
-        <div className="absolute inset-0 bg-[url('/images/banniere-interne.png')] bg-cover bg-center bg-no-repeat z-0"></div>
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url('${bgUrl}')` }}></div>
+        <div className="absolute inset-0 bg-primary-dark/70 z-0"></div>
         <div className="text-center max-w-3xl mx-auto relative z-10 reveal-up">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg"><TypingAnimation text="Actualités" typeSpeed={50} /></h1>
-          <p className="text-xl text-white drop-shadow-md">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+            <TypingAnimation text="Actualités" typeSpeed={50} />
+          </h1>
+          <p className="text-xl text-white drop-shadow-md font-medium">
             Restez informés des dernières nouveautés, événements et opportunités chez Salem Braha Finance.
           </p>
         </div>
@@ -73,7 +52,7 @@ export default function NewsPage() {
       <Section variant="default">
         {/* Categories filter - visual only for now */}
         <div className="flex flex-wrap justify-center gap-3 mb-12 reveal-up">
-          {["Tous", "Événement", "Produit", "Conseil", "Social"].map((cat, idx) => (
+          {categories.map((cat, idx) => (
             <button 
               key={idx}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${idx === 0 ? 'bg-primary text-white' : 'bg-surface-muted text-on-surface-variant hover:bg-surface-container'}`}
@@ -84,42 +63,53 @@ export default function NewsPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {news.map((item, index) => (
-            <Card key={item.id} className={`flex flex-col h-full reveal-up delay-${(index % 3 + 1) * 100} group border-outline-variant/50 hover:shadow-lg transition-all`}>
-              <div className="h-48 bg-surface-container relative overflow-hidden rounded-t-xl">
-                <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>
-                <div className="absolute top-4 left-4 bg-primary text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full">
-                  {item.category}
-                </div>
-              </div>
-              
-              <div className="p-6 flex flex-col grow">
-                <CardHeader className="p-0 pb-2">
-                  <div className="flex items-center text-on-surface-variant text-sm mb-3">
-                    <Calendar className="h-4 w-4 mr-2" />
-                    {item.date}
+          {actualites.length > 0 ? (
+            actualites.map((item, index) => (
+              <Card key={item.id} className={`flex flex-col h-full reveal-up delay-${(index % 3 + 1) * 100} group border-outline-variant/50 hover:shadow-lg transition-all`}>
+                <div 
+                  className="h-48 bg-surface-container relative overflow-hidden rounded-t-xl"
+                  style={item.image ? { backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
+                >
+                  <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>
+                  <div className="absolute top-4 left-4 bg-primary text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full shadow-md">
+                    {item.categorie}
                   </div>
-                  <CardTitle className="text-xl text-primary-dark group-hover:text-primary transition-colors">
-                    {item.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-0 py-2 grow">
-                  <p className="text-on-surface-variant">
-                    {item.excerpt}
-                  </p>
-                </CardContent>
-                <CardFooter className="p-0 pt-4">
-                  <Link 
-                    href="#"
-                    className="inline-flex items-center text-accent font-medium hover:text-accent-hover transition-colors"
-                  >
-                    Lire la suite
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </CardFooter>
-              </div>
-            </Card>
-          ))}
+                </div>
+                
+                <div className="p-6 flex flex-col grow">
+                  <CardHeader className="p-0 pb-2">
+                    <div className="flex items-center text-on-surface-variant text-sm mb-3">
+                      <Calendar className="h-4 w-4 mr-2" />
+                      {new Date(item.createdAt).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' })}
+                    </div>
+                    <CardTitle className="text-xl text-primary-dark group-hover:text-primary transition-colors">
+                      {item.titre}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-0 py-2 grow">
+                    <p className="text-on-surface-variant line-clamp-3">
+                      {item.extrait}
+                    </p>
+                  </CardContent>
+                  <CardFooter className="p-0 pt-4 mt-auto">
+                    <Link 
+                      href={item.lienExterne ? item.lienExterne : `/actualites/${item.slug}`}
+                      target={item.lienExterne ? "_blank" : undefined}
+                      rel={item.lienExterne ? "noopener noreferrer" : undefined}
+                      className="inline-flex items-center text-accent font-medium hover:text-accent-hover transition-colors"
+                    >
+                      Lire la suite
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </CardFooter>
+                </div>
+              </Card>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12 text-gray-500">
+              Aucune actualité n'est disponible pour le moment.
+            </div>
+          )}
         </div>
 
         {/* Pagination */}

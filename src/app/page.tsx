@@ -20,7 +20,7 @@ export default async function Home() {
 
   try {
     parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } }) as any;
-    
+
     recentNews = await prisma.actualite.findMany({
       where: { estPublie: true },
       orderBy: { createdAt: 'desc' },
@@ -35,7 +35,7 @@ export default async function Home() {
   } catch (error) {
     console.error("Database fetch error:", error);
   }
-  
+
   if (!parametres) {
     parametres = {
       id: 1,
@@ -92,24 +92,98 @@ export default async function Home() {
 
   const displayTestimonials = formattedTestimonials.length > 0 ? formattedTestimonials : defaultTestimonials;
 
+  // Default content matching the dashboard default
+  const defaultContent = {
+    hero: [
+      {
+        id: "1",
+        image: "/images/hero/Osez entreprendre.png",
+        title: "Osez entreprendre, nous finançons la suite",
+        subtitle: "Des solutions de financement adaptées pour accompagner la croissance de vos activités.",
+        cta: "Découvrir nos crédits",
+        href: "/produits/credit"
+      },
+      {
+        id: "2",
+        image: "/images/hero/Cultivons la prospérité.png",
+        title: "Cultivons la prospérité ensemble",
+        subtitle: "Votre partenaire financier de confiance pour bâtir un avenir solide et sécurisé.",
+        cta: "Notre mission",
+        href: "/a-propos"
+      }
+    ],
+    dgQuote: {
+      image: "/images/home/dg-new.png",
+      quote: "Notre mission dépasse la simple gestion de l'argent ; nous protégeons vos efforts. Chez SBF, nous croyons que chaque trajectoire, qu'elle soit dans le secteur formel ou informel, mérite d'être sécurisée et valorisée. Bienvenue dans notre communauté de progrès.",
+      author: "Dr. Ahonon Houekin Augustine",
+      role: "Directrice Générale, Salem Braha Finance"
+    },
+    features: {
+      backgroundText: "Atouts",
+      title: "Pourquoi SBF ?",
+      subtitle: "Nos piliers fondateurs",
+      items: [
+        { title: "Vision à l'horizon 2035", description: "Être une institution de microfinance leader dans la finance inclusive, responsable et environnementale au Bénin.", icon: "TrendingUp", link: "/a-propos" },
+        { title: "Mission", description: "Contribuer à l'amélioration des conditions de vie des personnes à faible revenu via des services financiers et non financiers adaptés.", icon: "Users", link: "/a-propos" },
+        { title: "Nos Valeurs", description: "Le Respect, l'Intégrité et l'Efficacité guident toutes nos actions au quotidien.", icon: "ShieldCheck", link: "/a-propos" }
+      ]
+    },
+    missionVision: {
+      image: "/images/home/Engagement.jpeg",
+      backgroundText: "Vision",
+      title: "Plus que du financement, un véritable partenaire de croissance.",
+      buttonText: "En savoir plus sur nous",
+      buttonLink: "/a-propos"
+    },
+    partners: {
+      title: "Ils nous font confiance",
+      items: [] as any[]
+    },
+    productsPreview: {
+      backgroundText: "Produits",
+      title: "Nos Offres de Crédit",
+      subtitle: "Nos piliers fondateurs"
+    },
+    newsPreview: {
+      backgroundText: "Blog",
+      title: "Restez informés",
+      subtitle: "Les dernières nouveautés"
+    },
+    testimonials: {
+      title: "Ce qu'ils disent de nous",
+      subtitle: "Découvrez les retours d'expérience"
+    },
+    joinUs: {
+      image: "/images/home/join-us.jpg",
+      title: "Rejoignez Salem Braha Finance",
+      text: "Découvrez nos offres d'emploi",
+      buttonText: "Voir les offres",
+      buttonLink: "/carrieres"
+    }
+  };
+
+  const content = parametres?.accueilContenu ? { ...defaultContent, ...(parametres.accueilContenu as any) } : defaultContent;
+
   // Parse hero carousel if available
   let heroSlides = undefined;
-  if (parametres.heroCarousel && Array.isArray(parametres.heroCarousel)) {
+  if (content.hero && Array.isArray(content.hero) && content.hero.length > 0) {
+    heroSlides = content.hero;
+  } else if (parametres.heroCarousel && Array.isArray(parametres.heroCarousel)) {
     heroSlides = parametres.heroCarousel;
   }
 
   return (
     <>
       <Hero carouselSlides={heroSlides} />
-      <Features />
+      <Features content={content.features} />
       <Numbers stats={stats} />
-      <MissionVision mission={parametres.mission} vision={parametres.vision} />
-      <Partners />
-      <DgQuote />
-      <ProductsPreview />
-      <NewsPreview news={recentNews} />
-      <Testimonials testimonials={displayTestimonials} />
-      <JoinUs />
+      <MissionVision mission={parametres.mission} vision={parametres.vision} content={content.missionVision} />
+      <Partners content={content.partners} />
+      <DgQuote content={content.dgQuote} />
+      <ProductsPreview content={content.productsPreview} />
+      <NewsPreview news={recentNews} content={content.newsPreview} />
+      <Testimonials testimonials={displayTestimonials} content={content.testimonials} />
+      <JoinUs content={content.joinUs} />
     </>
   );
 }

@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Users, FileText, Settings, MessageSquare, Briefcase } from 'lucide-react';
+import { Home, Users, FileText, Settings, MessageSquare, Briefcase, UserPlus } from 'lucide-react';
 import { LogoutButton } from '@/components/admin/logout-button';
 
 export default function AdminLayout({
@@ -41,7 +41,19 @@ export default function AdminLayout({
             <MessageSquare className="w-5 h-5 mr-3 shrink-0" />
             Demandes
           </Link>
-          <Link href="/sbf-gestion/parametres" className="flex items-center px-4 py-3 text-gray-300 hover:bg-[#243048] hover:text-white rounded-md transition-colors">
+          <Link href="/sbf-gestion/candidatures" className={`flex items-center px-4 py-3 rounded-md transition-colors ${pathname.startsWith('/sbf-gestion/candidatures') ? 'bg-[#243048] text-white' : 'text-gray-300 hover:bg-[#243048] hover:text-white'}`}>
+            <UserPlus className="w-5 h-5 mr-3 shrink-0" />
+            Candidatures
+          </Link>
+          <Link href="/sbf-gestion/contenu-accueil" className={`flex items-center px-4 py-3 rounded-md transition-colors ${pathname.startsWith('/sbf-gestion/contenu-accueil') ? 'bg-[#243048] text-white' : 'text-gray-300 hover:bg-[#243048] hover:text-white'}`}>
+            <Home className="w-5 h-5 mr-3 shrink-0" />
+            Contenu Accueil
+          </Link>
+          <Link href="/sbf-gestion/contenu-mobilis" className={`flex items-center px-4 py-3 rounded-md transition-colors ${pathname.startsWith('/sbf-gestion/contenu-mobilis') ? 'bg-[#243048] text-white' : 'text-gray-300 hover:bg-[#243048] hover:text-white'}`}>
+            <Briefcase className="w-5 h-5 mr-3 shrink-0" />
+            Contenu Mobilis
+          </Link>
+          <Link href="/sbf-gestion/parametres" className={`flex items-center px-4 py-3 rounded-md transition-colors ${pathname.startsWith('/sbf-gestion/parametres') ? 'bg-[#243048] text-white' : 'text-gray-300 hover:bg-[#243048] hover:text-white'}`}>
             <Settings className="w-5 h-5 mr-3 shrink-0" />
             Paramètres
           </Link>

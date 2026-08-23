@@ -22,6 +22,7 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
     contenu: '',
     image: '',
     categorie: 'Informations',
+    lienExterne: '',
     estPublie: true
   });
 
@@ -43,6 +44,7 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
           contenu: data.contenu || '',
           image: data.image || '',
           categorie: data.categorie || 'Informations',
+          lienExterne: data.lienExterne || '',
           estPublie: data.estPublie
         });
       }
@@ -144,6 +146,19 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
               value={formData.image}
               onChange={(url) => setFormData(prev => ({ ...prev, image: url }))}
             />
+          </div>
+          
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Lien externe (Optionnel)</label>
+            <input 
+              name="lienExterne"
+              type="url"
+              value={formData.lienExterne}
+              onChange={handleChange}
+              className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5]"
+              placeholder="Ex: https://lien-vers-article-externe.com"
+            />
+            <p className="text-xs text-gray-500 mt-1">Si renseigné, l'article redirigera vers ce lien au lieu de la page détaillée.</p>
           </div>
 
           <div className="md:col-span-2">

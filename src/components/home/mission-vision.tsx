@@ -9,9 +9,10 @@ import Image from 'next/image';
 interface MissionVisionProps {
   mission: string;
   vision: string;
+  content?: any;
 }
 
-export function MissionVision({ mission, vision }: MissionVisionProps) {
+export function MissionVision({ mission, vision, content }: MissionVisionProps) {
   return (
     <Section variant="default" className="relative bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -24,7 +25,7 @@ export function MissionVision({ mission, vision }: MissionVisionProps) {
             <div className="animate-marquee">
               {[...Array(4)].map((_, i) => (
                 <span key={i} className="text-[80px] md:text-[120px] font-black text-slate-200/40 dark:text-slate-800/10 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
-                  Vision
+                  {content?.backgroundText || 'Vision'}
                 </span>
               ))}
             </div>
@@ -32,7 +33,7 @@ export function MissionVision({ mission, vision }: MissionVisionProps) {
 
           <div className="relative z-10">
             <h2 className="text-3xl md:text-5xl font-bold text-primary-dark mb-4">
-              <TypingAnimation text="Notre Engagement" typeSpeed={50} />
+              <TypingAnimation text={content?.title || "Notre Engagement"} typeSpeed={50} />
             </h2>
             <p className="text-on-surface-variant text-sm tracking-[0.2em] uppercase font-semibold">
               Mission & Vision SBF
@@ -70,17 +71,17 @@ export function MissionVision({ mission, vision }: MissionVisionProps) {
           </div>
 
           <Button asChild variant="primary" size="lg">
-            <Link href="/a-propos">En savoir plus sur nous</Link>
+            <Link href={content?.buttonLink || "/a-propos"}>{content?.buttonText || "En savoir plus sur nous"}</Link>
           </Button>
         </div>
 
         <div className="relative rounded-none overflow-hidden shadow-lg reveal-left bg-surface-muted">
           <Image
-            src="/images/home/engagement.png"
+            src={content?.image || "/images/home/Engagement.jpeg"}
             alt="Équipe Salem Braha Finance au travail"
             width={1200}
             height={800}
-            className="w-full h-auto object-cover"
+            className="w-full h-auto object-cover aspect-4/3 md:aspect-auto"
           />
           <div className="absolute inset-0 bg-primary-dark opacity-10"></div>
 

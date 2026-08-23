@@ -41,13 +41,18 @@ export default async function ContactPage() {
     console.error("Database fetch error:", error);
   }
 
+  const bgUrl = (parametres as any)?.banniereAPropos || '/images/BANNIERE.png';
+
   return (
     <>
       <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
-        <div className="absolute inset-0 bg-[url('/images/banniere-interne.png')] bg-cover bg-center bg-no-repeat z-0"></div>
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url('${bgUrl}')` }}></div>
+        <div className="absolute inset-0 bg-primary-dark/70 z-0"></div>
         <div className="text-center max-w-3xl mx-auto relative z-10 reveal-up">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg"><TypingAnimation text="Contactez-nous" typeSpeed={50} /></h1>
-          <p className="text-xl text-white drop-shadow-md">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+            <TypingAnimation text="Contactez-nous" typeSpeed={50} />
+          </h1>
+          <p className="text-xl text-white drop-shadow-md font-medium">
             Notre équipe est à votre écoute pour vous accompagner dans vos projets et répondre à toutes vos questions.
           </p>
         </div>

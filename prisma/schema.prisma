@@ -75,6 +75,7 @@ model Actualite {
   contenu          String   @db.Text
   image            String?
   categorie        String
+  lienExterne      String?
   estPublie        Boolean  @default(true)
   
   createdAt        DateTime @default(now())
@@ -136,7 +137,45 @@ model ParametresSite {
   banniereAPropos  String?
   motDuDg          String?  @db.Text
   motDuDgImage     String?
+  
+  accueilContenu   Json?
+  mobilisContenu   Json?
 
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+// ---------------------------------------------
+// Carrières / Offres d'emploi
+// ---------------------------------------------
+
+model OffreEmploi {
+  id               String   @id @default(cuid())
+  titre            String
+  slug             String   @unique
+  missions         Json     // Array of strings
+  profil           Json     // Array of strings
+  dateLimite       String
+  estPublie        Boolean  @default(true)
+  candidatures     Candidature[]
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Candidature {
+  id               String   @id @default(cuid())
+  offreId          String
+  offre            OffreEmploi @relation(fields: [offreId], references: [id], onDelete: Cascade)
+  nom              String
+  prenom           String
+  telephone        String
+  email            String
+  cvUrl            String
+  lettreUrl        String
+  message          String?  @db.Text
+  estTraite        Boolean  @default(false)
+  
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }

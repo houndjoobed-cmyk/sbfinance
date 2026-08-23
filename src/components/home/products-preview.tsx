@@ -20,7 +20,7 @@ import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
-export function ProductsPreview() {
+export function ProductsPreview({ content }: { content?: any }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     loop: true,
@@ -54,14 +54,14 @@ export function ProductsPreview() {
       title: "Appui",
       description: "Un soutien sur-mesure pour développer vos activités et pérenniser votre croissance.",
       icon: <Handshake className="h-5 w-5" />,
-      image: "/images/products/appui-v2.jpg",
+      image: "/images/products/appui.png",
       link: "/produits/appui"
     },
     {
       title: "Conseil",
       description: "Expertise et accompagnement stratégique pour la gestion de votre entreprise.",
       icon: <Lightbulb className="h-5 w-5" />,
-      image: "/images/products/conseil-v2.jpg",
+      image: "/images/products/conseil.jpeg",
       link: "/produits/conseil"
     },
     {
@@ -87,7 +87,7 @@ export function ProductsPreview() {
             <div className="animate-marquee">
               {[...Array(4)].map((_, i) => (
                 <span key={i} className="text-[120px] md:text-[180px] font-black text-slate-200/40 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
-                  PRODUITS
+                  {content?.backgroundText || 'PRODUITS'}
                 </span>
               ))}
             </div>
@@ -96,10 +96,10 @@ export function ProductsPreview() {
           {/* Foreground content */}
           <div className="relative z-10 flex flex-col items-center justify-center text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-3">
-              Découvrez nos produits
+              {content?.title || "Découvrez nos produits"}
             </h2>
             <div className="text-slate-500 text-sm md:text-base font-bold tracking-[0.2em] uppercase">
-              Nos services
+              {content?.subtitle || "Nos services"}
             </div>
           </div>
         </div>

@@ -60,11 +60,21 @@ export default async function ProductDetailPage({ params }: Props) {
   const formattedAmount = formatAmount(product.montantMin, product.montantMax);
   const formattedDuration = formatDuration(product.dureeMinMois, product.dureeMaxMois, product.differeMois);
 
+  let parametres = null;
+  try {
+    parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } });
+  } catch (error) {
+    console.error("Database fetch error for parametres:", error);
+  }
+
+  const bgUrl = parametres?.banniereAPropos || '/images/BANNIERE.png';
+
   return (
     <>
       {/* Hero Section */}
       <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
-        <div className="absolute inset-0 bg-[url('/images/banniere-interne.png')] bg-cover bg-center bg-no-repeat z-0"></div>
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url('${bgUrl}')` }}></div>
+        <div className="absolute inset-0 bg-primary-dark/70 z-0"></div>
 
         {/* Decorative elements */}
         <div className="absolute top-[20%] right-[10%] w-[50%] h-[80%] rounded-full bg-accent/20 blur-[120px] pointer-events-none"></div>

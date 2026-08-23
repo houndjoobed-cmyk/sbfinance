@@ -68,7 +68,15 @@ export async function POST(request: Request) {
       nombreClients: Number(data.nombreClients),
       telephonePrincipal: data.telephonePrincipal,
       emailPrincipal: data.emailPrincipal,
-      adresseSiege: data.adresseSiege
+      adresseSiege: data.adresseSiege,
+      heroCarousel: data.heroCarousel,
+      histoireTexte: data.histoireTexte,
+      gouvernanceTexte: data.gouvernanceTexte,
+      banniereAPropos: data.banniereAPropos,
+      motDuDg: data.motDuDg,
+      motDuDgImage: data.motDuDgImage,
+      accueilContenu: data.accueilContenu,
+      mobilisContenu: data.mobilisContenu
     };
 
     const result = await prisma.parametresSite.upsert({

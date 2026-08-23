@@ -36,7 +36,7 @@ const defaultSlides = [
   },
   {
     id: "4",
-    image: "/images/hero/BANNIERE 04 SITE.png",
+    image: "/images/hero/BANNIERE 05.png",
     title: "Pour une finance inclusive et responsable",
     subtitle: "Nous favorisons l'inclusion financière des populations à travers tout le Bénin.",
     cta: "Notre réseau",

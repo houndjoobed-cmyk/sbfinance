@@ -24,6 +24,7 @@ export function Header() {
     { name: 'Accueil', href: '/' },
     { name: 'Qui sommes-nous', href: '/a-propos' },
     { name: 'Nos produits', href: '/produits' },
+    { name: 'Mobilis', href: '/mobilis' },
     { name: 'Notre réseau', href: '/reseau' },
     { name: 'Actualités', href: '/actualites' },
     { name: 'Contacts', href: '/contacts' },

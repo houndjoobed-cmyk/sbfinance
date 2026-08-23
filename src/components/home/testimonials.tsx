@@ -13,9 +13,10 @@ interface TestimonialsProps {
     role: string | null;
     initial: string;
   }>;
+  content?: any;
 }
 
-export function Testimonials({ testimonials }: TestimonialsProps) {
+export function Testimonials({ testimonials, content }: TestimonialsProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'center' }, [
     Autoplay({ delay: 6000, stopOnInteraction: false })
   ]);
@@ -55,7 +56,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
         <div className="animate-marquee">
           {[...Array(4)].map((_, i) => (
             <span key={i} className="text-[100px] md:text-[180px] lg:text-[250px] font-black text-white/5 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
-              Témoignages
+              {content?.backgroundText || 'Témoignages'}
             </span>
           ))}
         </div>
@@ -63,9 +64,14 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl relative z-10 text-center text-white">
         
-        <h2 className="text-3xl md:text-5xl font-bold mb-12">
-          Témoignages
+        <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          {content?.title || "Ce qu'ils disent de nous"}
         </h2>
+        {content?.subtitle && (
+          <p className="text-white/80 text-sm tracking-[0.2em] uppercase font-semibold mb-12">
+            {content.subtitle}
+          </p>
+        )}
 
         <div className="relative mx-auto reveal-up">
           <div className="overflow-hidden" ref={emblaRef}>
