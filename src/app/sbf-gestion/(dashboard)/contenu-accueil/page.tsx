@@ -22,6 +22,23 @@ const DEFAULT_CONTENT = {
       subtitle: "Votre partenaire financier de confiance pour bâtir un avenir solide et sécurisé.",
       cta: "Notre mission",
       href: "/a-propos"
+    },
+    {
+      id: "3",
+      image: "/images/hero/Soutenir l'économie local.png",
+      title: "Soutenir l'économie locale",
+      subtitle: "Nous accompagnons les commerçants et artisans béninois dans leur développement.",
+      cta: "Voir nos produits",
+      href: "/produits"
+    },
+    {
+      id: "4",
+      image: "/images/hero/BANNIERE 05.png",
+      title: "Pour une finance inclusive et responsable",
+      subtitle: "Nous favorisons l'inclusion financière des populations à travers tout le Bénin.",
+      cta: "Notre réseau",
+      href: "/reseau",
+      objectPosition: "center 10%"
     }
   ],
   dgQuote: {
@@ -57,7 +74,7 @@ const DEFAULT_CONTENT = {
     subtitle: "Découvrez nos solutions de financement"
   },
   newsPreview: {
-    backgroundText: "Blog",
+    backgroundText: "ACTUALITÉS",
     title: "Restez informés",
     subtitle: "Les dernières nouveautés"
   },
@@ -66,9 +83,9 @@ const DEFAULT_CONTENT = {
     subtitle: "Découvrez les retours d'expérience"
   },
   joinUs: {
-    image: "/images/home/join-us.jpg",
-    title: "Rejoignez Salem Braha Finance",
-    text: "Découvrez nos offres d'emploi",
+    image: "/images/home/REJOIGNEZ-NOUS.png",
+    title: "Rejoignez-nous",
+    text: "Travailler chez SBF, c'est rejoindre une institution engagée auprès de ses clients",
     buttons: [
       { id: "1", text: "Demande de crédit", link: "/contacts" },
       { id: "2", text: "Compte d'épargne", link: "/produits" },

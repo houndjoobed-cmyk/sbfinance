@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { TypingAnimation } from '@/components/ui/typing-animation';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
+import Fade from 'embla-carousel-fade';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -48,7 +49,8 @@ const defaultSlides = [
 export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
   const displaySlides = carouselSlides && carouselSlides.length > 0 ? carouselSlides : defaultSlides;
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, watchDrag: false }, [
+    Fade(),
     Autoplay({ delay: 6000, stopOnInteraction: false })
   ]);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -80,11 +82,11 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
                   src={slide.image || '/images/hero/hero-finance.jpg'}
                   alt={slide.title || 'SBF'}
                   fill
-                  sizes="100vw"
+                  sizes="150vw"
                   quality={100}
                   priority={index === 0}
                   style={{ objectPosition: slide.objectPosition || 'center' }}
-                  className={`object-cover transition-transform duration-10000 ${index === selectedIndex ? 'scale-110' : 'scale-100'}`}
+                  className={`object-cover ${index === selectedIndex ? 'animate-zoom' : ''}`}
                 />
                 {/* Dark Overlay for text readability — no gradient */}
                 <div className="absolute inset-0 bg-black/30"></div>
@@ -98,7 +100,11 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
                       className="text-4xl md:text-5xl lg:text-(--font-size-hero) font-bold leading-tight mb-6 drop-shadow-lg"
                       style={{ color: '#ffffff' }}
                     >
-                      <TypingAnimation text={slide.title || ''} typeSpeed={40} />
+                      {index === selectedIndex ? (
+                        <TypingAnimation text={slide.title || ''} typeSpeed={40} />
+                      ) : (
+                        slide.title || ''
+                      )}
                     </h1>
                     <p className="text-lg md:text-xl mb-8 max-w-xl drop-shadow-md" style={{ color: '#d6e3ff' }}>
                       {slide.subtitle || ''}

@@ -24,7 +24,7 @@ export function MissionVision({ mission, vision, content }: MissionVisionProps) 
           >
             <div className="animate-marquee">
               {[...Array(4)].map((_, i) => (
-                <span key={i} className="text-[80px] md:text-[120px] font-black text-slate-200/40 dark:text-slate-800/10 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
+                <span key={i} className="text-[80px] md:text-[120px] font-black text-slate-200/50 dark:text-slate-800/20 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
                   {content?.backgroundText || 'Vision'}
                 </span>
               ))}

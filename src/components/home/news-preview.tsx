@@ -22,7 +22,7 @@ export function NewsPreview({ news, content }: NewsPreviewProps) {
         <div className="animate-marquee">
           {[...Array(4)].map((_, i) => (
             <span key={i} className="text-[120px] md:text-[180px] font-black text-slate-200/50 dark:text-slate-800/20 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
-              {content?.backgroundText || 'BLOG'}
+              {content?.backgroundText || 'ACTUALITÉS'}
             </span>
           ))}
         </div>

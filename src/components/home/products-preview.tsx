@@ -86,7 +86,7 @@ export function ProductsPreview({ content }: { content?: any }) {
           >
             <div className="animate-marquee">
               {[...Array(4)].map((_, i) => (
-                <span key={i} className="text-[120px] md:text-[180px] font-black text-slate-200/40 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
+                <span key={i} className="text-[120px] md:text-[180px] font-black text-slate-200/50 dark:text-slate-800/20 uppercase tracking-tighter whitespace-nowrap leading-none pr-16 md:pr-32">
                   {content?.backgroundText || 'PRODUITS'}
                 </span>
               ))}
