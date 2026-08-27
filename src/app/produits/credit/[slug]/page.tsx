@@ -82,7 +82,7 @@ export default async function ProductDetailPage({ params }: Props) {
 
         <div className="max-w-5xl mx-auto relative z-10 reveal-up">
           <div className="flex items-center mb-6">
-            <span className="bg-accent text-primary-dark font-bold px-4 py-1.5 text-xs uppercase tracking-widest shadow-lg">
+            <span className="bg-accent text-white font-bold px-4 py-1.5 text-xs uppercase tracking-widest shadow-lg">
               {product.categorie}
             </span>
           </div>

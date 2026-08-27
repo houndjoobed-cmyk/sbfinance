@@ -87,20 +87,58 @@ export function Header() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center py-3">
             <nav className="flex space-x-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={cn(
-                    "text-base font-semibold transition-colors",
-                    pathname === link.href
-                      ? "text-white"
-                      : "text-white/80 hover:text-white"
-                  )}
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                if (link.name === 'Nos produits') {
+                  return (
+                    <div key={link.name} className="relative group">
+                      <Link
+                        href={link.href}
+                        className={cn(
+                          "flex items-center text-base font-semibold transition-colors py-2",
+                          pathname.startsWith('/produits')
+                            ? "text-white"
+                            : "text-white/80 hover:text-white"
+                        )}
+                      >
+                        {link.name}
+                        <svg className="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                      </Link>
+
+                      <div className="absolute left-0 top-full pt-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                        <div className="w-48 bg-white rounded-md shadow-lg py-2 border border-gray-100 mt-1">
+                          <Link
+                            href="/produits/epargne"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary font-medium transition-colors"
+                          >
+                            Épargnes
+                          </Link>
+                          <Link
+                            href="/produits#credit"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary font-medium transition-colors"
+                          >
+                            Crédits
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={cn(
+                      "text-base font-semibold transition-colors py-2",
+                      pathname === link.href
+                        ? "text-white"
+                        : "text-white/80 hover:text-white"
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
             </nav>
           </div>
         </div>

@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { TypingAnimation } from '@/components/ui/typing-animation';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import Fade from 'embla-carousel-fade';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -50,7 +49,6 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
   const displaySlides = carouselSlides && carouselSlides.length > 0 ? carouselSlides : defaultSlides;
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, watchDrag: false }, [
-    Fade(),
     Autoplay({ delay: 6000, stopOnInteraction: false })
   ]);
   const [selectedIndex, setSelectedIndex] = useState(0);

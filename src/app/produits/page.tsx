@@ -34,24 +34,27 @@ export default async function ProductsPage() {
     {
       title: "Besoin de fonds de roulement",
       products: [
-        { name: "Crédit de Groupe (CG)", slug: "cg", desc: "Soutien aux activités génératrices de revenus pour les groupes solidaires." },
-        { name: "Garantie de Caution Solidaire (GCS)", slug: "gcs", desc: "Financement d'opportunités avec garanties allégées par cautionnement mutuel." },
-        { name: "Crédit Individuel à Caution Physique (CICP)", slug: "cicp", desc: "Pour les micro-entrepreneurs ayant une activité stable avec avaliseur." },
-        { name: "Crédit Cale (CC)", slug: "cc", desc: "Solution de renflouement temporaire de caisse." },
+        { name: "Crédit aux Groupements (CG)", slug: "cg", desc: "Soutien à l'inclusion financière via des groupements solidaires de 10 à 30 personnes." },
+        { name: "Crédit aux Groupes de Cautions Solidaires (GCS)", slug: "gcs", desc: "Organisation de femmes en petits groupes solidaires de 3 à 5 membres pour financer commerce, élevage, artisanat ou transformation." },
+        { name: "Crédit Individuel Caution Personnelle (CICP)", slug: "cicp", desc: "Pour les micro-entrepreneurs et petits commerçants désireux de développer leurs projets." },
+        { name: "Crédit aux Commerçants (CC)", slug: "cc", desc: "Soutien financier en fonds de roulement pour les entreprises et entrepreneurs structurés." },
       ]
     },
     {
       title: "Crédit à la consommation",
       products: [
-        { name: "Crédit aux Fonctionnaires (CF)", slug: "cf", desc: "Découvert permanent ou prêts à moyen terme pour les agents de l'État." },
-        { name: "Salarié Avance (SA)", slug: "sa", desc: "Anticipation de salaire pour faire face aux dépenses imprévues." },
+        { name: "Crédit aux Fonctionnaires (CF)", slug: "cf", desc: "Crédit à la consommation pour les agents de l'État dont le traitement est domicilié au Trésor public." },
+        { name: "Crédit aux Salariés (CS)", slug: "sa", desc: "Crédit pour les travailleurs du secteur privé justifiant d'un contrat de travail." },
+        { name: "Crédit au Personnel (CP)", slug: "cp", desc: "Accompagnement financier pour le personnel de SB Finance." },
+        { name: "Crédit Moto au Personnel (CMP)", slug: "cmp", desc: "Acquisition de motos pour faciliter les déplacements des agents de terrain." },
+        { name: "Crédit aux Associés (CA)", slug: "ca", desc: "Financement des biens d'équipement et d'investissement pour les actionnaires." },
       ]
     },
     {
       title: "Crédit Cause",
       products: [
-        { name: "Crédit Bien Consommation (CBC)", slug: "cbc", desc: "Acquisition de biens d'équipement, groupes électrogènes, etc." },
-        { name: "Crédit à l'Autonomisation de la Femme (CAF)", slug: "caf", desc: "Produit spécifique pour l'achat de moulins, tricycles et matériels d'exploitation." },
+        { name: "Crédit Bon de Commande (CBC)", slug: "cbc", desc: "Solution de crédit à court terme pour honorer les commandes importantes sans utiliser sa propre trésorerie." },
+        { name: "Crédit Avance sur Facture (CAF)", slug: "caf", desc: "Crédit de trésorerie permettant d'obtenir le paiement anticipé d'une facture émise." },
       ]
     }
   ];

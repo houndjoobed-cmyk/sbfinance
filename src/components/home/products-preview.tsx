@@ -41,7 +41,7 @@ export function ProductsPreview({ content }: { content?: any }) {
       title: "Crédit",
       description: "Solutions de financement pour vos besoins de roulement, de consommation ou d'investissement.",
       icon: "Wallet",
-      image: "/images/products/credit-v2.jpg",
+      image: "/images/products/Credits.jpeg",
       link: "/produits/credit"
     },
     {
@@ -57,7 +57,7 @@ export function ProductsPreview({ content }: { content?: any }) {
       title: "Appui",
       description: "Un soutien sur-mesure pour développer vos activités et pérenniser votre croissance.",
       icon: "Handshake",
-      image: "/images/products/appui.png",
+      image: "/images/products/Appui.jpeg",
       link: "/produits/appui"
     },
     {
@@ -83,7 +83,7 @@ export function ProductsPreview({ content }: { content?: any }) {
   const defaultHelpCard = {
     title: "Besoin d'aide pour choisir ?",
     description: "Nos conseillers sont à votre disposition dans toutes nos agences pour vous orienter vers la solution la plus adaptée.",
-    image: "/images/products/besoin d'aide.jpeg",
+    image: "/images/products/Aide.jpeg",
     buttonText: "Nous contacter",
     buttonLink: "/contacts"
   };
