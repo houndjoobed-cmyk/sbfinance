@@ -178,7 +178,7 @@ export default async function Home() {
       title: "Rejoignez-nous",
       text: "Travailler chez SBF, c'est rejoindre une institution engagée auprès de ses clients",
       buttons: [
-        { id: "1", text: "Demande de crédit", link: "/contacts" },
+        { id: "1", text: "Demande de crédit", link: "/produits#credit" },
         { id: "2", text: "Compte d'épargne", link: "/produits" },
         { id: "3", text: "Nos offres d'emploi", link: "/carrieres" }
       ]
@@ -192,6 +192,14 @@ export default async function Home() {
   };
 
   const content = parametres?.accueilContenu ? { ...defaultContent, ...(parametres.accueilContenu as any) } : defaultContent;
+
+  // S'assurer que le lien de demande de crédit pointe toujours au bon endroit même si la BDD a l'ancienne valeur
+  if (content?.joinUs?.buttons) {
+    const btnCredit = content.joinUs.buttons.find((b: any) => b.id === "1" || b.text.toLowerCase().includes("crédit"));
+    if (btnCredit) {
+      btnCredit.link = "/produits#credit";
+    }
+  }
 
   // Parse hero carousel if available
   let heroSlides = undefined;

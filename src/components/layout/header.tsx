@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { StaggeredMenu } from '@/components/ui/staggered-menu';
+import { MobileMenu, MobileMenuItem } from '@/components/layout/mobile-menu';
 
 export function Header() {
   const pathname = usePathname();
@@ -30,15 +30,20 @@ export function Header() {
     { name: 'Contacts', href: '/contacts' },
   ];
 
-  const mobileMenuLinks = navLinks.map(link => ({
-    label: link.name,
-    link: link.href
-  }));
-
-  const mobileSocials = [
-    { label: 'WhatsApp', link: 'https://wa.me/2290128305976' },
-    { label: 'Téléphone', link: 'tel:+2290121380587' },
-    { label: 'Email', link: 'mailto:contact@sbfinance.bj' }
+  const mobileMenuItems: MobileMenuItem[] = [
+    { label: 'Accueil', href: '/' },
+    { label: 'Qui sommes-nous', href: '/a-propos' },
+    {
+      label: 'Nos produits',
+      children: [
+        { label: 'Épargnes', href: '/produits/epargne' },
+        { label: 'Crédits', href: '/produits#credit' }
+      ]
+    },
+    { label: 'Mobilis', href: '/mobilis' },
+    { label: 'Notre réseau', href: '/reseau' },
+    { label: 'Actualités', href: '/actualites' },
+    { label: 'Contacts', href: '/contacts' },
   ];
 
   if (pathname.startsWith('/sbf-gestion')) return null;
@@ -144,18 +149,25 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div className="md:hidden">
-        <StaggeredMenu
-          isFixed={true}
-          isScrolled={isScrolled}
-          items={mobileMenuLinks}
-          socialItems={mobileSocials}
+      {/* Mobile Header */}
+      <div className={cn(
+        "md:hidden flex items-center justify-between w-full px-4 py-3 transition-colors duration-300",
+        (isScrolled || !isHomePage) ? "bg-primary shadow-sm" : "bg-transparent"
+      )}>
+        <Link href="/" className="shrink-0">
+          <Image
+            src="/images/logos/logo-sbf-color.png"
+            alt="Salem Braha Finance Logo"
+            width={180}
+            height={60}
+            className="h-10 w-auto object-contain brightness-0 invert"
+            priority
+          />
+        </Link>
+        <MobileMenu
+          items={mobileMenuItems}
           logoUrl="/images/logos/logo-sbf-color.png"
-          colors={['#01438F', '#00326e']}
-          accentColor="#EB001B"
-          menuButtonColor="#01438F"
-          openMenuButtonColor="#fff"
+          isScrolled={isScrolled}
         />
       </div>
     </header>

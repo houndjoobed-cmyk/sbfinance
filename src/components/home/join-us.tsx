@@ -58,7 +58,7 @@ export function JoinUs({ content }: { content?: any }) {
                 size="lg"
                 className="bg-primary hover:bg-primary-dark text-white border-none min-w-55 py-6 font-semibold uppercase tracking-wide group"
               >
-                <Link href="/contacts">
+                <Link href="/produits#credit">
                   Demande de crédit
                 </Link>
               </Button>
