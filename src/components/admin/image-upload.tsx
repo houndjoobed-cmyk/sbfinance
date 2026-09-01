@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { ImagePlus, Loader2, X } from 'lucide-react';
+import imageCompression from 'browser-image-compression';
 
 interface ImageUploadProps {
   value: string;
@@ -17,14 +18,30 @@ export function ImageUpload({ value, onChange, label = "Image" }: ImageUploadPro
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
-      const file = e.target.files?.[0];
+      let file = e.target.files?.[0];
       if (!file) return;
 
       setUploading(true);
       setError(null);
 
+      // Compress image
+      const options = {
+        maxSizeMB: 1, // Max 1MB
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+        fileType: 'image/webp', // Convert to WebP for best compression
+      };
+      
+      try {
+        file = await imageCompression(file, options);
+      } catch (compressionError) {
+        console.error('Error compressing image:', compressionError);
+        // Continue with original file if compression fails
+      }
+
       // Create a unique file name
-      const fileExt = file.name.split('.').pop();
+      // Always use .webp since we compress to webp if possible
+      const fileExt = file.type === 'image/webp' ? 'webp' : file.name.split('.').pop();
       const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
       const filePath = `${fileName}`;
 

@@ -232,8 +232,6 @@ body {
 
 .animate-zoom {
   animation: zoom-in-out 20s ease-in-out infinite alternate;
-  will-change: transform;
-  backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
 }
 

@@ -9,7 +9,7 @@ const DEFAULT_CONTENT = {
   hero: [
     {
       id: "1",
-      image: "/images/hero/Osez entreprendre.png",
+      image: "/images/hero/osez-entreprendre.png",
       title: "Osez entreprendre, nous finançons la suite",
       subtitle: "Des solutions de financement adaptées pour accompagner la croissance de vos activités.",
       cta: "Découvrir nos crédits",
@@ -17,7 +17,7 @@ const DEFAULT_CONTENT = {
     },
     {
       id: "2",
-      image: "/images/hero/Cultivons la prospérité.png",
+      image: "/images/hero/cultivons-la-prosperite.png",
       title: "Cultivons la prospérité ensemble",
       subtitle: "Votre partenaire financier de confiance pour bâtir un avenir solide et sécurisé.",
       cta: "Notre mission",
@@ -25,7 +25,7 @@ const DEFAULT_CONTENT = {
     },
     {
       id: "3",
-      image: "/images/hero/Soutenir l'économie local.png",
+      image: "/images/hero/soutenir-economie-locale.png",
       title: "Soutenir l'économie locale",
       subtitle: "Nous accompagnons les commerçants et artisans béninois dans leur développement.",
       cta: "Voir nos produits",
@@ -33,7 +33,7 @@ const DEFAULT_CONTENT = {
     },
     {
       id: "4",
-      image: "/images/hero/BANNIERE 05.png",
+      image: "/images/hero/banniere-05.png",
       title: "Pour une finance inclusive et responsable",
       subtitle: "Nous favorisons l'inclusion financière des populations à travers tout le Bénin.",
       cta: "Notre réseau",
@@ -85,7 +85,7 @@ const DEFAULT_CONTENT = {
     subtitle: "Découvrez les retours d'expérience"
   },
   joinUs: {
-    image: "/images/home/REJOIGNEZ-NOUS.png",
+    image: "/images/home/rejoignez-nous.png",
     title: "Rejoignez-nous",
     text: "Travailler chez SBF, c'est rejoindre une institution engagée auprès de ses clients",
     buttons: [

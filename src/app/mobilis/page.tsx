@@ -19,7 +19,7 @@ const DEFAULT_CONTENT = {
     title: "MOBILIS Horizon 2027",
     subtitle: "« L'accès à la mobilité pour chaque profil, chaque ambition. »",
     description: "Roulez neuf. Roulez hybride. Sans un franc d'apport. MOBILIS est le premier programme de crédit automobile 100% hybride au Bénin, réservé en exclusivité à Salem Braha Finance.",
-    image: "/images/COUVERTIRE C4.png"
+    image: "/images/couverture-c4.png"
   },
   avantages: {
     title: "Ce qui fait la force de MOBILIS",

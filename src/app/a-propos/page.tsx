@@ -46,7 +46,7 @@ export default async function AboutPage() {
       <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-          style={{ backgroundImage: `url('${parametres.banniereAPropos || '/images/BANNIERE.png'}')` }}
+          style={{ backgroundImage: `url('${parametres.banniereAPropos || '/images/banniere.png'}')` }}
         ></div>
 
         {/* Overlay bleu pour faire ressortir le texte tout en gardant l'identité visuelle */}

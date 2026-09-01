@@ -96,7 +96,7 @@ export default async function NetworkPage() {
     return 0;
   });
 
-  const bgUrl = (parametres as any)?.banniereAPropos || '/images/BANNIERE.png';
+  const bgUrl = (parametres as any)?.banniereAPropos || '/images/banniere.png';
 
   return (
     <>

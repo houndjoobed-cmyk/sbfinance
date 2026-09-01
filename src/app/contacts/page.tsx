@@ -41,7 +41,7 @@ export default async function ContactPage() {
     console.error("Database fetch error:", error);
   }
 
-  const bgUrl = (parametres as any)?.banniereAPropos || '/images/BANNIERE.png';
+  const bgUrl = (parametres as any)?.banniereAPropos || '/images/banniere.png';
 
   return (
     <>

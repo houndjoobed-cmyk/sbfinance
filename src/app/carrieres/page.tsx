@@ -30,7 +30,7 @@ export default async function CarrieresPage() {
     console.error("Database fetch error for parametres:", error);
   }
 
-  const bgUrl = parametres?.banniereAPropos || '/images/BANNIERE.png';
+  const bgUrl = parametres?.banniereAPropos || '/images/banniere.png';
 
   return (
     <>

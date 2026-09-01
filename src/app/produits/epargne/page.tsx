@@ -225,7 +225,7 @@ export default function EpargnesPage() {
       <meta name="description" content="Découvrez nos comptes courants et nos solutions d'épargne adaptées à vos projets et à votre situation." />
 
       <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url('/images/BANNIERE.png')` }}></div>
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url('/images/banniere.png')` }}></div>
         <div className="absolute inset-0 bg-primary-dark/70 z-0"></div>
         <div className="text-center max-w-3xl mx-auto relative z-10 reveal-up">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">

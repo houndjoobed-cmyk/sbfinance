@@ -13,6 +13,18 @@ import { Slot } from "@radix-ui/react-slot";
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "default", size = "default", asChild = false, ...props }, ref) => {
     
+    let useAsChild = asChild;
+    if (useAsChild) {
+      const childCount = React.Children.count(props.children);
+      const isElement = React.isValidElement(props.children);
+      const isFragment = isElement && (props.children as React.ReactElement).type === React.Fragment;
+      
+      if (childCount !== 1 || !isElement || isFragment) {
+        console.error("Button asChild error! Expected exactly 1 valid React Element. Received count:", childCount, "isElement:", isElement, "children:", props.children);
+        useAsChild = false;
+      }
+    }
+
     // We add liquid-btn to trigger the pseudo-element in globals.css
     // isolation-isolate ensures the z-index: -1 pseudo-element stays above the background but below the text
     const baseStyles = "liquid-btn relative overflow-hidden inline-flex items-center justify-center whitespace-nowrap rounded-none text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 group hover:scale-[1.03] active:scale-[0.95] isolate";
@@ -34,7 +46,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       icon: "h-10 w-10",
     };
 
-    const Comp = asChild ? Slot : "button";
+    const Comp = useAsChild ? Slot : "button";
     
     // Determine the liquid fill color
     const fillColors = {

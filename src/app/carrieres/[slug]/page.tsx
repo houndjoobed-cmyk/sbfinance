@@ -46,7 +46,7 @@ export default async function OffreDetail({ params }: PageProps) {
   const profil = offre.profil as string[];
 
   const parametres = await prisma.parametresSite.findUnique({ where: { id: 1 } });
-  const bgUrl = parametres?.banniereAPropos || '/images/BANNIERE.png';
+  const bgUrl = parametres?.banniereAPropos || '/images/banniere.png';
 
   return (
     <>

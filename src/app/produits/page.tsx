@@ -27,7 +27,7 @@ export default async function ProductsPage() {
     console.error("Database fetch error:", error);
   }
   
-  const bgUrl = parametres?.banniereAPropos || '/images/BANNIERE.png';
+  const bgUrl = parametres?.banniereAPropos || '/images/banniere.png';
 
   // Default hardcoded fallback in case DB is empty
   let creditCategories = [

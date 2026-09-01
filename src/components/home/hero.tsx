@@ -7,12 +7,11 @@ import { TypingAnimation } from '@/components/ui/typing-animation';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const defaultSlides = [
   {
     id: "1",
-    image: "/images/hero/Osez entreprendre.png",
+    image: "/images/hero/osez-entreprendre.png",
     title: "Osez entreprendre, nous finançons la suite",
     subtitle: "Des solutions de financement adaptées pour accompagner la croissance de vos activités.",
     cta: "Découvrir nos crédits",
@@ -20,7 +19,7 @@ const defaultSlides = [
   },
   {
     id: "2",
-    image: "/images/hero/Cultivons la prospérité.png",
+    image: "/images/hero/cultivons-la-prosperite.png",
     title: "Cultivons la prospérité ensemble",
     subtitle: "Votre partenaire financier de confiance pour bâtir un avenir solide et sécurisé.",
     cta: "Notre mission",
@@ -28,7 +27,7 @@ const defaultSlides = [
   },
   {
     id: "3",
-    image: "/images/hero/Soutenir l'économie local.png",
+    image: "/images/hero/soutenir-economie-locale.png",
     title: "Soutenir l'économie locale",
     subtitle: "Nous accompagnons les commerçants et artisans béninois dans leur développement.",
     cta: "Voir nos produits",
@@ -36,7 +35,7 @@ const defaultSlides = [
   },
   {
     id: "4",
-    image: "/images/hero/BANNIERE 05.png",
+    image: "/images/hero/banniere-05.png",
     title: "Pour une finance inclusive et responsable",
     subtitle: "Nous favorisons l'inclusion financière des populations à travers tout le Bénin.",
     cta: "Notre réseau",
@@ -53,10 +52,6 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
   ]);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
-
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
@@ -69,8 +64,8 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="relative w-full h-[85vh] md:h-[90vh] lg:h-[95vh] min-h-150">
-      <div className="embla h-full" ref={emblaRef}>
+    <div className="relative w-full min-h-[70svh] md:aspect-auto md:h-[85vh] lg:h-[95vh] md:min-h-150">
+      <div className="embla h-full absolute inset-0" ref={emblaRef}>
         <div className="embla__container h-full">
           {displaySlides.map((slide, index) => (
             <div className="embla__slide relative h-full shrink-0 grow-0 basis-full" key={index}>
@@ -80,22 +75,23 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
                   src={slide.image || '/images/hero/hero-finance.jpg'}
                   alt={slide.title || 'SBF'}
                   fill
-                  sizes="150vw"
-                  quality={100}
+                  sizes="100vw"
+                  quality={90}
                   priority={index === 0}
+                  loading={index === 0 ? 'eager' : 'lazy'}
                   style={{ objectPosition: slide.objectPosition || 'center' }}
                   className={`object-cover ${index === selectedIndex ? 'animate-zoom' : ''}`}
                 />
-                {/* Dark Overlay for text readability — no gradient */}
-                <div className="absolute inset-0 bg-black/30"></div>
+                {/* Dark Overlay for text readability */}
+                <div className="absolute inset-0 bg-black/35"></div>
               </div>
 
               {/* Content */}
-              <div className="relative z-10 h-full flex items-center pt-28 md:pt-32">
+              <div className="relative z-10 h-full flex items-end pb-8 md:items-center md:pb-0 pt-16 md:pt-32">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
                   <div className="max-w-2xl reveal-up">
                     <h1
-                      className="text-4xl md:text-5xl lg:text-(--font-size-hero) font-bold leading-tight mb-6 drop-shadow-lg"
+                      className="text-2xl sm:text-3xl md:text-5xl lg:text-(--font-size-hero) font-bold leading-tight mb-3 md:mb-6 drop-shadow-lg"
                       style={{ color: '#ffffff' }}
                     >
                       {index === selectedIndex ? (
@@ -104,10 +100,10 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
                         slide.title || ''
                       )}
                     </h1>
-                    <p className="text-lg md:text-xl mb-8 max-w-xl drop-shadow-md" style={{ color: '#d6e3ff' }}>
+                    <p className="text-sm sm:text-base md:text-xl mb-4 md:mb-8 max-w-xl drop-shadow-md line-clamp-2 md:line-clamp-none" style={{ color: '#d6e3ff' }}>
                       {slide.subtitle || ''}
                     </p>
-                    <div className="flex flex-wrap gap-4">
+                    <div className="flex flex-wrap gap-3 md:gap-4">
                       {slide.cta && (
                         <Button asChild size="lg" variant="accent">
                           <Link href={slide.href || '#'}>{slide.cta}</Link>
@@ -124,7 +120,6 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
           ))}
         </div>
       </div>
-
     </div>
   );
 }

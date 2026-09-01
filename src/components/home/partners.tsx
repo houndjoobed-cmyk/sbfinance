@@ -3,11 +3,11 @@ import { Section } from "@/components/layout/section";
 
 export function Partners({ content }: { content?: any }) {
   const partnersList = content?.items?.length > 0 ? content.items : [
-    { id: 1, name: 'Assurance 1', image: '/images/partenaires/Assurance 1.png' },
-    { id: 2, name: 'Banque 1', image: '/images/partenaires/Banque 1.png' },
-    { id: 3, name: 'Banque 2', image: '/images/partenaires/Banque 2.png' },
-    { id: 4, name: 'Banque 3', image: '/images/partenaires/Bnaque 3.png' },
-    { id: 5, name: 'Ecobank', image: '/images/partenaires/Ecobank.png' },
+    { id: 1, name: 'Assurance 1', image: '/images/partenaires/assurance-1.png' },
+    { id: 2, name: 'Banque 1', image: '/images/partenaires/banque-1.png' },
+    { id: 3, name: 'Banque 2', image: '/images/partenaires/banque-2.png' },
+    { id: 4, name: 'Banque 3', image: '/images/partenaires/banque-3.png' },
+    { id: 5, name: 'Ecobank', image: '/images/partenaires/ecobank.png' },
   ];
 
   return (

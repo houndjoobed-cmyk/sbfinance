@@ -29,7 +29,7 @@ export default async function NewsPage() {
     orderBy: { createdAt: 'desc' }
   });
 
-  const bgUrl = parametres?.banniereAPropos || '/images/BANNIERE.png';
+  const bgUrl = parametres?.banniereAPropos || '/images/banniere.png';
 
   // Get unique categories for filter
   const categories = ["Tous", ...Array.from(new Set(actualites.map(a => a.categorie)))];
