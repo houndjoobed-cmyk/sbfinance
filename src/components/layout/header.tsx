@@ -53,7 +53,7 @@ export function Header() {
   return (
     <header className={cn(
       "top-0 z-40 w-full",
-      isHomePage ? "sticky md:absolute bg-primary md:bg-transparent" : "sticky bg-white shadow-sm"
+      isHomePage ? "sticky lg:absolute bg-primary lg:bg-transparent" : "sticky bg-white shadow-sm"
     )}>
       {/* Top Bar — White with color logo + CTA */}
       <div className={cn(

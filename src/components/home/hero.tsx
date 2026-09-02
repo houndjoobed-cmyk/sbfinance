@@ -64,7 +64,7 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="relative w-full min-h-[70svh] md:aspect-auto md:h-[85vh] lg:h-[95vh] md:min-h-150">
+    <div className="relative w-full aspect-video lg:aspect-auto lg:h-[85vh] xl:h-[95vh] lg:min-h-150">
       <div className="embla h-full absolute inset-0" ref={emblaRef}>
         <div className="embla__container h-full">
           {displaySlides.map((slide, index) => (
@@ -83,15 +83,15 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
                   className={`object-cover ${index === selectedIndex ? 'animate-zoom' : ''}`}
                 />
                 {/* Dark Overlay for text readability */}
-                <div className="absolute inset-0 bg-black/35"></div>
+                <div className="absolute inset-0 bg-black/40"></div>
               </div>
 
               {/* Content */}
-              <div className="relative z-10 h-full flex items-end pb-8 md:items-center md:pb-0 pt-16 md:pt-32">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+              <div className="relative z-10 h-full flex items-center py-4 lg:py-0 lg:pt-32">
+                <div className="mx-auto max-w-7xl px-4 lg:px-8 w-full">
                   <div className="max-w-2xl reveal-up">
                     <h1
-                      className="text-2xl sm:text-3xl md:text-5xl lg:text-(--font-size-hero) font-bold leading-tight mb-3 md:mb-6 drop-shadow-lg"
+                      className="text-lg md:text-3xl lg:text-5xl xl:text-(--font-size-hero) font-bold leading-tight mb-2 lg:mb-6 drop-shadow-lg"
                       style={{ color: '#ffffff' }}
                     >
                       {index === selectedIndex ? (
@@ -100,16 +100,16 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
                         slide.title || ''
                       )}
                     </h1>
-                    <p className="text-sm sm:text-base md:text-xl mb-4 md:mb-8 max-w-xl drop-shadow-md line-clamp-2 md:line-clamp-none" style={{ color: '#d6e3ff' }}>
+                    <p className="text-xs md:text-base lg:text-xl mb-3 lg:mb-8 max-w-xl drop-shadow-md line-clamp-2 lg:line-clamp-none" style={{ color: '#d6e3ff' }}>
                       {slide.subtitle || ''}
                     </p>
-                    <div className="flex flex-wrap gap-3 md:gap-4">
+                    <div className="flex flex-wrap gap-2 md:gap-4">
                       {slide.cta && (
-                        <Button asChild size="lg" variant="accent">
+                        <Button asChild variant="accent" className="h-8 px-3 text-xs md:h-10 md:px-5 md:text-sm lg:h-12 lg:px-8 lg:text-base">
                           <Link href={slide.href || '#'}>{slide.cta}</Link>
                         </Button>
                       )}
-                      <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10 hover:text-white">
+                      <Button asChild variant="outline" className="h-8 px-3 text-xs md:h-10 md:px-5 md:text-sm lg:h-12 lg:px-8 lg:text-base text-white border-white hover:bg-white/10 hover:text-white">
                         <Link href="/contacts">Nous contacter</Link>
                       </Button>
                     </div>
