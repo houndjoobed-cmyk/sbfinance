@@ -8,6 +8,7 @@ import { Calendar, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 import prisma from "@/lib/prisma";
+import { JsonLd } from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = {
   title: "Actualités",
@@ -36,6 +37,13 @@ export default async function NewsPage() {
 
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Actualités - Salem Braha Finance",
+        "url": "https://sbfinance.bj/actualites",
+        "description": "Suivez les dernières nouvelles, événements et conseils financiers de Salem Braha Finance."
+      }} />
       <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url('${bgUrl}')` }}></div>
         <div className="absolute inset-0 bg-primary-dark/70 z-0"></div>

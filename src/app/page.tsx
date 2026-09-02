@@ -9,6 +9,7 @@ import { DgQuote } from "@/components/home/dg-quote";
 import { Partners } from "@/components/home/partners";
 import { JoinUs } from "@/components/home/join-us";
 import prisma from "@/lib/prisma";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = 'force-dynamic';
 
@@ -211,6 +212,12 @@ export default async function Home() {
 
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Salem Braha Finance",
+        "url": "https://sbfinance.bj"
+      }} />
       <Hero carouselSlides={heroSlides} />
       <Features content={content.features} />
       <Numbers stats={content.stats} />

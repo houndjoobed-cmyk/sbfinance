@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Shield, TrendingUp, Handshake, Lightbulb, BookOpen, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import prisma from "@/lib/prisma";
+import { JsonLd } from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = {
   title: "Nos Produits",
@@ -82,6 +83,17 @@ export default async function ProductsPage() {
 
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "FinancialProduct",
+        "name": "Produits Financiers - Salem Braha Finance",
+        "url": "https://sbfinance.bj/produits",
+        "provider": {
+          "@type": "Organization",
+          "name": "Salem Braha Finance"
+        },
+        "description": "Solutions de crédit et d'épargne adaptées pour les entrepreneurs, commerçants et particuliers."
+      }} />
       <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url('${bgUrl}')` }}></div>
         <div className="absolute inset-0 bg-primary-dark/70 z-0"></div>

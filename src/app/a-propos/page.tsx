@@ -5,6 +5,7 @@ import { Section } from '@/components/layout/section';
 import { ShieldCheck, TrendingUp, Users, Award, BookOpen } from 'lucide-react';
 import prisma from "@/lib/prisma";
 import Image from 'next/image';
+import { JsonLd } from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = {
   title: "Qui sommes-nous",
@@ -42,6 +43,13 @@ export default async function AboutPage() {
 
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "Qui sommes-nous - Salem Braha Finance",
+        "url": "https://sbfinance.bj/a-propos",
+        "description": "Découvrez l'histoire, la mission, la vision et les valeurs de Salem Braha Finance."
+      }} />
       {/* Page Header */}
       <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
         <div

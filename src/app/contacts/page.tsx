@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import prisma from "@/lib/prisma";
 import { ContactForm } from '@/components/contact/contact-form';
+import { JsonLd } from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = {
   title: "Contacts",
@@ -45,6 +46,19 @@ export default async function ContactPage() {
 
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contactez Salem Braha Finance",
+        "url": "https://sbfinance.bj/contacts",
+        "description": "Contactez-nous pour toute question sur nos offres de crédit ou d'épargne.",
+        "mainEntity": {
+          "@type": "Organization",
+          "name": "Salem Braha Finance",
+          "telephone": "+229-01-21-38-05-87",
+          "email": "contact@sbfinance.bj"
+        }
+      }} />
       <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url('${bgUrl}')` }}></div>
         <div className="absolute inset-0 bg-primary-dark/70 z-0"></div>

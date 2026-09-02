@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { MapPin, Phone, Clock, MessageCircle } from 'lucide-react';
 import { MapWrapper } from '@/components/network/map-wrapper';
 import prisma from "@/lib/prisma";
+import { JsonLd } from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = {
   title: "Notre réseau d'agences",
@@ -100,6 +101,17 @@ export default async function NetworkPage() {
 
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "FinancialService",
+        "name": "Réseau d'Agences Salem Braha Finance",
+        "url": "https://sbfinance.bj/reseau",
+        "description": "Trouvez l'agence Salem Braha Finance la plus proche de chez vous au Bénin.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "BJ"
+        }
+      }} />
       <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url('${bgUrl}')` }}></div>
         <div className="absolute inset-0 bg-primary-dark/70 z-0"></div>
