@@ -6,9 +6,16 @@ export async function proxy(request: NextRequest) {
     request,
   })
 
+  const supabaseUrl =
+    process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    "https://zympcihvfsxdlxuvaqtc.supabase.co";
+  const supabaseAnonKey =
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5bXBjaWh2ZnN4ZGx4dXZhcXRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxNDg2NjgsImV4cCI6MjEwMjcyNDY2OH0.auKCHnM-kLlKuKxA55b45aUpo-0Kc42EXYxAxetEN5E";
+
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseUrl,
+    supabaseAnonKey,
     {
       cookies: {
         getAll() {
