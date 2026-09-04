@@ -1,39 +1,54 @@
 import React from 'react';
 import { Section } from '@/components/layout/section';
-import { ArrowRight, ShieldCheck, TrendingUp, Users } from 'lucide-react';
+import { ArrowRight, ShieldCheck, TrendingUp, Users, Target, Award, Heart } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { TypingAnimation } from '@/components/ui/typing-animation';
 
 export function Features({ content }: { content?: any }) {
-  const features = content?.items || [
+  const defaultFeatures = [
     {
       title: "Vision à l'horizon 2035",
       description: "Être une institution de microfinance leader dans la finance inclusive, responsable et environnementale au Bénin.",
       icon: "TrendingUp",
+      image: "/images/home/mission-vision.jpg",
       link: "/a-propos"
     },
     {
       title: "Mission",
       description: "Contribuer à l'amélioration des conditions de vie des personnes à faible revenu via des services financiers et non financiers adaptés.",
       icon: "Users",
+      image: "/images/home/rejoignez-nous.png",
       link: "/a-propos"
     },
     {
       title: "Nos Valeurs",
       description: "Le Respect, l'Intégrité et l'Efficacité guident toutes nos actions au quotidien.",
       icon: "ShieldCheck",
+      image: "/images/home/Engagement.jpeg",
       link: "/a-propos"
     }
   ];
 
+  const features = (content?.items && content.items.length > 0) ? content.items : defaultFeatures;
+
   const getIcon = (name: string) => {
     switch (name) {
-      case 'TrendingUp': return <TrendingUp className="h-8 w-8 text-accent" />;
-      case 'Users': return <Users className="h-8 w-8 text-accent" />;
-      case 'ShieldCheck': return <ShieldCheck className="h-8 w-8 text-accent" />;
-      default: return <ShieldCheck className="h-8 w-8 text-accent" />;
+      case 'TrendingUp': return <TrendingUp className="h-5 w-5 text-accent" />;
+      case 'Users': return <Users className="h-5 w-5 text-accent" />;
+      case 'ShieldCheck': return <ShieldCheck className="h-5 w-5 text-accent" />;
+      case 'Target': return <Target className="h-5 w-5 text-accent" />;
+      case 'Award': return <Award className="h-5 w-5 text-accent" />;
+      case 'Heart': return <Heart className="h-5 w-5 text-accent" />;
+      default: return <ShieldCheck className="h-5 w-5 text-accent" />;
     }
   };
+
+  const defaultImgs = [
+    "/images/home/mission-vision.jpg",
+    "/images/home/rejoignez-nous.png",
+    "/images/home/Engagement.jpeg"
+  ];
 
   return (
     <Section variant="default" className="bg-white -mt-8 relative z-30 pt-16">
@@ -61,22 +76,49 @@ export function Features({ content }: { content?: any }) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {features.map((feature: any, index: number) => (
-          <div key={index} className="bg-white p-8 shadow-(--shadow-card) border border-outline-variant hover:shadow-lg transition-shadow">
-            <div className="w-14 h-14 bg-primary/10 flex items-center justify-center mb-6">
-              {getIcon(feature.icon)}
-            </div>
-            <h3 className="text-xl font-bold text-primary-dark mb-4">{feature.title}</h3>
-            <p className="text-on-surface-variant mb-6">{feature.description}</p>
-            <Link
-              href={feature.link}
-              className="inline-flex items-center text-primary font-medium hover:text-accent transition-colors group"
+        {features.map((feature: any, index: number) => {
+          const cardImage = feature.image || defaultImgs[index % defaultImgs.length];
+
+          return (
+            <div
+              key={index}
+              className="bg-white border border-slate-200 hover:shadow-xl transition-all duration-300 h-full flex flex-col group overflow-hidden"
             >
-              En savoir plus
-              <ArrowRight className="ml-2 h-4 w-4 transform transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
-        ))}
+              {/* Image de couverture avec icône flottante comme les cartes produits */}
+              <div className="relative h-52 overflow-hidden bg-slate-100">
+                <Image
+                  src={cardImage}
+                  alt={feature.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                {/* Badge Icône circulaire */}
+                <div className="absolute top-4 left-4 w-11 h-11 rounded-full bg-white/95 backdrop-blur-sm flex items-center justify-center shadow-md">
+                  {getIcon(feature.icon)}
+                </div>
+              </div>
+
+              {/* Contenu textuel */}
+              <div className="p-6 flex flex-col grow">
+                <h3 className="text-xl font-bold text-primary mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-6 grow">
+                  {feature.description}
+                </p>
+                <Link
+                  href={feature.link || "/a-propos"}
+                  className="inline-flex items-center text-primary font-semibold hover:text-accent transition-colors mt-auto group/link"
+                >
+                  En savoir plus
+                  <ArrowRight className="ml-2 h-4 w-4 transform transition-transform group-hover/link:translate-x-1" />
+                </Link>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </Section>
   );

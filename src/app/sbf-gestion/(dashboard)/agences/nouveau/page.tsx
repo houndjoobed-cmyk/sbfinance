@@ -1,14 +1,16 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
-export default function AgenceFormPage({ params }: { params?: { id: string } }) {
-  const isEditing = !!params?.id;
+export default function AgenceFormPage({ params }: { params?: { id?: string } }) {
   const router = useRouter();
+  const routeParams = useParams();
+  const id = params?.id || (routeParams?.id as string | undefined);
+  const isEditing = Boolean(id);
   
   const [loading, setLoading] = useState(isEditing);
   const [saving, setSaving] = useState(false);
@@ -24,14 +26,14 @@ export default function AgenceFormPage({ params }: { params?: { id: string } }) 
   });
 
   useEffect(() => {
-    if (isEditing && params?.id) {
-      fetchAgence(params.id);
+    if (isEditing && id) {
+      fetchAgence(id);
     }
-  }, [isEditing, params]);
+  }, [isEditing, id]);
 
-  const fetchAgence = async (id: string) => {
+  const fetchAgence = async (agenceId: string) => {
     try {
-      const res = await fetch(`/api/admin/agences/${id}`);
+      const res = await fetch(`/api/admin/agences/${agenceId}`);
       if (res.ok) {
         const data = await res.json();
         setFormData({
@@ -55,7 +57,7 @@ export default function AgenceFormPage({ params }: { params?: { id: string } }) 
     setSaving(true);
     setError('');
 
-    const url = isEditing ? `/api/admin/agences/${params.id}` : '/api/admin/agences';
+    const url = isEditing && id ? `/api/admin/agences/${id}` : '/api/admin/agences';
     const method = isEditing ? 'PUT' : 'POST';
 
     try {

@@ -130,9 +130,9 @@ export default async function Home() {
       title: "Pourquoi SBF ?",
       subtitle: "Nos piliers fondateurs",
       items: [
-        { title: "Vision à l'horizon 2035", description: "Être une institution de microfinance leader dans la finance inclusive, responsable et environnementale au Bénin.", icon: "TrendingUp", link: "/a-propos" },
-        { title: "Mission", description: "Contribuer à l'amélioration des conditions de vie des personnes à faible revenu via des services financiers et non financiers adaptés.", icon: "Users", link: "/a-propos" },
-        { title: "Nos Valeurs", description: "Le Respect, l'Intégrité et l'Efficacité guident toutes nos actions au quotidien.", icon: "ShieldCheck", link: "/a-propos" }
+        { title: "Vision à l'horizon 2035", description: "Être une institution de microfinance leader dans la finance inclusive, responsable et environnementale au Bénin.", icon: "TrendingUp", image: "/images/home/mission-vision.jpg", link: "/a-propos" },
+        { title: "Mission", description: "Contribuer à l'amélioration des conditions de vie des personnes à faible revenu via des services financiers et non financiers adaptés.", icon: "Users", image: "/images/home/rejoignez-nous.png", link: "/a-propos" },
+        { title: "Nos Valeurs", description: "Le Respect, l'Intégrité et l'Efficacité guident toutes nos actions au quotidien.", icon: "ShieldCheck", image: "/images/home/Engagement.jpeg", link: "/a-propos" }
       ]
     },
     missionVision: {
@@ -144,7 +144,13 @@ export default async function Home() {
     },
     partners: {
       title: "Ils nous font confiance",
-      items: [] as any[]
+      items: [
+        { id: "1", name: 'Assurance 1', image: '/images/partenaires/assurance-1.png' },
+        { id: "2", name: 'Banque 1', image: '/images/partenaires/banque-1.png' },
+        { id: "3", name: 'Banque 2', image: '/images/partenaires/banque-2.png' },
+        { id: "4", name: 'Banque 3', image: '/images/partenaires/banque-3.png' },
+        { id: "5", name: 'Ecobank', image: '/images/partenaires/ecobank.png' },
+      ]
     },
     productsPreview: {
       backgroundText: "Produits",
@@ -210,15 +216,35 @@ export default async function Home() {
     heroSlides = parametres.heroCarousel;
   }
 
+  const heroSettings = (parametres?.themeConfig as any)?.heroSettings 
+    || (parametres?.accueilContenu as any)?.themeConfig?.heroSettings 
+    || content?.themeConfig?.heroSettings 
+    || content?.heroSettings 
+    || undefined;
+
   return (
     <>
       <JsonLd data={{
         "@context": "https://schema.org",
-        "@type": "WebSite",
+        "@type": "FinancialService",
         "name": "Salem Braha Finance",
-        "url": "https://sbfinance.bj"
+        "alternateName": ["SBF", "Salem Braha Finance Bénin"],
+        "url": "https://sbfinance.bj",
+        "logo": "https://sbfinance.bj/images/logos/logo-sbf.png",
+        "image": "https://sbfinance.bj/images/banniere.png",
+        "description": "Institution de microfinance au Bénin offrant des services d'épargne, de crédit, de conseil et d'inclusion financière.",
+        "telephone": parametres.telephonePrincipal || "+229 01 21 38 05 87",
+        "email": parametres.emailPrincipal || "contact@sbfinance.bj",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": parametres.adresseSiege || "ZOGBO Carré 553 Lot 1907 M 072, Arconville",
+          "addressLocality": "Abomey-Calavi",
+          "addressCountry": "BJ"
+        },
+        "priceRange": "$$",
+        "areaServed": "Bénin"
       }} />
-      <Hero carouselSlides={heroSlides} />
+      <Hero carouselSlides={heroSlides} settings={heroSettings} />
       <Features content={content.features} />
       <Numbers stats={content.stats} />
       <MissionVision mission={parametres.mission} vision={parametres.vision} content={content.missionVision} />

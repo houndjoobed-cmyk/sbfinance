@@ -1,15 +1,17 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Save, Loader2 } from 'lucide-react';
+import { ArrowLeft, Save, Loader2, Plus, Trash2, Images } from 'lucide-react';
 import Link from 'next/link';
 import { ImageUpload } from '@/components/admin/image-upload';
 
-export default function ActualiteFormPage({ params }: { params?: { id: string } }) {
-  const isEditing = !!params?.id;
+export default function ActualiteFormPage({ params }: { params?: { id?: string } }) {
   const router = useRouter();
+  const routeParams = useParams();
+  const id = params?.id || (routeParams?.id as string | undefined);
+  const isEditing = Boolean(id);
   
   const [loading, setLoading] = useState(isEditing);
   const [saving, setSaving] = useState(false);
@@ -21,20 +23,21 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
     extrait: '',
     contenu: '',
     image: '',
+    images: [] as string[],
     categorie: 'Informations',
     lienExterne: '',
     estPublie: true
   });
 
   useEffect(() => {
-    if (isEditing && params?.id) {
-      fetchActualite(params.id);
+    if (isEditing && id) {
+      fetchActualite(id);
     }
-  }, [isEditing, params]);
+  }, [isEditing, id]);
 
-  const fetchActualite = async (id: string) => {
+  const fetchActualite = async (articleId: string) => {
     try {
-      const res = await fetch(`/api/admin/actualites/${id}`);
+      const res = await fetch(`/api/admin/actualites/${articleId}`);
       if (res.ok) {
         const data = await res.json();
         setFormData({
@@ -43,9 +46,10 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
           extrait: data.extrait || '',
           contenu: data.contenu || '',
           image: data.image || '',
+          images: Array.isArray(data.images) ? data.images : [],
           categorie: data.categorie || 'Informations',
           lienExterne: data.lienExterne || '',
-          estPublie: data.estPublie
+          estPublie: data.estPublie ?? true
         });
       }
     } catch (err) {
@@ -60,14 +64,19 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
     setSaving(true);
     setError('');
 
-    const url = isEditing ? `/api/admin/actualites/${params.id}` : '/api/admin/actualites';
+    const url = isEditing && id ? `/api/admin/actualites/${id}` : '/api/admin/actualites';
     const method = isEditing ? 'PUT' : 'POST';
+
+    const payload = {
+      ...formData,
+      images: formData.images.filter((img) => typeof img === 'string' && img.trim() !== '')
+    };
 
     try {
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(payload)
       });
 
       if (!res.ok) {
@@ -88,6 +97,28 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+    }));
+  };
+
+  const addGalleryImage = () => {
+    setFormData(prev => ({
+      ...prev,
+      images: [...prev.images, '']
+    }));
+  };
+
+  const updateGalleryImage = (index: number, url: string) => {
+    setFormData(prev => {
+      const next = [...prev.images];
+      next[index] = url;
+      return { ...prev, images: next };
+    });
+  };
+
+  const removeGalleryImage = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index)
     }));
   };
 
@@ -141,14 +172,6 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
           </div>
 
           <div>
-            <ImageUpload 
-              label="Image de l'article (Optionnel)"
-              value={formData.image}
-              onChange={(url) => setFormData(prev => ({ ...prev, image: url }))}
-            />
-          </div>
-          
-          <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">Lien externe (Optionnel)</label>
             <input 
               name="lienExterne"
@@ -158,9 +181,60 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
               className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
               placeholder="Ex: https://lien-vers-article-externe.com"
             />
-            <p className="text-xs text-gray-500 mt-1">Si renseigné, l'article redirigera vers ce lien au lieu de la page détaillée.</p>
+            <p className="text-xs text-gray-500 mt-1">Si renseigné, l'article peut rediriger vers ce lien externe.</p>
           </div>
 
+          <div className="md:col-span-2">
+            <ImageUpload 
+              label="Photo principale / couverture"
+              value={formData.image}
+              onChange={(url) => setFormData(prev => ({ ...prev, image: url }))}
+            />
+          </div>
+
+          {/* GALERIE PHOTOS MULTIPLES */}
+          <div className="md:col-span-2 border-t pt-6">
+            <div className="flex justify-between items-center mb-4">
+              <div>
+                <label className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+                  <Images className="w-4 h-4 text-[#0991b5]" />
+                  Galerie photos additionnelles (Photos de l'article)
+                </label>
+                <p className="text-xs text-gray-500">Ajoutez autant de photos que souhaité pour cet article.</p>
+              </div>
+              <Button type="button" variant="outline" size="sm" onClick={addGalleryImage}>
+                <Plus className="w-4 h-4 mr-1" />
+                Ajouter une photo
+              </Button>
+            </div>
+
+            {formData.images.length === 0 ? (
+              <div className="text-center py-6 bg-gray-50 rounded-lg border border-dashed border-gray-200">
+                <p className="text-xs text-gray-500">Aucune photo additionnelle dans la galerie.</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {formData.images.map((imgUrl, index) => (
+                  <div key={index} className="p-3 bg-gray-50 border rounded-lg relative space-y-2">
+                    <button
+                      type="button"
+                      onClick={() => removeGalleryImage(index)}
+                      className="absolute top-2 right-2 text-red-500 hover:text-red-700 bg-white p-1 rounded-md shadow-sm z-10"
+                      title="Supprimer cette photo"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                    <ImageUpload
+                      label={`Photo #${index + 1}`}
+                      value={imgUrl}
+                      onChange={(url) => updateGalleryImage(index, url)}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">Extrait court *</label>
             <textarea 
@@ -170,7 +244,7 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
               value={formData.extrait}
               onChange={handleChange}
               className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
-              placeholder="Résumé de l'article pour la page d'accueil"
+              placeholder="Résumé de l'article pour la liste"
             />
           </div>
 
@@ -183,7 +257,7 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
               value={formData.contenu}
               onChange={handleChange}
               className="w-full border-gray-300 rounded-md shadow-sm focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2"
-              placeholder="Contenu détaillé (supporte le HTML basique ou Markdown plus tard)"
+              placeholder="Contenu détaillé de l'article..."
             />
           </div>
 
@@ -196,7 +270,7 @@ export default function ActualiteFormPage({ params }: { params?: { id: string } 
               onChange={handleChange}
               className="h-4 w-4 text-[#0991b5] focus:ring-[#0991b5] border-gray-300 rounded border bg-white px-3 py-2"
             />
-            <label htmlFor="estPublie" className="ml-2 block text-sm text-gray-900">
+            <label htmlFor="estPublie" className="ml-2 block text-sm text-gray-900 font-medium">
               Publier cet article immédiatement (décocher pour garder en brouillon)
             </label>
           </div>

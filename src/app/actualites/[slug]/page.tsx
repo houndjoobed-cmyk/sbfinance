@@ -87,6 +87,23 @@ export default async function ActualiteDetailPage(props: Props) {
             className="prose prose-lg prose-primary max-w-none text-on-surface"
             dangerouslySetInnerHTML={{ __html: actualite.contenu }}
           />
+
+          {Array.isArray(actualite.images) && actualite.images.length > 0 && (
+            <div className="mt-12 pt-8 border-t border-outline-variant/30">
+              <h3 className="text-xl font-bold text-primary-dark mb-6">Galerie photos</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {actualite.images.map((img: any, idx: number) => (
+                  <div key={idx} className="rounded-xl overflow-hidden shadow-sm border border-outline-variant/30 bg-surface-variant/20 hover:shadow-md transition-shadow aspect-4/3">
+                    <img
+                      src={img}
+                      alt={`${actualite.titre} - photo ${idx + 1}`}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </Section>
     </>

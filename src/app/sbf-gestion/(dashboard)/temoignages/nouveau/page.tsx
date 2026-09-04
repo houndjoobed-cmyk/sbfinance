@@ -1,15 +1,17 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { ImageUpload } from '@/components/admin/image-upload';
 
-export default function TemoignageFormPage({ params }: { params?: { id: string } }) {
-  const isEditing = !!params?.id;
+export default function TemoignageFormPage({ params }: { params?: { id?: string } }) {
   const router = useRouter();
+  const routeParams = useParams();
+  const id = params?.id || (routeParams?.id as string | undefined);
+  const isEditing = Boolean(id);
   
   const [loading, setLoading] = useState(isEditing);
   const [saving, setSaving] = useState(false);
@@ -24,12 +26,12 @@ export default function TemoignageFormPage({ params }: { params?: { id: string }
   });
 
   useEffect(() => {
-    if (isEditing && params?.id) fetchTemoignage(params.id);
-  }, [isEditing, params]);
+    if (isEditing && id) fetchTemoignage(id);
+  }, [isEditing, id]);
 
-  const fetchTemoignage = async (id: string) => {
+  const fetchTemoignage = async (temoignageId: string) => {
     try {
-      const res = await fetch(`/api/admin/temoignages/${id}`);
+      const res = await fetch(`/api/admin/temoignages/${temoignageId}`);
       if (res.ok) {
         const data = await res.json();
         setFormData({
@@ -52,7 +54,7 @@ export default function TemoignageFormPage({ params }: { params?: { id: string }
     setSaving(true);
     setError('');
 
-    const url = isEditing ? `/api/admin/temoignages/${params.id}` : '/api/admin/temoignages';
+    const url = isEditing && id ? `/api/admin/temoignages/${id}` : '/api/admin/temoignages';
     const method = isEditing ? 'PUT' : 'POST';
 
     try {

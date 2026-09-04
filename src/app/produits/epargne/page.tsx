@@ -218,6 +218,39 @@ const comptesEpargne = [
 export default function EpargnesPage() {
   const [activeTab, setActiveTab] = useState<'courants' | 'epargne'>('courants');
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
+  const [data, setData] = useState({
+    hero: {
+      title: "Comptes Courants & Épargne",
+      description: "Des solutions souples pour sécuriser vos revenus quotidiens ou préparer l'avenir, avec des conditions de rémunération attractives.",
+      image: "/images/banniere.png"
+    },
+    section: {
+      title: "Nos Solutions Bancaires",
+      subtitle: "Fidèle aux orientations de sa Direction, Salem Braha Finance adapte ses produits à vos besoins.",
+      courantsIntro: "Ces comptes facilitent le versement de vos revenus et la gestion de vos opérations financières au quotidien. Ils ne génèrent pas d'intérêts, mais vous permettent d'obtenir des financements et de sécuriser votre trésorerie.",
+      epargneIntro: "Les comptes d'épargne vous permettent de constituer une réserve financière et de concrétiser des projets futurs grâce à des taux d'intérêts très performants."
+    },
+    comptesCourants: comptesCourants,
+    comptesEpargne: comptesEpargne
+  });
+
+  React.useEffect(() => {
+    fetch('/api/admin/parametres')
+      .then(res => res.json())
+      .then(resData => {
+        if (resData && resData.epargneContenu) {
+          setData(prev => ({
+            ...prev,
+            ...resData.epargneContenu,
+            hero: { ...prev.hero, ...(resData.epargneContenu.hero || {}) },
+            section: { ...prev.section, ...(resData.epargneContenu.section || {}) },
+            comptesCourants: resData.epargneContenu.comptesCourants || prev.comptesCourants,
+            comptesEpargne: resData.epargneContenu.comptesEpargne || prev.comptesEpargne,
+          }));
+        }
+      })
+      .catch(err => console.error('Erreur chargement epargne:', err));
+  }, []);
 
   return (
     <>
@@ -225,23 +258,23 @@ export default function EpargnesPage() {
       <meta name="description" content="Découvrez nos comptes courants et nos solutions d'épargne adaptées à vos projets et à votre situation." />
 
       <Section variant="primary" className="py-24 md:py-32 lg:py-40 relative overflow-hidden bg-primary-dark">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url('/images/banniere.png')` }}></div>
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ backgroundImage: `url('${data.hero.image || '/images/banniere.png'}')` }}></div>
         <div className="absolute inset-0 bg-primary-dark/70 z-0"></div>
         <div className="text-center max-w-3xl mx-auto relative z-10 reveal-up">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">
-            <TypingAnimation text="Comptes Courants & Épargne" typeSpeed={50} />
+            <TypingAnimation text={data.hero.title || "Comptes Courants & Épargne"} typeSpeed={50} />
           </h1>
           <p className="text-xl text-white drop-shadow-md font-medium">
-            Des solutions souples pour sécuriser vos revenus quotidiens ou préparer l'avenir, avec des conditions de rémunération attractives.
+            {data.hero.description}
           </p>
         </div>
       </Section>
 
       <Section variant="default" className="py-16">
         <div className="text-center mb-12 reveal-up">
-          <h2 className="text-3xl font-bold text-primary-dark mb-4">Nos Solutions Bancaires</h2>
+          <h2 className="text-3xl font-bold text-primary-dark mb-4">{data.section.title || "Nos Solutions Bancaires"}</h2>
           <p className="text-on-surface-variant text-lg max-w-2xl mx-auto mb-8">
-            Fidèle aux orientations de sa Direction, Salem Braha Finance adapte ses produits à vos besoins.
+            {data.section.subtitle}
           </p>
 
           {/* Custom Tabs */}
@@ -278,80 +311,122 @@ export default function EpargnesPage() {
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <p className="text-on-surface-variant">
-                Ces comptes facilitent le versement de vos revenus et la gestion de vos opérations financières au quotidien. Ils ne génèrent pas d'intérêts, mais vous permettent d'obtenir des financements et de sécuriser votre trésorerie.
+                {data.section.courantsIntro}
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-              {comptesCourants.map((compte) => (
-                <div key={compte.nom} className="bg-white rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden hover:shadow-md transition-shadow">
-                  <div className="p-6">
-                    <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <span className="inline-block px-3 py-1 bg-accent/10 text-accent font-semibold text-xs rounded-full mb-2">
-                          {compte.categorie}
-                        </span>
-                        <h3 className="text-2xl font-bold text-primary-dark">{compte.nom}</h3>
+              {data.comptesCourants.map((compte: any) => {
+                const hasCout = Boolean(compte.coutPack && compte.coutPack.trim());
+                const hasDepot = Boolean(compte.depotMin && compte.depotMin.trim());
+                const hasFraisTenue = Boolean(compte.fraisTenue && compte.fraisTenue.trim());
+                const hasFraisOuverture = Boolean(compte.fraisOuverture && compte.fraisOuverture.trim());
+                const hasTarifs = hasCout || hasDepot || hasFraisTenue || hasFraisOuverture;
+
+                const hasCredits = Boolean(compte.creditsPossibles && compte.creditsPossibles.trim());
+                const piecesList = (Array.isArray(compte.pieces) ? compte.pieces : []).filter((p: string) => Boolean(p && typeof p === 'string' && p.trim()));
+                const hasPieces = piecesList.length > 0;
+                const hasDetails = hasCredits || hasPieces;
+
+                return (
+                  <div key={compte.nom} className="bg-white rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div className="p-6">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          {compte.categorie && (
+                            <span className="inline-block px-3 py-1 bg-accent/10 text-accent font-semibold text-xs rounded-full mb-2">
+                              {compte.categorie}
+                            </span>
+                          )}
+                          <h3 className="text-2xl font-bold text-primary-dark">{compte.nom}</h3>
+                        </div>
+                        <div className="w-12 h-12 bg-primary/10 flex items-center justify-center rounded-full shrink-0">
+                          <Wallet className="h-6 w-6 text-primary" />
+                        </div>
                       </div>
-                      <div className="w-12 h-12 bg-primary/10 flex items-center justify-center rounded-full shrink-0">
-                        <Wallet className="h-6 w-6 text-primary" />
-                      </div>
+
+                      {compte.cible && (
+                        <p className="text-on-surface-variant text-sm mb-6 pb-6 border-b border-outline-variant/30">
+                          <strong>Cible :</strong> {compte.cible}
+                        </p>
+                      )}
+
+                      {/* Tarifs et conditions : affichage conditionnel propre */}
+                      {hasTarifs ? (
+                        <div className="grid grid-cols-2 gap-4 mb-6">
+                          {hasCout && (
+                            <div className="bg-surface-variant/50 p-3 rounded-lg">
+                              <span className="block text-xs text-on-surface-variant mb-1">Coût du PACK</span>
+                              <span className="font-bold text-primary-dark">{compte.coutPack}</span>
+                            </div>
+                          )}
+                          {hasDepot && (
+                            <div className="bg-surface-variant/50 p-3 rounded-lg">
+                              <span className="block text-xs text-on-surface-variant mb-1">Dépôt minimum</span>
+                              <span className="font-bold text-primary-dark">{compte.depotMin}</span>
+                            </div>
+                          )}
+                          {hasFraisTenue && (
+                            <div className="bg-surface-variant/50 p-3 rounded-lg">
+                              <span className="block text-xs text-on-surface-variant mb-1">Frais de tenue</span>
+                              <span className="font-bold text-primary-dark">{compte.fraisTenue}</span>
+                            </div>
+                          )}
+                          {hasFraisOuverture && (
+                            <div className="bg-surface-variant/50 p-3 rounded-lg">
+                              <span className="block text-xs text-on-surface-variant mb-1">Frais d'ouverture</span>
+                              <span className="font-bold text-primary-dark">{compte.fraisOuverture}</span>
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="mb-6 p-3 bg-surface-variant/30 rounded-lg text-xs text-on-surface-variant/80 italic text-center">
+                          Conditions tarifaires disponibles en agence
+                        </div>
+                      )}
+
+                      {hasDetails ? (
+                        <button
+                          onClick={() => setExpandedCard(expandedCard === compte.nom ? null : compte.nom)}
+                          className="flex items-center justify-center w-full py-2 text-sm font-semibold text-primary hover:bg-primary/5 rounded-md transition-colors"
+                        >
+                          {expandedCard === compte.nom ? "Voir moins" : "Voir plus de détails"}
+                          <ChevronDown className={cn("ml-2 w-4 h-4 transition-transform", expandedCard === compte.nom ? "rotate-180" : "")} />
+                        </button>
+                      ) : (
+                        <div className="py-2 text-xs text-center text-on-surface-variant/60">
+                          Renseignements complémentaires en agence
+                        </div>
+                      )}
                     </div>
 
-                    <p className="text-on-surface-variant text-sm mb-6 pb-6 border-b border-outline-variant/30">
-                      <strong>Cible :</strong> {compte.cible}
-                    </p>
-
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div className="bg-surface-variant/50 p-3 rounded-lg">
-                        <span className="block text-xs text-on-surface-variant mb-1">Coût du PACK</span>
-                        <span className="font-bold text-primary-dark">{compte.coutPack}</span>
+                    {/* Expanded content */}
+                    {hasDetails && expandedCard === compte.nom && (
+                      <div className="px-6 pb-6 pt-2 bg-surface-variant/30 animate-in slide-in-from-top-2 border-t border-outline-variant/20">
+                        {hasCredits && (
+                          <div className="mb-4">
+                            <h4 className="font-bold text-primary-dark mb-2 text-sm">Crédits possibles :</h4>
+                            <p className="text-sm text-on-surface-variant">{compte.creditsPossibles}</p>
+                          </div>
+                        )}
+                        {hasPieces && (
+                          <div>
+                            <h4 className="font-bold text-primary-dark mb-2 text-sm">Pièces à fournir :</h4>
+                            <ul className="space-y-2">
+                              {piecesList.map((piece: string, idx: number) => (
+                                <li key={idx} className="flex items-start text-sm text-on-surface-variant">
+                                  <CheckCircle2 className="w-4 h-4 text-accent mr-2 mt-0.5 shrink-0" />
+                                  <span>{piece}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
                       </div>
-                      <div className="bg-surface-variant/50 p-3 rounded-lg">
-                        <span className="block text-xs text-on-surface-variant mb-1">Dépôt minimum</span>
-                        <span className="font-bold text-primary-dark">{compte.depotMin}</span>
-                      </div>
-                      <div className="bg-surface-variant/50 p-3 rounded-lg">
-                        <span className="block text-xs text-on-surface-variant mb-1">Frais de tenue</span>
-                        <span className="font-bold text-primary-dark">{compte.fraisTenue}</span>
-                      </div>
-                      <div className="bg-surface-variant/50 p-3 rounded-lg">
-                        <span className="block text-xs text-on-surface-variant mb-1">Frais d'ouverture</span>
-                        <span className="font-bold text-primary-dark">{compte.fraisOuverture}</span>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => setExpandedCard(expandedCard === compte.nom ? null : compte.nom)}
-                      className="flex items-center justify-center w-full py-2 text-sm font-semibold text-primary hover:bg-primary/5 rounded-md transition-colors"
-                    >
-                      {expandedCard === compte.nom ? "Voir moins" : "Voir plus de détails"}
-                      <ChevronDown className={cn("ml-2 w-4 h-4 transition-transform", expandedCard === compte.nom ? "rotate-180" : "")} />
-                    </button>
+                    )}
                   </div>
-
-                  {/* Expanded content */}
-                  {expandedCard === compte.nom && (
-                    <div className="px-6 pb-6 pt-2 bg-surface-variant/30 animate-in slide-in-from-top-2">
-                      <div className="mb-4">
-                        <h4 className="font-bold text-primary-dark mb-2 text-sm">Crédits possibles :</h4>
-                        <p className="text-sm text-on-surface-variant">{compte.creditsPossibles}</p>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-primary-dark mb-2 text-sm">Pièces à fournir :</h4>
-                        <ul className="space-y-2">
-                          {compte.pieces.map((piece, idx) => (
-                            <li key={idx} className="flex items-start text-sm text-on-surface-variant">
-                              <CheckCircle2 className="w-4 h-4 text-accent mr-2 mt-0.5 shrink-0" />
-                              <span>{piece}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}
@@ -361,79 +436,115 @@ export default function EpargnesPage() {
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <p className="text-on-surface-variant">
-                Les comptes d'épargne vous permettent de constituer une réserve financière et de concrétiser des projets futurs grâce à des taux d'intérêts très performants.
+                {data.section.epargneIntro}
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-              {comptesEpargne.map((epargne) => (
-                <div key={epargne.nom} className="bg-white rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
-                  <div className="p-6 grow">
-                    <div className="flex justify-between items-start mb-4">
+              {data.comptesEpargne.map((epargne: any) => {
+                const hasDepot = Boolean(epargne.depotMin && epargne.depotMin.trim());
+                const hasRemuneration = Boolean(epargne.remuneration && epargne.remuneration.trim());
+                const hasTarifs = hasDepot || hasRemuneration;
+
+                const caracsList = (Array.isArray(epargne.caracteristiques) ? epargne.caracteristiques : []).filter((c: string) => Boolean(c && typeof c === 'string' && c.trim()));
+                const piecesList = (Array.isArray(epargne.pieces) ? epargne.pieces : []).filter((p: string) => Boolean(p && typeof p === 'string' && p.trim()));
+                const hasDetails = caracsList.length > 0 || piecesList.length > 0;
+
+                return (
+                  <div key={epargne.nom} className="bg-white rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div className="p-6 grow flex flex-col justify-between">
                       <div>
-                        <h3 className="text-2xl font-bold text-primary-dark">{epargne.nom}</h3>
+                        <div className="flex justify-between items-start mb-4">
+                          <div>
+                            <h3 className="text-2xl font-bold text-primary-dark">{epargne.nom}</h3>
+                          </div>
+                          <div className="w-12 h-12 bg-accent/10 flex items-center justify-center rounded-full shrink-0">
+                            <Landmark className="h-6 w-6 text-accent" />
+                          </div>
+                        </div>
+
+                        {epargne.description && (
+                          <p className="text-on-surface-variant text-sm mb-4">
+                            {epargne.description}
+                          </p>
+                        )}
+                        {epargne.cible && (
+                          <p className="text-on-surface-variant text-sm mb-6 pb-6 border-b border-outline-variant/30">
+                            <strong>Cible :</strong> {epargne.cible}
+                          </p>
+                        )}
+
+                        {hasTarifs ? (
+                          <div className="grid grid-cols-2 gap-4 mb-6">
+                            {hasDepot && (
+                              <div className={`bg-surface-variant/50 p-3 rounded-lg ${hasRemuneration ? 'col-span-2 sm:col-span-1' : 'col-span-2'}`}>
+                                <span className="block text-xs text-on-surface-variant mb-1">Dépôt minimum</span>
+                                <span className="font-bold text-primary-dark">{epargne.depotMin}</span>
+                              </div>
+                            )}
+                            {hasRemuneration && (
+                              <div className={`bg-surface-variant/50 p-3 rounded-lg ${hasDepot ? 'col-span-2 sm:col-span-1' : 'col-span-2'}`}>
+                                <span className="block text-xs text-on-surface-variant mb-1">Rémunération</span>
+                                <span className="font-bold text-accent">{epargne.remuneration}</span>
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <div className="mb-6 p-3 bg-surface-variant/30 rounded-lg text-xs text-on-surface-variant/80 italic text-center">
+                            Taux et rémunération disponibles en agence
+                          </div>
+                        )}
                       </div>
-                      <div className="w-12 h-12 bg-accent/10 flex items-center justify-center rounded-full shrink-0">
-                        <Landmark className="h-6 w-6 text-accent" />
-                      </div>
+
+                      {hasDetails ? (
+                        <button
+                          onClick={() => setExpandedCard(expandedCard === epargne.nom ? null : epargne.nom)}
+                          className="flex items-center justify-center w-full py-2 text-sm font-semibold text-primary hover:bg-primary/5 rounded-md transition-colors mt-auto"
+                        >
+                          {expandedCard === epargne.nom ? "Voir moins" : "Voir plus de détails"}
+                          <ChevronDown className={cn("ml-2 w-4 h-4 transition-transform", expandedCard === epargne.nom ? "rotate-180" : "")} />
+                        </button>
+                      ) : (
+                        <div className="py-2 text-xs text-center text-on-surface-variant/60 mt-auto">
+                          Renseignements complémentaires en agence
+                        </div>
+                      )}
                     </div>
 
-                    <p className="text-on-surface-variant text-sm mb-4">
-                      {epargne.description}
-                    </p>
-                    <p className="text-on-surface-variant text-sm mb-6 pb-6 border-b border-outline-variant/30">
-                      <strong>Cible :</strong> {epargne.cible}
-                    </p>
-
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div className="bg-surface-variant/50 p-3 rounded-lg col-span-2 sm:col-span-1">
-                        <span className="block text-xs text-on-surface-variant mb-1">Dépôt minimum</span>
-                        <span className="font-bold text-primary-dark">{epargne.depotMin}</span>
+                    {/* Expanded content */}
+                    {hasDetails && expandedCard === epargne.nom && (
+                      <div className="px-6 pb-6 pt-2 bg-surface-variant/30 animate-in slide-in-from-top-2 border-t border-outline-variant/20">
+                        {caracsList.length > 0 && (
+                          <div className="mb-4">
+                            <h4 className="font-bold text-primary-dark mb-2 text-sm">Caractéristiques :</h4>
+                            <ul className="space-y-2">
+                              {caracsList.map((carac: string, idx: number) => (
+                                <li key={idx} className="flex items-start text-sm text-on-surface-variant">
+                                  <CheckCircle2 className="w-4 h-4 text-primary mr-2 mt-0.5 shrink-0" />
+                                  <span>{carac}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        {piecesList.length > 0 && (
+                          <div>
+                            <h4 className="font-bold text-primary-dark mb-2 text-sm">Pièces à fournir :</h4>
+                            <ul className="space-y-2">
+                              {piecesList.map((piece: string, idx: number) => (
+                                <li key={idx} className="flex items-start text-sm text-on-surface-variant">
+                                  <CheckCircle2 className="w-4 h-4 text-primary mr-2 mt-0.5 shrink-0" />
+                                  <span>{piece}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
                       </div>
-                      <div className="bg-surface-variant/50 p-3 rounded-lg col-span-2 sm:col-span-1">
-                        <span className="block text-xs text-on-surface-variant mb-1">Rémunération</span>
-                        <span className="font-bold text-accent">{epargne.remuneration}</span>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => setExpandedCard(expandedCard === epargne.nom ? null : epargne.nom)}
-                      className="flex items-center justify-center w-full py-2 text-sm font-semibold text-primary hover:bg-primary/5 rounded-md transition-colors mt-auto"
-                    >
-                      {expandedCard === epargne.nom ? "Voir moins" : "Voir plus de détails"}
-                      <ChevronDown className={cn("ml-2 w-4 h-4 transition-transform", expandedCard === epargne.nom ? "rotate-180" : "")} />
-                    </button>
+                    )}
                   </div>
-
-                  {/* Expanded content */}
-                  {expandedCard === epargne.nom && (
-                    <div className="px-6 pb-6 pt-2 bg-surface-variant/30 animate-in slide-in-from-top-2">
-                      <div className="mb-4">
-                        <h4 className="font-bold text-primary-dark mb-2 text-sm">Caractéristiques :</h4>
-                        <ul className="space-y-2">
-                          {epargne.caracteristiques.map((carac, idx) => (
-                            <li key={idx} className="flex items-start text-sm text-on-surface-variant">
-                              <CheckCircle2 className="w-4 h-4 text-primary mr-2 mt-0.5 shrink-0" />
-                              <span>{carac}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-primary-dark mb-2 text-sm">Pièces à fournir :</h4>
-                        <ul className="space-y-2">
-                          {epargne.pieces.map((piece, idx) => (
-                            <li key={idx} className="flex items-start text-sm text-on-surface-variant">
-                              <CheckCircle2 className="w-4 h-4 text-primary mr-2 mt-0.5 shrink-0" />
-                              <span>{piece}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

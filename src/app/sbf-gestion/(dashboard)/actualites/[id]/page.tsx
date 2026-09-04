@@ -1,5 +1,10 @@
 import ActualiteFormPage from '../nouveau/page';
 
-export default function EditActualitePage({ params }: { params: { id: string } }) {
-  return <ActualiteFormPage params={params} />;
+export default async function EditActualitePage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const resolvedParams = await params;
+  return <ActualiteFormPage params={resolvedParams} />;
 }

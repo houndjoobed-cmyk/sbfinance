@@ -1,14 +1,16 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2, Plus, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 
-export default function ProduitCreditFormPage({ params }: { params?: { id: string } }) {
-  const isEditing = !!params?.id;
+export default function ProduitCreditFormPage({ params }: { params?: { id?: string } }) {
   const router = useRouter();
+  const routeParams = useParams();
+  const id = params?.id || (routeParams?.id as string | undefined);
+  const isEditing = Boolean(id);
   
   const [loading, setLoading] = useState(isEditing);
   const [saving, setSaving] = useState(false);
@@ -16,6 +18,7 @@ export default function ProduitCreditFormPage({ params }: { params?: { id: strin
   
   const [formData, setFormData] = useState({
     nom: '',
+    slug: '',
     categorie: 'Besoin de fonds de roulement',
     description: '',
     cible: '',
@@ -32,10 +35,10 @@ export default function ProduitCreditFormPage({ params }: { params?: { id: strin
   const [pieces, setPieces] = useState<string[]>(['']);
 
   useEffect(() => {
-    if (isEditing && params?.id) {
-      fetchProduit(params.id);
+    if (isEditing && id) {
+      fetchProduit(id);
     }
-  }, [isEditing, params]);
+  }, [isEditing, id]);
 
   const fetchProduit = async (id: string) => {
     try {
@@ -44,6 +47,7 @@ export default function ProduitCreditFormPage({ params }: { params?: { id: strin
         const data = await res.json();
         setFormData({
           nom: data.nom || '',
+          slug: data.slug || '',
           categorie: data.categorie || 'Besoin de fonds de roulement',
           description: data.description || '',
           cible: data.cible || '',
@@ -70,7 +74,7 @@ export default function ProduitCreditFormPage({ params }: { params?: { id: strin
     setSaving(true);
     setError('');
 
-    const url = isEditing ? `/api/admin/produits/credit/${params.id}` : '/api/admin/produits/credit';
+    const url = isEditing && id ? `/api/admin/produits/credit/${id}` : '/api/admin/produits/credit';
     const method = isEditing ? 'PUT' : 'POST';
 
     const payload = {

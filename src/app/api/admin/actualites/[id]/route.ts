@@ -52,10 +52,11 @@ export async function PUT(request: Request, props: { params: Promise<{ id: strin
       where: { id: params.id },
       data: {
         titre: data.titre,
-        slug: data.slug,
+        slug: data.slug || data.titre?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') || undefined,
         extrait: data.extrait,
         contenu: data.contenu,
         image: data.image,
+        images: Array.isArray(data.images) ? data.images : [],
         categorie: data.categorie,
         lienExterne: data.lienExterne,
         estPublie: data.estPublie,

@@ -1,5 +1,10 @@
 import ProduitCreditFormPage from '../nouveau/page';
 
-export default function EditProduitCreditPage({ params }: { params: { id: string } }) {
-  return <ProduitCreditFormPage params={params} />;
+export default async function EditProduitCreditPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const resolvedParams = await params;
+  return <ProduitCreditFormPage params={resolvedParams} />;
 }

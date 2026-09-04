@@ -3,7 +3,20 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Users, FileText, Settings, MessageSquare, Briefcase, UserPlus } from 'lucide-react';
+import { 
+  Home, 
+  Users, 
+  FileText, 
+  Settings, 
+  MessageSquare, 
+  Briefcase, 
+  UserPlus, 
+  MessageCircle, 
+  Landmark, 
+  Globe,
+  Palette,
+  CreditCard
+} from 'lucide-react';
 import { LogoutButton } from '@/components/admin/logout-button';
 
 export default function AdminLayout({
@@ -13,52 +26,66 @@ export default function AdminLayout({
 }) {
   const pathname = usePathname();
 
+  const navItems = [
+    { label: 'Tableau de bord', href: '/sbf-gestion', icon: Home, exact: true },
+    { label: 'Produits & Crédits', href: '/sbf-gestion/produits', icon: CreditCard },
+    { label: 'Contenu Épargne', href: '/sbf-gestion/contenu-epargne', icon: Landmark },
+    { label: "Réseau d'Agences", href: '/sbf-gestion/agences', icon: Users },
+    { label: 'Actualités', href: '/sbf-gestion/actualites', icon: FileText },
+    { label: 'Témoignages', href: '/sbf-gestion/temoignages', icon: MessageCircle },
+    { label: 'Demandes Contacts', href: '/sbf-gestion/contacts', icon: MessageSquare },
+    { label: "Offres d'emploi", href: '/sbf-gestion/offres', icon: Briefcase },
+    { label: 'Candidatures', href: '/sbf-gestion/candidatures', icon: UserPlus },
+    { label: 'Contenu Accueil', href: '/sbf-gestion/contenu-accueil', icon: Globe },
+    { label: 'Apparence & Thème', href: '/sbf-gestion/apparence', icon: Palette },
+    { label: 'Contenu Mobilis', href: '/sbf-gestion/contenu-mobilis', icon: Landmark },
+    { label: 'Paramètres', href: '/sbf-gestion/parametres', icon: Settings },
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
+    <div 
+      className="min-h-screen bg-gray-100 flex flex-col md:flex-row admin-scope"
+      style={{
+        '--color-primary': '#01438F',
+        '--color-primary-dark': '#00326e',
+        '--color-accent': '#EB001B',
+        '--color-accent-hover': '#c80017',
+        '--radius-button': '0px'
+      } as React.CSSProperties}
+    >
       {/* Sidebar */}
       <aside className="w-full md:w-64 bg-[#111e36] text-white shrink-0 flex flex-col">
-        <div className="p-6">
-          <h2 className="text-2xl font-bold text-white tracking-tight">SBF Admin</h2>
+        <div className="p-6 border-b border-gray-800 flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-bold text-white tracking-tight">SBF Admin</h2>
+            <p className="text-xs text-gray-400">Gestion de contenu</p>
+          </div>
+          <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
         </div>
-        <nav className="flex-1 px-4 space-y-2 overflow-y-auto">
-          <Link href="/sbf-gestion" className="flex items-center px-4 py-3 text-gray-300 hover:bg-[#243048] hover:text-white rounded-md transition-colors">
-            <Home className="w-5 h-5 mr-3" />
-            Tableau de bord
-          </Link>
-          <Link href="/sbf-gestion/produits" className="flex items-center px-4 py-3 text-gray-300 hover:bg-[#243048] hover:text-white rounded-md transition-colors">
-            <Briefcase className="w-5 h-5 mr-3" />
-            Produits & Crédits
-          </Link>
-          <Link href="/sbf-gestion/agences" className="flex items-center px-4 py-3 text-gray-300 hover:bg-[#243048] hover:text-white rounded-md transition-colors">
-            <Users className="w-5 h-5 mr-3" />
-            Réseau d'Agences
-          </Link>
-          <Link href="/sbf-gestion/actualites" className="flex items-center px-4 py-3 text-gray-300 hover:bg-[#243048] hover:text-white rounded-md transition-colors">
-            <FileText className="w-5 h-5 mr-3" />
-            Actualités
-          </Link>
-          <Link href="/sbf-gestion/contacts" className="flex items-center px-4 py-3 text-gray-300 hover:bg-[#243048] hover:text-white rounded-md transition-colors">
-            <MessageSquare className="w-5 h-5 mr-3 shrink-0" />
-            Demandes
-          </Link>
-          <Link href="/sbf-gestion/candidatures" className={`flex items-center px-4 py-3 rounded-md transition-colors ${pathname.startsWith('/sbf-gestion/candidatures') ? 'bg-[#243048] text-white' : 'text-gray-300 hover:bg-[#243048] hover:text-white'}`}>
-            <UserPlus className="w-5 h-5 mr-3 shrink-0" />
-            Candidatures
-          </Link>
-          <Link href="/sbf-gestion/contenu-accueil" className={`flex items-center px-4 py-3 rounded-md transition-colors ${pathname.startsWith('/sbf-gestion/contenu-accueil') ? 'bg-[#243048] text-white' : 'text-gray-300 hover:bg-[#243048] hover:text-white'}`}>
-            <Home className="w-5 h-5 mr-3 shrink-0" />
-            Contenu Accueil
-          </Link>
-          <Link href="/sbf-gestion/contenu-mobilis" className={`flex items-center px-4 py-3 rounded-md transition-colors ${pathname.startsWith('/sbf-gestion/contenu-mobilis') ? 'bg-[#243048] text-white' : 'text-gray-300 hover:bg-[#243048] hover:text-white'}`}>
-            <Briefcase className="w-5 h-5 mr-3 shrink-0" />
-            Contenu Mobilis
-          </Link>
-          <Link href="/sbf-gestion/parametres" className={`flex items-center px-4 py-3 rounded-md transition-colors ${pathname.startsWith('/sbf-gestion/parametres') ? 'bg-[#243048] text-white' : 'text-gray-300 hover:bg-[#243048] hover:text-white'}`}>
-            <Settings className="w-5 h-5 mr-3 shrink-0" />
-            Paramètres
-          </Link>
+        <nav className="flex-1 px-3 py-4 space-y-1.5 overflow-y-auto">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = item.exact 
+              ? pathname === item.href 
+              : pathname.startsWith(item.href);
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                  isActive 
+                    ? 'bg-[#0991b5] text-white shadow-sm' 
+                    : 'text-gray-300 hover:bg-[#243048] hover:text-white'
+                }`}
+              >
+                <Icon className="w-4 h-4 mr-3 shrink-0" />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
         </nav>
-        <div className="p-4 border-t border-gray-700">
+        <div className="p-4 border-t border-gray-800">
           <LogoutButton />
         </div>
       </aside>

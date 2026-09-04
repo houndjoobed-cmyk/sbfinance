@@ -3,7 +3,6 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { TypingAnimation } from '@/components/ui/typing-animation';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { Button } from '@/components/ui/button';
@@ -44,11 +43,34 @@ const defaultSlides = [
   }
 ];
 
-export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
+import { TypingAnimation } from '@/components/ui/typing-animation';
+import { cn } from '@/lib/utils';
+
+export interface HeroSettings {
+  autoplayDelay?: number;
+  enableZoom?: boolean;
+  overlayOpacity?: number;
+  textAnimation?: 'typing' | 'fade' | 'slide';
+  pauseOnHover?: boolean;
+}
+
+export function Hero({ 
+  carouselSlides,
+  settings 
+}: { 
+  carouselSlides?: any[];
+  settings?: HeroSettings;
+}) {
   const displaySlides = carouselSlides && carouselSlides.length > 0 ? carouselSlides : defaultSlides;
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, watchDrag: false }, [
-    Autoplay({ delay: 6000, stopOnInteraction: false })
+  const autoplayDelay = (settings?.autoplayDelay && settings.autoplayDelay >= 2000) ? settings.autoplayDelay : 6000;
+  const pauseOnHover = settings?.pauseOnHover ?? true;
+  const enableZoom = settings?.enableZoom ?? true;
+  const overlayOpacity = settings?.overlayOpacity !== undefined ? settings.overlayOpacity : 20;
+  const textAnimation = settings?.textAnimation || 'typing';
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, watchDrag: true }, [
+    Autoplay({ delay: autoplayDelay, stopOnInteraction: false, stopOnMouseEnter: pauseOnHover })
   ]);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -80,10 +102,13 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
                   priority={index === 0}
                   loading={index === 0 ? 'eager' : 'lazy'}
                   style={{ objectPosition: slide.objectPosition || 'center' }}
-                  className={`object-cover ${index === selectedIndex ? 'animate-zoom' : ''}`}
+                  className={cn("object-cover", index === selectedIndex && enableZoom ? "animate-zoom" : "")}
                 />
                 {/* Dark Overlay for text readability */}
-                <div className="absolute inset-0 bg-black/40"></div>
+                <div 
+                  className="absolute inset-0 transition-colors duration-300" 
+                  style={{ backgroundColor: `rgba(0, 0, 0, ${overlayOpacity / 100})` }}
+                ></div>
               </div>
 
               {/* Content */}
@@ -91,11 +116,14 @@ export function Hero({ carouselSlides }: { carouselSlides?: any[] }) {
                 <div className="mx-auto max-w-7xl px-4 lg:px-8 w-full">
                   <div className="max-w-2xl reveal-up">
                     <h1
-                      className="text-lg md:text-3xl lg:text-5xl xl:text-(--font-size-hero) font-bold leading-tight mb-2 lg:mb-6 drop-shadow-lg"
+                      className={cn(
+                        "text-lg md:text-3xl lg:text-5xl xl:text-(--font-size-hero) font-bold leading-tight mb-2 lg:mb-6 drop-shadow-lg",
+                        textAnimation === 'fade' && "animate-fade-in"
+                      )}
                       style={{ color: '#ffffff' }}
                     >
-                      {index === selectedIndex ? (
-                        <TypingAnimation text={slide.title || ''} typeSpeed={40} />
+                      {textAnimation === 'typing' && index === selectedIndex ? (
+                        <TypingAnimation text={slide.title || ''} typeSpeed={45} />
                       ) : (
                         slide.title || ''
                       )}

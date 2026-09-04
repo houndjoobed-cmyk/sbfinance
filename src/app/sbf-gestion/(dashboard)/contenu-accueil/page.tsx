@@ -52,9 +52,9 @@ const DEFAULT_CONTENT = {
     title: "Pourquoi SBF ?",
     subtitle: "Nos piliers fondateurs",
     items: [
-      { id: "1", title: "Vision à l'horizon 2035", description: "Être une institution de microfinance leader...", icon: "TrendingUp", link: "/a-propos" },
-      { id: "2", title: "Mission", description: "Contribuer à l'amélioration des conditions de vie...", icon: "Users", link: "/a-propos" },
-      { id: "3", title: "Nos Valeurs", description: "Le Respect, l'Intégrité et l'Efficacité guident toutes nos actions.", icon: "ShieldCheck", link: "/a-propos" }
+      { id: "1", title: "Vision à l'horizon 2035", description: "Être une institution de microfinance leader dans la finance inclusive, responsable et environnementale au Bénin.", icon: "TrendingUp", image: "/images/home/mission-vision.jpg", link: "/a-propos" },
+      { id: "2", title: "Mission", description: "Contribuer à l'amélioration des conditions de vie des personnes à faible revenu via des services financiers et non financiers adaptés.", icon: "Users", image: "/images/home/rejoignez-nous.png", link: "/a-propos" },
+      { id: "3", title: "Nos Valeurs", description: "Le Respect, l'Intégrité et l'Efficacité guident toutes nos actions au quotidien.", icon: "ShieldCheck", image: "/images/home/Engagement.jpeg", link: "/a-propos" }
     ]
   },
   missionVision: {
@@ -66,14 +66,67 @@ const DEFAULT_CONTENT = {
   },
   partners: {
     title: "Ils nous font confiance",
-    items: [] as any[]
+    items: [
+      { id: "1", name: "Assurance 1", image: "/images/partenaires/assurance-1.png" },
+      { id: "2", name: "Banque 1", image: "/images/partenaires/banque-1.png" },
+      { id: "3", name: "Banque 2", image: "/images/partenaires/banque-2.png" },
+      { id: "4", name: "Banque 3", image: "/images/partenaires/banque-3.png" },
+      { id: "5", name: "Ecobank", image: "/images/partenaires/ecobank.png" }
+    ]
   },
   productsPreview: {
     backgroundText: "Produits",
     title: "Nos Offres de Crédit",
     subtitle: "Découvrez nos solutions de financement",
-    items: [] as any[],
-    helpCard: null as any
+    helpCard: {
+      title: "Besoin d'aide pour choisir ?",
+      description: "Nos conseillers sont à votre disposition dans toutes nos agences pour vous orienter vers la solution la plus adaptée.",
+      image: "/images/products/Aide.jpeg",
+      buttonText: "Nous contacter",
+      buttonLink: "/contacts"
+    },
+    items: [
+      {
+        id: "1",
+        title: "Crédit",
+        description: "Solutions de financement pour vos besoins de roulement, de consommation ou d'investissement.",
+        icon: "Wallet",
+        image: "/images/products/Credits.jpeg",
+        link: "/produits/credit"
+      },
+      {
+        id: "2",
+        title: "Épargne",
+        description: "Sécurisez votre avenir avec nos produits d'épargne: Houenoussou, Allodo, Ahossou, Zédaga et Kondokpo.",
+        icon: "Landmark",
+        image: "/images/products/epargne-v2.jpg",
+        link: "/produits/epargne"
+      },
+      {
+        id: "3",
+        title: "Appui",
+        description: "Un soutien sur-mesure pour développer vos activités et pérenniser votre croissance.",
+        icon: "Handshake",
+        image: "/images/products/Appui.jpeg",
+        link: "/produits/appui"
+      },
+      {
+        id: "4",
+        title: "Conseil",
+        description: "Expertise et accompagnement stratégique pour la gestion de votre entreprise.",
+        icon: "Lightbulb",
+        image: "/images/products/conseil.jpeg",
+        link: "/produits/conseil"
+      },
+      {
+        id: "5",
+        title: "Formation",
+        description: "Renforcez vos compétences avec nos programmes d'éducation financière et entrepreneuriale.",
+        icon: "GraduationCap",
+        image: "/images/products/formation.jpeg",
+        link: "/produits/formation"
+      }
+    ]
   },
   newsPreview: {
     backgroundText: "ACTUALITÉS",
@@ -123,7 +176,39 @@ export default function ContenuAccueilPage() {
         const data = await res.json();
         setGlobalParams(data);
         if (data && data.accueilContenu) {
-          setContent({ ...DEFAULT_CONTENT, ...data.accueilContenu });
+          const loaded = data.accueilContenu;
+          setContent({
+            ...DEFAULT_CONTENT,
+            ...loaded,
+            partners: {
+              ...DEFAULT_CONTENT.partners,
+              ...(loaded.partners || {}),
+              items: (Array.isArray(loaded.partners?.items) && loaded.partners.items.length > 0)
+                ? loaded.partners.items
+                : DEFAULT_CONTENT.partners.items
+            },
+            productsPreview: {
+              ...DEFAULT_CONTENT.productsPreview,
+              ...(loaded.productsPreview || {}),
+              helpCard: {
+                ...DEFAULT_CONTENT.productsPreview.helpCard,
+                ...(loaded.productsPreview?.helpCard || {})
+              },
+              items: (Array.isArray(loaded.productsPreview?.items) && loaded.productsPreview.items.length > 0)
+                ? loaded.productsPreview.items
+                : DEFAULT_CONTENT.productsPreview.items
+            },
+            features: {
+              ...DEFAULT_CONTENT.features,
+              ...(loaded.features || {}),
+              items: (Array.isArray(loaded.features?.items) && loaded.features.items.length > 0)
+                ? loaded.features.items.map((it: any, idx: number) => ({
+                    ...it,
+                    image: it.image || DEFAULT_CONTENT.features.items[idx]?.image || "/images/home/Engagement.jpeg"
+                  }))
+                : DEFAULT_CONTENT.features.items
+            }
+          });
         }
       }
     } catch (error) {
@@ -196,6 +281,60 @@ export default function ContenuAccueilPage() {
       partners: {
         ...prev.partners,
         items: prev.partners.items.map((p: any) => p.id === id ? { ...p, [field]: value } : p)
+      }
+    }));
+  };
+
+  const updateFeature = (id: string, field: string, value: string) => {
+    setContent((prev: any) => ({
+      ...prev,
+      features: {
+        ...prev.features,
+        items: (prev.features?.items || DEFAULT_CONTENT.features.items).map((item: any) =>
+          item.id === id ? { ...item, [field]: value } : item
+        )
+      }
+    }));
+  };
+
+  const addProduct = () => {
+    const newId = Date.now().toString();
+    setContent((prev: any) => ({
+      ...prev,
+      productsPreview: {
+        ...prev.productsPreview,
+        items: [
+          ...(prev.productsPreview.items || []),
+          {
+            id: newId,
+            title: 'Nouveau Produit',
+            description: 'Description du produit...',
+            link: '/produits',
+            image: '',
+            icon: 'Wallet'
+          }
+        ]
+      }
+    }));
+  };
+
+  const removeProduct = (id: string) => {
+    if (!window.confirm("Voulez-vous supprimer ce produit de l'accueil ?")) return;
+    setContent((prev: any) => ({
+      ...prev,
+      productsPreview: {
+        ...prev.productsPreview,
+        items: (prev.productsPreview.items || []).filter((p: any) => p.id !== id)
+      }
+    }));
+  };
+
+  const updateProduct = (id: string, field: string, value: string) => {
+    setContent((prev: any) => ({
+      ...prev,
+      productsPreview: {
+        ...prev.productsPreview,
+        items: (prev.productsPreview.items || []).map((p: any) => p.id === id ? { ...p, [field]: value } : p)
       }
     }));
   };
@@ -275,6 +414,9 @@ export default function ContenuAccueilPage() {
       <div className="flex overflow-x-auto border-b border-gray-200 mb-6 space-x-6 pb-2">
         <button type="button" onClick={() => setActiveTab('hero')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'hero' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
           Bannières (Hero)
+        </button>
+        <button type="button" onClick={() => setActiveTab('features')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'features' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
+          Pourquoi SBF (Atouts)
         </button>
         <button type="button" onClick={() => setActiveTab('sections')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'sections' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
           Titres Sections
@@ -387,6 +529,119 @@ export default function ContenuAccueilPage() {
                 ))}
               </div>
             )}
+          </div>
+        )}
+
+        {activeTab === 'features' && (
+          <div className="space-y-8">
+            <div className="border-b pb-2">
+              <h2 className="text-xl font-semibold text-[#111e36]">Section Atouts (Pourquoi SBF ?)</h2>
+              <p className="text-sm text-gray-500 mt-1">
+                Personnalisez le titre de la section et les 3 cartes de piliers fondateurs avec leurs photos d'illustration, icônes, textes et liens.
+              </p>
+            </div>
+
+            {/* En-tête de la section */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-gray-50 p-4 rounded-lg border">
+              <div>
+                <label className="block text-xs font-medium text-gray-500">Titre principal</label>
+                <input 
+                  type="text" 
+                  className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
+                  value={content.features?.title || ''}
+                  onChange={e => updateSection('features', 'title', e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500">Sous-titre</label>
+                <input 
+                  type="text" 
+                  className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
+                  value={content.features?.subtitle || ''}
+                  onChange={e => updateSection('features', 'subtitle', e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500">Texte de fond animé (watermark)</label>
+                <input 
+                  type="text" 
+                  className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
+                  value={content.features?.backgroundText || ''}
+                  onChange={e => updateSection('features', 'backgroundText', e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* Les 3 Cartes de Piliers avec Images */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-gray-800">Les 3 Cartes de Piliers (Vision, Mission, Valeurs)</h3>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {(content.features?.items || DEFAULT_CONTENT.features.items).map((item: any, index: number) => (
+                  <div key={item.id || index} className="p-5 border border-gray-200 rounded-xl bg-white shadow-sm space-y-4 flex flex-col justify-between">
+                    <div className="space-y-4">
+                      {/* Image de la carte */}
+                      <div>
+                        <ImageUpload 
+                          label={`Photo d'illustration (${item.title || `Carte ${index + 1}`})`}
+                          value={item.image || ''} 
+                          onChange={(url) => updateFeature(item.id, 'image', url)} 
+                        />
+                      </div>
+
+                      {/* Titre */}
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500">Titre de la carte</label>
+                        <input 
+                          type="text" 
+                          className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2 font-semibold text-gray-900"
+                          value={item.title}
+                          onChange={(e) => updateFeature(item.id, 'title', e.target.value)}
+                        />
+                      </div>
+
+                      {/* Choix d'icône */}
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500">Icône du badge flottant</label>
+                        <select
+                          className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
+                          value={item.icon || 'ShieldCheck'}
+                          onChange={(e) => updateFeature(item.id, 'icon', e.target.value)}
+                        >
+                          <option value="TrendingUp">TrendingUp (Croissance / Vision)</option>
+                          <option value="Users">Users (Communauté / Mission)</option>
+                          <option value="ShieldCheck">ShieldCheck (Sécurité / Valeurs)</option>
+                          <option value="Target">Target (Objectifs)</option>
+                          <option value="Award">Award (Excellence)</option>
+                          <option value="Heart">Heart (Engagement)</option>
+                        </select>
+                      </div>
+
+                      {/* Description */}
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500">Description</label>
+                        <textarea 
+                          rows={3}
+                          className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
+                          value={item.description}
+                          onChange={(e) => updateFeature(item.id, 'description', e.target.value)}
+                        />
+                      </div>
+
+                      {/* Lien */}
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500">Lien du bouton &quot;En savoir plus&quot;</label>
+                        <input 
+                          type="text" 
+                          className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2 text-xs font-mono"
+                          value={item.link || '/a-propos'}
+                          onChange={(e) => updateFeature(item.id, 'link', e.target.value)}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
@@ -681,46 +936,68 @@ export default function ContenuAccueilPage() {
             </div>
 
             <div className="space-y-6">
-              <h2 className="text-xl font-semibold text-[#111e36] border-b pb-2">Les 5 Cartes Produits</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {(content.productsPreview.items || DEFAULT_CONTENT.productsPreview.items).map((item: any, index: number) => (
-                  <div key={item.id} className="p-4 border border-gray-200 rounded-lg bg-gray-50 relative">
-                    <div className="mb-4">
-                      <ImageUpload 
-                        label={`Image (${item.title})`}
-                        value={item.image} 
-                        onChange={(url) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, items: prev.productsPreview.items.map((i: any) => i.id === item.id ? { ...i, image: url } : i) } }))} 
-                      />
-                    </div>
-                    <div className="space-y-3">
-                      <div>
-                        <label className="block text-xs font-medium text-gray-500">Titre</label>
-                        <input type="text" className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={item.title} onChange={(e) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, items: prev.productsPreview.items.map((i: any) => i.id === item.id ? { ...i, title: e.target.value } : i) } }))} />
-                      </div>
-                      <div>
-                        <label className="block text-xs font-medium text-gray-500">Description</label>
-                        <textarea rows={2} className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={item.description} onChange={(e) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, items: prev.productsPreview.items.map((i: any) => i.id === item.id ? { ...i, description: e.target.value } : i) } }))} />
-                      </div>
-                      <div className="grid grid-cols-2 gap-2">
-                        <div>
-                          <label className="block text-xs font-medium text-gray-500">Lien</label>
-                          <input type="text" className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={item.link} onChange={(e) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, items: prev.productsPreview.items.map((i: any) => i.id === item.id ? { ...i, link: e.target.value } : i) } }))} />
-                        </div>
-                        <div>
-                          <label className="block text-xs font-medium text-gray-500">Icône</label>
-                          <select className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={item.icon || 'Wallet'} onChange={(e) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, items: prev.productsPreview.items.map((i: any) => i.id === item.id ? { ...i, icon: e.target.value } : i) } }))}>
-                            <option value="Wallet">Portefeuille (Crédit)</option>
-                            <option value="Landmark">Banque (Épargne)</option>
-                            <option value="Handshake">Poignée (Appui)</option>
-                            <option value="Lightbulb">Ampoule (Conseil)</option>
-                            <option value="GraduationCap">Diplôme (Formation)</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              <div className="flex justify-between items-center border-b pb-2">
+                <h2 className="text-xl font-semibold text-[#111e36]">Les Cartes Produits sur l'accueil</h2>
+                <Button type="button" onClick={addProduct} variant="outline" size="sm">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Ajouter un produit
+                </Button>
               </div>
+
+              {(!content.productsPreview.items || content.productsPreview.items.length === 0) ? (
+                <div className="text-center py-10 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                  <p className="text-gray-500">Aucun produit configuré. Cliquez sur « Ajouter un produit » pour commencer.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {content.productsPreview.items.map((item: any, index: number) => (
+                    <div key={item.id} className="p-4 border border-gray-200 rounded-lg bg-gray-50 relative">
+                      <button 
+                        type="button"
+                        onClick={() => removeProduct(item.id)}
+                        className="absolute top-2 right-2 text-red-500 hover:text-red-700 bg-white p-1 rounded-md shadow-sm z-10"
+                        title="Supprimer ce produit"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+
+                      <div className="mb-4">
+                        <ImageUpload 
+                          label={`Image (${item.title || `Produit #${index + 1}`})`}
+                          value={item.image} 
+                          onChange={(url) => updateProduct(item.id, 'image', url)} 
+                        />
+                      </div>
+                      <div className="space-y-3">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-500">Titre</label>
+                          <input type="text" className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={item.title || ''} onChange={(e) => updateProduct(item.id, 'title', e.target.value)} />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-500">Description</label>
+                          <textarea rows={2} className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={item.description || ''} onChange={(e) => updateProduct(item.id, 'description', e.target.value)} />
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div>
+                            <label className="block text-xs font-medium text-gray-500">Lien</label>
+                            <input type="text" className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={item.link || ''} onChange={(e) => updateProduct(item.id, 'link', e.target.value)} />
+                          </div>
+                          <div>
+                            <label className="block text-xs font-medium text-gray-500">Icône</label>
+                            <select className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={item.icon || 'Wallet'} onChange={(e) => updateProduct(item.id, 'icon', e.target.value)}>
+                              <option value="Wallet">Portefeuille (Crédit)</option>
+                              <option value="Landmark">Banque (Épargne)</option>
+                              <option value="Handshake">Poignée (Appui)</option>
+                              <option value="Lightbulb">Ampoule (Conseil)</option>
+                              <option value="GraduationCap">Diplôme (Formation)</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}

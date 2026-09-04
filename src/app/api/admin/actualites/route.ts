@@ -64,6 +64,7 @@ export async function POST(request: Request) {
         extrait: data.extrait,
         contenu: data.contenu,
         image: data.image || null,
+        images: Array.isArray(data.images) ? data.images : [],
         categorie: data.categorie,
         lienExterne: data.lienExterne || null,
         estPublie: data.estPublie ?? true,

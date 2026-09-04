@@ -1,15 +1,17 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { ImageUpload } from '@/components/admin/image-upload';
 
-export default function ProduitAutreFormPage({ params }: { params?: { id: string } }) {
-  const isEditing = !!params?.id;
+export default function ProduitAutreFormPage({ params }: { params?: { id?: string } }) {
   const router = useRouter();
+  const routeParams = useParams();
+  const id = params?.id || (routeParams?.id as string | undefined);
+  const isEditing = Boolean(id);
   
   const [loading, setLoading] = useState(isEditing);
   const [saving, setSaving] = useState(false);
@@ -17,6 +19,7 @@ export default function ProduitAutreFormPage({ params }: { params?: { id: string
   
   const [formData, setFormData] = useState({
     nom: '',
+    slug: '',
     type: 'Epargne',
     description: '',
     contenuDetaille: '',
@@ -24,10 +27,10 @@ export default function ProduitAutreFormPage({ params }: { params?: { id: string
   });
 
   useEffect(() => {
-    if (isEditing && params?.id) {
-      fetchProduit(params.id);
+    if (isEditing && id) {
+      fetchProduit(id);
     }
-  }, [isEditing, params]);
+  }, [isEditing, id]);
 
   const fetchProduit = async (id: string) => {
     try {
@@ -36,6 +39,7 @@ export default function ProduitAutreFormPage({ params }: { params?: { id: string
         const data = await res.json();
         setFormData({
           nom: data.nom || '',
+          slug: data.slug || '',
           type: data.type || 'Epargne',
           description: data.description || '',
           contenuDetaille: data.contenuDetaille || '',
@@ -54,7 +58,7 @@ export default function ProduitAutreFormPage({ params }: { params?: { id: string
     setSaving(true);
     setError('');
 
-    const url = isEditing ? `/api/admin/produits/autres/${params.id}` : '/api/admin/produits/autres';
+    const url = isEditing && id ? `/api/admin/produits/autres/${id}` : '/api/admin/produits/autres';
     const method = isEditing ? 'PUT' : 'POST';
 
     try {

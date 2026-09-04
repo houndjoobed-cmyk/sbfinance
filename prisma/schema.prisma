@@ -74,6 +74,7 @@ model Actualite {
   extrait          String
   contenu          String   @db.Text
   image            String?
+  images           Json?    // Galerie photos (Array de URLs)
   categorie        String
   lienExterne      String?
   estPublie        Boolean  @default(true)
@@ -140,6 +141,8 @@ model ParametresSite {
   
   accueilContenu   Json?
   mobilisContenu   Json?
+  epargneContenu   Json?
+  themeConfig      Json?
 
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
