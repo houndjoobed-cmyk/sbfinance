@@ -800,7 +800,7 @@ export default function ApparencePage() {
                     key={preset.url}
                     type="button"
                     onClick={() => setFaviconUrl(preset.url)}
-                    className={`p-3.5 border text-left transition-all rounded-lg flex flex-col items-center text-center group ${
+                    className={`p-3.5 border transition-all rounded-lg flex flex-col items-center text-center group ${
                       faviconUrl === preset.url
                         ? 'border-primary ring-2 ring-primary/20 bg-blue-50/50 shadow-sm'
                         : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
@@ -825,7 +825,7 @@ export default function ApparencePage() {
 
             {/* 3. Guide & Bonnes Pratiques Google */}
             <div className="bg-blue-50/70 border border-blue-200/80 p-5 rounded-xl text-xs space-y-2 text-blue-900">
-              <div className="flex items-center gap-2 font-bold text-sm text-[#01438F]">
+              <div className="flex items-center gap-2 font-bold text-sm text-primary">
                 <Info className="w-4 h-4 shrink-0" />
                 Recommandations Google Search & Navigateurs
               </div>
