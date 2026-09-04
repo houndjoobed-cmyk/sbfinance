@@ -12,8 +12,26 @@ export interface ThemeConfig {
   buttonRadius?: string;
 }
 
-export function PublicThemeInjector({ theme }: { theme?: ThemeConfig | null }) {
+export function PublicThemeInjector({ 
+  theme, 
+  faviconUrl 
+}: { 
+  theme?: ThemeConfig | null; 
+  faviconUrl?: string | null; 
+}) {
   const pathname = usePathname();
+
+  React.useEffect(() => {
+    if (faviconUrl && typeof document !== 'undefined') {
+      let link = document.querySelector("link[rel*='icon']") as HTMLLinkElement;
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+      }
+      link.href = faviconUrl;
+    }
+  }, [faviconUrl]);
 
   // Ne jamais appliquer les styles personnalisés au dashboard admin
   if (pathname.startsWith('/sbf-gestion')) {

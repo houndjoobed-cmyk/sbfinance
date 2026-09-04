@@ -27,8 +27,10 @@ export default function ProduitCreditFormPage({ params }: { params?: { id?: stri
     montantMax: '',
     dureeMinMois: '',
     dureeMaxMois: '',
+    differeMois: '',
     tauxInteretAnnuel: '',
     periodicite: 'Mensuelle',
+    fraisEtEpargne: '',
   });
 
   const [conditions, setConditions] = useState<string[]>(['']);
@@ -56,8 +58,10 @@ export default function ProduitCreditFormPage({ params }: { params?: { id?: stri
           montantMax: data.montantMax?.toString() || '',
           dureeMinMois: data.dureeMinMois?.toString() || '',
           dureeMaxMois: data.dureeMaxMois?.toString() || '',
+          differeMois: data.differeMois?.toString() || '',
           tauxInteretAnnuel: data.tauxInteretAnnuel || '',
           periodicite: data.periodicite || 'Mensuelle',
+          fraisEtEpargne: data.fraisEtEpargne || '',
         });
         setConditions(data.conditions?.length ? data.conditions : ['']);
         setPieces(data.piecesAFournir?.length ? data.piecesAFournir : ['']);
@@ -190,18 +194,51 @@ export default function ProduitCreditFormPage({ params }: { params?: { id?: stri
               <label className="block text-sm font-medium text-gray-700 mb-1">Durée Max (Mois)</label>
               <input type="number" name="dureeMaxMois" value={formData.dureeMaxMois} onChange={handleChange} className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" />
             </div>
+            <div className="md:col-span-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Différé (Mois)</label>
+              <input type="number" name="differeMois" value={formData.differeMois} onChange={handleChange} className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" placeholder="Ex: 1, 2..." />
+            </div>
+            <div className="md:col-span-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Périodicité</label>
+              <input name="periodicite" value={formData.periodicite} onChange={handleChange} className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" placeholder="Mensuelle, Hebdomadaire..." />
+            </div>
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">Taux d'intérêt (Optionnel, ex: 1.5% par mois)</label>
               <input name="tauxInteretAnnuel" value={formData.tauxInteretAnnuel} onChange={handleChange} className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" />
             </div>
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Périodicité de remboursement</label>
-              <input name="periodicite" value={formData.periodicite} onChange={handleChange} className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" placeholder="Mensuelle, Hebdomadaire..." />
-            </div>
           </div>
         </div>
 
-        {/* Section 3: Conditions et Garanties */}
+        {/* Section: Frais & Épargne */}
+        <div>
+          <div className="flex items-center justify-between border-b pb-2 mb-4">
+            <h2 className="text-xl font-semibold text-[#0991b5]">Frais & Épargne</h2>
+            <span className="text-xs bg-amber-50 text-amber-700 border border-amber-200 px-2.5 py-1 rounded font-medium">
+              Visible sur la fiche produit
+            </span>
+          </div>
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Détails des frais et de l'épargne applicables
+            </label>
+            <p className="text-xs text-gray-500">
+              Indiquez ici les détails tels que le dépôt de garantie, l'épargne de capitalisation, les frais d'étude de dossier, frais de solidarité, frais de gestion et assurance.
+            </p>
+            <textarea
+              name="fraisEtEpargne"
+              rows={5}
+              value={formData.fraisEtEpargne}
+              onChange={handleChange}
+              className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2 text-sm leading-relaxed"
+              placeholder="Ex: Dépôt de garantie : 10% du montant du crédit octroyé • Épargne de capitalisation : 5% du montant du crédit étalé sur les échéances • Frais d'étude de dossier : 2 000F CFA (non remboursable) • Frais de solidarité : 2 000F CFA (non remboursable) • Frais de dossier : 2% du montant du crédit octroyé (non remboursable) • Frais de gestion : 3% du montant du crédit octroyé (non remboursable) • Assurance : Taux en vigueur par les compagnies d'assurances agréées par SBF"
+            />
+            <p className="text-xs text-gray-400">
+              💡 Astuce : Vous pouvez utiliser des puces « • » ou aller à la ligne pour présenter clairement chaque frais au client.
+            </p>
+          </div>
+        </div>
+
+        {/* Section: Conditions et Garanties */}
         <div>
           <h2 className="text-xl font-semibold mb-4 text-[#0991b5] border-b pb-2">Conditions & Garanties (Résumé Public)</h2>
           

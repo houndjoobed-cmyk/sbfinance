@@ -64,6 +64,8 @@ export async function POST(request: Request) {
         dureeMaxMois: data.dureeMaxMois ? Number(data.dureeMaxMois) : null,
         tauxInteretAnnuel: data.tauxInteretAnnuel || null,
         periodicite: data.periodicite || null,
+        fraisEtEpargne: data.fraisEtEpargne || null,
+        differeMois: data.differeMois ? Number(data.differeMois) : null,
       }
     });
 

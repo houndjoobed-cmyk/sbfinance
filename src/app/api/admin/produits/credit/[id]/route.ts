@@ -59,6 +59,8 @@ export async function PUT(request: Request, props: { params: Promise<{ id: strin
         dureeMaxMois: data.dureeMaxMois ? Number(data.dureeMaxMois) : null,
         tauxInteretAnnuel: data.tauxInteretAnnuel,
         periodicite: data.periodicite,
+        fraisEtEpargne: data.fraisEtEpargne || null,
+        differeMois: data.differeMois ? Number(data.differeMois) : null,
       }
     });
 

@@ -221,7 +221,7 @@ export default async function ProductDetailPage({ params }: Props) {
                       </div>
                       <div>
                         <p className="text-on-surface-variant text-sm font-medium mb-1 uppercase tracking-wide">Frais & Épargne</p>
-                        <p className="text-primary-dark font-medium leading-snug">{product.fraisEtEpargne}</p>
+                        <p className="text-primary-dark font-medium leading-snug whitespace-pre-line">{product.fraisEtEpargne}</p>
                       </div>
                     </div>
                   )}

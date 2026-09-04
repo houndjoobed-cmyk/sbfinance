@@ -13,9 +13,16 @@ import {
   Layers, 
   ArrowRight,
   ShieldCheck,
-  CheckCircle2
+  CheckCircle2,
+  Globe,
+  Lock,
+  ExternalLink,
+  RefreshCw,
+  Info,
+  Search
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ImageUpload } from '@/components/admin/image-upload';
 
 // Valeurs par défaut de la charte graphique officielle SBF
 const DEFAULT_THEME = {
@@ -68,13 +75,14 @@ const RADIUS_OPTIONS = [
 ];
 
 export default function ApparencePage() {
-  const [activeTab, setActiveTab] = useState<'colors' | 'hero'>('colors');
+  const [activeTab, setActiveTab] = useState<'colors' | 'hero' | 'favicon'>('colors');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
 
   const [theme, setTheme] = useState(DEFAULT_THEME);
   const [heroSettings, setHeroSettings] = useState(DEFAULT_HERO_SETTINGS);
+  const [faviconUrl, setFaviconUrl] = useState<string>('/images/logos/LOGO_SB_F-navigateur.png');
   const [globalParams, setGlobalParams] = useState<any>({});
 
   useEffect(() => {
@@ -95,6 +103,9 @@ export default function ApparencePage() {
           if (data.themeConfig.heroSettings) {
             setHeroSettings({ ...DEFAULT_HERO_SETTINGS, ...data.themeConfig.heroSettings });
           }
+          if (data.themeConfig.faviconUrl) {
+            setFaviconUrl(data.themeConfig.faviconUrl);
+          }
         }
       }
     } catch (err) {
@@ -114,6 +125,7 @@ export default function ApparencePage() {
         themeConfig: {
           theme,
           heroSettings,
+          faviconUrl,
         },
       };
 
@@ -141,9 +153,10 @@ export default function ApparencePage() {
   };
 
   const handleResetToDefaults = () => {
-    if (confirm('Voulez-vous rétablir toutes les couleurs et animations de la charte officielle SBF ?')) {
+    if (confirm('Voulez-vous rétablir toutes les couleurs, animations et le logo navigateur de la charte officielle SBF ?')) {
       setTheme(DEFAULT_THEME);
       setHeroSettings(DEFAULT_HERO_SETTINGS);
+      setFaviconUrl('/images/logos/LOGO_SB_F-navigateur.png');
       setMessage({
         text: 'Valeurs par défaut rétablies. Cliquez sur « Enregistrer les modifications » pour confirmer.',
         type: 'success',
@@ -238,6 +251,19 @@ export default function ApparencePage() {
         >
           <Sparkles className="w-4 h-4" />
           Animations de la Section Hero (Accueil)
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab('favicon')}
+          className={`pb-3 px-4 text-sm font-semibold flex items-center gap-2 border-b-2 transition-all ${
+            activeTab === 'favicon'
+              ? 'border-primary text-primary'
+              : 'border-transparent text-gray-500 hover:text-gray-900'
+          }`}
+        >
+          <Globe className="w-4 h-4" />
+          Logo Navigateur (Favicon)
         </button>
       </div>
 
@@ -686,6 +712,253 @@ export default function ApparencePage() {
               />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:width-5 after:transition-all peer-checked:bg-primary"></div>
             </label>
+          </div>
+        </div>
+      )}
+
+      {/* TAB 3: LOGO DU NAVIGATEUR (FAVICON) */}
+      {activeTab === 'favicon' && (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Colonne gauche : Paramètres et Téléversement */}
+          <div className="lg:col-span-7 space-y-6">
+            {/* 1. Téléversement du Favicon */}
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-5">
+              <div className="flex justify-between items-start border-b pb-3">
+                <div>
+                  <h3 className="font-semibold text-[#111e36] text-base flex items-center gap-2">
+                    <Globe className="w-5 h-5 text-[#0991b5]" />
+                    Logo / Favicon dans le Navigateur
+                  </h3>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Cette icône s'affiche dans l'onglet du navigateur de vos visiteurs, dans leurs favoris et dans les résultats de recherche Google devant <strong>sbfinance.bj</strong>.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <ImageUpload
+                  label="Téléverser un nouveau logo favicon (PNG, WebP, ICO, SVG)"
+                  value={faviconUrl}
+                  onChange={(url) => setFaviconUrl(url || '/images/logos/LOGO_SB_F-navigateur.png')}
+                />
+              </div>
+
+              {/* Champ d'URL directe */}
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-1">
+                  Ou renseigner directement le chemin ou l'URL de l'image :
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={faviconUrl}
+                    onChange={(e) => setFaviconUrl(e.target.value)}
+                    className="flex-1 text-sm border border-gray-300 rounded-md px-3 py-2 bg-white text-gray-800 focus:ring-primary focus:border-primary"
+                    placeholder="/images/logos/LOGO_SB_F-navigateur.png"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setFaviconUrl('/images/logos/LOGO_SB_F-navigateur.png')}
+                    title="Rétablir l'icône officielle"
+                    className="shrink-0 text-xs"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5 mr-1" />
+                    Par défaut
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            {/* 2. Présélections officielles SBF */}
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
+              <h3 className="font-semibold text-[#111e36] text-base">Présélections officielles SBF</h3>
+              <p className="text-xs text-gray-500">
+                Vous pouvez activer en 1 clic l'une des déclinaisons d'icônes préparées pour la charte Salem Braha Finance :
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                {[
+                  {
+                    name: 'Logo Navigateur SBF',
+                    url: '/images/logos/LOGO_SB_F-navigateur.png',
+                    desc: 'Optimisé onglet web',
+                  },
+                  {
+                    name: 'Emblème Carré HD',
+                    url: '/icon.png',
+                    desc: '512×512 px Haute Définition',
+                  },
+                  {
+                    name: 'Logo Complet SBF',
+                    url: '/images/logos/logo-sbf.png',
+                    desc: 'Version horizontale',
+                  },
+                ].map((preset) => (
+                  <button
+                    key={preset.url}
+                    type="button"
+                    onClick={() => setFaviconUrl(preset.url)}
+                    className={`p-3.5 border text-left transition-all rounded-lg flex flex-col items-center text-center group ${
+                      faviconUrl === preset.url
+                        ? 'border-primary ring-2 ring-primary/20 bg-blue-50/50 shadow-sm'
+                        : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
+                    <div className="w-14 h-14 bg-white border border-gray-100 rounded-lg p-2 shadow-xs mb-2 flex items-center justify-center">
+                      <img src={preset.url} alt={preset.name} className="max-w-full max-h-full object-contain" />
+                    </div>
+                    <span className="font-medium text-xs text-gray-900 group-hover:text-primary transition-colors">
+                      {preset.name}
+                    </span>
+                    <span className="text-[10px] text-gray-500 mt-0.5">{preset.desc}</span>
+                    {faviconUrl === preset.url && (
+                      <span className="mt-2 inline-flex items-center text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                        <Check className="w-3 h-3 mr-0.5" /> Actif
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 3. Guide & Bonnes Pratiques Google */}
+            <div className="bg-blue-50/70 border border-blue-200/80 p-5 rounded-xl text-xs space-y-2 text-blue-900">
+              <div className="flex items-center gap-2 font-bold text-sm text-[#01438F]">
+                <Info className="w-4 h-4 shrink-0" />
+                Recommandations Google Search & Navigateurs
+              </div>
+              <ul className="list-disc list-inside space-y-1.5 text-blue-800/90 pl-1 leading-relaxed">
+                <li><strong>Ratio carré 1:1 :</strong> Préférez une image parfaitement carrée (ex: 512×512 px ou multiple de 48 px : 48×48, 96×96).</li>
+                <li><strong>Fond transparent :</strong> Permet un affichage impeccable que l'utilisateur soit en mode sombre ou clair.</li>
+                <li><strong>Prise en compte :</strong> Une fois sauvegardée, la modification est immédiate dans les onglets du site. Google met quelques jours à rafraîchir son cache de favicons pour les résultats de recherche.</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Colonne droite : Aperçus en direct */}
+          <div className="lg:col-span-5 space-y-6">
+            {/* Aperçu 1 : Onglet de navigateur */}
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b pb-3">
+                <h3 className="font-semibold text-[#111e36] text-base flex items-center gap-2">
+                  <Eye className="w-4 h-4 text-primary" />
+                  Aperçu dans l'onglet navigateur
+                </h3>
+                <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+                  Simulation en direct
+                </span>
+              </div>
+
+              {/* Faux navigateur Chrome / Edge */}
+              <div className="bg-slate-200 rounded-xl overflow-hidden shadow-md border border-slate-300">
+                {/* Barre d'onglets */}
+                <div className="bg-slate-200 px-3 pt-2.5 pb-0 flex items-center gap-2">
+                  {/* Boutons fenêtre */}
+                  <div className="flex items-center gap-1.5 mr-2">
+                    <span className="w-3 h-3 rounded-full bg-red-400 inline-block"></span>
+                    <span className="w-3 h-3 rounded-full bg-amber-400 inline-block"></span>
+                    <span className="w-3 h-3 rounded-full bg-emerald-400 inline-block"></span>
+                  </div>
+
+                  {/* Onglet actif */}
+                  <div className="bg-white text-slate-800 px-3 py-2 rounded-t-lg text-xs flex items-center gap-2 max-w-65 shadow-xs border-t border-l border-r border-slate-300">
+                    <img
+                      src={faviconUrl}
+                      alt="Favicon preview"
+                      className="w-4 h-4 object-contain shrink-0"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/images/logos/LOGO_SB_F-navigateur.png';
+                      }}
+                    />
+                    <span className="truncate font-medium text-[11px]">Salem Braha Finance - Cultivons la prospérité</span>
+                    <span className="text-slate-400 hover:text-slate-600 ml-auto cursor-pointer font-bold text-[10px]">✕</span>
+                  </div>
+
+                  {/* Faux second onglet */}
+                  <div className="hidden sm:flex items-center gap-1 text-slate-500 px-3 py-1 text-xs opacity-60">
+                    <span className="w-3 h-3 rounded-full bg-slate-400/50"></span>
+                    <span className="truncate text-[10px]">Autre onglet</span>
+                  </div>
+                </div>
+
+                {/* Barre d'URL */}
+                <div className="bg-white px-3 py-2 border-t border-slate-200 flex items-center gap-2">
+                  <div className="flex-1 bg-slate-100 rounded-full px-3 py-1 flex items-center gap-2 text-xs text-slate-600 border border-slate-200">
+                    <Lock className="w-3 h-3 text-emerald-600 shrink-0" />
+                    <span className="text-slate-900 font-medium">https://</span>
+                    <span className="text-slate-900 font-semibold">sbfinance.bj</span>
+                  </div>
+                </div>
+
+                {/* Mini page */}
+                <div className="bg-slate-50 p-6 flex items-center justify-center border-t border-slate-200">
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-white rounded-xl shadow-xs border border-gray-200 flex items-center justify-center p-2 mx-auto mb-2">
+                      <img
+                        src={faviconUrl}
+                        alt="Logo"
+                        className="max-w-full max-h-full object-contain"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/images/logos/LOGO_SB_F-navigateur.png';
+                        }}
+                      />
+                    </div>
+                    <p className="text-xs font-bold text-slate-800">Salem Braha Finance</p>
+                    <p className="text-[10px] text-slate-400 mt-0.5">Icône active dans la barre de titre</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Aperçu 2 : Résultat Google Search */}
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b pb-3">
+                <h3 className="font-semibold text-[#111e36] text-base flex items-center gap-2">
+                  <Search className="w-4 h-4 text-[#0991b5]" />
+                  Aperçu dans les résultats Google
+                </h3>
+                <span className="text-[11px] font-bold text-blue-600 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded">
+                  Google Search
+                </span>
+              </div>
+
+              {/* Simulation Google Snippet */}
+              <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-xs space-y-2">
+                {/* Ligne URL + Favicon */}
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center overflow-hidden shrink-0 shadow-2xs">
+                    <img
+                      src={faviconUrl}
+                      alt="Google Favicon"
+                      className="w-4 h-4 object-contain"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/images/logos/LOGO_SB_F-navigateur.png';
+                      }}
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-semibold text-gray-800 leading-tight">sbfinance.bj</span>
+                    <span className="text-[11px] text-gray-500 leading-tight">https://sbfinance.bj</span>
+                  </div>
+                </div>
+
+                {/* Titre cliquable bleu */}
+                <h4 className="text-base font-semibold text-[#1a0dab] hover:underline cursor-pointer leading-snug">
+                  Salem Braha Finance - Cultivons la prospérité
+                </h4>
+
+                {/* Description */}
+                <p className="text-xs text-[#4d5156] leading-relaxed">
+                  Institution de microfinance au Bénin. Nous contribuons à l'amélioration des conditions de vie via des services financiers adaptés.
+                </p>
+              </div>
+
+              <p className="text-[11px] text-gray-400 italic">
+                * Dès le prochain passage du robot Googlebot, le logo ci-dessus remplacera l'icône de globe gris.
+              </p>
+            </div>
           </div>
         </div>
       )}

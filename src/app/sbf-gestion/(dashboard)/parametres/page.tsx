@@ -24,7 +24,8 @@ export default function ParametresPage() {
     adresseSiege: '',
     histoireTexte: '',
     gouvernanceTexte: '',
-    banniereAPropos: ''
+    banniereAPropos: '',
+    faviconUrl: ''
   });
 
   useEffect(() => {
@@ -34,8 +35,6 @@ export default function ParametresPage() {
   const fetchParametres = async () => {
     try {
       setLoading(true);
-      // TODO: Fetch from API or Server Action when we implement Prisma route handlers
-      // For now we'll simulate fetching the singleton (id = 1)
       const res = await fetch('/api/admin/parametres');
       if (res.ok) {
         const data = await res.json();
@@ -45,7 +44,8 @@ export default function ParametresPage() {
             valeurs: Array.isArray(data.valeurs) ? data.valeurs.join('\n') : '',
             histoireTexte: data.histoireTexte || '',
             gouvernanceTexte: data.gouvernanceTexte || '',
-            banniereAPropos: data.banniereAPropos || ''
+            banniereAPropos: data.banniereAPropos || '',
+            faviconUrl: data.themeConfig?.faviconUrl || data.faviconUrl || ''
           });
         }
       }
@@ -62,9 +62,14 @@ export default function ParametresPage() {
     setMessage({ text: '', type: '' });
 
     try {
+      const currentThemeConfig = (formData as any).themeConfig || {};
       const payload = {
         ...formData,
-        valeurs: formData.valeurs.split('\n').filter(v => v.trim() !== '')
+        valeurs: formData.valeurs.split('\n').filter(v => v.trim() !== ''),
+        themeConfig: {
+          ...currentThemeConfig,
+          faviconUrl: formData.faviconUrl
+        }
       };
 
       const res = await fetch('/api/admin/parametres', {
@@ -296,8 +301,17 @@ export default function ParametresPage() {
                 />
                 <p className="mt-2 text-sm text-gray-500">Image recommandée : 1920x600px. S'affiche en haut de la page "Qui sommes-nous".</p>
               </div>
-              
 
+              <div>
+                <ImageUpload 
+                  label="Logo du Navigateur (Favicon)"
+                  value={formData.faviconUrl} 
+                  onChange={(url) => handleImageChange('faviconUrl', url)} 
+                />
+                <p className="mt-2 text-sm text-gray-500">
+                  Icône carrée (PNG, WebP, ICO). S'affiche dans l'onglet du navigateur et dans les résultats Google devant sbfinance.bj.
+                </p>
+              </div>
             </div>
           </div>
         )}
