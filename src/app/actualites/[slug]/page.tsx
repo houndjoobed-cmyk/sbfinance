@@ -54,7 +54,7 @@ export default async function ActualiteDetailPage(props: Props) {
           </Link>
 
           <div className="flex items-center text-on-surface-variant text-sm mb-6">
-            <span className="bg-primary/10 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider text-xs mr-4">
+            <span className="bg-primary/10 text-primary px-3 py-1 rounded-none font-bold uppercase tracking-wider text-xs mr-4">
               {actualite.categorie}
             </span>
             <Calendar className="h-4 w-4 mr-2" />
@@ -74,7 +74,7 @@ export default async function ActualiteDetailPage(props: Props) {
       <Section variant="default" className="py-12 md:py-16">
         <div className="max-w-4xl mx-auto">
           {actualite.image && (
-            <div className="mb-12 rounded-2xl overflow-hidden shadow-lg border border-outline-variant/30">
+            <div className="mb-12 rounded-none overflow-hidden shadow-lg border border-outline-variant/30">
               <img
                 src={actualite.image}
                 alt={actualite.titre}
@@ -93,7 +93,7 @@ export default async function ActualiteDetailPage(props: Props) {
               <h3 className="text-xl font-bold text-primary-dark mb-6">Galerie photos</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {actualite.images.map((img: any, idx: number) => (
-                  <div key={idx} className="rounded-xl overflow-hidden shadow-sm border border-outline-variant/30 bg-surface-variant/20 hover:shadow-md transition-shadow aspect-4/3">
+                  <div key={idx} className="rounded-none overflow-hidden shadow-sm border border-outline-variant/30 bg-surface-variant/20 hover:shadow-md transition-shadow aspect-4/3">
                     <img
                       src={img}
                       alt={`${actualite.titre} - photo ${idx + 1}`}

@@ -56,8 +56,8 @@ export default async function CarrieresPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {offres.map((offre: any, index: number) => (
-              <Card key={offre.id} className={`flex flex-col h-full reveal-up delay-${(index % 3 + 1) * 100} group border-outline-variant/50 hover:shadow-lg transition-all`}>
-                <div className="h-32 bg-white relative overflow-hidden rounded-t-xl flex items-center justify-center border-b border-outline-variant/30">
+              <Card key={offre.id} className={`flex flex-col h-full rounded-none reveal-up delay-${(index % 3 + 1) * 100} group border-outline-variant/50 hover:shadow-lg transition-all`}>
+                <div className="h-32 bg-white relative overflow-hidden rounded-none flex items-center justify-center border-b border-outline-variant/30">
                   <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>
                   <Image 
                     src="/images/logos/logo-sbf.png" 

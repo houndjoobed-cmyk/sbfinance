@@ -63,7 +63,7 @@ export default async function NewsPage() {
           {categories.map((cat, idx) => (
             <button 
               key={idx}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${idx === 0 ? 'bg-primary text-white' : 'bg-surface-muted text-on-surface-variant hover:bg-surface-container'}`}
+              className={`px-4 py-2 rounded-none text-sm font-medium transition-colors ${idx === 0 ? 'bg-primary text-white' : 'bg-surface-muted text-on-surface-variant hover:bg-surface-container'}`}
             >
               {cat}
             </button>
@@ -73,13 +73,13 @@ export default async function NewsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {actualites.length > 0 ? (
             actualites.map((item, index) => (
-              <Card key={item.id} className={`flex flex-col h-full reveal-up delay-${(index % 3 + 1) * 100} group border-outline-variant/50 hover:shadow-lg transition-all`}>
+              <Card key={item.id} className={`flex flex-col h-full rounded-none reveal-up delay-${(index % 3 + 1) * 100} group border-outline-variant/50 hover:shadow-lg transition-all`}>
                 <div 
-                  className="h-48 bg-surface-container relative overflow-hidden rounded-t-xl"
+                  className="h-48 bg-surface-container relative overflow-hidden rounded-none"
                   style={item.image ? { backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
                 >
                   <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>
-                  <div className="absolute top-4 left-4 bg-primary text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full shadow-md">
+                  <div className="absolute top-4 left-4 bg-primary text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-none shadow-md">
                     {item.categorie}
                   </div>
                 </div>
