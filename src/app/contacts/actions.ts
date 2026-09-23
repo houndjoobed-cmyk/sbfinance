@@ -33,3 +33,36 @@ export async function submitContactForm(formData: FormData) {
     return { success: false, error: "Une erreur est survenue lors de l'envoi de votre demande." };
   }
 }
+
+export async function submitReclamationForm(formData: FormData) {
+  try {
+    const objet = formData.get("objet") as string;
+    const nom = formData.get("nom_prenom") as string;
+    const telephone = formData.get("contact") as string;
+    const email = formData.get("email") as string | null;
+    const revendication = formData.get("revendication") as string;
+
+    if (!objet || !nom || !telephone || !revendication) {
+      return { success: false, error: "Veuillez remplir tous les champs obligatoires." };
+    }
+
+    // Format the message to include the subject and mark it clearly as a reclamation
+    const formattedMessage = `[RÉCLAMATION]\nObjet : ${objet}\n\nDétails :\n${revendication}`;
+
+    // We store it in the DemandeContact table so it shows up in the admin dashboard
+    await prisma.demandeContact.create({
+      data: {
+        nom,
+        telephone,
+        email: email || null,
+        message: formattedMessage,
+        estTraite: false
+      }
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error submitting reclamation form:", error);
+    return { success: false, error: "Une erreur est survenue lors de l'envoi de votre réclamation." };
+  }
+}

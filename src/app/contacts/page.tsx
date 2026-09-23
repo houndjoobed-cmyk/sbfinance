@@ -3,10 +3,11 @@ import type { Metadata } from 'next';
 import { TypingAnimation } from '@/components/ui/typing-animation';
 import { Section } from '@/components/layout/section';
 import { Card, CardContent } from '@/components/ui/card';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, AlertCircle } from 'lucide-react';
 import prisma from "@/lib/prisma";
 import { ContactForm } from '@/components/contact/contact-form';
 import { JsonLd } from '@/components/seo/JsonLd';
+import { ReclamationModal } from '@/components/contact/ReclamationModal';
 
 export const metadata: Metadata = {
   title: "Contacts",
@@ -117,6 +118,19 @@ export default async function ContactPage() {
                   </div>
                 </CardContent>
               </Card>
+              
+              <Card className="border-0 shadow-sm bg-red-50 border border-red-100">
+                <CardContent className="p-6">
+                  <div className="flex items-start">
+                    <AlertCircle className="h-6 w-6 text-red-600 mr-4 shrink-0 mt-1" />
+                    <div className="w-full">
+                      <h3 className="font-bold text-red-700 text-lg mb-1">Service réclamation</h3>
+                      <p className="text-red-600 font-semibold text-lg mb-4">01 49 34 30 64</p>
+                      <ReclamationModal />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
 
@@ -134,3 +148,4 @@ export default async function ContactPage() {
     </>
   );
 }
+
