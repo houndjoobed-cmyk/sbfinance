@@ -454,7 +454,7 @@ export default function ContenuAccueilPage() {
           Pourquoi SBF (Atouts)
         </button>
         <button type="button" onClick={() => setActiveTab('productsServices')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'productsServices' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
-          Produits & Services
+          Nos offres & Promotions
         </button>
         <button type="button" onClick={() => setActiveTab('sections')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'sections' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
           Titres Sections
@@ -469,7 +469,7 @@ export default function ContenuAccueilPage() {
           Partenaires
         </button>
         <button type="button" onClick={() => setActiveTab('products')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'products' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
-          Produits (Cartes)
+          Nous vous accompagnons
         </button>
         <button type="button" onClick={() => setActiveTab('join')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'join' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
           Rejoignez-nous
@@ -686,7 +686,7 @@ export default function ContenuAccueilPage() {
         {activeTab === 'productsServices' && (
           <div className="space-y-8">
             <div className="border-b pb-2">
-              <h2 className="text-xl font-semibold text-[#111e36]">Section Produits & Services</h2>
+              <h2 className="text-xl font-semibold text-[#111e36]">Section Nos offres & Promotions</h2>
               <p className="text-sm text-gray-500 mt-1">
                 Personnalisez le titre de la section et les 5 cartes de produits.
               </p>
@@ -725,7 +725,7 @@ export default function ContenuAccueilPage() {
 
             {/* Les Cartes Produits */}
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-gray-800">Les Cartes Produits & Services</h3>
+              <h3 className="text-lg font-bold text-gray-800">Les Cartes Nos offres & Promotions</h3>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {(content.productsServices?.items || DEFAULT_CONTENT.productsServices.items).map((item: any, index: number) => (
                   <div key={item.id || index} className="p-5 border border-gray-200 rounded-xl bg-white shadow-sm space-y-4 flex flex-col justify-between">
@@ -795,7 +795,7 @@ export default function ContenuAccueilPage() {
               </div>
 
               <div className="space-y-4 p-4 border rounded bg-gray-50">
-                <h3 className="font-bold text-gray-800">Section Produits & Services</h3>
+                <h3 className="font-bold text-gray-800">Section Nos offres & Promotions</h3>
                 <div>
                   <label className="block text-xs font-medium text-gray-500">Texte de fond animé</label>
                   <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.productsServices?.backgroundText} onChange={e => updateSection('productsServices', 'backgroundText', e.target.value)} />
@@ -811,7 +811,7 @@ export default function ContenuAccueilPage() {
               </div>
 
               <div className="space-y-4 p-4 border rounded bg-gray-50">
-                <h3 className="font-bold text-gray-800">Section Nos Produits (Carrousel)</h3>
+                <h3 className="font-bold text-gray-800">Section Nous vous accompagnons (Carrousel)</h3>
                 <div>
                   <label className="block text-xs font-medium text-gray-500">Texte de fond animé</label>
                   <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.productsPreview.backgroundText} onChange={e => updateSection('productsPreview', 'backgroundText', e.target.value)} />
@@ -1081,7 +1081,7 @@ export default function ContenuAccueilPage() {
 
             <div className="space-y-6">
               <div className="flex justify-between items-center border-b pb-2">
-                <h2 className="text-xl font-semibold text-[#111e36]">Les Cartes Produits sur l'accueil</h2>
+                <h2 className="text-xl font-semibold text-[#111e36]">Les Cartes Nous vous accompagnons</h2>
                 <Button type="button" onClick={addProduct} variant="outline" size="sm">
                   <Plus className="w-4 h-4 mr-2" />
                   Ajouter un produit
