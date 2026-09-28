@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { TypingAnimation } from '@/components/ui/typing-animation';
 import { Section } from '@/components/layout/section';
 import { Card, CardContent } from '@/components/ui/card';
@@ -93,34 +94,37 @@ export default async function ContactPage() {
 
           {/* Contact Info */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 reveal-up delay-200">
-            <Card className="border-0 shadow-sm bg-white rounded-none hover:shadow-md transition-shadow">
+            <Card className="border-0 shadow-sm bg-white rounded-none hover:shadow-md transition-shadow relative group">
+              <Link href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(parametres.adresseSiege || 'Salem Braha Finance Benin')}`} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-10" aria-hidden="true"></Link>
               <CardContent className="p-8 text-center flex flex-col items-center">
-                <div className="w-12 h-12 bg-primary/10 text-primary rounded-none flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-primary/10 text-primary rounded-none flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
                   <MapPin className="h-6 w-6" />
                 </div>
                 <h3 className="font-bold text-primary-dark text-lg mb-2">Siège social</h3>
-                <p className="text-on-surface-variant text-sm whitespace-pre-line">{parametres.adresseSiege}</p>
-                <p className="text-on-surface-variant mt-2 text-xs font-medium">BP 317</p>
+                <p className="text-on-surface-variant text-sm whitespace-pre-line relative z-20">{parametres.adresseSiege}</p>
+                <p className="text-on-surface-variant mt-2 text-xs font-medium relative z-20">BP 317</p>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-sm bg-white rounded-none hover:shadow-md transition-shadow">
+            <Card className="border-0 shadow-sm bg-white rounded-none hover:shadow-md transition-shadow relative group">
+              <Link href={`https://wa.me/${parametres.telephonePrincipal?.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-10" aria-hidden="true"></Link>
               <CardContent className="p-8 text-center flex flex-col items-center">
-                <div className="w-12 h-12 bg-primary/10 text-primary rounded-none flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-primary/10 text-primary rounded-none flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
                   <Phone className="h-6 w-6" />
                 </div>
                 <h3 className="font-bold text-primary-dark text-lg mb-2">Téléphone</h3>
-                <p className="text-on-surface-variant font-medium">{parametres.telephonePrincipal}</p>
+                <p className="text-on-surface-variant font-medium relative z-20">{parametres.telephonePrincipal}</p>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-sm bg-white rounded-none hover:shadow-md transition-shadow">
+            <Card className="border-0 shadow-sm bg-white rounded-none hover:shadow-md transition-shadow relative group">
+              <Link href={`mailto:${parametres.emailPrincipal || 'contact@sbfinance.bj'}`} className="absolute inset-0 z-10" aria-hidden="true"></Link>
               <CardContent className="p-8 text-center flex flex-col items-center">
-                <div className="w-12 h-12 bg-primary/10 text-primary rounded-none flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-primary/10 text-primary rounded-none flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
                   <Mail className="h-6 w-6" />
                 </div>
                 <h3 className="font-bold text-primary-dark text-lg mb-2">Email</h3>
-                <a href={`mailto:${parametres.emailPrincipal || 'contact@sbfinance.bj'}`} className="text-primary hover:underline font-medium break-all">
+                <a href={`mailto:${parametres.emailPrincipal || 'contact@sbfinance.bj'}`} className="text-primary hover:underline font-medium break-all relative z-20">
                   {parametres.emailPrincipal || 'contact@sbfinance.bj'}
                 </a>
               </CardContent>

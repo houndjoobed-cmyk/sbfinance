@@ -126,21 +126,23 @@ export default async function ProductsPage() {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {category.products.map((product, pIdx) => (
-                  <Card key={pIdx} className="h-full flex flex-col group hover:shadow-lg transition-shadow border-outline-variant/50">
+                  <Card key={pIdx} className="h-full flex flex-col group hover:shadow-lg transition-shadow border-outline-variant/50 relative">
+                    <Link href={`/produits/credit/${product.slug}`} className="absolute inset-0 z-10" aria-hidden="true"></Link>
                     <CardHeader>
                       <CardTitle className="text-lg text-primary-dark group-hover:text-primary transition-colors">
                         {product.name}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="grow">
-                      <p className="text-on-surface-variant text-sm">
-                        {product.desc}
-                      </p>
+                      <div 
+                        className="text-on-surface-variant text-sm line-clamp-3 prose prose-sm prose-p:my-0 prose-headings:my-0 max-w-none"
+                        dangerouslySetInnerHTML={{ __html: product.desc || '' }}
+                      />
                     </CardContent>
                     <CardFooter>
                       <Link
                         href={`/produits/credit/${product.slug}`}
-                        className="inline-flex items-center text-accent font-medium hover:text-accent-hover transition-colors text-sm"
+                        className="inline-flex items-center text-accent font-medium hover:text-accent-hover transition-colors text-sm relative z-20"
                       >
                         Voir les conditions
                         <ArrowRight className="ml-2 h-4 w-4" />

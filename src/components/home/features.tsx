@@ -108,9 +108,10 @@ export function Features({ content }: { content?: any }) {
                 <h3 className="text-xl font-bold text-primary mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-slate-600 text-sm leading-relaxed mb-6 grow">
-                  {feature.description}
-                </p>
+                <div 
+                  className="text-slate-600 text-sm leading-relaxed mb-6 grow prose prose-sm prose-p:my-0 prose-headings:my-0 max-w-none line-clamp-4 overflow-hidden"
+                  dangerouslySetInnerHTML={{ __html: feature.description || '' }}
+                />
                 <Link
                   href={feature.link || "/a-propos"}
                   className="inline-flex items-center text-primary font-semibold hover:text-accent transition-colors mt-auto group/link relative z-20"

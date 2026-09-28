@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Save, Loader2, Plus, Trash2 } from 'lucide-react';
 import { ImageUpload } from '@/components/admin/image-upload';
+import { RichTextEditor } from '@/components/admin/rich-text-editor';
 
 const DEFAULT_CONTENT = {
   hero: [
@@ -656,13 +657,13 @@ export default function ContenuAccueilPage() {
 
                       {/* Description */}
                       <div>
-                        <label className="block text-xs font-medium text-gray-500">Description</label>
-                        <textarea 
-                          rows={3}
-                          className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
-                          value={item.description}
-                          onChange={(e) => updateFeature(item.id, 'description', e.target.value)}
-                        />
+                        <label className="block text-xs font-medium text-gray-500 mb-1">Description (HTML)</label>
+                        <div className="border border-gray-300 rounded-md bg-white">
+                          <RichTextEditor
+                            content={item.description}
+                            onChange={(content: string) => updateFeature(item.id, 'description', content)}
+                          />
+                        </div>
                       </div>
 
                       {/* Lien */}
@@ -748,13 +749,13 @@ export default function ContenuAccueilPage() {
                       </div>
 
                       <div>
-                        <label className="block text-xs font-medium text-gray-500">Description</label>
-                        <textarea 
-                          rows={3}
-                          className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
-                          value={item.description}
-                          onChange={(e) => updateProductService(item.id, 'description', e.target.value)}
-                        />
+                        <label className="block text-xs font-medium text-gray-500 mb-1">Description (HTML)</label>
+                        <div className="border border-gray-300 rounded-md bg-white">
+                          <RichTextEditor
+                            content={item.description}
+                            onChange={(content: string) => updateProductService(item.id, 'description', content)}
+                          />
+                        </div>
                       </div>
                       <div>
                         <label className="block text-xs font-medium text-gray-500">Lien du bouton &quot;En savoir plus&quot;</label>
@@ -1062,8 +1063,13 @@ export default function ContenuAccueilPage() {
                     <input type="text" className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={content.productsPreview.helpCard?.title || ''} onChange={(e) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, helpCard: { ...prev.productsPreview.helpCard, title: e.target.value } } }))} />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-gray-500">Description</label>
-                    <textarea rows={3} className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={content.productsPreview.helpCard?.description || ''} onChange={(e) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, helpCard: { ...prev.productsPreview.helpCard, description: e.target.value } } }))} />
+                    <label className="block text-xs font-medium text-gray-500 mb-1">Description (HTML)</label>
+                    <div className="border border-gray-300 rounded-md bg-white">
+                      <RichTextEditor
+                        content={content.productsPreview.helpCard?.description || ''}
+                        onChange={(val: string) => setContent((prev: any) => ({ ...prev, productsPreview: { ...prev.productsPreview, helpCard: { ...prev.productsPreview.helpCard, description: val } } }))}
+                      />
+                    </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
@@ -1118,8 +1124,13 @@ export default function ContenuAccueilPage() {
                           <input type="text" className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={item.title || ''} onChange={(e) => updateProduct(item.id, 'title', e.target.value)} />
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-gray-500">Description</label>
-                          <textarea rows={2} className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2" value={item.description || ''} onChange={(e) => updateProduct(item.id, 'description', e.target.value)} />
+                          <label className="block text-xs font-medium text-gray-500 mb-1">Description (HTML)</label>
+                          <div className="border border-gray-300 rounded-md bg-white">
+                            <RichTextEditor
+                              content={item.description || ''}
+                              onChange={(content: string) => updateProduct(item.id, 'description', content)}
+                            />
+                          </div>
                         </div>
                         <div className="grid grid-cols-2 gap-2">
                           <div>

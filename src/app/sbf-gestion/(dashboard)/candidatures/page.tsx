@@ -84,7 +84,7 @@ export default function CandidaturesPage() {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Candidat</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Poste</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documents</th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider sticky right-0 bg-gray-50 z-10 shadow-[-4px_0_10px_-5px_rgba(0,0,0,0.05)]">Actions</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -92,7 +92,7 @@ export default function CandidaturesPage() {
               <tr><td colSpan={5} className="px-6 py-8 text-center text-gray-500">Aucune candidature reçue pour l'instant.</td></tr>
             ) : (
               candidatures.map((c) => (
-                <tr key={c.id} className={`hover:bg-gray-50 ${c.estTraite ? 'opacity-60' : 'bg-blue-50/30'}`}>
+                <tr key={c.id} className={`hover:bg-gray-50 group ${c.estTraite ? 'opacity-60' : 'bg-blue-50/30'}`}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-gray-900">{new Date(c.createdAt).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
                     <div className="mt-1">
@@ -131,7 +131,7 @@ export default function CandidaturesPage() {
                       </a>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium sticky right-0 bg-white/95 backdrop-blur-sm shadow-[-4px_0_10px_-5px_rgba(0,0,0,0.05)] z-10 group-hover:bg-gray-50/95 transition-colors">
                     <div className="flex justify-end space-x-2">
                       <Button 
                         variant="outline" 

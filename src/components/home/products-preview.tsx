@@ -178,9 +178,10 @@ export function ProductsPreview({ content }: { content?: any }) {
                     <h3 className="text-xl font-bold text-primary mb-3">
                       {product.title}
                     </h3>
-                    <p className="text-slate-600 text-sm leading-relaxed mb-6 grow">
-                      {product.description}
-                    </p>
+                    <div 
+                      className="text-slate-600 text-sm leading-relaxed mb-6 grow prose prose-sm prose-p:my-0 prose-headings:my-0 max-w-none line-clamp-4 overflow-hidden"
+                      dangerouslySetInnerHTML={{ __html: product.description || '' }}
+                    />
                     <Button asChild variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white group-hover:bg-primary group-hover:text-white transition-colors relative z-20">
                       <Link href={product.link}>
                         Découvrir
@@ -213,9 +214,10 @@ export function ProductsPreview({ content }: { content?: any }) {
                   <h3 className="text-xl font-bold mb-3">
                     {helpCard.title}
                   </h3>
-                  <p className="text-primary-light text-sm leading-relaxed mb-6 grow">
-                    {helpCard.description}
-                  </p>
+                  <div 
+                    className="text-primary-light text-sm leading-relaxed mb-6 grow prose prose-sm prose-p:my-0 prose-headings:my-0 max-w-none prose-invert"
+                    dangerouslySetInnerHTML={{ __html: helpCard.description || '' }}
+                  />
                   <Button asChild className="w-full bg-white text-primary hover:bg-slate-100 border-0 relative z-20">
                     <Link href={helpCard.buttonLink}>
                       <Phone className="mr-2 h-4 w-4" /> {helpCard.buttonText}

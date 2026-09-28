@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { ImageUpload } from '@/components/admin/image-upload';
+import { RichTextEditor } from '@/components/admin/rich-editor';
 
 export default function ProduitAutreFormPage({ params }: { params?: { id?: string } }) {
   const router = useRouter();
@@ -119,11 +120,21 @@ export default function ProduitAutreFormPage({ params }: { params?: { id?: strin
           </div>
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">Description courte *</label>
-            <textarea required name="description" rows={2} value={formData.description} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] border bg-white px-3 py-2" placeholder="Résumé de l'offre" />
+            <div className="border border-gray-300 rounded-md bg-white">
+              <RichTextEditor
+                content={formData.description}
+                onChange={(content) => setFormData(prev => ({ ...prev, description: content }))}
+              />
+            </div>
           </div>
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">Contenu détaillé *</label>
-            <textarea required name="contenuDetaille" rows={6} value={formData.contenuDetaille} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] border bg-white px-3 py-2" placeholder="Explication détaillée des avantages, fonctionnement..." />
+            <div className="border border-gray-300 rounded-md bg-white">
+              <RichTextEditor
+                content={formData.contenuDetaille}
+                onChange={(content) => setFormData(prev => ({ ...prev, contenuDetaille: content }))}
+              />
+            </div>
           </div>
           <div className="md:col-span-2">
             <ImageUpload 

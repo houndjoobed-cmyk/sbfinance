@@ -89,9 +89,10 @@ export default async function ProductDetailPage({ params }: Props) {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-md">
             {product.nom}
           </h1>
-          <p className="text-xl md:text-2xl text-primary-light leading-relaxed max-w-3xl border-l-4 border-accent pl-6">
-            {product.description}
-          </p>
+          <div 
+            className="text-xl md:text-2xl text-primary-light leading-relaxed max-w-3xl border-l-4 border-accent pl-6 prose prose-invert prose-p:my-2 prose-headings:text-white"
+            dangerouslySetInnerHTML={{ __html: product.description || '' }}
+          />
         </div>
       </Section>
 
@@ -221,7 +222,10 @@ export default async function ProductDetailPage({ params }: Props) {
                       </div>
                       <div>
                         <p className="text-on-surface-variant text-sm font-medium mb-1 uppercase tracking-wide">Frais & Épargne</p>
-                        <p className="text-primary-dark font-medium leading-snug whitespace-pre-line">{product.fraisEtEpargne}</p>
+                        <div 
+                          className="text-primary-dark font-medium leading-snug prose prose-sm prose-p:my-1 prose-ul:my-1 max-w-none"
+                          dangerouslySetInnerHTML={{ __html: product.fraisEtEpargne || '' }}
+                        />
                       </div>
                     </div>
                   )}

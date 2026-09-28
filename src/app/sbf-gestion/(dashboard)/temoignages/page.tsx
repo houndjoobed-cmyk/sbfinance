@@ -74,7 +74,7 @@ export default function TemoignagesPage() {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider sticky right-0 bg-gray-50 z-10 shadow-[-4px_0_10px_-5px_rgba(0,0,0,0.05)]">Actions</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -82,7 +82,7 @@ export default function TemoignagesPage() {
               <tr><td colSpan={4} className="px-6 py-8 text-center text-gray-500">Aucun témoignage enregistré.</td></tr>
             ) : (
               temoignages.map((t) => (
-                <tr key={t.id} className="hover:bg-gray-50">
+                <tr key={t.id} className="hover:bg-gray-50 group">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="font-medium text-gray-900">{t.nom}</div>
                     <div className="text-sm text-gray-500">{t.role || 'Non spécifié'}</div>
@@ -97,7 +97,7 @@ export default function TemoignagesPage() {
                       <span className="flex items-center text-sm text-gray-500"><EyeOff className="w-4 h-4 mr-1" /> Masqué</span>
                     )}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium sticky right-0 bg-white/95 backdrop-blur-sm shadow-[-4px_0_10px_-5px_rgba(0,0,0,0.05)] z-10 group-hover:bg-gray-50/95 transition-colors">
                     <div className="flex justify-end space-x-2">
                       <Link href={`/sbf-gestion/temoignages/${t.id}`} className="text-[#0991b5] hover:bg-blue-50 p-2 rounded-md"><Edit className="w-4 h-4" /></Link>
                       <button onClick={() => handleDelete(t.id)} className="text-red-600 hover:bg-red-50 p-2 rounded-md"><Trash2 className="w-4 h-4" /></button>

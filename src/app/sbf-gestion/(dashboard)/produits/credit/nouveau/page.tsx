@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2, Plus, Trash2 } from 'lucide-react';
 import Link from 'next/link';
+import { RichTextEditor } from '@/components/admin/rich-editor';
 
 export default function ProduitCreditFormPage({ params }: { params?: { id?: string } }) {
   const router = useRouter();
@@ -169,7 +170,12 @@ export default function ProduitCreditFormPage({ params }: { params?: { id?: stri
             </div>
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">Description courte *</label>
-              <textarea required name="description" rows={2} value={formData.description} onChange={handleChange} className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2" />
+              <div className="border border-gray-300 rounded-md bg-white">
+                <RichTextEditor
+                  content={formData.description}
+                  onChange={(content) => setFormData(prev => ({ ...prev, description: content }))}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -224,15 +230,13 @@ export default function ProduitCreditFormPage({ params }: { params?: { id?: stri
             <p className="text-xs text-gray-500">
               Indiquez ici les détails tels que le dépôt de garantie, l'épargne de capitalisation, les frais d'étude de dossier, frais de solidarité, frais de gestion et assurance.
             </p>
-            <textarea
-              name="fraisEtEpargne"
-              rows={5}
-              value={formData.fraisEtEpargne}
-              onChange={handleChange}
-              className="w-full border-gray-300 rounded-md focus:ring-[#0991b5] focus:border-[#0991b5] border bg-white px-3 py-2 text-sm leading-relaxed"
-              placeholder="Ex: Dépôt de garantie : 10% du montant du crédit octroyé • Épargne de capitalisation : 5% du montant du crédit étalé sur les échéances • Frais d'étude de dossier : 2 000F CFA (non remboursable) • Frais de solidarité : 2 000F CFA (non remboursable) • Frais de dossier : 2% du montant du crédit octroyé (non remboursable) • Frais de gestion : 3% du montant du crédit octroyé (non remboursable) • Assurance : Taux en vigueur par les compagnies d'assurances agréées par SBF"
-            />
-            <p className="text-xs text-gray-400">
+            <div className="border border-gray-300 rounded-md bg-white">
+              <RichTextEditor
+                content={formData.fraisEtEpargne}
+                onChange={(content) => setFormData(prev => ({ ...prev, fraisEtEpargne: content }))}
+              />
+            </div>
+            <p className="text-xs text-gray-400 mt-2">
               💡 Astuce : Vous pouvez utiliser des puces « • » ou aller à la ligne pour présenter clairement chaque frais au client.
             </p>
           </div>

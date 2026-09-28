@@ -56,7 +56,11 @@ export default async function CarrieresPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {offres.map((offre: any, index: number) => (
-              <Card key={offre.id} className={`flex flex-col h-full rounded-none reveal-up delay-${(index % 3 + 1) * 100} group border-outline-variant/50 hover:shadow-lg transition-all`}>
+              <Card key={offre.id} className={`flex flex-col h-full rounded-none reveal-up delay-${(index % 3 + 1) * 100} group border-outline-variant/50 hover:shadow-lg transition-all relative`}>
+                <Link 
+                  href={`/carrieres/${offre.slug}`}
+                  className="absolute inset-0 z-10" aria-hidden="true"
+                ></Link>
                 <div className="h-32 bg-white relative overflow-hidden rounded-none flex items-center justify-center border-b border-outline-variant/30">
                   <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>
                   <Image 
@@ -86,7 +90,7 @@ export default async function CarrieresPage() {
                   <CardFooter className="p-0 pt-4">
                     <Link 
                       href={`/carrieres/${offre.slug}`}
-                      className="inline-flex items-center text-accent font-medium hover:text-accent-hover transition-colors"
+                      className="inline-flex items-center text-accent font-medium hover:text-accent-hover transition-colors relative z-20"
                     >
                       Voir les détails et postuler
                       <ArrowRight className="ml-2 h-4 w-4" />

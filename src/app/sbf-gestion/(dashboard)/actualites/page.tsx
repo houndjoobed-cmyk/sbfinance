@@ -77,7 +77,7 @@ export default function ActualitesPage() {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Catégorie</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider sticky right-0 bg-gray-50 z-10 shadow-[-4px_0_10px_-5px_rgba(0,0,0,0.05)]">Actions</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -89,7 +89,7 @@ export default function ActualitesPage() {
               </tr>
             ) : (
               actualites.map((actu) => (
-                <tr key={actu.id} className="hover:bg-gray-50">
+                <tr key={actu.id} className="hover:bg-gray-50 group">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-gray-900">{actu.titre}</div>
                     <div className="text-sm text-gray-500">/{actu.slug}</div>
@@ -109,7 +109,7 @@ export default function ActualitesPage() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {new Date(actu.createdAt).toLocaleDateString('fr-FR')}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium sticky right-0 bg-white/95 backdrop-blur-sm shadow-[-4px_0_10px_-5px_rgba(0,0,0,0.05)] z-10 group-hover:bg-gray-50/95 transition-colors">
                     <div className="flex justify-end space-x-2">
                       <Link href={`/sbf-gestion/actualites/${actu.id}`} className="text-[#0991b5] hover:text-[#077a99] p-2 rounded-md hover:bg-blue-50">
                         <Edit className="w-4 h-4" />

@@ -85,7 +85,7 @@ export default function ProduitsPage() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom du crédit</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Catégorie</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Montant Max</th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider sticky right-0 bg-gray-50 z-10 shadow-[-4px_0_10px_-5px_rgba(0,0,0,0.05)]">Actions</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -93,13 +93,13 @@ export default function ProduitsPage() {
                 <tr><td colSpan={4} className="px-6 py-8 text-center text-gray-500">Aucun crédit.</td></tr>
               ) : (
                 credits.map((c) => (
-                  <tr key={c.id} className="hover:bg-gray-50">
+                  <tr key={c.id} className="hover:bg-gray-50 group">
                     <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{c.nom}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{c.categorie}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {c.montantMax ? `${c.montantMax.toLocaleString('fr-FR')} FCFA` : 'Non défini'}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium sticky right-0 bg-white/95 backdrop-blur-sm shadow-[-4px_0_10px_-5px_rgba(0,0,0,0.05)] z-10 group-hover:bg-gray-50/95 transition-colors">
                       <div className="flex justify-end space-x-2">
                         <Link href={`/sbf-gestion/produits/credit/${c.id}`} className="text-[#0991b5] hover:bg-blue-50 p-2 rounded-md"><Edit className="w-4 h-4" /></Link>
                         <button onClick={() => handleDeleteCredit(c.id)} className="text-red-600 hover:bg-red-50 p-2 rounded-md"><Trash2 className="w-4 h-4" /></button>
@@ -134,7 +134,7 @@ export default function ProduitsPage() {
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom du produit</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider sticky right-0 bg-gray-50 z-10 shadow-[-4px_0_10px_-5px_rgba(0,0,0,0.05)]">Actions</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -142,14 +142,14 @@ export default function ProduitsPage() {
                 <tr><td colSpan={3} className="px-6 py-8 text-center text-gray-500">Aucun autre produit.</td></tr>
               ) : (
                 autres.map((a) => (
-                  <tr key={a.id} className="hover:bg-gray-50">
+                  <tr key={a.id} className="hover:bg-gray-50 group">
                     <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{a.nom}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                         {a.type}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium sticky right-0 bg-white/95 backdrop-blur-sm shadow-[-4px_0_10px_-5px_rgba(0,0,0,0.05)] z-10 group-hover:bg-gray-50/95 transition-colors">
                       <div className="flex justify-end space-x-2">
                         <Link href={`/sbf-gestion/produits/autres/${a.id}`} className="text-[#0991b5] hover:bg-blue-50 p-2 rounded-md"><Edit className="w-4 h-4" /></Link>
                         <button onClick={() => handleDeleteAutre(a.id)} className="text-red-600 hover:bg-red-50 p-2 rounded-md"><Trash2 className="w-4 h-4" /></button>

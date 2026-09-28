@@ -73,7 +73,13 @@ export default async function NewsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {actualites.length > 0 ? (
             actualites.map((item, index) => (
-              <Card key={item.id} className={`flex flex-col h-full rounded-none reveal-up delay-${(index % 3 + 1) * 100} group border-outline-variant/50 hover:shadow-lg transition-all`}>
+              <Card key={item.id} className={`flex flex-col h-full rounded-none reveal-up delay-${(index % 3 + 1) * 100} group border-outline-variant/50 hover:shadow-lg transition-all relative`}>
+                <Link 
+                  href={(item as any).lienExterne ? (item as any).lienExterne : `/actualites/${item.slug}`}
+                  target={(item as any).lienExterne ? "_blank" : undefined}
+                  rel={(item as any).lienExterne ? "noopener noreferrer" : undefined}
+                  className="absolute inset-0 z-10" aria-hidden="true"
+                ></Link>
                 <div 
                   className="h-48 bg-surface-container relative overflow-hidden rounded-none"
                   style={item.image ? { backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
@@ -104,7 +110,7 @@ export default async function NewsPage() {
                       href={(item as any).lienExterne ? (item as any).lienExterne : `/actualites/${item.slug}`}
                       target={(item as any).lienExterne ? "_blank" : undefined}
                       rel={(item as any).lienExterne ? "noopener noreferrer" : undefined}
-                      className="inline-flex items-center text-accent font-medium hover:text-accent-hover transition-colors"
+                      className="inline-flex items-center text-accent font-medium hover:text-accent-hover transition-colors relative z-20"
                     >
                       Lire la suite
                       <ArrowRight className="ml-2 h-4 w-4" />
