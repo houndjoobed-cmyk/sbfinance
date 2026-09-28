@@ -5,7 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2, Plus, Trash2 } from 'lucide-react';
 import Link from 'next/link';
-import { RichTextEditor } from '@/components/admin/rich-editor';
+import { RichTextEditor } from '@/components/admin/rich-text-editor';
 
 export default function ProduitCreditFormPage({ params }: { params?: { id?: string } }) {
   const router = useRouter();

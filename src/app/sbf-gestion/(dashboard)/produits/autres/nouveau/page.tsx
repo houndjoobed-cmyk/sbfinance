@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { ImageUpload } from '@/components/admin/image-upload';
-import { RichTextEditor } from '@/components/admin/rich-editor';
+import { RichTextEditor } from '@/components/admin/rich-text-editor';
 
 export default function ProduitAutreFormPage({ params }: { params?: { id?: string } }) {
   const router = useRouter();
