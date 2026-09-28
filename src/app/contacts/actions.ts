@@ -7,19 +7,22 @@ export async function submitContactForm(formData: FormData) {
     const nom = formData.get("name") as string;
     const telephone = formData.get("phone") as string;
     const email = formData.get("email") as string | null;
+    const objet = formData.get("objet") as string | null;
     const agenceId = formData.get("agency") as string | null;
     const message = formData.get("message") as string;
 
-    if (!nom || !telephone || !message) {
+    if (!nom || !telephone || !message || !objet) {
       return { success: false, error: "Veuillez remplir tous les champs obligatoires." };
     }
+    
+    const formattedMessage = `[Objet : ${objet}]\n\n${message}`;
 
     await prisma.demandeContact.create({
       data: {
         nom,
         telephone,
         email: email || null,
-        message,
+        message: formattedMessage,
         agencePreference: agenceId || null,
         estTraite: false
       }

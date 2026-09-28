@@ -39,7 +39,15 @@ export function NewsPreview({ news, content }: NewsPreviewProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
         {news.map((item, index) => (
-          <Card key={item.id} className={`flex flex-col h-full rounded-none reveal-up delay-${(index + 1) * 100} group`}>
+          <Card key={item.id} className={`flex flex-col h-full rounded-none reveal-up delay-${(index + 1) * 100} group relative`}>
+            {/* Lien qui couvre toute la carte */}
+            <Link 
+              href={item.lienExterne ? item.lienExterne : `/actualites/${item.slug}`}
+              target={item.lienExterne ? "_blank" : undefined}
+              rel={item.lienExterne ? "noopener noreferrer" : undefined}
+              className="absolute inset-0 z-10" 
+              aria-hidden="true"
+            ></Link>
             {/* Image Placeholder */}
             <div className="h-48 bg-surface-container relative overflow-hidden rounded-none" style={item.image ? { backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}>
               {!item.image && <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>}
@@ -67,7 +75,7 @@ export function NewsPreview({ news, content }: NewsPreviewProps) {
                 href={item.lienExterne ? item.lienExterne : `/actualites/${item.slug}`}
                 target={item.lienExterne ? "_blank" : undefined}
                 rel={item.lienExterne ? "noopener noreferrer" : undefined}
-                className="inline-flex items-center text-accent font-medium hover:text-accent-hover transition-colors"
+                className="inline-flex items-center text-accent font-medium hover:text-accent-hover transition-colors relative z-20"
               >
                 Lire la suite
                 <ArrowRight className="ml-2 h-4 w-4" />

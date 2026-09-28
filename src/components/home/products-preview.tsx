@@ -157,7 +157,9 @@ export function ProductsPreview({ content }: { content?: any }) {
                 key={index}
                 className="flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_33.33%] min-w-0 pr-4 sm:pr-6"
               >
-                <div className="bg-white border border-slate-200 hover:shadow-xl transition-all duration-300 h-full flex flex-col group overflow-hidden">
+                <div className="bg-white border border-slate-200 hover:shadow-xl transition-all duration-300 h-full flex flex-col group overflow-hidden relative">
+                  {/* Lien qui couvre toute la carte */}
+                  <Link href={product.link} className="absolute inset-0 z-10" aria-hidden="true"></Link>
                   {/* Image */}
                   <div className="relative h-48 sm:h-52 overflow-hidden">
                     <Image
@@ -179,7 +181,7 @@ export function ProductsPreview({ content }: { content?: any }) {
                     <p className="text-slate-600 text-sm leading-relaxed mb-6 grow">
                       {product.description}
                     </p>
-                    <Button asChild variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white group-hover:bg-primary group-hover:text-white transition-colors">
+                    <Button asChild variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white group-hover:bg-primary group-hover:text-white transition-colors relative z-20">
                       <Link href={product.link}>
                         Découvrir
                       </Link>
@@ -191,7 +193,9 @@ export function ProductsPreview({ content }: { content?: any }) {
 
             {/* Special Contact Card in the Carousel */}
             <div className="flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_33.33%] min-w-0 pr-4 sm:pr-6">
-              <div className="bg-primary overflow-hidden shadow-lg h-full flex flex-col text-white">
+              <div className="bg-primary overflow-hidden shadow-lg h-full flex flex-col text-white relative">
+                {/* Lien qui couvre toute la carte */}
+                <Link href={helpCard.buttonLink} className="absolute inset-0 z-10" aria-hidden="true"></Link>
                 {/* Decorative top image area */}
                 <div className="relative h-48 sm:h-52 overflow-hidden">
                   <Image
@@ -212,7 +216,7 @@ export function ProductsPreview({ content }: { content?: any }) {
                   <p className="text-primary-light text-sm leading-relaxed mb-6 grow">
                     {helpCard.description}
                   </p>
-                  <Button asChild className="w-full bg-white text-primary hover:bg-slate-100 border-0">
+                  <Button asChild className="w-full bg-white text-primary hover:bg-slate-100 border-0 relative z-20">
                     <Link href={helpCard.buttonLink}>
                       <Phone className="mr-2 h-4 w-4" /> {helpCard.buttonText}
                     </Link>

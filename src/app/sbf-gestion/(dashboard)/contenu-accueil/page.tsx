@@ -74,6 +74,18 @@ const DEFAULT_CONTENT = {
       { id: "5", name: "Ecobank", image: "/images/partenaires/ecobank.png" }
     ]
   },
+  productsServices: {
+    backgroundText: "PRODUITS",
+    title: "Produits & Services",
+    subtitle: "Ce que nous offrons",
+    items: [
+      { id: "1", title: "Crédit", description: "Solutions de financement pour vos besoins de roulement, de consommation ou d'investissement.", icon: "Wallet", image: "/images/products/credit-v2.jpg", link: "/produits/credit" },
+      { id: "2", title: "Épargne", description: "Sécurisez votre avenir avec nos produits d'épargne: Houenoussou, Allodo, Ahossou, Zédaga et Kondokpo.", icon: "Landmark", image: "/images/products/epargne-v2.jpg", link: "/produits/epargne" },
+      { id: "3", title: "Appui", description: "Un soutien sur-mesure pour développer vos activités et pérenniser votre croissance.", icon: "Handshake", image: "/images/products/appui.png", link: "/produits/appui" },
+      { id: "4", title: "Conseil", description: "Expertise et accompagnement stratégique pour la gestion de votre entreprise.", icon: "Lightbulb", image: "/images/products/conseil.jpeg", link: "/produits/conseil" },
+      { id: "5", title: "Formation", description: "Renforcez vos compétences avec nos programmes d'éducation financière et entrepreneuriale.", icon: "GraduationCap", image: "/images/products/formation.jpeg", link: "/produits/formation" }
+    ]
+  },
   productsPreview: {
     backgroundText: "Produits",
     title: "Nos Offres de Crédit",
@@ -207,6 +219,16 @@ export default function ContenuAccueilPage() {
                     image: it.image || DEFAULT_CONTENT.features.items[idx]?.image || "/images/home/Engagement.jpeg"
                   }))
                 : DEFAULT_CONTENT.features.items
+            },
+            productsServices: {
+              ...DEFAULT_CONTENT.productsServices,
+              ...(loaded.productsServices || {}),
+              items: (Array.isArray(loaded.productsServices?.items) && loaded.productsServices.items.length > 0)
+                ? loaded.productsServices.items.map((it: any, idx: number) => ({
+                    ...it,
+                    image: it.image || DEFAULT_CONTENT.productsServices.items[idx]?.image || "/images/products/credit-v2.jpg"
+                  }))
+                : DEFAULT_CONTENT.productsServices.items
             }
           });
         }
@@ -291,6 +313,18 @@ export default function ContenuAccueilPage() {
       features: {
         ...prev.features,
         items: (prev.features?.items || DEFAULT_CONTENT.features.items).map((item: any) =>
+          item.id === id ? { ...item, [field]: value } : item
+        )
+      }
+    }));
+  };
+
+  const updateProductService = (id: string, field: string, value: string) => {
+    setContent((prev: any) => ({
+      ...prev,
+      productsServices: {
+        ...prev.productsServices,
+        items: (prev.productsServices?.items || DEFAULT_CONTENT.productsServices.items).map((item: any) =>
           item.id === id ? { ...item, [field]: value } : item
         )
       }
@@ -417,6 +451,9 @@ export default function ContenuAccueilPage() {
         </button>
         <button type="button" onClick={() => setActiveTab('features')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'features' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
           Pourquoi SBF (Atouts)
+        </button>
+        <button type="button" onClick={() => setActiveTab('productsServices')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'productsServices' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
+          Produits & Services
         </button>
         <button type="button" onClick={() => setActiveTab('sections')} className={`whitespace-nowrap pb-2 font-medium text-sm transition-colors ${activeTab === 'sections' ? 'border-b-2 border-[#0991b5] text-[#0991b5]' : 'text-gray-500 hover:text-gray-700'}`}>
           Titres Sections
@@ -645,6 +682,109 @@ export default function ContenuAccueilPage() {
           </div>
         )}
 
+        {activeTab === 'productsServices' && (
+          <div className="space-y-8">
+            <div className="border-b pb-2">
+              <h2 className="text-xl font-semibold text-[#111e36]">Section Produits & Services</h2>
+              <p className="text-sm text-gray-500 mt-1">
+                Personnalisez le titre de la section et les 5 cartes de produits.
+              </p>
+            </div>
+
+            {/* En-tête de la section */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-gray-50 p-4 rounded-lg border">
+              <div>
+                <label className="block text-xs font-medium text-gray-500">Titre principal</label>
+                <input 
+                  type="text" 
+                  className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
+                  value={content.productsServices?.title || ''}
+                  onChange={e => updateSection('productsServices', 'title', e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500">Sous-titre</label>
+                <input 
+                  type="text" 
+                  className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
+                  value={content.productsServices?.subtitle || ''}
+                  onChange={e => updateSection('productsServices', 'subtitle', e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500">Texte de fond animé (watermark)</label>
+                <input 
+                  type="text" 
+                  className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
+                  value={content.productsServices?.backgroundText || ''}
+                  onChange={e => updateSection('productsServices', 'backgroundText', e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* Les Cartes Produits */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-gray-800">Les Cartes Produits & Services</h3>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {(content.productsServices?.items || DEFAULT_CONTENT.productsServices.items).map((item: any, index: number) => (
+                  <div key={item.id || index} className="p-5 border border-gray-200 rounded-xl bg-white shadow-sm space-y-4 flex flex-col justify-between">
+                    <div className="space-y-4">
+                      <div>
+                        <ImageUpload 
+                          label={`Photo d'illustration (${item.title || `Carte ${index + 1}`})`}
+                          value={item.image || ''} 
+                          onChange={(url) => updateProductService(item.id, 'image', url)} 
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500">Titre de la carte</label>
+                        <input 
+                          type="text" 
+                          className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2 font-semibold text-gray-900"
+                          value={item.title}
+                          onChange={(e) => updateProductService(item.id, 'title', e.target.value)}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500">Icône du badge flottant</label>
+                        <select
+                          className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
+                          value={item.icon || 'Wallet'}
+                          onChange={(e) => updateProductService(item.id, 'icon', e.target.value)}
+                        >
+                          <option value="Wallet">Wallet (Crédit)</option>
+                          <option value="Landmark">Landmark (Épargne)</option>
+                          <option value="Handshake">Handshake (Appui)</option>
+                          <option value="Lightbulb">Lightbulb (Conseil)</option>
+                          <option value="GraduationCap">GraduationCap (Formation)</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500">Description</label>
+                        <textarea 
+                          rows={3}
+                          className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
+                          value={item.description}
+                          onChange={(e) => updateProductService(item.id, 'description', e.target.value)}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500">Lien du bouton &quot;En savoir plus&quot;</label>
+                        <input 
+                          type="text" 
+                          className="w-full mt-1 border-gray-300 rounded-md border bg-white px-3 py-2 text-xs font-mono"
+                          value={item.link || '/produits'}
+                          onChange={(e) => updateProductService(item.id, 'link', e.target.value)}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         {activeTab === 'sections' && (
           <div className="space-y-8">
             <h2 className="text-xl font-semibold text-[#111e36] border-b pb-2">Entêtes des sections de l'accueil</h2>
@@ -667,7 +807,23 @@ export default function ContenuAccueilPage() {
               </div>
 
               <div className="space-y-4 p-4 border rounded bg-gray-50">
-                <h3 className="font-bold text-gray-800">Section Nos Produits</h3>
+                <h3 className="font-bold text-gray-800">Section Produits & Services</h3>
+                <div>
+                  <label className="block text-xs font-medium text-gray-500">Texte de fond animé</label>
+                  <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.productsServices?.backgroundText} onChange={e => updateSection('productsServices', 'backgroundText', e.target.value)} />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-500">Titre</label>
+                  <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.productsServices?.title} onChange={e => updateSection('productsServices', 'title', e.target.value)} />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-500">Sous-titre</label>
+                  <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.productsServices?.subtitle} onChange={e => updateSection('productsServices', 'subtitle', e.target.value)} />
+                </div>
+              </div>
+
+              <div className="space-y-4 p-4 border rounded bg-gray-50">
+                <h3 className="font-bold text-gray-800">Section Nos Produits (Carrousel)</h3>
                 <div>
                   <label className="block text-xs font-medium text-gray-500">Texte de fond animé</label>
                   <input type="text" className="w-full border-gray-300 rounded-md border bg-white px-3 py-2" value={content.productsPreview.backgroundText} onChange={e => updateSection('productsPreview', 'backgroundText', e.target.value)} />

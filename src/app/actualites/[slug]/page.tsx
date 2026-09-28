@@ -43,7 +43,7 @@ export default async function ActualiteDetailPage(props: Props) {
 
   return (
     <>
-      <Section variant="light" className="py-12 md:py-16 border-b border-outline-variant/30">
+      <Section variant="default" className="py-12 md:py-16 border-b border-outline-variant/30">
         <div className="max-w-4xl mx-auto">
           <Link
             href="/actualites"

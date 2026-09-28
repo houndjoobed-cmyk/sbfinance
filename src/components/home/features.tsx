@@ -82,8 +82,11 @@ export function Features({ content }: { content?: any }) {
           return (
             <div
               key={index}
-              className="bg-white border border-slate-200 hover:shadow-xl transition-all duration-300 h-full flex flex-col group overflow-hidden"
+              className="bg-white border border-slate-200 hover:shadow-xl transition-all duration-300 h-full flex flex-col group overflow-hidden relative"
             >
+              {/* Lien qui couvre toute la carte */}
+              <Link href={feature.link || "/a-propos"} className="absolute inset-0 z-10" aria-hidden="true"></Link>
+
               {/* Image de couverture avec icône flottante comme les cartes produits */}
               <div className="relative h-52 overflow-hidden bg-slate-100">
                 <Image
@@ -110,7 +113,7 @@ export function Features({ content }: { content?: any }) {
                 </p>
                 <Link
                   href={feature.link || "/a-propos"}
-                  className="inline-flex items-center text-primary font-semibold hover:text-accent transition-colors mt-auto group/link"
+                  className="inline-flex items-center text-primary font-semibold hover:text-accent transition-colors mt-auto group/link relative z-20"
                 >
                   En savoir plus
                   <ArrowRight className="ml-2 h-4 w-4 transform transition-transform group-hover/link:translate-x-1" />

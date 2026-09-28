@@ -57,7 +57,7 @@ export function ReclamationModal() {
   };
 
   const modalContent = isOpen && mounted ? (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm"
+    <div className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm"
       onClick={() => setIsOpen(false)}
     >
       <div 
@@ -115,7 +115,7 @@ export function ReclamationModal() {
                   name="revendication" 
                   required 
                   placeholder="Décrivez votre revendication ici..." 
-                  className="min-h-[120px]"
+                  className="min-h-30"
                 />
               </div>
               

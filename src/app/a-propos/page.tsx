@@ -111,7 +111,7 @@ export default async function AboutPage() {
       </Section>
 
       {/* Mission / Vision Bento Grid */}
-      <Section variant="light">
+      <Section variant="default">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 reveal-up">
 
           <div className="md:col-span-7 bg-primary text-white p-8 md:p-12 shadow-(--shadow-card)">

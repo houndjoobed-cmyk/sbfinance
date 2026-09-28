@@ -1,0 +1,649 @@
+/* ===== Éditeur de texte riche — Styles Tiptap ===== */
+
+/* Conteneur global */
+.rich-editor-wrapper {
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s ease;
+}
+
+.rich-editor-wrapper:focus-within {
+  border-color: #0991b5;
+  box-shadow: 0 0 0 3px rgba(9, 145, 181, 0.1);
+}
+
+/* ===== Toolbar ===== */
+.editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 8px 10px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  align-items: center;
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 24px;
+  background: #d1d5db;
+  margin: 0 6px;
+  flex-shrink: 0;
+}
+
+.toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
+}
+
+.toolbar-btn:hover {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.toolbar-btn.is-active {
+  background: #0991b5;
+  color: #fff;
+}
+
+.toolbar-btn.is-active:hover {
+  background: #0880a0;
+}
+
+.toolbar-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.toolbar-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Sélecteur de headings */
+.heading-select {
+  padding: 4px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 13px;
+  color: #374151;
+  cursor: pointer;
+  min-width: 130px;
+  height: 32px;
+}
+
+.heading-select:focus {
+  outline: none;
+  border-color: #0991b5;
+  box-shadow: 0 0 0 2px rgba(9, 145, 181, 0.15);
+}
+
+/* Bouton insérer image (plus large) */
+.toolbar-btn-image {
+  width: auto;
+  padding: 0 10px;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.toolbar-btn-image svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ===== Zone d'édition (ProseMirror) ===== */
+.ProseMirror {
+  min-height: 400px;
+  max-height: 700px;
+  overflow-y: auto;
+  padding: 24px 28px;
+  outline: none;
+  font-size: 15px;
+  line-height: 1.75;
+  color: #1f2937;
+}
+
+.ProseMirror p {
+  margin-bottom: 0.75em;
+}
+
+/* Placeholder */
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Titres */
+.ProseMirror h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 1.5em;
+  margin-bottom: 0.6em;
+  color: #111827;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.3em;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 1.4em;
+  margin-bottom: 0.5em;
+  color: #1f2937;
+}
+
+.ProseMirror h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
+  color: #374151;
+}
+
+.ProseMirror h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1em;
+  margin-bottom: 0.4em;
+  color: #4b5563;
+}
+
+/* Listes */
+.ProseMirror ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+.ProseMirror li {
+  margin-bottom: 0.3em;
+}
+
+.ProseMirror li p {
+  margin-bottom: 0.2em;
+}
+
+/* Blockquote */
+.ProseMirror blockquote {
+  border-left: 4px solid #0991b5;
+  padding: 0.5em 1em;
+  margin: 1em 0;
+  background: #f0f9fb;
+  color: #374151;
+  border-radius: 0 6px 6px 0;
+}
+
+.ProseMirror blockquote p {
+  margin-bottom: 0.4em;
+}
+
+/* Ligne horizontale */
+.ProseMirror hr {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 1.5em 0;
+}
+
+/* Code inline */
+.ProseMirror code {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 0.15em 0.35em;
+  font-size: 0.9em;
+  font-family: 'Consolas', 'Monaco', monospace;
+  color: #dc2626;
+}
+
+/* Code block */
+.ProseMirror pre {
+  background: #1f2937;
+  color: #e5e7eb;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 1em 0;
+  overflow-x: auto;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.ProseMirror pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* Liens */
+.ProseMirror a {
+  color: #0991b5;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.ProseMirror a:hover {
+  color: #067a97;
+}
+
+/* Texte surligné */
+.ProseMirror mark {
+  background: #fef08a;
+  padding: 0.1em 0.2em;
+  border-radius: 2px;
+}
+
+/* ===== Images insérées dans l'éditeur ===== */
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1em auto;
+  display: block;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ProseMirror img:hover {
+  border-color: #0991b5;
+}
+
+.ProseMirror img.ProseMirror-selectednode {
+  border-color: #0991b5;
+  box-shadow: 0 0 0 3px rgba(9, 145, 181, 0.2);
+}
+
+/* ===== Dispositions d'images (journal style) ===== */
+
+/* Figure wrapper */
+.ProseMirror .image-figure,
+.ProseMirror figure {
+  margin: 1em 0;
+  padding: 0;
+  position: relative;
+}
+
+.ProseMirror .image-figure img,
+.ProseMirror figure img {
+  margin: 0;
+}
+
+/* Image caption */
+.ProseMirror .image-caption,
+.ProseMirror figcaption {
+  text-align: center;
+  font-size: 0.85em;
+  color: #6b7280;
+  font-style: italic;
+  margin-top: 6px;
+  padding: 0 4px;
+}
+
+/* Float left — image à gauche, texte à droite */
+.ProseMirror .img-layout-float-left,
+.ProseMirror figure[data-layout="float-left"],
+.ProseMirror img[data-layout="float-left"] {
+  float: left;
+  margin: 0.5em 1.5em 1em 0;
+  max-width: 45%;
+  clear: left;
+}
+
+/* Float right — image à droite, texte à gauche */
+.ProseMirror .img-layout-float-right,
+.ProseMirror figure[data-layout="float-right"],
+.ProseMirror img[data-layout="float-right"] {
+  float: right;
+  margin: 0.5em 0 1em 1.5em;
+  max-width: 45%;
+  clear: right;
+}
+
+/* Center — centré, pas de float */
+.ProseMirror .img-layout-center,
+.ProseMirror figure[data-layout="center"],
+.ProseMirror img[data-layout="center"] {
+  float: none;
+  display: block;
+  margin: 1.5em auto;
+  max-width: 80%;
+  clear: both;
+}
+
+/* Full width */
+.ProseMirror .img-layout-full-width,
+.ProseMirror figure[data-layout="full-width"],
+.ProseMirror img[data-layout="full-width"] {
+  float: none;
+  display: block;
+  margin: 1.5em 0;
+  max-width: 100%;
+  width: 100%;
+  clear: both;
+}
+
+/* Clearfix après les images flottantes */
+.ProseMirror p::after,
+.ProseMirror h1::after,
+.ProseMirror h2::after,
+.ProseMirror h3::after,
+.ProseMirror h4::after {
+  content: '';
+  display: table;
+  clear: none;
+}
+
+/* Les headings forcent le clear */
+.ProseMirror h1,
+.ProseMirror h2 {
+  clear: both;
+}
+
+/* Sélection visuelle des figures */
+.ProseMirror figure.ProseMirror-selectednode {
+  outline: 2px solid #0991b5;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* ===== Menu flottant de disposition d'image ===== */
+.image-bubble-menu {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 100;
+  animation: bubbleUp 0.2s ease;
+  border: 1px solid #e5e7eb;
+}
+
+.bubble-menu-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  white-space: nowrap;
+  margin-right: 4px;
+}
+
+.bubble-menu-buttons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bubble-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.bubble-btn:hover {
+  background: #f3f4f6;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+.bubble-btn.is-active {
+  background: #0991b5;
+  color: #fff;
+  border-color: #0991b5;
+}
+
+.bubble-btn.is-active:hover {
+  background: #0880a0;
+}
+
+.bubble-btn-danger {
+  color: #ef4444;
+  border-color: #fecaca;
+}
+
+.bubble-btn-danger:hover {
+  background: #fef2f2;
+  color: #dc2626;
+  border-color: #f87171;
+}
+
+.bubble-divider {
+  width: 1px;
+  height: 24px;
+  background: #e5e7eb;
+  margin: 0 4px;
+}
+
+@keyframes bubbleUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* Alignement du texte */
+.ProseMirror .has-text-align-center {
+  text-align: center;
+}
+
+.ProseMirror .has-text-align-right {
+  text-align: right;
+}
+
+.ProseMirror .has-text-align-justify {
+  text-align: justify;
+}
+
+.ProseMirror .has-text-align-left {
+  text-align: left;
+}
+
+/* ===== Modal d'insertion d'image ===== */
+.image-insert-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.15s ease;
+}
+
+.image-insert-modal {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 520px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.2s ease;
+}
+
+.image-insert-modal h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 16px;
+}
+
+.image-insert-modal .upload-zone {
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 12px;
+}
+
+.image-insert-modal .upload-zone:hover {
+  border-color: #0991b5;
+  background: #f0f9fb;
+}
+
+.image-insert-modal .upload-zone.uploading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.image-insert-modal .or-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.image-insert-modal .or-divider::before,
+.image-insert-modal .or-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.image-insert-modal .url-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.image-insert-modal .url-input:focus {
+  border-color: #0991b5;
+  box-shadow: 0 0 0 2px rgba(9, 145, 181, 0.12);
+}
+
+.image-insert-modal .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Compteur de mots ===== */
+.editor-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .ProseMirror {
+    padding: 16px;
+    min-height: 300px;
+    font-size: 14px;
+  }
+
+  .editor-toolbar {
+    padding: 6px;
+    gap: 1px;
+  }
+
+  .toolbar-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .heading-select {
+    min-width: 100px;
+    font-size: 12px;
+  }
+
+  /* Sur mobile, les images flottantes prennent plus de place */
+  .ProseMirror .img-layout-float-left,
+  .ProseMirror figure[data-layout="float-left"],
+  .ProseMirror img[data-layout="float-left"],
+  .ProseMirror .img-layout-float-right,
+  .ProseMirror figure[data-layout="float-right"],
+  .ProseMirror img[data-layout="float-right"] {
+    float: none;
+    max-width: 100%;
+    margin: 1em 0;
+    display: block;
+  }
+
+  .image-bubble-menu {
+    bottom: 12px;
+    padding: 6px 10px;
+    gap: 4px;
+  }
+
+  .bubble-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .bubble-menu-label {
+    display: none;
+  }
+}
+

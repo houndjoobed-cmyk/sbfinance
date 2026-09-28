@@ -73,74 +73,76 @@ export default async function ContactPage() {
         </div>
       </Section>
 
-      <Section variant="default">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <Section variant="default" className="py-16 md:py-24">
+        <div className="max-w-4xl mx-auto">
+          
+          <div className="text-center mb-12 reveal-up">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-none bg-accent/10 text-accent font-medium text-sm mb-4">
+              <Mail className="w-4 h-4" /> Joignez-nous
+            </span>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-primary-dark mb-4">
+              <TypingAnimation text="Contactez-nous" typeSpeed={50} />
+            </h2>
+            <p className="text-lg text-on-surface-variant max-w-2xl mx-auto">
+              Pour tous renseignements ou suggestions, veuillez nous écrire en remplissant le formulaire ci-dessous ou utiliser nos coordonnées.
+            </p>
+          </div>
+
+          <div className="reveal-up delay-100 mb-16">
+            <ContactForm agencies={agencies} />
+          </div>
 
           {/* Contact Info */}
-          <div className="space-y-8 reveal-left">
-            <div>
-              <h2 className="text-3xl font-bold text-primary-dark mb-6"><TypingAnimation text="Nos Coordonnées" typeSpeed={50} /></h2>
-              <p className="text-on-surface-variant mb-8">
-                N'hésitez pas à nous contacter directement ou à venir nous rencontrer dans l'une de nos agences.
-              </p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 reveal-up delay-200">
+            <Card className="border-0 shadow-sm bg-white rounded-none hover:shadow-md transition-shadow">
+              <CardContent className="p-8 text-center flex flex-col items-center">
+                <div className="w-12 h-12 bg-primary/10 text-primary rounded-none flex items-center justify-center mb-4">
+                  <MapPin className="h-6 w-6" />
+                </div>
+                <h3 className="font-bold text-primary-dark text-lg mb-2">Siège social</h3>
+                <p className="text-on-surface-variant text-sm whitespace-pre-line">{parametres.adresseSiege}</p>
+                <p className="text-on-surface-variant mt-2 text-xs font-medium">BP 317</p>
+              </CardContent>
+            </Card>
 
-            <div className="space-y-6">
-              <Card className="border-0 shadow-sm bg-surface-muted">
-                <CardContent className="p-6 flex items-start">
-                  <MapPin className="h-6 w-6 text-accent mr-4 shrink-0 mt-1" />
-                  <div>
-                    <h3 className="font-bold text-primary-dark text-lg mb-1">Siège social</h3>
-                    <p className="text-on-surface-variant whitespace-pre-line">{parametres.adresseSiege}</p>
-                    <p className="text-on-surface-variant mt-2 text-sm">BP 317</p>
-                  </div>
-                </CardContent>
-              </Card>
+            <Card className="border-0 shadow-sm bg-white rounded-none hover:shadow-md transition-shadow">
+              <CardContent className="p-8 text-center flex flex-col items-center">
+                <div className="w-12 h-12 bg-primary/10 text-primary rounded-none flex items-center justify-center mb-4">
+                  <Phone className="h-6 w-6" />
+                </div>
+                <h3 className="font-bold text-primary-dark text-lg mb-2">Téléphone</h3>
+                <p className="text-on-surface-variant font-medium">{parametres.telephonePrincipal}</p>
+              </CardContent>
+            </Card>
 
-              <Card className="border-0 shadow-sm bg-surface-muted">
-                <CardContent className="p-6 flex items-start">
-                  <Phone className="h-6 w-6 text-accent mr-4 shrink-0 mt-1" />
-                  <div>
-                    <h3 className="font-bold text-primary-dark text-lg mb-1">Téléphone</h3>
-                    <p className="text-on-surface-variant">{parametres.telephonePrincipal}</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-sm bg-surface-muted">
-                <CardContent className="p-6 flex items-start">
-                  <Mail className="h-6 w-6 text-accent mr-4 shrink-0 mt-1" />
-                  <div>
-                    <h3 className="font-bold text-primary-dark text-lg mb-1">Email</h3>
-                    <a href={`mailto:${parametres.emailPrincipal || 'contact@sbfinance.bj'}`} className="text-primary hover:underline">
-                      {parametres.emailPrincipal || 'contact@sbfinance.bj'}
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="border-0 shadow-sm bg-red-50 border border-red-100">
-                <CardContent className="p-6">
-                  <div className="flex items-start">
-                    <AlertCircle className="h-6 w-6 text-red-600 mr-4 shrink-0 mt-1" />
-                    <div className="w-full">
-                      <h3 className="font-bold text-red-700 text-lg mb-1">Service réclamation</h3>
-                      <p className="text-red-600 font-semibold text-lg mb-4">01 49 34 30 64</p>
+            <Card className="border-0 shadow-sm bg-white rounded-none hover:shadow-md transition-shadow">
+              <CardContent className="p-8 text-center flex flex-col items-center">
+                <div className="w-12 h-12 bg-primary/10 text-primary rounded-none flex items-center justify-center mb-4">
+                  <Mail className="h-6 w-6" />
+                </div>
+                <h3 className="font-bold text-primary-dark text-lg mb-2">Email</h3>
+                <a href={`mailto:${parametres.emailPrincipal || 'contact@sbfinance.bj'}`} className="text-primary hover:underline font-medium break-all">
+                  {parametres.emailPrincipal || 'contact@sbfinance.bj'}
+                </a>
+              </CardContent>
+            </Card>
+            
+            <div className="md:col-span-3">
+              <Card className="shadow-sm bg-red-50 border border-red-100 rounded-none overflow-hidden">
+                <CardContent className="p-8">
+                  <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6">
+                    <div className="w-14 h-14 bg-red-100 text-red-600 rounded-none flex items-center justify-center shrink-0">
+                      <AlertCircle className="h-8 w-8" />
+                    </div>
+                    <div className="grow">
+                      <h3 className="font-bold text-red-700 text-xl mb-1">Service réclamation</h3>
+                      <p className="text-red-600 font-semibold text-2xl mb-4">01 49 34 30 64</p>
                       <ReclamationModal />
                     </div>
                   </div>
                 </CardContent>
               </Card>
             </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="reveal-right">
-            <Card className="shadow-lg border-outline-variant/50">
-              <CardContent className="p-8">
-                <ContactForm agencies={agencies} />
-              </CardContent>
-            </Card>
           </div>
 
         </div>
