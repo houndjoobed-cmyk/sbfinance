@@ -1,9 +1,59 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import { Section } from '@/components/layout/section';
 import { ArrowRight, Wallet, Landmark, Handshake, Lightbulb, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { TypingAnimation } from '@/components/ui/typing-animation';
+
+function ExpandableServiceCard({ item, cardImage }: { item: any, cardImage: string }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div 
+      className="bg-white border border-slate-200 hover:shadow-xl transition-all duration-300 flex flex-col group overflow-hidden relative cursor-pointer"
+      onClick={() => setIsExpanded(!isExpanded)}
+    >
+      {/* Container d'image carré (aspect-square) pour garder les proportions */}
+      <div className="relative aspect-square overflow-hidden bg-slate-100 shrink-0">
+        <Image
+          src={cardImage}
+          alt={item.title}
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className="object-cover group-hover:scale-110 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+      </div>
+
+      {/* Contenu textuel */}
+      <div className="p-6 flex flex-col grow">
+        <h3 className="text-xl font-bold text-primary mb-3">
+          {item.title}
+        </h3>
+        <div 
+          className={`text-slate-600 text-sm leading-relaxed mb-6 grow prose prose-sm prose-p:my-0 prose-headings:my-0 max-w-none ${!isExpanded ? 'line-clamp-4 overflow-hidden' : ''}`}
+          dangerouslySetInnerHTML={{ __html: item.description || '' }}
+        />
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsExpanded(!isExpanded);
+          }}
+          className="inline-flex items-center text-primary font-semibold hover:text-accent transition-colors mt-auto group/link relative z-20"
+        >
+          {isExpanded ? 'Voir moins' : (
+            <>
+              En savoir plus
+              <ArrowRight className="ml-2 h-4 w-4 transform transition-transform group-hover/link:translate-x-1" />
+            </>
+          )}
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export function ProductsServices({ content }: { content?: any }) {
   const defaultItems = [
@@ -89,43 +139,7 @@ export function ProductsServices({ content }: { content?: any }) {
           const cardImage = item.image || defaultImgs[index % defaultImgs.length];
 
           return (
-            <div
-              key={index}
-              className="bg-white border border-slate-200 hover:shadow-xl transition-all duration-300 flex flex-col group overflow-hidden rounded-none relative h-full"
-            >
-              {/* Lien qui couvre toute la carte */}
-              <Link href={item.link || "/produits"} className="absolute inset-0 z-10" aria-hidden="true"></Link>
-
-              {/* Image de couverture */}
-              <div className="relative aspect-square overflow-hidden bg-slate-100 shrink-0">
-                <Image
-                  src={cardImage}
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
-              </div>
-
-              {/* Contenu textuel */}
-              <div className="p-6 flex flex-col grow">
-                <h3 className="text-xl font-bold text-primary mb-3">
-                  {item.title}
-                </h3>
-                <div 
-                  className="text-slate-600 text-sm leading-relaxed mb-6 grow prose prose-sm prose-p:my-0 prose-headings:my-0 max-w-none line-clamp-4 overflow-hidden"
-                  dangerouslySetInnerHTML={{ __html: item.description || '' }}
-                />
-                <Link
-                  href={item.link || "/produits"}
-                  className="inline-flex items-center text-primary font-semibold hover:text-accent transition-colors mt-auto group/link relative z-20"
-                >
-                  En savoir plus
-                  <ArrowRight className="ml-2 h-4 w-4 transform transition-transform group-hover/link:translate-x-1" />
-                </Link>
-              </div>
-            </div>
+            <ExpandableServiceCard key={index} item={item} cardImage={cardImage} />
           );
         })}
       </div>

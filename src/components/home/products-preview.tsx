@@ -20,6 +20,53 @@ import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
+function ExpandableCard({ product, renderIcon }: { product: any, renderIcon: (iconName: string) => React.ReactNode }) {
+  const [isExpanded, setIsExpanded] = React.useState(false);
+
+  return (
+    <div className="bg-white border border-slate-200 hover:shadow-xl transition-all duration-300 h-full flex flex-col group overflow-hidden relative cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
+      {/* Image */}
+      <div className="relative h-48 sm:h-52 overflow-hidden shrink-0">
+        <Image
+          src={product.image}
+          alt={product.title}
+          fill
+          className="object-cover group-hover:scale-110 transition-transform duration-500"
+        />
+        {/* Icon badge */}
+        <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-primary shadow-md">
+          {renderIcon(product.icon || 'Wallet')}
+        </div>
+      </div>
+      {/* Content */}
+      <div className="p-6 flex flex-col grow">
+        <h3 className="text-xl font-bold text-primary mb-3">
+          {product.title}
+        </h3>
+        <div 
+          className={`text-slate-600 text-sm leading-relaxed mb-6 grow prose prose-sm prose-p:my-0 prose-headings:my-0 max-w-none ${!isExpanded ? 'line-clamp-4 overflow-hidden' : ''}`}
+          dangerouslySetInnerHTML={{ __html: product.description || '' }}
+        />
+        <Button 
+          variant="outline" 
+          className="w-full border-primary text-primary hover:bg-primary hover:text-white group-hover:bg-primary group-hover:text-white transition-colors relative z-20 mt-auto"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsExpanded(!isExpanded);
+          }}
+        >
+          {isExpanded ? 'Voir moins' : (
+            <>
+              En savoir plus
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </>
+          )}
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 export function ProductsPreview({ content }: { content?: any }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
@@ -157,38 +204,7 @@ export function ProductsPreview({ content }: { content?: any }) {
                 key={index}
                 className="flex-[0_0_85%] sm:flex-[0_0_45%] lg:flex-[0_0_33.33%] min-w-0 pr-4 sm:pr-6"
               >
-                <div className="bg-white border border-slate-200 hover:shadow-xl transition-all duration-300 h-full flex flex-col group overflow-hidden relative">
-                  {/* Lien qui couvre toute la carte */}
-                  <Link href={product.link} className="absolute inset-0 z-10" aria-hidden="true"></Link>
-                  {/* Image */}
-                  <div className="relative h-48 sm:h-52 overflow-hidden">
-                    <Image
-                      src={product.image}
-                      alt={product.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    {/* Icon badge */}
-                    <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-primary shadow-md">
-                      {renderIcon(product.icon || 'Wallet')}
-                    </div>
-                  </div>
-                  {/* Content */}
-                  <div className="p-6 flex flex-col grow">
-                    <h3 className="text-xl font-bold text-primary mb-3">
-                      {product.title}
-                    </h3>
-                    <div 
-                      className="text-slate-600 text-sm leading-relaxed mb-6 grow prose prose-sm prose-p:my-0 prose-headings:my-0 max-w-none line-clamp-4 overflow-hidden"
-                      dangerouslySetInnerHTML={{ __html: product.description || '' }}
-                    />
-                    <Button asChild variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white group-hover:bg-primary group-hover:text-white transition-colors relative z-20">
-                      <Link href={product.link}>
-                        Découvrir
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
+                <ExpandableCard product={product} renderIcon={renderIcon} />
               </div>
             ))}
 
