@@ -24,24 +24,32 @@ export function ProductsServices({ content }: { content?: any }) {
     {
       title: "Appui",
       description: "Un soutien sur-mesure pour développer vos activités et pérenniser votre croissance.",
-      icon: "Handshake",
       image: "/images/products/appui.png",
       link: "/produits/appui"
+    },
+    {
+      title: "Conseil",
+      description: "Expertise et accompagnement stratégique pour la gestion de votre entreprise.",
+      image: "/images/products/conseil.jpeg",
+      link: "/produits/conseil"
+    },
+    {
+      title: "Formation",
+      description: "Renforcez vos compétences avec nos programmes d'éducation financière et entrepreneuriale.",
+      image: "/images/products/formation.jpeg",
+      link: "/produits/formation"
+    },
+    {
+      title: "Autres offres",
+      description: "Découvrez nos offres personnalisées pour répondre à vos besoins spécifiques.",
+      image: "/images/products/autre.jpeg",
+      link: "/produits"
     }
   ];
 
   const items = (content?.items && content.items.length > 0) ? content.items : defaultItems;
 
-  const getIcon = (name: string) => {
-    switch (name) {
-      case 'Wallet': return <Wallet className="h-5 w-5 text-accent" />;
-      case 'Landmark': return <Landmark className="h-5 w-5 text-accent" />;
-      case 'Handshake': return <Handshake className="h-5 w-5 text-accent" />;
-      case 'Lightbulb': return <Lightbulb className="h-5 w-5 text-accent" />;
-      case 'GraduationCap': return <GraduationCap className="h-5 w-5 text-accent" />;
-      default: return <Wallet className="h-5 w-5 text-accent" />;
-    }
-  };
+
 
   const defaultImgs = [
     "/images/products/credit-v2.jpg",
@@ -69,7 +77,7 @@ export function ProductsServices({ content }: { content?: any }) {
         </div>
 
         <h2 className="text-3xl md:text-5xl font-bold text-primary-dark mb-4 relative z-10">
-          <TypingAnimation text={content?.title || "Produits & Services"} typeSpeed={50} />
+          <TypingAnimation text={content?.title || "Nos offres & Promotions"} typeSpeed={50} />
         </h2>
         <p className="text-on-surface-variant text-sm tracking-[0.2em] uppercase font-semibold relative z-10">
           {content?.subtitle || "Ce que nous offrons"}
@@ -83,13 +91,13 @@ export function ProductsServices({ content }: { content?: any }) {
           return (
             <div
               key={index}
-              className="bg-white border border-slate-200 hover:shadow-xl transition-all duration-300 h-full flex flex-col group overflow-hidden rounded-none relative"
+              className="bg-white border border-slate-200 hover:shadow-xl transition-all duration-300 flex flex-col group overflow-hidden rounded-none relative h-full"
             >
               {/* Lien qui couvre toute la carte */}
               <Link href={item.link || "/produits"} className="absolute inset-0 z-10" aria-hidden="true"></Link>
 
               {/* Image de couverture */}
-              <div className="relative h-52 overflow-hidden bg-slate-100">
+              <div className="relative aspect-square overflow-hidden bg-slate-100 shrink-0">
                 <Image
                   src={cardImage}
                   alt={item.title}
@@ -98,10 +106,6 @@ export function ProductsServices({ content }: { content?: any }) {
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
-                {/* Badge Icône circulaire */}
-                <div className="absolute top-4 left-4 w-11 h-11 rounded-none bg-white/95 backdrop-blur-sm flex items-center justify-center shadow-md">
-                  {getIcon(item.icon)}
-                </div>
               </div>
 
               {/* Contenu textuel */}

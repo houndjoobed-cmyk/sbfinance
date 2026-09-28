@@ -3,11 +3,10 @@ import type { Metadata } from 'next';
 import { TypingAnimation } from '@/components/ui/typing-animation';
 import { Section } from '@/components/layout/section';
 import { Card, CardContent } from '@/components/ui/card';
-import { MapPin, Phone, Mail, AlertCircle } from 'lucide-react';
+import { MapPin, Phone, Mail } from 'lucide-react';
 import prisma from "@/lib/prisma";
 import { ContactForm } from '@/components/contact/contact-form';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { ReclamationModal } from '@/components/contact/ReclamationModal';
 
 export const metadata: Metadata = {
   title: "Contacts",
@@ -126,23 +125,6 @@ export default async function ContactPage() {
                 </a>
               </CardContent>
             </Card>
-            
-            <div className="md:col-span-3">
-              <Card className="shadow-sm bg-red-50 border border-red-100 rounded-none overflow-hidden">
-                <CardContent className="p-8">
-                  <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6">
-                    <div className="w-14 h-14 bg-red-100 text-red-600 rounded-none flex items-center justify-center shrink-0">
-                      <AlertCircle className="h-8 w-8" />
-                    </div>
-                    <div className="grow">
-                      <h3 className="font-bold text-red-700 text-xl mb-1">Service réclamation</h3>
-                      <p className="text-red-600 font-semibold text-2xl mb-4">01 49 34 30 64</p>
-                      <ReclamationModal />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
           </div>
 
         </div>

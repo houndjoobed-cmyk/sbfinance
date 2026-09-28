@@ -83,8 +83,25 @@ export function ContactForm({ agencies }: ContactFormProps) {
         <div className="space-y-2">
           <label htmlFor="phone" className="text-sm font-semibold text-primary-dark">Numéro de téléphone <span className="text-accent">*</span></label>
           <div className="relative flex">
-            <div className="flex items-center justify-center h-14 px-4 bg-surface-muted border border-outline-variant/60 border-r-0 rounded-none text-on-surface-variant font-medium">
-              <span className="mr-2">🇧🇯</span> (+229)
+            <div className="relative">
+              <select 
+                name="countryCode" 
+                className="h-14 pl-3 pr-8 bg-surface-muted border border-outline-variant/60 border-r-0 rounded-none text-on-surface-variant font-medium appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/20"
+                defaultValue="+229"
+              >
+                <option value="+229">🇧🇯 +229</option>
+                <option value="+228">🇹🇬 +228</option>
+                <option value="+227">🇳🇪 +227</option>
+                <option value="+226">🇧🇫 +226</option>
+                <option value="+225">🇨🇮 +225</option>
+                <option value="+234">🇳🇬 +234</option>
+                <option value="+221">🇸🇳 +221</option>
+                <option value="+223">🇲🇱 +223</option>
+                <option value="+33">🇫🇷 +33</option>
+              </select>
+              <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none text-on-surface-variant/50">
+                <ChevronDown className="h-4 w-4" />
+              </div>
             </div>
             <div className="relative grow">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-on-surface-variant/50">

@@ -76,19 +76,20 @@ const DEFAULT_CONTENT = {
   },
   productsServices: {
     backgroundText: "PRODUITS",
-    title: "Produits & Services",
+    title: "Nos offres & Promotions",
     subtitle: "Ce que nous offrons",
     items: [
-      { id: "1", title: "Crédit", description: "Solutions de financement pour vos besoins de roulement, de consommation ou d'investissement.", icon: "Wallet", image: "/images/products/credit-v2.jpg", link: "/produits/credit" },
-      { id: "2", title: "Épargne", description: "Sécurisez votre avenir avec nos produits d'épargne: Houenoussou, Allodo, Ahossou, Zédaga et Kondokpo.", icon: "Landmark", image: "/images/products/epargne-v2.jpg", link: "/produits/epargne" },
-      { id: "3", title: "Appui", description: "Un soutien sur-mesure pour développer vos activités et pérenniser votre croissance.", icon: "Handshake", image: "/images/products/appui.png", link: "/produits/appui" },
-      { id: "4", title: "Conseil", description: "Expertise et accompagnement stratégique pour la gestion de votre entreprise.", icon: "Lightbulb", image: "/images/products/conseil.jpeg", link: "/produits/conseil" },
-      { id: "5", title: "Formation", description: "Renforcez vos compétences avec nos programmes d'éducation financière et entrepreneuriale.", icon: "GraduationCap", image: "/images/products/formation.jpeg", link: "/produits/formation" }
+      { id: "1", title: "Crédit", description: "Solutions de financement pour vos besoins de roulement, de consommation ou d'investissement.", image: "/images/products/credit-v2.jpg", link: "/produits/credit" },
+      { id: "2", title: "Épargne", description: "Sécurisez votre avenir avec nos produits d'épargne: Houenoussou, Allodo, Ahossou, Zédaga et Kondokpo.", image: "/images/products/epargne-v2.jpg", link: "/produits/epargne" },
+      { id: "3", title: "Appui", description: "Un soutien sur-mesure pour développer vos activités et pérenniser votre croissance.", image: "/images/products/appui.png", link: "/produits/appui" },
+      { id: "4", title: "Conseil", description: "Expertise et accompagnement stratégique pour la gestion de votre entreprise.", image: "/images/products/conseil.jpeg", link: "/produits/conseil" },
+      { id: "5", title: "Formation", description: "Renforcez vos compétences avec nos programmes d'éducation financière et entrepreneuriale.", image: "/images/products/formation.jpeg", link: "/produits/formation" },
+      { id: "6", title: "Autres offres", description: "Découvrez nos offres personnalisées pour répondre à vos besoins spécifiques.", image: "/images/products/autre.jpeg", link: "/produits" }
     ]
   },
   productsPreview: {
-    backgroundText: "Produits",
-    title: "Nos Offres de Crédit",
+    backgroundText: "ACCOMPAGNEMENT",
+    title: "Nous vous accompagnons",
     subtitle: "Découvrez nos solutions de financement",
     helpCard: {
       title: "Besoin d'aide pour choisir ?",
@@ -745,20 +746,7 @@ export default function ContenuAccueilPage() {
                           onChange={(e) => updateProductService(item.id, 'title', e.target.value)}
                         />
                       </div>
-                      <div>
-                        <label className="block text-xs font-medium text-gray-500">Icône du badge flottant</label>
-                        <select
-                          className="w-full mt-1 border-gray-300 rounded-md text-sm border bg-white px-3 py-2"
-                          value={item.icon || 'Wallet'}
-                          onChange={(e) => updateProductService(item.id, 'icon', e.target.value)}
-                        >
-                          <option value="Wallet">Wallet (Crédit)</option>
-                          <option value="Landmark">Landmark (Épargne)</option>
-                          <option value="Handshake">Handshake (Appui)</option>
-                          <option value="Lightbulb">Lightbulb (Conseil)</option>
-                          <option value="GraduationCap">GraduationCap (Formation)</option>
-                        </select>
-                      </div>
+
                       <div>
                         <label className="block text-xs font-medium text-gray-500">Description</label>
                         <textarea 

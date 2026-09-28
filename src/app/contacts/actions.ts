@@ -5,7 +5,9 @@ import prisma from "@/lib/prisma";
 export async function submitContactForm(formData: FormData) {
   try {
     const nom = formData.get("name") as string;
-    const telephone = formData.get("phone") as string;
+    const countryCode = formData.get("countryCode") as string || "+229";
+    const phoneNum = formData.get("phone") as string;
+    const telephone = `${countryCode} ${phoneNum}`;
     const email = formData.get("email") as string | null;
     const objet = formData.get("objet") as string | null;
     const agenceId = formData.get("agency") as string | null;

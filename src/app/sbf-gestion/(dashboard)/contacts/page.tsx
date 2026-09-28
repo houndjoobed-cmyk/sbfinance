@@ -71,7 +71,7 @@ export default function ContactsPage() {
         <h1 className="text-3xl font-bold text-gray-900">Demandes de Contact</h1>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
