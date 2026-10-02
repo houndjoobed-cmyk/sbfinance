@@ -4,6 +4,7 @@ import { ArrowRight, ShieldCheck, TrendingUp, Users, Target, Award, Heart } from
 import Link from 'next/link';
 import Image from 'next/image';
 import { TypingAnimation } from '@/components/ui/typing-animation';
+import { htmlToPlainText } from '@/lib/utils';
 
 export function Features({ content }: { content?: any }) {
   const defaultFeatures = [
@@ -108,10 +109,9 @@ export function Features({ content }: { content?: any }) {
                 <h3 className="text-xl font-bold text-primary mb-3">
                   {feature.title}
                 </h3>
-                <div 
-                  className="text-slate-600 text-sm leading-relaxed mb-6 grow prose prose-sm prose-p:my-0 prose-headings:my-0 max-w-none line-clamp-4 overflow-hidden"
-                  dangerouslySetInnerHTML={{ __html: feature.description || '' }}
-                />
+                <p className="text-slate-600 text-sm leading-relaxed mb-6 grow line-clamp-4">
+                  {htmlToPlainText(feature.description || '')}
+                </p>
                 <Link
                   href={feature.link || "/a-propos"}
                   className="inline-flex items-center text-primary font-semibold hover:text-accent transition-colors mt-auto group/link relative z-20"

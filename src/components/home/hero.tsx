@@ -79,6 +79,10 @@ export function Hero({
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi, setSelectedIndex]);
 
+  const scrollTo = useCallback((index: number) => {
+    emblaApi?.scrollTo(index);
+  }, [emblaApi]);
+
   useEffect(() => {
     if (!emblaApi) return;
     onSelect();
@@ -148,6 +152,34 @@ export function Hero({
           ))}
         </div>
       </div>
+
+      {displaySlides.length > 1 && (
+        <div
+          className="absolute bottom-3 md:bottom-6 lg:bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full bg-slate-950/35 px-3 py-2 backdrop-blur-sm"
+          role="group"
+          aria-label="Navigation du carrousel principal"
+        >
+          {displaySlides.map((slide, index) => {
+            const isSelected = index === selectedIndex;
+
+            return (
+              <button
+                key={slide.id || index}
+                type="button"
+                onClick={() => scrollTo(index)}
+                className={cn(
+                  "h-2.5 w-2.5 rounded-full border border-white/80 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white",
+                  isSelected
+                    ? "scale-125 bg-white shadow-sm"
+                    : "bg-white/35 hover:bg-white/70"
+                )}
+                aria-label={`Afficher la bannière ${index + 1}`}
+                aria-current={isSelected ? 'true' : undefined}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

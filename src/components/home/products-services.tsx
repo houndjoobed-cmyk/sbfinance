@@ -6,6 +6,7 @@ import { ArrowRight, Wallet, Landmark, Handshake, Lightbulb, GraduationCap } fro
 import Link from 'next/link';
 import Image from 'next/image';
 import { TypingAnimation } from '@/components/ui/typing-animation';
+import { htmlToPlainText } from '@/lib/utils';
 
 function ExpandableServiceCard({ item, cardImage }: { item: any, cardImage: string }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -32,10 +33,16 @@ function ExpandableServiceCard({ item, cardImage }: { item: any, cardImage: stri
         <h3 className="text-xl font-bold text-primary mb-3">
           {item.title}
         </h3>
-        <div 
-          className={`text-slate-600 text-sm leading-relaxed mb-6 grow prose prose-sm prose-p:my-0 prose-headings:my-0 max-w-none ${!isExpanded ? 'line-clamp-4 overflow-hidden' : ''}`}
-          dangerouslySetInnerHTML={{ __html: item.description || '' }}
-        />
+        {isExpanded ? (
+          <div
+            className="text-slate-600 text-sm leading-relaxed mb-6 grow prose prose-sm prose-p:my-0 prose-headings:my-0 max-w-none"
+            dangerouslySetInnerHTML={{ __html: item.description || '' }}
+          />
+        ) : (
+          <p className="text-slate-600 text-sm leading-relaxed mb-6 grow line-clamp-4">
+            {htmlToPlainText(item.description || '')}
+          </p>
+        )}
         <button
           onClick={(e) => {
             e.stopPropagation();
@@ -97,7 +104,7 @@ export function ProductsServices({ content }: { content?: any }) {
     }
   ];
 
-  const items = (content?.items && content.items.length > 0) ? content.items : defaultItems;
+  const items = ((content?.items && content.items.length > 0) ? content.items : defaultItems).slice(0, 3);
 
 
 

@@ -150,9 +150,7 @@ export default async function Home() {
       items: [
         { title: "Crédit", description: "Solutions de financement pour vos besoins de roulement, de consommation ou d'investissement.", icon: "Wallet", image: "/images/products/credit-v2.jpg", link: "/produits/credit" },
         { title: "Épargne", description: "Sécurisez votre avenir avec nos produits d'épargne: Houenoussou, Allodo, Ahossou, Zédaga et Kondokpo.", icon: "Landmark", image: "/images/products/epargne-v2.jpg", link: "/produits/epargne" },
-        { title: "Appui", description: "Un soutien sur-mesure pour développer vos activités et pérenniser votre croissance.", icon: "Handshake", image: "/images/products/appui.png", link: "/produits/appui" },
-        { title: "Conseil", description: "Expertise et accompagnement stratégique pour la gestion de votre entreprise.", icon: "Lightbulb", image: "/images/products/conseil.jpeg", link: "/produits/conseil" },
-        { title: "Formation", description: "Renforcez vos compétences avec nos programmes d'éducation financière et entrepreneuriale.", icon: "GraduationCap", image: "/images/products/formation.jpeg", link: "/produits/formation" }
+        { title: "Appui", description: "Un soutien sur-mesure pour développer vos activités et pérenniser votre croissance.", icon: "Handshake", image: "/images/products/appui.png", link: "/produits/appui" }
       ]
     },
     partners: {

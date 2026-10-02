@@ -19,6 +19,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
+import { htmlToPlainText } from '@/lib/utils';
 
 function ExpandableCard({ product, renderIcon }: { product: any, renderIcon: (iconName: string) => React.ReactNode }) {
   const [isExpanded, setIsExpanded] = React.useState(false);
@@ -43,10 +44,16 @@ function ExpandableCard({ product, renderIcon }: { product: any, renderIcon: (ic
         <h3 className="text-xl font-bold text-primary mb-3">
           {product.title}
         </h3>
-        <div 
-          className={`text-slate-600 text-sm leading-relaxed mb-6 grow prose prose-sm prose-p:my-0 prose-headings:my-0 max-w-none ${!isExpanded ? 'line-clamp-4 overflow-hidden' : ''}`}
-          dangerouslySetInnerHTML={{ __html: product.description || '' }}
-        />
+        {isExpanded ? (
+          <div
+            className="text-slate-600 text-sm leading-relaxed mb-6 grow prose prose-sm prose-p:my-0 prose-headings:my-0 max-w-none"
+            dangerouslySetInnerHTML={{ __html: product.description || '' }}
+          />
+        ) : (
+          <p className="text-slate-600 text-sm leading-relaxed mb-6 grow line-clamp-4">
+            {htmlToPlainText(product.description || '')}
+          </p>
+        )}
         <Button 
           variant="outline" 
           className="w-full border-primary text-primary hover:bg-primary hover:text-white group-hover:bg-primary group-hover:text-white transition-colors relative z-20 mt-auto"

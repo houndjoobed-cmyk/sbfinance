@@ -82,10 +82,7 @@ const DEFAULT_CONTENT = {
     items: [
       { id: "1", title: "Crédit", description: "Solutions de financement pour vos besoins de roulement, de consommation ou d'investissement.", image: "/images/products/credit-v2.jpg", link: "/produits/credit" },
       { id: "2", title: "Épargne", description: "Sécurisez votre avenir avec nos produits d'épargne: Houenoussou, Allodo, Ahossou, Zédaga et Kondokpo.", image: "/images/products/epargne-v2.jpg", link: "/produits/epargne" },
-      { id: "3", title: "Appui", description: "Un soutien sur-mesure pour développer vos activités et pérenniser votre croissance.", image: "/images/products/appui.png", link: "/produits/appui" },
-      { id: "4", title: "Conseil", description: "Expertise et accompagnement stratégique pour la gestion de votre entreprise.", image: "/images/products/conseil.jpeg", link: "/produits/conseil" },
-      { id: "5", title: "Formation", description: "Renforcez vos compétences avec nos programmes d'éducation financière et entrepreneuriale.", image: "/images/products/formation.jpeg", link: "/produits/formation" },
-      { id: "6", title: "Autres offres", description: "Découvrez nos offres personnalisées pour répondre à vos besoins spécifiques.", image: "/images/products/autre.jpeg", link: "/produits" }
+      { id: "3", title: "Appui", description: "Un soutien sur-mesure pour développer vos activités et pérenniser votre croissance.", image: "/images/products/appui.png", link: "/produits/appui" }
     ]
   },
   productsPreview: {
@@ -226,7 +223,7 @@ export default function ContenuAccueilPage() {
               ...DEFAULT_CONTENT.productsServices,
               ...(loaded.productsServices || {}),
               items: (Array.isArray(loaded.productsServices?.items) && loaded.productsServices.items.length > 0)
-                ? loaded.productsServices.items.map((it: any, idx: number) => ({
+                ? loaded.productsServices.items.slice(0, 3).map((it: any, idx: number) => ({
                     ...it,
                     image: it.image || DEFAULT_CONTENT.productsServices.items[idx]?.image || "/images/products/credit-v2.jpg"
                   }))
@@ -728,7 +725,7 @@ export default function ContenuAccueilPage() {
             <div className="space-y-4">
               <h3 className="text-lg font-bold text-gray-800">Les Cartes Nos offres & Promotions</h3>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {(content.productsServices?.items || DEFAULT_CONTENT.productsServices.items).map((item: any, index: number) => (
+                {(content.productsServices?.items || DEFAULT_CONTENT.productsServices.items).slice(0, 3).map((item: any, index: number) => (
                   <div key={item.id || index} className="p-5 border border-gray-200 rounded-xl bg-white shadow-sm space-y-4 flex flex-col justify-between">
                     <div className="space-y-4">
                       <div>
