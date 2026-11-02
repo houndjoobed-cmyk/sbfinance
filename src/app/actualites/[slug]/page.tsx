@@ -6,6 +6,8 @@ import { Section } from '@/components/layout/section';
 import { Calendar, ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 interface Props {
   params: Promise<{ slug: string }>;
 }

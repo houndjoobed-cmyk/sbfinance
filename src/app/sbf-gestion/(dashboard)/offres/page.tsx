@@ -46,7 +46,7 @@ export default function OffresPage() {
   const fetchOffres = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/admin/offres');
+      const res = await fetch('/api/admin/offres', { cache: 'no-store' });
       if (res.ok) {
         setOffres(await res.json());
       }

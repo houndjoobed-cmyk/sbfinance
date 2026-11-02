@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   description: "Rejoignez l'équipe de Salem Braha Finance. Consultez nos offres d'emploi et postulez en ligne.",
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function CarrieresPage() {
   const offres = await prisma.offreEmploi.findMany({
     where: {

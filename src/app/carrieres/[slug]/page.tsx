@@ -8,6 +8,8 @@ import Link from 'next/link';
 import prisma from '@/lib/prisma';
 import { CandidatureForm } from '@/components/carrieres/candidature-form';
 
+export const dynamic = 'force-dynamic';
+
 interface PageProps {
   params: Promise<{
     slug: string;

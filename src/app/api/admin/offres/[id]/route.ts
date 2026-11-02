@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import prisma from '@/lib/prisma';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+
+export const dynamic = 'force-dynamic';
 
 async function checkAuth() {
   const cookieStore = await cookies();
@@ -105,6 +108,10 @@ export async function PUT(
       data: updateData
     });
 
+    revalidatePath('/carrieres');
+    revalidatePath(`/carrieres/${updated.slug}`);
+    revalidatePath('/sbf-gestion/offres');
+
     return NextResponse.json(updated);
   } catch (error) {
     console.error('API Offre PUT [id] Error:', error);
@@ -127,6 +134,9 @@ export async function DELETE(
     await prisma.offreEmploi.delete({
       where: { id }
     });
+
+    revalidatePath('/carrieres');
+    revalidatePath('/sbf-gestion/offres');
 
     return NextResponse.json({ success: true });
   } catch (error) {

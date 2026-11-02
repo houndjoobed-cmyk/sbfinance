@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import prisma from '@/lib/prisma';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+
+export const dynamic = 'force-dynamic';
 
 async function checkAuth() {
   const cookieStore = await cookies();
@@ -92,6 +95,10 @@ export async function POST(request: Request) {
         estPublie: data.estPublie ?? true,
       }
     });
+
+    revalidatePath('/carrieres');
+    revalidatePath(`/carrieres/${uniqueSlug}`);
+    revalidatePath('/sbf-gestion/offres');
 
     return NextResponse.json(nouvelleOffre, { status: 201 });
   } catch (error) {
