@@ -121,7 +121,7 @@ export function ContactForm({ agencies }: ContactFormProps) {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="email" className="text-sm font-semibold text-primary-dark">Email (optionnel)</label>
+          <label htmlFor="email" className="text-sm font-semibold text-primary-dark">Adresse Email <span className="text-accent">*</span></label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-on-surface-variant/50">
               <Mail className="h-5 w-5" />
@@ -130,8 +130,9 @@ export function ContactForm({ agencies }: ContactFormProps) {
               type="email" 
               id="email" 
               name="email"
+              required
               className="w-full h-14 pl-12 pr-4 rounded-none border border-outline-variant/60 bg-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface" 
-              placeholder="Entrez votre adresse email"
+              placeholder="Entrez votre adresse email pour recevoir notre réponse"
               disabled={isPending}
             />
           </div>

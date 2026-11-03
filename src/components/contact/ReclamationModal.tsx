@@ -103,8 +103,8 @@ export function ReclamationModal() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" name="email" type="email" placeholder="votre@email.com (Optionnel)" />
+                  <Label htmlFor="email">Email *</Label>
+                  <Input id="email" name="email" type="email" required placeholder="votre@email.com" />
                 </div>
               </div>
               
